@@ -11,6 +11,9 @@
 * [Bash](languages/bash.md)
 * [PHP](languages/php.md)
 * [C](languages/c.md)
+* [Haskell](languages/haskell.md)
+* [Javascript](languages/javascript.md)
+* [XML](languages/xml.md)
 
 ## Tools
 
