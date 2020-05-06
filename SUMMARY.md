@@ -28,10 +28,14 @@
 ## Oh hold
 
 * [MySQL](oh-hold/mysql.md)
-* [On hold](oh-hold/on-hold.md)
 * [SSH](oh-hold/ssh.md)
-* [Networking](oh-hold/networking/README.md)
-  * [Modèle](oh-hold/networking/modele.md)
-  * [Machines](oh-hold/networking/machines.md)
-  * [DNS](oh-hold/networking/dns.md)
+
+## Theory
+
+* [Networking](theory/networking/README.md)
+  * [Modèle](theory/networking/modele.md)
+  * [Machines](theory/networking/machines.md)
+  * [DNS](theory/networking/dns.md)
+* [On hold](theory/on-hold.md)
+* [Linux / \*nix](theory/linux-nix.md)
 
