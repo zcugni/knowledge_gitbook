@@ -1,6 +1,6 @@
 # XPATH
 
-* Permet de naviguer un document XML \(en sélectionant des noeuds particulier\)
+* Permet de naviguer un document XML \(en sélectionnant des nœuds particuliers\)
 * Les expression XPath sont aussi utilisées dans d'autre languages
 * Suit la structure des chemins de fichiers
 
@@ -13,14 +13,38 @@
 | .. | Selects direct parent |
 | @ | Selects attributes |
 
-### Opérateurs
+## Opérateurs
 
-* `|` Combine des sélections : `//book | //cd`
-* `+`, `-`, `*`, `div`, `mod`
-* `=`, `!=`, `<`, `<=`, `>`, `>=`
-* `and`, `or`
+### Arithmétiques
 
-### Prédicat \(condition\)
+| Symbole | Sens |
+| :--- | :--- |
+| + |  |
+| - |  |
+| \* |  |
+| div |  |
+| mod |  |
+
+### De comparaison
+
+| Symbole | Sens |
+| :--- | :--- |
+| = |  |
+| != |  |
+| &lt; |  |
+| &lt;= |  |
+| &gt; |  |
+| &gt;= |  |
+
+### Misc
+
+| Sens | Symbole |
+| :--- | :--- |
+| and |  |
+| or |  |
+| \| | ? |
+
+## Prédicat \(condition\)
 
 Les conditions sont écrites entre \[\] : `/bookstore/book[1]`
 
@@ -35,7 +59,7 @@ Exemple de conditions :
 * `/bookstore/book[price > 35.00]`
 * `/bookstore/book[price > 35.00]/title`
 
-### Wildcard
+## Wildcard
 
 | Wildcard | Definition |
 | :--- | :--- |
@@ -44,9 +68,11 @@ Exemple de conditions :
 | node\(\) | Any node of any kind |
 | text\(\) | Any text node |
 
-Je suis pas certaine de la diff entre `*` et `node()`.
+{% hint style="info" %}
+Je suis pas certaine de la diff entre `*` et `node()`
+{% endhint %}
 
-### Location Path
+## Location Path
 
 On peut aussi définir des chemins plus explicitement \(même si ça me semble très redondant avec l'autre méthode donc je comprends moyen\) ainsi : `axisname::nodetest[predicate]`
 
@@ -72,3 +98,4 @@ Les axes suivantes existent :
 * `preceding` Selects all nodes that appear before the current node in the document, except ancestors, attribute nodes and namespace nodes
 * `preceding-sibling` Selects all siblings before the current node
 * `self` Selects the current node
+

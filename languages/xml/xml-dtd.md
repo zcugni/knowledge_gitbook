@@ -1,14 +1,12 @@
 # XML DTD
 
 * DTD pour _Document Type Definition_
-* Définis la structure que devrait avoir un document xml
-* On spécifie le DTD avant le premier noeud \(hors description\) dans un élément `<!DOCTYPE>` \(qui n'a pas de `/` fermante\)
+* Définit la structure que devrait avoir un document xml
+* On spécifie le DTD avant le premier nœud \(hors description\) dans un élément `<!DOCTYPE>` \(qui n'a pas de `/` fermante\)
   * Déclaration dans le fichier `<!DOCTYPE root_name [...]>`
   * Inclusion d'un fichier externe `<!DOCTYPE root_name SYSTEM "file">`
 
-### Elément
-
-On décrit un élément ainsi
+## Elément
 
 ```markup
 <!ELEMENT element-name EMPTY>
@@ -18,7 +16,7 @@ On décrit un élément ainsi
 <!ELEMENT element-name (child1, child2, ...)>
 ```
 
-* `#PCDATA` \(_Parsed Character Data_\) signifie que ces données seront interprêtées par le parser à l'inverse des `#CDATA` \(_Character Data_\)
+* `#PCDATA` \(_Parsed Character Data_\) signifie que ces données seront interprétées par le parser à l'inverse des `#CDATA` \(_Character Data_\)
 * Les enfants doivent se retrouver dans le même ordre dans le document xml
 * Tous les enfants spécifiés doivent être déclarés \(décrits\) dans le fichier DTD
 * Certains symbole ajoute des restrictions :
@@ -31,21 +29,17 @@ On décrit un élément ainsi
 <!ELEMENT note (to,from,header,(message|body))> <!-- to, from header obligatoire, puis soit message soit body -->
 ```
 
-### Attributs
-
-On décrit un attribut ainsi :
+## Attributs
 
 ```markup
 <!ATTLIST element_name attribute_name attribute_type attribute_value>
 ```
 
-Type acceptés :
-
 | Type | Définition |
 | :--- | :--- |
 | CDATA | Character data |
 | \(val1\|val2\|..\) | One from the enumerated list |
-| \(val1\|val2\|..\) "val1" | One from the enumerated list,                                                    defaulting to the specified one |
+| \(val1\|val2\|..\) "val1" | One from the enumerated list, defaulting to the specified one |
 | ID | Unique id |
 | IDREF | Id of another element |
 | IDREFS | List of other ids |
@@ -56,8 +50,6 @@ Type acceptés :
 | NOTATION | Name of a notation |
 | xml: | Predefined xml value |
 
-Valeur acceptées :
-
 | Valeur | Définition |
 | :--- | :--- |
 | value | The default value of the attribute |
@@ -65,7 +57,7 @@ Valeur acceptées :
 | \#IMPLIED | The attribute is optional |
 | \#FIXED value | The attribute value is fixed |
 
-### Entity
+## Entity
 
 L'équivalent de variable, peuvent contenir une valeur donnée ou load le contenu d'un fichier \(local ou depuis un lien\). Ce second cas est ce qu'on appelle une entité externe.
 
@@ -77,7 +69,7 @@ L'équivalent de variable, peuvent contenir une valeur donnée ou load le conten
 <test>&entity_name1;</test>
 ```
 
-#### Parameter Entity
+### Parameter Entity
 
 Elles permettent 2 choses :
 
@@ -98,7 +90,7 @@ L'exemple qui suit sert à une attaque mais montre bien l'idée :
     %wrapper;
 ```
 
-### Example Complet
+## Example Complet
 
 ```markup
 <!DOCTYPE TVSCHEDULE [
@@ -121,3 +113,4 @@ L'exemple qui suit sert à une attaque mais montre bien l'idée :
 <!ATTLIST TITLE LANGUAGE CDATA #IMPLIED>
 ]>
 ```
+
