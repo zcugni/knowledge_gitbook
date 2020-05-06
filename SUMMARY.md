@@ -13,7 +13,10 @@
 * [C](languages/c.md)
 * [Haskell](languages/haskell.md)
 * [Javascript](languages/javascript.md)
-* [XML](languages/xml.md)
+* [XML](languages/xml/README.md)
+  * [XPATH](languages/xml/xpath.md)
+  * [XML DTD](languages/xml/xml-dtd.md)
+  * [Autre Ajouts](languages/xml/autre-ajouts.md)
 
 ## Tools
 

@@ -1,6 +1,6 @@
 # XML
 
-### Généralités
+## Généralités
 
 * Abréviation de eXtensible Markup Language
 * Conçu pour le transport et le stockage des données
@@ -18,7 +18,7 @@
 * `<!-- Ceci est un commentaire -->`
 * `<!-- Ceci est un -- commentaire invalide -->`
 
-### Structure
+## Structure
 
 * Description du document optionnel \(obligatoirement en premier\) :
 
@@ -27,7 +27,7 @@
 * Un élément parent à tous les autres \(en dehors de la description\)
 * Structure hiérarchique pour le reste
 
-### Tags/éléments/nœuds
+## Tags/éléments/nœuds
 
 * Ces 3 termes sont synonymes
 * `<elementName></elementName>`
@@ -39,7 +39,7 @@
 * Peuvent être vide `<element></element>` et se fermer tout seul `<element />`
 * Un élément entouré de CDATA ne sera pas interprété `<![CDATA[content]]>`
 
-### Attributs
+## Attributs
 
 * Possibilité d'ajouter des attributs aux tags :
 
@@ -49,7 +49,7 @@
 * Toujours entre `“”` \(ou `‘’`\) même si ce sont des nombres/autres
 * En général, les metadata \(par exemple un id\) devraient être des attributs, tandis que les données en elles-mêmes \(par exemple une date\) devraient être des tags.
 
-### Exemple
+## Exemple
 
 ```markup
 <?xml version="1.0" encoding="UTF-8"?>
@@ -75,7 +75,7 @@
 </bookstore>
 ```
 
-### Namespace
+## Namespace
 
 Si on a 2 éléments avec un même nom mais ne représentant pas le même type d'informations, on peut préciser des namespace.
 
