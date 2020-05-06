@@ -4,6 +4,8 @@
 
 ## Languages
 
+* [PHP](languages/php.md)
+* [Bash](languages/bash.md)
 * [Python](languages/python/README.md)
   * [Syntaxe](languages/python/syntax.md)
   * [Norme](languages/python/norme.md)
