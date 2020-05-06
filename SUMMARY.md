@@ -32,10 +32,11 @@
 
 ## Theory
 
+* [Terminologie / Misc](theory/terminologie-misc.md)
 * [Networking](theory/networking/README.md)
   * [Modèle](theory/networking/modele.md)
   * [Machines](theory/networking/machines.md)
   * [DNS](theory/networking/dns.md)
-* [On hold](theory/on-hold.md)
 * [Linux / \*nix](theory/linux-nix.md)
+* [Cryptographie & Hash](theory/cryptographie-and-hash.md)
 
