@@ -1,3 +1,7 @@
+---
+description: Not complete & not tested
+---
+
 # XPATH
 
 * Permet de naviguer un document XML \(en sélectionnant des nœuds particuliers\)

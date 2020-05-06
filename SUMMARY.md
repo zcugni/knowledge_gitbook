@@ -9,17 +9,29 @@
   * [Norme](languages/python/norme.md)
   * [Libs](languages/python/libs.md)
 * [XML](languages/xml/README.md)
-  * [XPATH](languages/xml/xpath.md)
   * [XML DTD](languages/xml/xml-dtd.md)
+  * [XPATH](languages/xml/xpath.md)
   * [Autre Ajouts](languages/xml/autre-ajouts.md)
 * [Bash](languages/bash.md)
+* [MongoDB](languages/mongodb.md)
+* [LDAP](languages/ldap.md)
 * [PHP](languages/php.md)
 * [C](languages/c.md)
 * [Haskell](languages/haskell.md)
 * [Javascript](languages/javascript.md)
+* [Jquery](languages/jquery.md)
 
 ## Tools
 
 * [TMUX](tools/tmux.md)
-* [On hold](tools/on-hold.md)
+
+## Oh hold
+
+* [MySQL](oh-hold/mysql.md)
+* [On hold](oh-hold/on-hold.md)
+* [SSH](oh-hold/ssh.md)
+* [Networking](oh-hold/networking/README.md)
+  * [Modèle](oh-hold/networking/modele.md)
+  * [Machines](oh-hold/networking/machines.md)
+  * [DNS](oh-hold/networking/dns.md)
 
