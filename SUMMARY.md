@@ -24,6 +24,7 @@
 ## Tools
 
 * [TMUX](tools/tmux.md)
+* [NMAP](tools/nmap.md)
 
 ## Oh hold
 
