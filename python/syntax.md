@@ -66,7 +66,7 @@ if not (elem1 or elem2 or elem 3):
 val = "something" if test else "something else
 
 # On peut mettre du ternaire dans un printf :
-print("Splitting", total_candies, "candy" if total_candies == 1 else "candies") 
+print("Splitting", total_candies, "candy" if total_candies == 1 else "candies")
 ```
 
 ## Boucles

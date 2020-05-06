@@ -1,8 +1,8 @@
-## Norme
+# Norme
 
 Je vais me baser sur les normes PEP qui sont les plus utilisées, en prenant à chaque fois une des méthodes proposées.
 
-### Général
+## Général
 
 * Variable = fonction\_avec\_paramètre
 
@@ -47,7 +47,7 @@ income = (gross_wages
           - student_loan_interest)
 ```
 
-### Espaces
+## Espaces
 
 * Autour des opérateurs “:” des slices quand ils séparent autre choses que des simples nombres.
 
@@ -73,20 +73,20 @@ def complex(real, imag=0.0):
 
 * Après le “\#” de début de commentaire
 
-### Ligne vide
+## Ligne vide
 
 * Surround top-level function and class definitions with two blank lines.
 * Method definitions inside a class are surrounded by a single blank line.
 * Extra blank lines may be used \(sparingly\) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners \(e.g. a set of dummy implementations\).
 * Use blank lines in functions, sparingly, to indicate logical sections
 
-### Import
+## Import
 
 * Au début du document
 * Dans cet ordre : standard, third party, our
 * Sur plusieurs ligne pour les “import” avec des virgules pour les “from.. import”
 
-### Docstring
+## Docstring
 
 * Placées après la ligne de définition.
 * Pour tout ce qui est publique. Pour les fonctions privées, un commentaire peut suffire 
@@ -107,7 +107,7 @@ def complex(real, imag=0.0):
 """
 ```
 
-### Naming convention
+## Naming convention
 
 * module : short lower-case name underscore
 * class : CamelCase
@@ -115,7 +115,7 @@ def complex(real, imag=0.0):
 * Si le nom qu’on veut donner est un mot réservé rajouter \_ à la fin
 * constant : uppercase with underscore
 
-### Remarques diverses
+## Misc
 
 * Ligne de 79 caractères, docstring de 72
 * Espace/tab de 4 \(ils conseillent espaces mais je préfère tab je pense\)
@@ -133,3 +133,4 @@ No:  if foo[:3] == 'bar':
 Yes: if isinstance(obj, int):
 No:  if type(obj) is type(1):
 ```
+
