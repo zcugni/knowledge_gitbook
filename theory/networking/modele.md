@@ -245,6 +245,8 @@ The _three-way handshale_ establish a connection between 2 hosts :
 2. _SYN-ACK_. The server acknowledge the request \(the _ack_ number is the initial syn seq one + 1\) and respond with it's own SYN request \(with another randon seq number\). The request comes from the requested port on the server to the client source port. 
 3. _ACK_. The client acknowledge the server SYN request, the connection is established. \(Also by upping the seq number by 1\)
 
+![](../../.gitbook/assets/ack.png)
+
 * The OS forward the data stream to a program only after the three-way handshake is done. So if the connection stop after it, the problem lies in the server program but if it fails before, the OS didn't complete the connection.
 * A SYN flood attack consist of sending lots of SYN request that never goes past the SYN-ACK stage.
 * When the server and client finished exchanging data, both sides request and acknowledge teardown with states like CLOSE_WAIT, TIME\_WAIT, FIN\_WAIT & LAST\_ACK \(\_four-way hanshake_\).
@@ -424,6 +426,8 @@ Content-Length: 48
 ## Communication entre couche
 
 Chaque "paquet" d'information \(sens global du terme\) est composé de l'header du protocol + son payload. Pour passer d'une couche à l'autre, les informations sont encapsulée et le combo devient le payload de la prochaine couche.
+
+![](../../.gitbook/assets/encapsulation.png)
 
 Les informations de la data link \(la mac adresse\), est modifiée à chaque hop, tandis que celle de l'ip de destination reste pour tout le trajet.
 

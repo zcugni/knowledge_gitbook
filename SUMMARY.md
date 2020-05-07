@@ -27,8 +27,8 @@
   * [Find](tools/linux-bash-command/find.md)
   * [Grep](tools/linux-bash-command/grep.md)
   * [tcpdump](tools/linux-bash-command/tcpdump.md)
-* [TMUX](tools/tmux.md)
 * [Hack tools](tools/hack-tools.md)
+* [TMUX](tools/tmux.md)
 * [NMAP](tools/nmap.md)
 * [Burp Proxy](tools/burp-proxy.md)
 * [JohnTheRipper](tools/johntheripper.md)
@@ -41,6 +41,9 @@
 * [Git](oh-hold/git.md)
 * [MySQL](oh-hold/mysql.md)
 * [SSH](oh-hold/ssh.md)
+* [ElasticSearch](oh-hold/elasticsearch.md)
+* [Finger](oh-hold/finger.md)
+* [Redis](oh-hold/redis.md)
 
 ## Theory
 
@@ -51,4 +54,6 @@
   * [DNS](theory/networking/dns.md)
 * [Linux / \*nix](theory/linux-nix.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
+* [MCD / MLD](theory/mcd-mld.md)
+* [Memory Allocation \(linux, glibc\)](theory/memory-allocation-linux-glibc.md)
 

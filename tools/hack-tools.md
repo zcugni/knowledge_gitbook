@@ -131,7 +131,7 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 * Cwel
   * Spider a website and generate a custom word list of words that could be used for password cracking by other tools such as John
-* [JohnTheRipper](../../../Résumés/Info/Outils/JohnTheRipper.md)
+* [JohnTheRipper](https://zcugni.gitbook.io/notes/tools/johntheripper)
 * Hashcat
   * `hashcat -a 0 -m 20 hash:salt path/to/rockyou.txt`
     * `-a` Définit le type d'attaque \(0 pour une attaque dico je pense\)
@@ -151,7 +151,7 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 ## Process Analysis
 
-* [https://github.com/DominicBreuker/pspy](pspy) Permet de voir les process appelés sans être root, peut être utile pour trouver des programmes appelés sans qu'un chemin soit utilisé par exemple.
+* [pspy](https://github.com/DominicBreuker/pspy) Permet de voir les process appelés sans être root, peut être utile pour trouver des programmes appelés sans qu'un chemin soit utilisé par exemple.
   * Penser à se reconnecter via ssh après l'avoir lancé \(dans une autre fenêtre\), pour voir ce qui est lancé à la co
   * Pour l'installation, lancer `go build` après avoir installé golang `sudo apt-get install golang`
     * S'il nous dit qu'il ne connait pas le paquet, d'abord lancé `go get github.com/dominicbreuker/pspy/cmd`
@@ -164,12 +164,12 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
   * `wfuzz -u url -d "username=asd&password=FUZZ" -w wordlist` \(d specifies post data\)
   * On peut le faire passer par un proxy avec `-p 127.0.0.1:8080`
   * On peut filtrer les résultats pour cacher les status code/nombre de lignes/nombre de mots/nombre de caractères spécifique avec `--hc/hl/hw/hh ..`
-  * utiliser `''` au lieu de `""` autour des paramètres car certains char peuvent faire bugger le shell s'ils sont interprêtés
+  * utiliser `''` au lieu de `""` autour des paramètres car certains char peuvent faire bugger le shell s'ils sont interprétés
 * Hydra \(over the network\)
 * Patator
 * Seclist has good specific fuzzing lists
 
 ## Misc
 
-* [https://gchq.github.io/CyberChef/](CyberChef) Permet d'enchainer pleins d'actions de cmd sur une string/un fichier, etc \(genre décompresser puis base64 puis hexdump, etc\)
+* [https://gchq.github.io/CyberChef/](CyberChef) Permet d’enchaîner pleins d'actions de cmd sur une string/un fichier, etc \(genre décompresser puis base64 puis hexdump, etc\)
 
