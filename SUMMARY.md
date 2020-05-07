@@ -2,6 +2,50 @@
 
 * [Initial page](README.md)
 
+## Pen test
+
+* [Broken Access Control & File Inclusion](pen-test/broken-access-control-and-file-inclusion.md)
+* [Méthodologie](pen-test/methodologie.md)
+* [Misc Attack](pen-test/misc-attack.md)
+* [Misc Théorie](pen-test/misc-theorie.md)
+* [Misc](pen-test/misc.md)
+* [Privilege Escalation](pen-test/privilege-escalation.md)
+* [Recon](pen-test/recon.md)
+* [Remote Code Execution](pen-test/remote-code-execution.md)
+* [Reverse code](pen-test/reverse-code.md)
+* [SOP, CORS & CSRF](pen-test/sop-cors-and-csrf.md)
+* [SQL Injection](pen-test/sql-injection.md)
+* [XSS](pen-test/xss.md)
+* [XXE and other XML vulnerabilities](pen-test/xxe-and-other-xml-vulnerabilities.md)
+
+## Tools
+
+* [Linux / Bash Command](tools/linux-bash-command/README.md)
+  * [Find](tools/linux-bash-command/find.md)
+  * [Grep](tools/linux-bash-command/grep.md)
+  * [tcpdump](tools/linux-bash-command/tcpdump.md)
+* [Hack tools](tools/hack-tools.md)
+* [TMUX](tools/tmux.md)
+* [NMAP](tools/nmap.md)
+* [Burp Proxy](tools/burp-proxy.md)
+* [JohnTheRipper](tools/johntheripper.md)
+* [Metasploit Framework](tools/metasploit-framework.md)
+* [Patator](tools/patator.md)
+* [Windows networking commands](tools/windows-networking-commands.md)
+
+## Theory
+
+* [Terminologie / Misc](theory/terminologie-misc.md)
+* [Networking](theory/networking/README.md)
+  * [Modèle](theory/networking/modele.md)
+  * [Machines](theory/networking/machines.md)
+  * [DNS](theory/networking/dns.md)
+* [Linux / \*nix](theory/linux-nix.md)
+* [Cryptographie & Hash](theory/cryptographie-and-hash.md)
+* [MCD / MLD](theory/mcd-mld.md)
+* [Memory Allocation \(linux, glibc\)](theory/memory-allocation-linux-glibc.md)
+* [URL & CO + URL Encoding](theory/url-and-co-+-url-encoding.md)
+
 ## Languages
 
 * [Python](languages/python/README.md)
@@ -21,21 +65,6 @@
 * [Javascript](languages/javascript.md)
 * [Jquery](languages/jquery.md)
 
-## Tools
-
-* [Linux / Bash Command](tools/linux-bash-command/README.md)
-  * [Find](tools/linux-bash-command/find.md)
-  * [Grep](tools/linux-bash-command/grep.md)
-  * [tcpdump](tools/linux-bash-command/tcpdump.md)
-* [Hack tools](tools/hack-tools.md)
-* [TMUX](tools/tmux.md)
-* [NMAP](tools/nmap.md)
-* [Burp Proxy](tools/burp-proxy.md)
-* [JohnTheRipper](tools/johntheripper.md)
-* [Metasploit Framework](tools/metasploit-framework.md)
-* [Patator](tools/patator.md)
-* [Windows networking commands](tools/windows-networking-commands.md)
-
 ## Oh hold
 
 * [Git](oh-hold/git.md)
@@ -44,16 +73,4 @@
 * [ElasticSearch](oh-hold/elasticsearch.md)
 * [Finger](oh-hold/finger.md)
 * [Redis](oh-hold/redis.md)
-
-## Theory
-
-* [Terminologie / Misc](theory/terminologie-misc.md)
-* [Networking](theory/networking/README.md)
-  * [Modèle](theory/networking/modele.md)
-  * [Machines](theory/networking/machines.md)
-  * [DNS](theory/networking/dns.md)
-* [Linux / \*nix](theory/linux-nix.md)
-* [Cryptographie & Hash](theory/cryptographie-and-hash.md)
-* [MCD / MLD](theory/mcd-mld.md)
-* [Memory Allocation \(linux, glibc\)](theory/memory-allocation-linux-glibc.md)
 
