@@ -64,26 +64,20 @@ Note :
 
 | Symbole | Sens |
 | :--- | :--- |
-| == |  |
-| != | Diff |
-| === | Equal in type & value |
-| !== | Diff in type & value |
-| &gt; |  |
-| &lt; |  |
-| &gt;= |  |
-| &lt;= |  |
+| `==` & `!=` | Equal & Diff in value |
+| `===` & `!==` | Equal & Diff in type & value |
+| `>` & `<` |  |
+| `>=` & `<=` |  |
 | ! | Not |
 
 #### Autre
 
 | Symbole | Sens |
 | :--- | :--- |
-| ? | Ternary |
-| && |  |
-| \|\| |  |
-| ++ |  |
-| -- |  |
-| += & co |  |
+| `?` | Ternary |
+| `&&` / `||` |  |
+| `++` / `--` |  |
+| `+=` / `-=` / `*=` / ... |  |
 
 ## Others
 

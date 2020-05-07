@@ -4,15 +4,15 @@
 
 | Shortcut | Result |
 | :--- | :--- |
-| ctrl-a | Go to start of the line |
-| ctrl-e | Go to end of the line |
-| up arrow key | Previous cmd |
-| down arrow key | Next cmd |
-| ctrl-p | Previous cmd |
-| ctrl-n | Next cdm |
-| ctrl-r | Bash cmd search \(use multiple time to go back in history\) |
-| ctrl-c | Interrupt |
-| ctrl-l | Clear |
+| `ctrl-a` | Go to start of the line |
+| `ctrl-e` | Go to end of the line |
+| `up arrow key` | Previous cmd |
+| `down arrow key` | Next cmd |
+| `ctrl-p` | Previous cmd |
+| `ctrl-n` | Next cdm |
+| `ctrl-r` | Bash cmd search \(use multiple time to go back in history\) |
+| `ctrl-c` | Interrupt |
+| `ctrl-l` | Clear |
 
 ## Déplacement
 
@@ -237,7 +237,7 @@ They're different on each distro
 
 ### nmap \(map network\)
 
-Go see [Nmap](../../../Résumés/Info/Outils/Nmap.md)
+Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 
 ### httprint \(fingerprint web server\)
 
@@ -290,7 +290,7 @@ The first one will generate only 1 uncompressed directory, the second one will g
 * `curl ip:port/path`
   * `-s` To not have the banner
 
-Pour les 2 y'a apparemment moyen de direct executer le fichier sans l'écrire sur le disque, faudrait que je regarde
+Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire sur le disque, faudrait que je regarde
 
 ### python
 
@@ -301,12 +301,14 @@ Pour les 2 y'a apparemment moyen de direct executer le fichier sans l'écrire su
 
 * En fonction de la taille du fichier ça peut être plus simple de le base64, copier le résultat puis de le décoder et rediriger dans un fichier dans le terminal de destination
 
-## Base64
+## Encoding
+
+### Base64
 
 * `base64 -d file` Decode
-  * Si on veut pas le faire depuis un fichier on peut faire ainsi `echo "..." | base64 -d`
+  * Si on ne veut pas le faire depuis un fichier on peut faire ainsi `echo "..." | base64 -d`
 
-## Dump
+### Hex to bin
 
 * `xxd` Dump a file in hexa
 * `echo "FF D8 FF DB" | xxd -r -p > new_file` Convert the hex back to binary and write it in a file
@@ -384,7 +386,7 @@ On peut accéder aux différents éléments ainsi :
 
 ## Tmux
 
-[tmux](../../../Résumés/Info/Outils/tmux.md)
+[tmux](https://zcugni.gitbook.io/notes/tools/tmux)
 
 ## Script cmd
 
@@ -397,7 +399,7 @@ On peut accéder aux différents éléments ainsi :
 
 ## Bash specific commands
 
-* `bash -c "cmd string"` Execute la chaine
+* `bash -c "cmd string"` Execute la chaîne
   * S'il y a d'autres arguments après celle-ci, ils sont transmis comme des arguments transitionnels commençant par $0
   * On peut éviter d'avoir des espaces en faisant cela `bash -c "{echo,string}"` au lieu de `bash -c "echo string"`
   * Si on veut piper des commandes qui ont des paramètres, faut les mettre par tas : `bash -c "{echo,string}|{base64,-d}"`

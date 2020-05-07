@@ -352,7 +352,7 @@ for key, val in dict.items():
 
 ## Time Conversion
 
-* Si on a une date sous ce format : "Wed, 22 Apr 2020 16:02:51 GMT" on peut la transformer en `struct_time` \(time tuple\), ainsi :
+Si on a une date sous ce format : "Wed, 22 Apr 2020 16:02:51 GMT" on peut la transformer en `struct_time` \(time tuple\), ainsi :
 
 ```python
 # [...]
@@ -362,7 +362,7 @@ format = "%a, %d %b %Y %H:%M:%S %Z"
 time_tuple = time.strptime(serverTime, format)`
 ```
 
-* On peut transformer un time tuple en **timespamp epoch** ainsi : `calendar.timegm(time_tuple)`
+On peut transformer un time tuple en **timespamp epoch** ainsi : `calendar.timegm(time_tuple)`
 
 ## Explorer des variables
 

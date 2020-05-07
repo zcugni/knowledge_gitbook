@@ -28,30 +28,30 @@ description: A Terminal Multi-Plexer
 
 | Commande | Effet |
 | :--- | :--- |
-| ctrl-b % | Split pane vertically |
-| ctrl-b " | Split pane horizontally |
-| ctrl-b x | Kill pane |
-| ctrl-b q | Show pane numbers |
-| ctrl-b o | Switch to next pane |
-| ctrl-b-o | Inverse les panes |
-| ctrl-b arrow keys | Resize panes |
-| ctrl-b space | Cycle layout |
+| `ctrl-b %` | Split pane vertically |
+| `ctrl-b "` | Split pane horizontally |
+| `ctrl-b x` | Kill pane |
+| `ctrl-b q` | Show pane numbers |
+| `ctrl-b o` | Switch to next pane |
+| `ctrl-b-o` | Inverse les panes |
+| `ctrl-b arrow keys` | Resize panes |
+| `ctrl-b space` | Cycle layout |
 
 ## Session
 
 | Commande | Effet |
 | :--- | :--- |
-| tmux new -s session\_name | Creates a new session |
-| ctrl-b d | Detach the session from the shell |
-| tmux attach -t session\_name | Attach the tmux session to the shell |
-| tmux list-sessions | List all sessions |
+| `tmux new -s session_name` | Creates a new session |
+| `ctrl-b d` | Detach the session from the shell |
+| `tmux attach -t session_name` | Attach the tmux session to the shell |
+| `tmux list-sessions` | List all sessions |
 
 ## Misc
 
 | Commande | Effet |
 | :--- | :--- |
-| ctrl-b \] | Paste |
-| ctrl-b ? | **List all key bindings** |
+| `ctrl-b ]` | Paste |
+| `ctrl-b ?` | **List all key bindings** |
 
 ## View Mode
 
@@ -59,10 +59,10 @@ In this mode you can go up the terminal & search/copy, etc.
 
 | Commande | Effet |
 | :--- | :--- |
-| ctrl-b \[ | Enter view mode |
-| q | quit |
-| ctrl-space | Highlight mode |
-| alt-w | Copy |
+| `ctrl-b [` | Enter view mode |
+| `q` | quit |
+| `ctrl-space` | Highlight mode |
+| `alt-w` | Copy |
 
 
 
