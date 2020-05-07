@@ -25,6 +25,8 @@
 
 * [TMUX](tools/tmux.md)
 * [NMAP](tools/nmap.md)
+* [Burp Proxy](tools/burp-proxy.md)
+* [Linux / Bash Command](tools/linux-bash-command.md)
 
 ## Oh hold
 
