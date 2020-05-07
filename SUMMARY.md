@@ -23,16 +23,22 @@
 
 ## Tools
 
-* [TMUX](tools/tmux.md)
-* [NMAP](tools/nmap.md)
-* [Burp Proxy](tools/burp-proxy.md)
 * [Linux / Bash Command](tools/linux-bash-command/README.md)
   * [Find](tools/linux-bash-command/find.md)
   * [Grep](tools/linux-bash-command/grep.md)
   * [tcpdump](tools/linux-bash-command/tcpdump.md)
+* [TMUX](tools/tmux.md)
+* [Hack tools](tools/hack-tools.md)
+* [NMAP](tools/nmap.md)
+* [Burp Proxy](tools/burp-proxy.md)
+* [JohnTheRipper](tools/johntheripper.md)
+* [Metasploit Framework](tools/metasploit-framework.md)
+* [Patator](tools/patator.md)
+* [Windows networking commands](tools/windows-networking-commands.md)
 
 ## Oh hold
 
+* [Git](oh-hold/git.md)
 * [MySQL](oh-hold/mysql.md)
 * [SSH](oh-hold/ssh.md)
 
