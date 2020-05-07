@@ -29,6 +29,7 @@
 * [Linux / Bash Command](tools/linux-bash-command/README.md)
   * [Find](tools/linux-bash-command/find.md)
   * [Grep](tools/linux-bash-command/grep.md)
+  * [tcpdump](tools/linux-bash-command/tcpdump.md)
 
 ## Oh hold
 

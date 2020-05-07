@@ -66,8 +66,8 @@
 
 ## Recherche
 
-* [Find](../../../Résumés/Info/Outils/Find.md)
-* grep
+* [Find](https://zcugni.gitbook.io/notes/tools/linux-bash-command/find)
+* [Grep](https://zcugni.gitbook.io/notes/tools/linux-bash-command/grep)
 
 ## Permission
 
@@ -85,7 +85,7 @@
   * o : Les autres
 * Permet de set les permissions de différentes façons :
   * `chmod u+w file`, `chmod u-x file`, `chmod u=wr file`, `chmod u+s file` Ajoute, supprime ou définit les droits de l'utilisateur \(remplacer par _g_ ou _o_ si nécessaire\)
-  * `chmod 754 file` Définit les droits pour chaque groupe en les aditionnant
+  * `chmod 754 file` Définit les droits pour chaque groupe en les additionnant
   * `chmod 4755 file` Same mais en ajoutant le SUID
 
 ### chown
@@ -267,7 +267,7 @@ Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 
 ### tarbomb
 
-A tarbomb is a compressed file that when uncompress will generate a lot of files/directory.
+A tarbomb is a compressed file that when uncompressed will generate a lot of files/directory.
 
 Good practice is to do that `tar -zcvf archive.tar.gz Documents/`, bad practice is to be _in_ Documents/ and do that `tar -zcvf archive.tar.gz`.
 
