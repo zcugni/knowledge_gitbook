@@ -41,9 +41,9 @@ description: A Terminal Multi-Plexer
 
 | Commande | Effet |
 | :--- | :--- |
-| `tmux new -s session_name` | Creates a new session |
+| `tmux new -s <name>` | Creates a new session |
 | `ctrl-b d` | Detach the session from the shell |
-| `tmux attach -t session_name` | Attach the tmux session to the shell |
+| `tmux attach -t <name>` | Attach the tmux session to the shell |
 | `tmux list-sessions` | List all sessions |
 
 ## Misc

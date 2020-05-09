@@ -15,10 +15,10 @@
   * hostname \(if it resolve to more than one ip, only the first one is used. Use `--resolve-all` to scan all\)
   * CIDR-like format for network \(v4 & v6\)
   * Octet-range to be more specific than a CIDR scope \(check man to see how\) \(Only on IPv4\)
-* `-iL filename` Reads target from file \(must be separated by spaces, tabs or newlines. Can have comment starting with "\#"\)
+* `-iL <file>` Reads target from file \(must be separated by spaces, tabs or newlines. Can have comment starting with "\#"\)
 * `-iL -` Reads target from standard input
 * `--exclude host1[, host2, ..]`
-* `--excludefile filname` Same restriction as -iL
+* `--excludefile <file>` Same restriction as -iL
 
 ## Définir les ports
 
@@ -27,7 +27,7 @@ In both host discovery & port scanning you can specify the port you target :
 * Individual port numbers separated by commas
 * Range specified via - : 1-1023
 * If the start or end values are omitted, nmap will use 1 & 65535
-* You can also use name and  _: \`-p ftp,http_\`
+* You can also use name and  _: `-p ftp,http`_
 
 ## Misc options
 
@@ -36,13 +36,13 @@ By default, nmap does a host discovery and then a port scan on live host
 * `-sn` No port scan \(so only host discovery\)
 * `-Pn` No host discovery \(so only port scan\)
 * Théoriquement on peut modifier le contenu des packets avec `--data`, `--data-string` mais ils ne sont pas détaillés et mêmes pas mentionnés dans certaines versions du man
-* `--resume filename` Resume a scan from a normal/grepable output file
+* `--resume <file>` Resume a scan from a normal/grepable output file
 * `-6` Enable IPv6 scanning
   * If you use IP address, they obviously must be IPv6 ones
   * Both the source and the target must be configured for IPv6
 * `-V` & `--version` Prints version number
 * `-h` & `--help`
-* `--max-retries nb` Si y'a des problèmes de perfs, réduire cela
+* `--max-retries <nb>` Si y'a des problèmes de perfs, réduire cela
 
 ## Host discovery
 
@@ -65,29 +65,29 @@ S'il n'est pas root :
 
 ### Type of "ping"
 
-Nmap can send different types of packets, the syntax is the same for each : `-PX port_list`
+Nmap can send different types of packets, the syntax is the same for each : `-PX<port_list>`
 
 * X being replaced by the letter of the packet type
 * Each has a default port so the port list is optional
 * La liste des ports doit être collée au reste : `-PX22`, `PX22-25,80`
 * nmap doesn't care here if the port is open or not, its just hoping for a response which would indicate that the host is live
 * If multiple probes are specified, they'll be send in parallel
-* `-PS port_list` TCP SYN ping
+* `-PS<port_list>` TCP SYN ping
   * Port 80 by default
   * If the host is live, we'll normally receive an `RST` or `SYN/ACK` packet back. For the second one we responds with an RST to prevent the connection from establishing. \(Note : actually, it's the OS that responds with RST after the unexpected SYN/ACK and not nmap itself\).
   * On Unix, usually only the root user can send & receive raw TCP packet, so the `connect` system call is instead used for unprivileged user. If it returns a quick succes or the `ECONNREFUSED` failure, the host is live, if there's a timeout, it's not.
-* `-PA port_list` TCP ACK ping
+* `-PA<port_list>` TCP ACK ping
   * Port 80 by default
   * Since we're acknowledging a connection that's never been setup, we should always receive back an `RST` packet, informing that the host is live
   * This is used because small firewalls sometimes only drop SYN packets
   * This won't work on unprivileged users because the `connect` system call only sends SYN packets.
-* `-PU port_list` UDP ping
+* `-PU<port_list>` UDP ping
   * Port 40125 by default
   * Empty UDP packets are used
     * Some protocol-specific payload might be useful \(check [https://nmap.org/book/nmap-payloads.html](https://nmap.org/book/nmap-payloads.html)\)
   * If the port is closed it will responds with an "ICMP port unreachable" packet or other type of ICMP errors and TTL expires. Open port usually won't responds however, which is why we send it to an unlikely port
   * This is useful against firewall that only filter TCP packets
-* `-PY port_list` SCTP Init ping
+* `-PY<port_list>` SCTP Init ping
   * Port 80 by default
   * Works kind of like the TCP SYN but it'll instead follow the SCTP four-way-handshake. It sends an `INIT Chunk` and receives either an `ABORT` or `INIT-ACK`. If the OS \(of the attacker\) knows about SCTP, it will responds to the unexpected ack with an abort.
   * Can only be done by root user
@@ -263,11 +263,11 @@ nmap utilise 6 états pour décrire un port :
 * Nmap provides options that can help evade protection mise en place par les admin
 * _Intrusion Detection System_ \(IDS\) have rules to detect nmap scans since they're a good indicator of an incoming attack.
 * _Intrustion Prevention System_ \(IPS\) actively block traffic deemed malicious. However those give a lot of false positive.
-* `-f` & `--mtu size` Fragment packet in multiple parts
+* `-f` & `--mtu <size>` Fragment packet in multiple parts
   * Fragment the TCP header in multiple packet to make it harder to detect what you're doing
   * Some programs have trouble dealing with these, and some setup will defragment them so it won't do anything
   * Use `-f` once to divide them in 8-bytes packet \(+ the ip header\), use it twice to divide them in 16-bytes packet \(+ ip header\)
-  * Specify an offset with `--mtu size`, it must be a multiple of 8
+  * Specify an offset with `--mtu <size>`, it must be a multiple of 8
   * Only supported by TCP & UDP scans \(except the connect one\) and OS detection.
 * `-D decoy1[,decoy2,ME,...]` Cloak a scan with decoys
   * Makes it appear to the target that the host you specify as decoy are also scanning the network.
@@ -276,18 +276,18 @@ nmap utilise 6 états pour décrire un port :
   * If you don't specify the ME, nmap will place it in a random position
   * The decoy host must obviously be up
   * Decoys do not work with version detection and the connect scan
-* `-S ip_address` Spoof source address
+* `-S <ip>` Spoof source address
   * Forge the source address to make it looks like somebody else is scanning the host
   * However responses won't be addressed to you, so you won't get a report
-* `--source-port portnumber` & `-g portnumber` Spoof source port number
+* `--source-port <port>` & `-g <port>` Spoof source port number
   * A common misconfiguration is to trust traffic based on the source port number \(particulary DNS & FTP one because it's a quick but insecure workaround to some problems\)
   * Most scanning operations using raw sockets, such as SYN & UDP scans, can use this
   * DNS request, TCP connect scan, version detection, script scanning & os detection can't use it
-* `--data-length number` Append random data to packets
+* `--data-length <nb>` Append random data to packets
   * Appends n number of random bytes to packets
   * OS detection isn't concerned by this
 * `--ip-options ..` Set specific IP options, read the man for more details
-* `--ttl value` Set the IPv4 ttl value
+* `--ttl <nb>` Set the IPv4 ttl value
 * `--randomize-hosts` Randomize target host order
   * Instead of scanning them in incrementing order, does it randomly, which may be less obvious
 * `--spoof-mac ..` Spoof the mac address, read the man for more details
@@ -297,10 +297,10 @@ nmap utilise 6 états pour décrire un port :
 
 ## Output & Verbosity
 
-* `-oN file` Write normal output \(human readable\) to the specified file. This corresponds to the interactive output written on stdout \(with a few differences\)
-* `-oX file` Write XML output to the specified file
-* `-oG file` Write grepable output to the specifed file, actually deprecated because the XML one is way more powerful.
-* `-oA filename` Write normal, xml & grepable output to 3 files having this filename.
+* `-oN <file>` Write normal output \(human readable\) to the specified file. This corresponds to the interactive output written on stdout \(with a few differences\)
+* `-oX <file>` Write XML output to the specified file
+* `-oG <file>` Write grepable output to the specifed file, actually deprecated because the XML one is way more powerful.
+* `-oA filename` Write normal, xml & grepable output to 3 files having this filename \(so don't specify extension\)
 * `-v` Increase the verbosity level
   * Concern mostly the interactive & normal output 
   * use `-vv` or `-v3` to increase it even more
@@ -310,7 +310,7 @@ nmap utilise 6 états pour décrire un port :
 * `--reason` Host and port state reason
   * Give the reason why a specific state was choosen for a port or why an host is seen as up or down.
   * Always added to the xml output
-* `--stats-every time` Print periodic timing stats
+* `--stats-every <time>` Print periodic timing stats
   * Example : `--stats-every 10s`
   * Printed to the interactive and xml output
 * `--packet-trace` Print all packets sent and received

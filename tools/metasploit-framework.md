@@ -16,16 +16,15 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
 
 ### Commandes basiques
 
-* `search service_name` Search the db for exploit on this service
-* `use exploit_name` Select the exploit \(copy the name from the result of the search\)
-  * `show options` Donnes les options de l'exploit
-  * `set option_name value` Set the given option
+* `search <service>` Search the db for exploit on this service
+* `use <exploit_path>` Select the exploit \(copy the name from the result of the search\)
+  * `show options` Donne les options de l'exploit
+  * `set <option> <value>` Set the given option
   * `run` Run l'exploit avec les options désignées
-  * \(il a set `LHOST` à `tun0` mais je suis pas sûre de comprendre pourquoi\)
-  * \(Si ça marche, ça devrait ouvrir un command shell, quoique ça doit déprendre du type d'exploit, auquel cas je peux écrire `whoami` dedans pour voir si ça fonctionne\)
-  * Pour voir le payload envoyé par metasploit quand c'est des exploit web, le plus simple est de le faire passer par burp en utiliser `set Proxies http:127.0.0.1:8080` \(c'est important de ne pas mettre les `//`, je sais pas pourquoi\)
-  * Dans burp, faut avoir mis l'intercept on et avant de forward la request : clic droit "do intercept" -&gt; "response to this request"
-  * \(Faut forward vite car sinon metasploit considère que ça n'a pas marché\)
+  * I a set `LHOST` à `tun0` mais je suis pas sûre de comprendre pourquoi
+  * On peut faire passer les explois web par un proxy`set Proxies http:127.0.0.1:8080`
+    * Dans burp, faut avoir mis l'intercept on et avant de forward la request : clic droit "do intercept" -&gt; "response to this request"
+    * Faut forward vite car sinon metasploit considère que ça n'a pas marché
 
 ## msfdb
 
@@ -37,7 +36,7 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
 ### Lancement
 
 * Sur kali il faut lancer `systemctl start postgresql` puis `sudo msfdb init`
-* On peut ensuite utiliser `msfdb run` pour lancer la db et run msfconsole
+* On peut ensuite utiliser `sudo msfdb run` pour lancer la db et run msfconsole
 * Si j'ai cette erreur `cannot load such file — bundler/setup`, c'est probablement parce que j'ai pas installé ruby. Pour corriger ça, faire ceci : 
   * `sudo gem update --system`
   * `sudo gem install bundler:1.17.3`

@@ -15,22 +15,24 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 ## Liste / CheatSheet
 
-* [https://gtfobins.github.io/](gtfobins) Liste d'utilisation des commandes linux permettant de sudo/shell & co \(aka vim, etc\)
+* `rockyou.txt` -&gt; Une breach des mdp de 32 millions d'utilisateur \(dispo dans 
+* [gtfobin](https://gtfobins.github.io/) Liste d'utilisation des commandes linux permettant de sudo/shell & co \(aka vim, etc\)
 * [fuzzdb](https://github.com/fuzzdb-project/fuzzdb)
 * [SecList](https://github.com/danielmiessler/SecLists)
 * [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 * [OWASP's CheatSheet](https://github.com/OWASP/CheatSheetSeries/tree/master/cheatsheets)
 * [Google Hacking Database](https://www.exploit-db.com/google-hacking-database)
-* Keywords for credentials/etc : [https://github.com/random-robbie/keywords/blob/master/keywords.txt](https://github.com/random-robbie/keywords/blob/master/keywords.txt)
-* `rockyou.txt` -&gt; Une breach des mdp de 32 millions d'utilisateur \(dispo dans [https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)\)
-* Password list : [https://wiki.skullsecurity.org/Passwords](https://wiki.skullsecurity.org/Passwords)
+* Keywords for credentials/etc : [random\_robbie](https://github.com/random-robbie/keywords/blob/master/keywords.txt)
+* [https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)\)
+* Password list : [skullssecurity](https://wiki.skullsecurity.org/Passwords)
 
 ## Proxy
 
-* Burp Suite
-* [OWASP's ZAP](https://owasp.org/www-project-zap/)
+[Burp Proxy](https://zcugni.gitbook.io/notes/tools/burp-proxy)
 
 ## Spider
+
+Not tested
 
 * Sam Spade
 * Spike Proxy
@@ -40,6 +42,8 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 ## Recon
 
 ### Fingerprint website
+
+Not tested
 
 * OWASP's amass
 * whois \(command\)
@@ -52,6 +56,8 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 ### Wayback machine
 
+Not tested
+
 * [waybackurls](https://github.com/tomnomnom/waybackurls)
 * [waybackunifier](https://github.com/mhmdiaa/waybackunifier)
 
@@ -62,6 +68,7 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
   * quite easy so read help in doubt
   * default command could be `gobuster dir -u ip/hostname -w wordlist_path -o result_file`
   * Don't forget to add `-x php,txt` \(for example\) to append ".php" and ".txt" to each name
+    * It's gonna take time but it's worth it. Don't hesitate to add more threads
   * Increase thread numbers if you're doing a lot of recon
   * You can put it in a bash loop if you need to do it recursively \(directly in the cmd\):
 
@@ -76,6 +83,8 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 ### Github dork
 
+Not tested
+
 * [gitrob](https://github.com/michenriksen/gitrob)
 
 ## Vulnérabilités
@@ -84,10 +93,13 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 * `searchsploit` is the command-line utility giving easy access to the exploit db
 * [https://exploits.shodan.io/](https://exploits.shodan.io/)
+* [metasploit](https://zcugni.gitbook.io/notes/tools/metasploit-framework)
 * Ces bdds ne sont pas toujours complètes, simplement faire une recherche google "nom exploit" peut s'avérer fructueuse
 * [hacktricks](https://book.hacktricks.xyz/)
 
 ### XSS
+
+Not tested
 
 * bXSS \(github\)
 * ezXSS \(github\)
@@ -101,6 +113,8 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 ### CSRF
 
+Not tested
+
 * CSRF tester
 * Cross Site Requester
 * Cross Frame Loader
@@ -108,18 +122,25 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 ### Directory Traversal
 
+Not tested
+
 * DotDotPwn : [https://github.com/wireghoul/dotdotpwn/blob/master/dotdotpwn.pl](https://github.com/wireghoul/dotdotpwn/blob/master/dotdotpwn.pl)
-* Path Traversal Fuzz Strings \(from WFuzz Tool\)
 
 ### Pad oracle
+
+Not tested
 
 * padbuster
 
 ### SQL Injection
 
+Not tested
+
 * SQLmap
 
 ### Vulnerability Scanner
+
+Not tested
 
 * OpenVAS
 * Nexpose
@@ -129,6 +150,7 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 ## Misc software scan
 
 * Magento : [https://github.com/steverobbins/magescan](magescan)
+* Joomla : [joomscan](https://www.securiteinfo.com/attaques/hacking/outils/joomscan.shtml)
 
 ## Stegonography
 
@@ -148,13 +170,13 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 
 ## Privilege escalation
 
-* Peas suite : [https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite)
+* [Peas suite](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite)
   * Assez verbose, énonce tous les tests qu'il fait même quand ils ne sont pas fructueux
   * Link vers ces explications, etc
   * \(Mais efficace\)
-* LinEnum : [https://github.com/rebootuser/LinEnum](https://github.com/rebootuser/LinEnum)
+* [LinEnum](https://github.com/rebootuser/LinEnum)
   * Lancer `./LinEnum.sh -t` pour avoir les tests complets
-  * * to the point, il ne donne que les infos qu'il trouve
+  * To the point, il ne donne que les infos qu'il trouve
 
 ## Process Analysis
 
@@ -172,8 +194,8 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
   * On peut le faire passer par un proxy avec `-p 127.0.0.1:8080`
   * On peut filtrer les résultats pour cacher les status code/nombre de lignes/nombre de mots/nombre de caractères spécifique avec `--hc/hl/hw/hh ..`
   * utiliser `''` au lieu de `""` autour des paramètres car certains char peuvent faire bugger le shell s'ils sont interprétés
-* Hydra \(over the network\)
-* Patator
+* Hydra
+* [Patator](https://zcugni.gitbook.io/notes/tools/patator)
 * Seclist has good specific fuzzing lists
 
 ## Misc

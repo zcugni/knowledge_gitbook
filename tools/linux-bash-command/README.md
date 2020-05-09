@@ -31,35 +31,33 @@
 
 | Commande | Définition |
 | :--- | :--- |
-| `touch path` | Create empty file |
-| `cp src_path dest_path` | Copy file |
-| `mkdir path` | Create dir |
-| `mv old_path new_path` | Move file \(can rename\) |
-| `rm path` | Remove file |
-| `rm path -r` | Remove dir |
-| `head path` | First 10 lines of file |
-| `tail path` | Last 10 lines of file |
-| `tail -f path` | Last 10 lines and keep following \(showing new content\) |
-
-`head` & `tail` peuvent être utilisé avec `-n x` pour montrer les x lignes
+| `touch <path>` | Create empty file |
+| `cp <src> <dest>` | Copy file |
+| `mkdir <dir>` | Create dir |
+| `mv <old> <new>` | Move file \(can rename\) |
+| `rm <file>` | Remove file |
+| `rm <path> -r` | Remove dir |
+| `head <file> -n x` | First x \(default 10\) lines of file |
+| `tail <file> -n x` | Last x \(default 10\) lines of file |
+| `tail -f <file>` | Last 10 lines and keep following \(showing new content\) |
 
 ## View info / file
 
 | Commande | Définition |
 | :--- | :--- |
-| `cat path` | "Read" file |
+| `cat <file>` | "Read" file |
 | `less` |  |
 | `more` |  |
-| `ls [path]` | List dir content |
+| `ls <dir>` | List dir content \(default `.`\) |
 | `ls -a` | List hidden files |
 | `ls -l` | List files with size & permissions |
-| `ls -lh` | Same but in human readeable format |
+| `ls -lh` | Same but in human readable format |
 
 ## Manipulation de string
 
 | Commande | Définition |
 | :--- | :--- |
-| `cut -dsymbol -fpart` | Cut at the delimiter and returns the part |
+| `cut -d<symbol> -f<part>` | Cut at the delimiter and returns the part |
 | `sort -bf` | Ignore leading whitespace and case insensitive |
 | `uniq` | Returns only unique result |
 | `wc` | Word count |
@@ -97,7 +95,7 @@ Change file owner
 | Commande | Définition |
 | :--- | :--- |
 | `useradd` |  |
-| `passwd username` |  |
+| `passwd <username>` |  |
 | `usermod` |  |
 | `userdel` |  |
 | `newusers` |  |
@@ -113,13 +111,13 @@ Change file owner
 | Commande | Définition |
 | :--- | :--- |
 | `kill -l` | List signal |
-| `kill signal_nb pid` | Send signals \(default `SIGTERM`\) |
-| `killall name` | Sends to all processes starting by name |
-| `pkill -u username` | Kill all username's processes |
+| `kill <signal_nb> <pid>` | Send signals \(default `SIGTERM`\) |
+| `killall <name>` | Sends to all processes starting by name |
+| `pkill -u <username>` | Kill all username's processes |
 | `nice` | Set niceness of process |
 | `renice` | Change niceness of process |
-| `ps` | List runnning processes |
-| `which name` | Tell where the binary is located |
+| `ps` | List running processes |
+| `which <name>` | Tell where the binary is located |
 | `top` | List running processes \*\(1\) |
 
 * \*\(1\) Par défaut ceux utilisant le plus de puissance en premier
@@ -127,7 +125,7 @@ Change file owner
 ## Alias
 
 * `alias name="cmd -param"`
-* Does not persirst outside the shell. To make it definitive, add it to the .rc file \(example : `/home/user/.bashrc`\)
+* Does not persist outside the shell. To make it definitive, add it to the .rc file \(example : `/home/user/.bashrc`\)
 * `alias` List all aliases
 * `unalias alias_name`
 
@@ -195,13 +193,16 @@ They're different on each distro
 
 * Lets you generate arbitrary TCP/IP traffic.
 * It can also simulate sockets and report on the data they receive.
-* netcat is an old tool that has been forked, rewritten, extended and improved many times. The openBSD version is the most popular \(and it support IPv6\).
+* netcat is an old tool that has been forked, rewritten, extended and improved many times.
+  * The openBSD version is the most popular \(and it support IPv6\).
 * Defaults using TCP
-* `netcat hostname port` If the client establish a TCP session, you'll get a blank line. Netcat hasn't sent any data but it has completed the three-way handshake. You can then write your own request \(`GET / HTTP/1.1`\)
+* `netcat hostname port` If the client establish a TCP session, you'll get a blank line. 
+  * Netcat hasn't sent any data but it has completed the three-way handshake. You can then write your own request \(`GET / HTTP/1.1`\)
 * `-v` Shows errors
 * `-u` Connects with UDP \(the protocol doesn't imply an answer, but netcat will listen for one and display it\)
 * `netcat -l port` Creates netcat listeners \(Can also use `-u`\)
-* You can use netcat to transfer files by redirecting the input of a listener to a file and using `netcat -q o ip port < file` on the sender machine \(or `-N` on some distribution\). \(The data is sent in clear\).
+* You can use netcat to transfer files by redirecting the input of a listener to a file and using `netcat -q o ip port < file` on the sender machine \(or `-N` on some distribution\).
+  * The data is sent in clear.
 * You can also attach a command shell to a netcat listener but that's a security issue \(anyone connecting to the port will have shell access\)
 * To send a command through netcat, it's easier to prepare it with echo before `echo "ping -c 1 my_ip" | nc their_ip their_port` 
 
@@ -216,7 +217,10 @@ They're different on each distro
 
 #### Errors
 
-* A line of `***` means that the previous host forwarded a packet, but no response came back so traceroute can't print an hostname or ip. It can mean that the host filters UDP or ICMP. Sometimes this will be the case only for one host so let traceroute run. However if there's multiple lines like that you probably won't get more info.
+* A line of `***` means that the previous host forwarded a packet, but no response came back so traceroute can't print an hostname or ip.
+  * It can mean that the host filters UDP or ICMP.
+  * Sometimes this will be the case only for one host so let traceroute run.
+  * However if there's multiple lines like that you probably won't get more info.
 * Time Spikes : Responding to a traceroute request takes more time that forwarding a packet, and it's not the prioriy of the router when it's busy. That's why an hop might have a longer time response that the next one.
 * Multiple hostname might respond at one hop because of load balancers making the whole trace more confusing
 * `!H` Means the next host is unreachable
@@ -370,16 +374,16 @@ On peut accéder aux différents éléments ainsi :
 
 | Commande | Définition |
 | :--- | :--- |
-| `ln -s real_file link_file` | Create symbolic link |
+| `ln -s <real_file> <link_file>` | Create symbolic link |
 | `clear` | Clear shell |
-| `man cmd` | Manuel de la cmd |
+| `man <cmd>` | Manuel de la cmd |
 | `sudo` | Super user do |
 | `sudo !!` | Run last cmd as root |
 | `tree` | Tree view of directory/files |
-| `which cmd` | Show binary of cmd |
+| `which <cmd>` | Show binary location of cmd |
 | `set` | List shell var & func \*\(1\) |
 | `history` | Shows history of cmd |
-| `watch -n sec_interval cmd` | Execute une cmd à une intervalle donnée |
+| `watch -n <sec_interval> <cmd>` | Execute une cmd à une intervalle donnée |
 | `htop` | Mix entre `w` & `top` avec une interface ncurse |
 
 * \*\(1\) With parameters, `set` can also set our unset predefined shell options.
@@ -392,7 +396,7 @@ On peut accéder aux différents éléments ainsi :
 ## Script cmd
 
 * Record what you do in your shell
-* `script filename` Record and write output to a file \(default typescript.txt\)
+* `script <file>` Record and write output to a file \(default typescript.txt\)
   * These can only bat shown \(via cat for example\)
 * `script myscript.log --timing=time.log` \(-t probably sufficient\) Records with timestamp
   * Will replay recording in the shell with `scriptreplay -s myscript.log -t time.log`
