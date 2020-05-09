@@ -1,3 +1,10 @@
+---
+description: >-
+  This is a summary of the OWASP pen testing book and some information found
+  here and there. I haven't yet select the tools i prefer. I just explained some
+  of them
+---
+
 # Hack tools
 
 ## Disclaimer

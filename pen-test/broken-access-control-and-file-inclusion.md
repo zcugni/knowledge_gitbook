@@ -18,15 +18,15 @@ This happens when an access control isn't done at the function level, meaning th
 
 You can give it the id of another user and the funciton will execute none the less.
 
-De ce que j'ai compris, la diff avec IDOR c'est que même si la page en elle-même a des protection, si on fait directement une requête forgée de toute pièce, celle-ci sera acceptée.
+De ce que j'ai compris, la diff avec IDOR c'est que même si la page en elle-même a des protections, si on fait directement une requête forgée de toute pièce, celle-ci sera acceptée.
 
 ## Forced Browsing
 
-The application directly expose sensible files \(disclosing information, backup/old files with vulnerabities corrected in newer versions, etc\). See [Recon](../../../Résumés/Info/Hack/Recon.md) for methodology.
+The application directly expose sensible files \(disclosing information, backup/old files with vulnerabilities corrected in newer versions, etc\).
 
 ## Directory Traversal & File Inclusion
 
-* With _Directory Traversal_ we can acces \(and read/execute\) snesible files by moving inside directories with this kind of payloads : `../../../../etc/passwd`
+* With _Directory Traversal_ we can access \(and read/execute\) sensible files by moving inside directories with this kind of payloads : `../../../../etc/passwd`
 * _Files Inclusion_ abuse arbitrary "require/include" used in application
   * LFI \(local\) can only include local files \(through path traversal probably\)
   * RFI \(remote\) can include any file
@@ -36,5 +36,5 @@ The application directly expose sensible files \(disclosing information, backup/
   * Certaine config d'apache permettent d'exécuter des fichiers ayant ce genre d'extensions `.php.jpg` ce qui peut être pratique pour bypass des vérifs de sécu
 * On a pas besoin de connaitre la structure exacte des dossiers car même si on mets trop de `../../` ça marchera quand même.
 * Windows est plus vulnérable que linux car on peut faire ça `test/../../../file.txt` même si _test_ n'existe pas, ce qui facilite des cas où le chemin est concaténé à autre chose.
-* Check if extension are added programmaticaly and try to cut the string with `%00` if it's the case
+* Check if extension are added programmatically and try to cut the string with `%00` if it's the case
 

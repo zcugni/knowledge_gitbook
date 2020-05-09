@@ -1,14 +1,15 @@
 ---
 description: >-
-  Disclaimer : un peu un doublon avec Recon, améliorer ça quand ce sera plus
-  établit.
+  Disclaimer : This page will change a lot. I'm trying to define *my*
+  methodology to follow.
 ---
 
 # Méthodologie
 
 ## Début
 
-* nmap l'ip
+* Do a quick nmap to get you started \(only most popular ports\)
+* Once it's finished, and while you explore the first result, do a full nmap
 
 ## Si c'est du web
 
@@ -25,14 +26,15 @@ description: >-
   * If it's in php and some input are reflected, try to do `<?php phpinfo(); ?>`
 * For every url
   * Check if anything is reflected on the page \(and if `'` & `"` break things\)
-  * Accessing page out of orders \(for example directly a /edit/\)
+  * Accessing page out of orders \(for example directly an /edit/\)
   * Force browsing & co
 * Changing GET request for POST and vice-versa
 
 ## Pour chaque technos
 
 * Si elle est connue, chercher "enumerate techno" sur google, y'a peut-être des outils
-* Si c'est open source, regarder sur github pour voir si y'a pas des fichiers que l'on accéder qui nous renseignerait sur la version
-* Searchsploit la techno / version
-* Chercher aussi sur google "techno exploit" pour complèter
+* Si c'est open source, regarder sur github pour voir si y'a pas des fichiers que l'on peut accéder qui nous renseigneraient sur la version
+* Searchsploit la techno
+* Metasploit search la techo
+* Chercher aussi sur google "techno exploit" pour compléter
 

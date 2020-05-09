@@ -4,20 +4,20 @@
 
 ## Pen test
 
-* [Get Shell](pen-test/get-shell.md)
-* [Broken Access Control & File Inclusion](pen-test/broken-access-control-and-file-inclusion.md)
 * [Méthodologie](pen-test/methodologie.md)
-* [Misc Attack](pen-test/misc-attack.md)
-* [Misc Théorie](pen-test/misc-theorie.md)
-* [Misc](pen-test/misc.md)
-* [Privilege Escalation](pen-test/privilege-escalation.md)
 * [Recon](pen-test/recon.md)
+* [Get Shell](pen-test/get-shell.md)
+* [Privilege Escalation](pen-test/privilege-escalation.md)
+* [Broken Access Control & File Inclusion](pen-test/broken-access-control-and-file-inclusion.md)
 * [Remote Code Execution](pen-test/remote-code-execution.md)
-* [Reverse code](pen-test/reverse-code.md)
 * [SOP, CORS & CSRF](pen-test/sop-cors-and-csrf.md)
 * [SQL Injection](pen-test/sql-injection.md)
 * [XSS](pen-test/xss.md)
 * [XXE and other XML vulnerabilities](pen-test/xxe-and-other-xml-vulnerabilities.md)
+* [Misc Attack](pen-test/misc-attack.md)
+* [Misc Théorie](pen-test/misc-theorie.md)
+* [Misc](pen-test/misc.md)
+* [Reverse code](pen-test/reverse-code.md)
 
 ## Tools
 

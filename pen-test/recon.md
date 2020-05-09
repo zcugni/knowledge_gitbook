@@ -1,8 +1,10 @@
+---
+description: >-
+  Disclaimer : This is a summary of the OWASP pen testing book and some
+  information found here and there. Some part overlap with the methodology page.
+---
+
 # Recon
-
-## Introduction
-
-Décrit les étapes et nommes les outils à utiliser pour les réaliser. \(Un détail de leur utilisation sera dispo dans le dossier Outils.
 
 ## Social Info
 
@@ -21,8 +23,8 @@ Décrit les étapes et nommes les outils à utiliser pour les réaliser. \(Un d�
 
 ## Map the network \(host discovery\)
 
-* Quand on nous donne une range d'ip, on veut identifier quels sont les host live parmis toutes celles dispo.
-* On peut faire du ping sweep \(pinger toutes les addresses de la range\) avec `fping`
+* Quand on nous donne une range d'ip, on veut identifier quels sont les host live parmi toutes celles dispo.
+* On peut faire du ping sweep \(pinger toutes les adresses de la range\) avec `fping`
 * Ou simplement utiliser `nmap` qui a plein d'options pensées pour
 
 ## Fingerprint the OS
@@ -109,16 +111,6 @@ MySQL propose des commentaires qui sont ignorés par les autres DBMS mais pas pa
 
 On peut récupérer pas mal d'information dans les erreurs ou les réponses du serveur donc c'est intéressant de brute-force des noms de fichier et de tenter des connexions erronées à des db.
 
-* 301 \(Moved\)
-* 302 \(Found\) ?
-* 400 \(Bad Request\)
-* 401 \(Unauthorized\)
-* 403 \(Forbidden\)
-* 404 \(Not Found\)
-* 405 \(Method Not Allowed\)
-* 408 \(Request Time-out\)
-* 500 \(Internal Error\)
-* 501 \(Method Not Implemented\)
 * Test network problems leading to the application being unable to access the database server
 * Test authentication failure due to missing credentials
 
