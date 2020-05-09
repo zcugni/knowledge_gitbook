@@ -15,7 +15,7 @@ description: >-
 
 * Test `index.html`, `index.php`, etc pour définir le langage
 * Check `robots.txt` et `sitemap.xml`
-* run gobuster \(Récursivement ainsi que les 2 premières étapes sur les infos intéressantes\)
+* run [gobuster](https://zcugni.gitbook.io/notes/tools/hack-tools#forced-browsing) \(Récursivement ainsi que les 2 premières étapes sur les infos intéressantes\)
 * Check le code source
   * Pour des parties générées par des technos facilement identifiable
   * Chaque commentaires pour voir si ça leak pas des infos

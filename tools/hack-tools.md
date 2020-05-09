@@ -61,7 +61,7 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
   * installer via `apt-get install gobuster`
   * quite easy so read help in doubt
   * default command could be `gobuster dir -u ip/hostname -w wordlist_path -o result_file`
-  * Don't forget to add `-x php` \(for example\) to append ".php" to each file
+  * Don't forget to add `-x php,txt` \(for example\) to append ".php" and ".txt" to each name
   * Increase thread numbers if you're doing a lot of recon
   * You can put it in a bash loop if you need to do it recursively \(directly in the cmd\):
 

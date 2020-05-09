@@ -168,9 +168,9 @@ Partir d’un postulat simple et le contester au fur et à mesure. C’est lié 
 
 ## File discovery
 
-Trouver tous les fichiers sensibles auxquels on peut avoir accès \(cela est fortement lié au _Forced Browsing_ [Broken Access Control](https://zcugni.gitbook.io/notes/pen-test/broken-access-control-and-file-inclusion)\).
+Trouver tous les fichiers sensibles auxquels on peut avoir accès \(cela est fortement lié au _Forced Browsing_ de [Broken Access Control](https://zcugni.gitbook.io/notes/pen-test/broken-access-control-and-file-inclusion)\).
 
-* Depending of the extension, a file might be either served \(shown\) or executed by the server \(without being shown\). However, by renaming/copying it, developpers might unvoluntarily change this behavior \(`login.asp` =&gt; `login.asp.old`\).
+* Depending of the extension, a file might be either served \(shown\) or executed by the server \(without being shown\). However, by renaming/copying it, developers might involuntarily change this behavior \(`login.asp` =&gt; `login.asp.old`\).
 * Guess unreferenced/old files name by looking at the published files name schema for logic. \(Aka, if edituser.asp exist, adduser.asp & viewuser.asp might as well, same for an app/user directory and an app/admin one\).
 
 Interesting extension are :
@@ -182,7 +182,7 @@ Interesting extension are :
 
 ### Dorking / Indexed Files / Web Archives
 
-Files might be wrongly indexed by browsers if the robot.txt file or html meta tag are not used correctly. We can find them by using _dorks_. \(I'm not sure of the exact definition but _dorking_ means using search query with special operators in browser, for exemple `:site` or `:cache`\).
+Files might be wrongly indexed by browsers if the robot.txt file or html meta tag are not used correctly. We can find them by using _dorks_. \(I'm not sure of the exact definition but _dorking_ means using search query with special operators in browser, for example `:site` or `:cache`\).
 
 Dorking can also be used in github to search for public sensible data. Some tools automate this but they can only search for users attached to the organization, it's a good idea to search for other employee on linkedin and check their github account.
 
