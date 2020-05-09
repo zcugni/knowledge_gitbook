@@ -2,6 +2,7 @@
 description: >-
   Disclaimer : This is a summary of the OWASP pen testing book and some
   information found here and there. Some part overlap with the methodology page.
+  I haven't update it in a while.
 ---
 
 # Recon
@@ -167,7 +168,7 @@ Partir d’un postulat simple et le contester au fur et à mesure. C’est lié 
 
 ## File discovery
 
-Trouver tous les fichiers sensibles auxquels on peut avoir accès \(cela est fortement lié au _Forced Browsing_ [Broken Access Control](../../../Résumés/Info/Hack/Broken%20Access%20Control%20&%20File%20Inclusion.md)\).
+Trouver tous les fichiers sensibles auxquels on peut avoir accès \(cela est fortement lié au _Forced Browsing_ [Broken Access Control](https://zcugni.gitbook.io/notes/pen-test/broken-access-control-and-file-inclusion)\).
 
 * Depending of the extension, a file might be either served \(shown\) or executed by the server \(without being shown\). However, by renaming/copying it, developpers might unvoluntarily change this behavior \(`login.asp` =&gt; `login.asp.old`\).
 * Guess unreferenced/old files name by looking at the published files name schema for logic. \(Aka, if edituser.asp exist, adduser.asp & viewuser.asp might as well, same for an app/user directory and an app/admin one\).

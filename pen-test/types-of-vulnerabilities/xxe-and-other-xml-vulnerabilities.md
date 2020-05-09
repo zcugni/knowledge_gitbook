@@ -2,11 +2,11 @@
 
 ## XML injection
 
-Si nos inputs sont directement ajouter en tant que noeud dans un doc xml :
+Si nos inputs sont directement ajoutés en tant que nœud dans un doc xml :
 
 * We can inject malformed string to break the parser
 * On peut modifier les informations enregistrées. Par exemple si notre input consiste en notre nom et que l'app rajoute ensuite automatiquement un champ pour nos droits, on peut fabriquer notre input de force à commenter la partie générée par l'appli et à la place mettre la notre \(owasp testing guide 4 page 138 pour un exemple\).
-* If the xml is converted to html, `<![CDATA[]]>` might just be stripped, making it possible to inject other script undectected
+* If the xml is converted to html, `<![CDATA[]]>` might just be stripped, making it possible to inject other script undetected
 
 ```text
 <html>
@@ -21,7 +21,7 @@ script<![CDATA[>]]>
 
 ### Inband
 
-Si le site nous renvoit directement ce qui a été parsé, on peut envoyer ce genre de fichier :
+Si le site nous renvoi directement ce qui a été parsé, on peut envoyer ce genre de fichier :
 
 ```markup
 <?xml version="1.0" encoding="UTF-8"?>

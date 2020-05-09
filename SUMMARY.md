@@ -8,16 +8,16 @@
 * [Recon](pen-test/recon.md)
 * [Get Shell](pen-test/get-shell.md)
 * [Privilege Escalation](pen-test/privilege-escalation.md)
-* [Broken Access Control & File Inclusion](pen-test/broken-access-control-and-file-inclusion.md)
-* [Remote Code Execution](pen-test/remote-code-execution.md)
-* [SOP, CORS & CSRF](pen-test/sop-cors-and-csrf.md)
-* [SQL Injection](pen-test/sql-injection.md)
-* [XSS](pen-test/xss.md)
-* [XXE and other XML vulnerabilities](pen-test/xxe-and-other-xml-vulnerabilities.md)
+* [Types of vulnerabilities](pen-test/types-of-vulnerabilities/README.md)
+  * [XXE and other XML vulnerabilities](pen-test/types-of-vulnerabilities/xxe-and-other-xml-vulnerabilities.md)
+  * [XSS - Cross-Site Scripting](pen-test/types-of-vulnerabilities/xss.md)
+  * [SQL Injection](pen-test/types-of-vulnerabilities/sql-injection.md)
+  * [SOP, CORS & CSRF](pen-test/types-of-vulnerabilities/sop-cors-and-csrf.md)
+  * [Remote Code Execution](pen-test/types-of-vulnerabilities/remote-code-execution.md)
+  * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
 * [Misc Attack](pen-test/misc-attack.md)
-* [Misc Théorie](pen-test/misc-theorie.md)
 * [Misc](pen-test/misc.md)
-* [Reverse code](pen-test/reverse-code.md)
+* [Reverse engineering](pen-test/reverse-code.md)
 
 ## Tools
 
@@ -37,6 +37,7 @@
 ## Theory
 
 * [Terminologie / Misc](theory/terminologie-misc.md)
+* [Pen test related theory](theory/misc-theorie.md)
 * [Networking](theory/networking/README.md)
   * [Modèle](theory/networking/modele.md)
   * [Machines](theory/networking/machines.md)

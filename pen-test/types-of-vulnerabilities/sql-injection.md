@@ -2,15 +2,13 @@
 
 ## Standard Exploitation
 
-* Ecrire `‘or ‘1’ = ‘1` transformant ainsi cette requête :
+Ecrire `‘or ‘1’ = ‘1`
 
 ```sql
+# Transoform this request : 
 SELECT * FROM Users WHERE Username=’$username’ AND Password=’$password’
-```
 
-en ça :
-
-```sql
+# In that : 
 SELECT * FROM Users WHERE Username=’...’ OR ‘1’ = ‘1’ AND Password=’1’ OR ‘1’ = ‘1’
 ```
 
@@ -20,15 +18,13 @@ SELECT * FROM Users WHERE Username=’...’ OR ‘1’ = ‘1’ AND Password=�
 
 ## Union Exploitation
 
-Etendre une requête SELECT avec un `UNION`. Transformant par exemple celle-ci :
+Étendre une requête SELECT avec un `UNION`
 
 ```sql
+# Tansform this request :
 SELECT Name, Phone, Address FROM Users WHERE Id=$id
-```
 
-en ça :
-
-```sql
+# In that :
 SELECT Name, Phone, Address FROM Users WHERE Id=1 UNION ALL SELECT creditCardNumber,1,1 FROM CreditCardTable
 ```
 
@@ -39,11 +35,9 @@ SELECT Name, Phone, Address FROM Users WHERE Id=1 UNION ALL SELECT creditCardNum
 
 ## Blind Exploitation \(Oracle\)
 
-Quand le site ne nous renvoit pas directement le résultat de la query, mais qu'il réagit différement en fonction de si celle-ci a donné un résultat ou non, on peut l'utiliser comme Oracle.
+Quand le site ne nous renvoi pas directement le résultat de la query, mais qu'il réagit différemment en fonction de si celle-ci a donné un résultat ou non, on peut l'utiliser comme Oracle.
 
-Cela permet par exempe de deviner lettre par lettre un mot de passe.
-
-Par exemple, prennons un site ayant 2 messages d'erreurs différents : "Unknown username" et "Invalid password" ayant cette requête pour le champ des usernames :
+Cela permet par exemple de deviner lettre par lettre un mot de passe. Pennons un site ayant 2 messages d'erreurs différents : "Unknown username" et "Invalid password" ayant cette requête pour le champ des usernames :
 
 ```sql
 SELECT password FROM Admins WHERE username='$username'
@@ -51,7 +45,7 @@ SELECT password FROM Admins WHERE username='$username'
 
 Avec ce payload : `'OR password LIKE '%x' --` on peut reconstruire caractère par caractère le mdp. Il n'y a pas d'utilisateur vide, donc si on reçoit un "Unknown username", on sait que le mdp qu'on a proposé n'existe pas.
 
-**Remarque** : C'est bien sûr un exemple très spécifique, car l'attaque sera différente à chaque fois. Mais l'idée générale reste la même, si le site réagit différement à une réponse binaire, on peut récupérer de l'info en la testant pas à pas.
+**Remarque** : C'est bien sûr un exemple très spécifique, car l'attaque sera différente à chaque fois. Mais l'idée générale reste la même, si le site réagit différemment à une réponse binaire, on peut récupérer de l'info en la testant pas à pas.
 
 **What to look for** :
 
@@ -93,13 +87,13 @@ Apparemment il existe ce genre de syntaxe :
 Create procedure get_report @columnamelist varchar(7900) As Declare @sqlstring varchar(8000) Set @sqlstring = ‘ Select ‘ + @ columnamelist + ‘ from ReportTable‘ exec(@sqlstring) Go
 ```
 
-Que l’on pourrait abuser avec ce genre d’input `1 from users; update users set password = ‘password’; select *`
+Que l’on pourrait abuser avec ce genre d’input :`1 from users; update users set password = ‘password’; select *`
 
 Mais je connais pas cette syntaxe donc je comprends pas trop.
 
 ## Insider Info
 
-If you have an injection in a place where doing an "or 1=1" isn't useful, you may still be able to use it to show the table name & structure by injecting an sql command. I think it was in one of the pentesterlab exercice.
+If you have an injection in a place where doing an "or 1=1" isn't useful, you may still be able to use it to show the table name & structure by injecting an sql command.
 
 ## MySQL Server Specificity
 

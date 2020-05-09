@@ -39,27 +39,35 @@ Permet au serveur d’autoriser certains échanges ne suivant pas la SOP grâce 
 
 Les requêtes respectant ces conditions ne triggereront pas de preflight.
 
-1. Méthodes acceptées :
-2. GET
-3. HEAD
-4. POST
-5. Headers pouvant être spécifiés manuellement : 
-6. Accept
-7. Accept-Language
-8. Content-Language
-9. Content-Type
-10. DPR
-11. Downlink
-12. Save-Data
-13. Viewport-Width
-14. Width
-15. Valeurs de Content-Type autorisées :
-16. application/x-www-form-urlencoded
-17. multipart/form-data
-18. text/plain
-19. No event listeners are registered on any _XMLHttpRequestUpload_ object used in the request. These are accessed using the `XMLHttpRequest.upload property`.
-20. No `ReadableStream` object is used in the request.
-21. Some additional restrictions by browsers.
+Méthodes acceptées :
+
+* GET
+* HEAD
+* POST
+
+Headers pouvant être spécifiés manuellement : 
+
+* Accept
+* Accept-Language
+* Content-Language
+* Content-Type
+* DPR
+* Downlink
+* Save-Data
+* Viewport-Width
+* Width
+
+Valeurs de Content-Type autorisées :
+
+* application/x-www-form-urlencoded
+* multipart/form-data
+* text/plain
+
+
+
+* No event listeners are registered on any _XMLHttpRequestUpload_ object used in the request. These are accessed using the `XMLHttpRequest.upload property`.
+* No `ReadableStream` object is used in the request.
+* Some additional restrictions by browsers.
 
 ### Preflight
 
@@ -80,7 +88,7 @@ header d’une réponse `OPTION` :
 
 Ces headers sont présents dans la requête du client pour décrire sa futur requête et dans la réponse du serveur pour décrire ce qu’il accepte.
 
-![](../.gitbook/assets/headers.png)
+![](../../.gitbook/assets/headers.png)
 
 ## CSRF - Cross Site Request Forgery
 

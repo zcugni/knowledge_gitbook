@@ -1,4 +1,4 @@
-# Misc Théorie
+# Pen test related theory
 
 ## Parser Differentials
 

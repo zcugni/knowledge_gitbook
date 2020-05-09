@@ -50,15 +50,13 @@ Exemple \(liste non-exhaustive\):
 
 Ces caractères sont utilisés dans des directives :
 
-* `<`
-* `!`
+* `<` & `>`
 * `#`
 * `=`
 * `/`
 * `.`
 * `“`
 * `-`
-* `>`
 * \[a-zA-Z0-9\]
 
 S’ils ne sont pas sanitize, il est donc possible d’en abuser.
@@ -156,7 +154,7 @@ Client-Side on s'en protège avec le _frame busting_ mais j'ai pas tout compris 
 
 ## JSFuck
 
-JSFuck is a valid javascritp syntax using only 6 caracters : `[`, `]`, `(`, `)`, `+`, `!`. It can be use to bypass filters
+JSFuck is a valid javascritp syntax using only 6 characters : `[`, `]`, `(`, `)`, `+`, `!`. It can be use to bypass filters
 
 ## Multiple view of framework
 
