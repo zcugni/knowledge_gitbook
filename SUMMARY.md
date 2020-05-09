@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Initial page](README.md)
+* [Hello World !](README.md)
 
 ## Pen test
 
