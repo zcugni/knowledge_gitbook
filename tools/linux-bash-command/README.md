@@ -203,6 +203,7 @@ They're different on each distro
 * `netcat -l port` Creates netcat listeners \(Can also use `-u`\)
 * You can use netcat to transfer files by redirecting the input of a listener to a file and using `netcat -q o ip port < file` on the sender machine \(or `-N` on some distribution\). \(The data is sent in clear\).
 * You can also attach a command shell to a netcat listener but that's a security issue \(anyone connecting to the port will have shell access\)
+* To send a command through netcat, it's easier to prepare it with echo before `echo "ping -c 1 my_ip" | nc their_ip their_port` 
 
 ### Traceroute \(Follow packet\)
 

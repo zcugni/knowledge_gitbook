@@ -16,7 +16,6 @@
   * [Remote Code Execution](pen-test/types-of-vulnerabilities/remote-code-execution.md)
   * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
 * [Misc Attack](pen-test/misc-attack.md)
-* [Misc](pen-test/misc.md)
 * [Reverse engineering](pen-test/reverse-code.md)
 
 ## Tools
@@ -75,6 +74,7 @@
 
 ## Oh hold
 
+* [To Do](oh-hold/misc.md)
 * [Git](oh-hold/git.md)
 * [MySQL](oh-hold/mysql.md)
 * [SSH](oh-hold/ssh.md)

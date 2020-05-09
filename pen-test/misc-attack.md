@@ -1,6 +1,12 @@
+---
+description: >-
+  Disclaimer : Some of theses are duplicates of concept i better explained
+  elsewhere, i'll clean it one day
+---
+
 # Misc Attack
 
-## Test HTTP Method
+## HTTP Method
 
 * Sometimes checks implemented for GET requests aren’t for HEAD one, which then permit to blindly simulate authorized GET requests
 * Same goes for methods names that don’t exist
@@ -125,19 +131,6 @@ En intégrant une page dans une iframe et en la rendant transparente en CSS, on 
 
 Client-Side on s'en protège avec le _frame busting_ mais j'ai pas tout compris et server-side avec `X-frame-options` qui définit qui peut mettre notre site dans une iframe.
 
-## Small Things
-
-* En regardant **robot.txt** on peut avoir une petite idée des dossiers existant.
-* Many web servers and application servers provide, in a default installation, sample applications and files that have vulnerabilities
-* _HTTP Strict Transport Security_ \(HSTS\) is a request header specifying that all exchanged must be done over HTTPS.
-* If `Cache-Control` is not  set to `must re-validate`, using the “back” button of the browser will show the previous page and it’s information, which may be sensitive if it was for a login for example. Other Cache-Control options will control how page are cached, and if wrongly set will enable finding sensitive information in the browser \(aka forced browsing\)
-* Mobile website may differ from desktop website, and may have vulnerabilities not existent in the other version. Same for different browser version \(looking at you IE\). By using an interception proxy and modifying request, you can forge them/bypass checks used in the front end. De même pour des champs qui sont normalement caché
-* Processing times might give a hint to the attacker, for example if the error message takes longer to come for an invalid username + invalid password combo than for a valid username + invalid password one
-* For application where seats are reserved while you pay, check that a timeout exist and you cannot just leave the reservation hanging.
-* Test that some function can't be used more than intended \(for example discount one\).
-* **Session Fixation** : Si l'application ne fournit pas un nouvel id de session à chaque connexion il est possible de pousser la victime à utiliser un id dont l'attaqueur à la connaissance et donc permettre à celui-ci de se faire passer pour elle.
-* In mass assignement vulnerabilities, try to guess table names and set value. For exemple, in pentesterlab, you could guess the organisation\_id table by deduction
-
 ## Path Injection
 
 * En plus des path traversal/etc, si une partie de l'url se retrouve dans la page, des path _injection_ sont possible.
@@ -187,4 +180,26 @@ If you have a path traversal vul, you can do this `www.example.com?file=php://fi
 En php \(mais je suppose que ça fonctionne de la même façon sur d'autres langages\), on peut serialize un objet. ça le transforme en une string le représentant : `O:8:"siteuser":2:{s:8:"username";s:5:"admin";s:8:"password";s:3:"aaa"}` -&gt; Objet dont le nom fait 8 caractères contenant 2 attributs : des strings \(lire la doc pour la syntaxe complète\).
 
 On peut aussi prendre une string du genre et la transformer en objet avec `unserialize`. **Doing this on unsanitized input can enable code execution** and other vuln.
+
+## Particularité firefox
+
+* Si le client reçoit des données depuis une vue json, en l'accédant via firefox, il va tenté de l'interprêter et la formatter, et son parseur eut buggé sur un payload alors qu'il fonctionne. **Utiliser burp pour analyser les réponses**
+* Si on dl un ficher dans le navigateur, firefox mettra comme date de dernière modification la date du jour, tandis que si on le dl avec wget, on récup la vraie
+
+## Tips &/ Tricks
+
+* Keep in mind that even if you can't access an directory of a website \(ip/dev/ for example\), you might be able to access it's subdir/files \(ip/dev/backup for example\)
+* when it ends with `==` it’s usually base64
+* Resource : [https://repo.zenk-security.com/](https://repo.zenk-security.com/)
+* MySQL's `LIKE` comparison isn't case sensitive
+* MySQL's `=` comparison isn't case sensitive & doesn't care about trailing spaces
+* To send yourself a ping back, you can do this on the victim `ping -c 1 ip` and launch `tcpdump -i tun0 -n icmp` on your machine
+* A weird way to write a file is to `cat > fine_name << EoF`, then write your text, and write EoF at the end.
+* Many web servers and application servers provide, in a default installation, sample applications and files that have vulnerabilities
+* _HTTP Strict Transport Security_ \(HSTS\) is a request header specifying that all exchanged must be done over HTTPS.
+* If `Cache-Control` is not  set to `must re-validate`, using the “back” button of the browser will show the previous page and it’s information, which may be sensitive if it was for a login for example. Other Cache-Control options will control how page are cached, and if wrongly set will enable finding sensitive information in the browser \(aka forced browsing\)
+* Mobile website may differ from desktop website, and may have vulnerabilities not existent in the other version. Same for different browser version \(looking at you IE\). By using an interception proxy and modifying request, you can forge them/bypass checks used in the front end. De même pour des champs qui sont normalement cachés
+* Processing times might give a hint to the attacker, for example if the error message takes longer to come for an invalid username + invalid password combo than for a valid username + invalid password one
+* Test that some function can't be used more times than intended \(for example discount one\).
+* **Session Fixation** : Si l'application ne fournit pas un nouvel id de session à chaque connexion il est possible de pousser la victime à utiliser un id dont l'attaqueur à la connaissance et donc permettre à celui-ci de se faire passer pour elle.
 
