@@ -100,19 +100,18 @@ See also "A Billion Laugh" attack
 
 Elles suivent la même logique que les injections SQL.
 
-```text
-Cette requête récupère le compte correspondant à "gandalf" avec le mdp "!3c"
+Exemple :
 
-string(//user[username/text()=’gandalf’ and password/text()=’!c3’]/account/text())
+Cette requête récupère le compte correspondant à "gandalf" avec le mdp "!3c" `string(//user[username/text()=’gandalf’ and password/text()=’!c3’]/account/text())`
 
 En insérant ces valeurs :
-Username: ‘ or ‘1’ = ‘1
-Password: ‘ or ‘1’ = ‘1 
+
+* Username: ‘ or ‘1’ = ‘1
+* Password: ‘ or ‘1’ = ‘1 
 
 Elle deviendrait cela :
-string(//user[username/text()=’’ or ‘1’ = ‘1’ and password/
-text()=’’ or ‘1’ = ‘1’]/account/text())
-```
+
+`string(//user[username/text()=’’ or ‘1’ = ‘1’ and password/text()=’’ or ‘1’ = ‘1’]/account/text())`
 
 Nous permettant de nous authentifier systématiquement.
 

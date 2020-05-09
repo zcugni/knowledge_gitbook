@@ -26,18 +26,23 @@ Types d’échanges :
 
 Doc : [https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
-Permet au serveur d’autoriser certains échanges ne suivant pas la SOP grâce à des header qu’il rajoute dans sa réponse.
+Permet au serveur d’autoriser certains échanges ne suivant pas la SOP grâce à des headers qu’il rajoute dans sa réponse.
 
 ### Type d’headers \(dans la réponse du serveur\)
 
 * `Access-Control-Allow-Origin : * | <origin>` : autorise des requêtes cross-origine venant de n’importe quel domaine ou d’un domaine spécifique.
-* `Access-Control-Allow-Credentials : true (false if not specified)` : permet de faire des requêtes avec des cookies, si ce header n’est pas présent dans la réponse du serveur, celle-ci sera rejetée par le navigateur qui ne rendra pas le contenu de la réponse accessible à la page. \(Pour que ce header soit prit en compte, `Access-Control-Allow-Origin` doit obligatoirement spécifié une origine précise\).
-
-\(+ toutes celles de réponse à un preflight, voir plus bas\).
+* `Access-Control-Allow-Credentials : true (false if not specified)` : permet de faire des requêtes avec des cookies.
+  * Si ce header n’est pas présent dans la réponse du serveur, une requête avec cookie sera rejetée par le navigateur. 
+  * Pour que ce header soit prit en compte, `Access-Control-Allow-Origin` doit obligatoirement spécifié une origine précise.
+* Plus toutes celles de réponse à un preflight, voir plus bas.
 
 ### Requêtes “normales”
 
 Les requêtes respectant ces conditions ne triggereront pas de preflight.
+
+* No event listeners are registered on any _XMLHttpRequestUpload_ object used in the request. These are accessed using the `XMLHttpRequest.upload property`.
+* No `ReadableStream` object is used in the request.
+* Some additional restrictions by browsers.
 
 Méthodes acceptées :
 
@@ -63,12 +68,6 @@ Valeurs de Content-Type autorisées :
 * multipart/form-data
 * text/plain
 
-
-
-* No event listeners are registered on any _XMLHttpRequestUpload_ object used in the request. These are accessed using the `XMLHttpRequest.upload property`.
-* No `ReadableStream` object is used in the request.
-* Some additional restrictions by browsers.
-
 ### Preflight
 
 Les autres requêtes sont jugées risquées et donc trigger un “preflight”. Cela consiste à d’abord envoyer une requête `OPTION` au serveur décrivant la requête finale que l’on compte faire pour vérifier qu’il l’accepte et si c’est le cas, la faire réellement.
@@ -92,7 +91,7 @@ Ces headers sont présents dans la requête du client pour décrire sa futur req
 
 ## CSRF - Cross Site Request Forgery
 
-Pour ces 2 attaques, l’utilisateur doit passer sur  _notre_  site, ayant soit une image ou un formulaire vicieux \(expliqué plus bas\) qui le feront charger des informations du site victime avec les cookies actuel de l’utilisateur.
+Pour ces 2 attaques, l’utilisateur doit passer sur  _notre_  site, ayant soit une image ou un formulaire vicieux \(expliqué plus bas\) qui le feront charger des informations du site victime avec les cookies actuels de l’utilisateur.
 
 ### Attaque avec GET
 

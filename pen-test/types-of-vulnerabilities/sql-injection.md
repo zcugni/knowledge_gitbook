@@ -5,7 +5,7 @@
 Ecrire `‘or ‘1’ = ‘1`
 
 ```sql
-# Transoform this request : 
+# Transform this request : 
 SELECT * FROM Users WHERE Username=’$username’ AND Password=’$password’
 
 # In that : 
@@ -13,8 +13,8 @@ SELECT * FROM Users WHERE Username=’...’ OR ‘1’ = ‘1’ AND Password=�
 ```
 
 * Penser à utiliser `LIMIT` si besoin
-* On peut aussi utiliser des commentaires au lieu de reformer la string `or 1=1 --` ou `or 1=1#`
-* Stacker des requêtes en terminant la 1ère avec un `;` \(impossible si la requête est dans une fonction l'a préparant, et non-géré par certains systèmes de db\) : `http://www.example.com/product.php?id=10; INSERT INTO users (…)` 
+* On peut aussi utiliser des commentaires au lieu de reformer la string `or 1=1 --`  \(be mindful of the last space\) ou `or 1=1#`
+* Stacker des requêtes en terminant la 1ère avec un `;` \(impossible si la requête est dans une fonction la préparant, et non-géré par certains systèmes de db\) : `http://www.example.com/product.php?id=10; INSERT INTO users (…)` 
 
 ## Union Exploitation
 
@@ -29,29 +29,20 @@ SELECT Name, Phone, Address FROM Users WHERE Id=1 UNION ALL SELECT creditCardNum
 ```
 
 * `ALL` est utilisé pour contrecarrer `DISTINCT`
-* On rajoute `1, 1` car il faut le même nombre de colonnes que le `SELECT` de base. Pour déterminer le nombre adéquat, on peut faire un `http://www.example.com/product.php?id=10 ORDER BY 10--` qui retournera soit une erreur, soit quelque chose s’il y a effectivement 10 colonnes.
-* En occurrence c’est des int \(donc `1, 1`\), mais il faut que ces colonnes match aussi le types. Pour ça, on peut tester en mettant d’abord null, puis en changeant le genre de données et en vérifiant l’erreur.
+* On rajoute `1, 1` car il faut le même nombre de colonnes que le `SELECT` de base. 
+  * Pour déterminer le nombre adéquat, on peut faire un `http://www.example.com/product.php?id=10 ORDER BY 10--` qui retournera soit une erreur, soit quelque chose s’il y a effectivement 10 colonnes.
+* En occurrence c’est des int \(donc `1, 1`\), mais il faut que ces colonnes match aussi le types.
+  * Pour ça, on peut tester en mettant d’abord null, puis en changeant le genre de données et en vérifiant l’erreur.
 * Si seul le premier résultat est montré \(et donc celui de la requête véridique\), on peut fournir un id invalide, comme ça c’est le résultat de notre union qui sera remonté.
 
 ## Blind Exploitation \(Oracle\)
 
-Quand le site ne nous renvoi pas directement le résultat de la query, mais qu'il réagit différemment en fonction de si celle-ci a donné un résultat ou non, on peut l'utiliser comme Oracle.
-
-Cela permet par exemple de deviner lettre par lettre un mot de passe. Pennons un site ayant 2 messages d'erreurs différents : "Unknown username" et "Invalid password" ayant cette requête pour le champ des usernames :
-
-```sql
-SELECT password FROM Admins WHERE username='$username'
-```
-
-Avec ce payload : `'OR password LIKE '%x' --` on peut reconstruire caractère par caractère le mdp. Il n'y a pas d'utilisateur vide, donc si on reçoit un "Unknown username", on sait que le mdp qu'on a proposé n'existe pas.
-
-**Remarque** : C'est bien sûr un exemple très spécifique, car l'attaque sera différente à chaque fois. Mais l'idée générale reste la même, si le site réagit différemment à une réponse binaire, on peut récupérer de l'info en la testant pas à pas.
-
-**What to look for** :
-
-* Difference in wording
-* Difference in response status code
-* Time-based difference
+* Si le site réagit différemment si une query obtient un résultat ou non, on peut l'utiliser comme Oracle même s'il ne nous donne pas directement le résultat.
+* Ca nous permet de deviner caractère par caracètre l'info qu'on recherche
+* What to look for :
+  * Difference in wording
+  * Difference in response status code
+  * Time-based difference
 
 ## Error Based Exploitation
 
@@ -124,7 +115,7 @@ If the db use the GBK charset \(simplified chinese\) and not the application, us
 ### Autre
 
 * On ne peut pas accumuler les requêtes \(donc utiliser le `;` pour en commencer une nouvelle\).
-* Y’a 2 genres d’utilisateur `USER()` et `CURRENT_USER()` mais je suis pas sure des subtilités.
+* Y’a 2 genres d’utilisateurs `USER()` et `CURRENT_USER()` mais je suis pas sûr des subtilités.
 * Comments : `--` \(The space is important\) ou \`\#
 
 ### Fonctions utiles

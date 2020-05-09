@@ -2,9 +2,8 @@
 
 ## Concept
 
-Broken Access Control is a class of vulnerabilities that lets you access/use files/informations/functions that you shouldn't be able to.
-
-Les nuances entre chaque attaque sont assez minimes donc j'ai un peu tendance à toutes les regroupées en 1 seul concept.
+* Class of vulnerabilities that lets you access/use files/informations/functions that you shouldn't be able to.
+* Les nuances entre chaque attaque sont assez minimes donc j'ai un peu tendance à toutes les regroupées en 1 seul concept.
 
 ## IDOR -  _Insecure Direct Object Reference_
 
@@ -16,7 +15,7 @@ De ce que j'ai compris, ça sous-entends généralement l'utilisation d'un id, e
 
 This happens when an access control isn't done at the function level, meaning that if you have this link : [https://website/changepwd?id=dasfaf-rwtwt-864864864](https://website/changepwd?id=dasfaf-rwtwt-864864864)
 
-You can give it the id of another user and the funciton will execute none the less.
+You can give it the id of another user and the function will execute none the less.
 
 De ce que j'ai compris, la diff avec IDOR c'est que même si la page en elle-même a des protections, si on fait directement une requête forgée de toute pièce, celle-ci sera acceptée.
 
