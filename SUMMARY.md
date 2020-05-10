@@ -13,7 +13,7 @@
   * [XSS - Cross-Site Scripting](pen-test/types-of-vulnerabilities/xss.md)
   * [SQL Injection](pen-test/types-of-vulnerabilities/sql-injection.md)
   * [SOP, CORS & CSRF](pen-test/types-of-vulnerabilities/sop-cors-and-csrf.md)
-  * [Remote Code Execution](pen-test/types-of-vulnerabilities/remote-code-execution.md)
+  * [RCE](pen-test/types-of-vulnerabilities/remote-code-execution.md)
   * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
 * [Misc Attack](pen-test/misc-attack.md)
 * [Reverse engineering](pen-test/reverse-code.md)

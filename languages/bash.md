@@ -10,9 +10,16 @@ Shell est un _macro processor that executes commands_. Un shell unix est à la f
 
 ## Variable
 
-* `$var_name`
+* Assignment : `var="value"` \(Won't work with spaces because if will search for the cmd name\)
+* Call :
+
+```bash
+echo "str is $var ." # On peut pas coller de caractères au nom de la var
+echo "str is ${var}s." # On peut
+```
+
 * environment variable / constant in CAPS
-* `var="value"` \(Won't work with spaces because if will search for the cmd name\)
+* To put a command in a var do `x=(printf "test");` \(test avec un $ devant la paranthèse si ça marche pas\)
 * `$?` Return value of last cmd
 * `$#` Number of args in the script
 * `$0` Name of the script
@@ -27,8 +34,6 @@ Shell est un _macro processor that executes commands_. Un shell unix est à la f
 
 echo 'won t be interpreted'
 echo "\$,\`,\\ will be interpreted"
-echo "str is $var ." # On peut pas coller de caractères au nom de la var
-echo "str is ${var}s." # On peut
 echo "this is a `cmd_to_be_interpreted`."
 ```
 

