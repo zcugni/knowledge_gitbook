@@ -6,7 +6,7 @@ description: To polish
 
 ## Binaire
 
-* Un octet \(ou byte\), est composé de 8 bits, plus on avance vers la gauche, plus le “poids” du bits est élevé
+* Un octet \(ou byte\), est composé de 8 bits. Plus on avance vers la gauche, plus le “poids” du bits est élevé
 * Une des façons d’écrire un nombre négatif est de mettre le tout premier bit à 1.
 
 ## Listes & tableaux

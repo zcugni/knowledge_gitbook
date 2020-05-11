@@ -266,6 +266,7 @@ Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 
 * `tar -zxf archive.tar.gz`
   * x : extract
+  * z : for zip file
 * `gzip -d file.gz`
 * `gunzip file.gz`
 * `bzip2 -d file.bz2`

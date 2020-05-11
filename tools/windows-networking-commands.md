@@ -31,7 +31,7 @@ Windows doesn't include `netcat`, but it has been ported
 ## ARP
 
 * `arp -a` Montre la table dans windows & linux.
-* `arp -a ip` Montre une entrée spécifique de la table
+* `arp -a <ip>` Montre une entrée spécifique de la table
 
 ## ND
 
@@ -54,15 +54,15 @@ Windows doesn't include `netcat`, but it has been ported
 
 * `n` Don't reverse DNS lookup IP addresses for hostname and check protocol names in the services file \(gain of time\)
 * `-a` Shows open port and live connection
-* `-p [protocol]` Specify which protocol you want to see \("tcp" will show IPv4 connections, to see IPv6 ones, use `tcpv6`\)
+* `-p <protocol>` Specify which protocol you want to see \("tcp" will show IPv4 connections, to see IPv6 ones, use `tcpv6`\)
 * `-b` \(As admin\) Shows the program or process name using the connection/socket
 
 ## nslookup \(DNS\)
 
 * Good for basic queries
 * For more complex one use BIND's `dig`, `drill` or `ldns`
-* `nslookup hostname` Gives address back \(specify if the answer is authoritative and list the recursive nameserver it asked\)
-* `nslookup ip_address` Gives hostname back
+* `nslookup <hostname>` Gives address back \(specify if the answer is authoritative and list the recursive name server it asked\)
+* `nslookup <ip>` Gives hostname back
 * For both case you can add a specific DNS IP as a third parameter to query it
 
 ## Other
