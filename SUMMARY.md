@@ -32,6 +32,7 @@
 * [Metasploit Framework](tools/metasploit-framework.md)
 * [Patator](tools/patator.md)
 * [Windows networking commands](tools/windows-networking-commands.md)
+* [Tor](tools/tor.md)
 
 ## Theory
 
