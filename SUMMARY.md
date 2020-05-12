@@ -47,6 +47,7 @@
 * [MCD / MLD](theory/mcd-mld.md)
 * [Memory Allocation \(linux, glibc\)](theory/memory-allocation-linux-glibc.md)
 * [URL & CO + URL Encoding](theory/url-and-co-+-url-encoding.md)
+* [Bitcoin](theory/bitcoin.md)
 * [Machine Learning](theory/machine-learning/README.md)
   * [Udemy](theory/machine-learning/udemy.md)
   * [Fonction de minimisation](theory/machine-learning/fonction-de-minimisation.md)
