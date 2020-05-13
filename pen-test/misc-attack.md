@@ -203,3 +203,12 @@ On peut aussi prendre une string du genre et la transformer en objet avec `unser
 * Test that some function can't be used more times than intended \(for example discount one\).
 * **Session Fixation** : Si l'application ne fournit pas un nouvel id de session à chaque connexion il est possible de pousser la victime à utiliser un id dont l'attaqueur à la connaissance et donc permettre à celui-ci de se faire passer pour elle.
 
+## Sources
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* [LiveOverflow](https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w/search?query=rce)
+* [PwnFunction](https://www.youtube.com/channel/UCW6MNdOsqv2E9AjQkv9we7A/videos)
+* [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
+* [Pentesterlab](https://pentesterlab.com/)
+* Misc research
+

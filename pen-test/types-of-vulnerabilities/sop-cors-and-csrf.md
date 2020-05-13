@@ -107,7 +107,7 @@ La défense contre cela consiste à utiliser des CSRF tokens. Concrètement, cel
 
 Par contre, si l’attaqueur trouve un moyen de le leak, c’est game over.
 
-## Source
+## Sources
 
 * MDN Web Docs
   * [On SOP](%20https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript)

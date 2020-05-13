@@ -118,14 +118,7 @@ If the db use the GBK charset \(simplified chinese\) and not the application, us
 * Y’a 2 genres d’utilisateurs `USER()` et `CURRENT_USER()` mais je suis pas sûr des subtilités.
 * Comments : `--` \(The space is important\) ou \`\#
 
-### Fonctions utiles
-
-* `LENGTH()`
-* `SUBSTRING()`
-* `BENCHMARK()`
-* `SLEEP()`
-
-## Source
+## Sources
 
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
 * Misc research

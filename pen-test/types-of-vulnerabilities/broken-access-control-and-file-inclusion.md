@@ -37,3 +37,9 @@ The application directly expose sensible files \(disclosing information, backup/
 * Windows est plus vulnérable que linux car on peut faire ça `test/../../../file.txt` même si _test_ n'existe pas, ce qui facilite des cas où le chemin est concaténé à autre chose.
 * Check if extension are added programmatically and try to cut the string with `%00` if it's the case
 
+## Sources
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* PwnFunction's [video](https://www.youtube.com/watch?v=rloqMGcPMkI)
+* Misc Research
+

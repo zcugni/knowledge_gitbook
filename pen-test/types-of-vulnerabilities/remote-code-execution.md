@@ -47,3 +47,9 @@
   * In an example using usort and then create\_function, the easiest is to try and break out create\_function, even more so since we can have it's source code. This is the pentesterlab payload that would break it \(Essential - Code Execution 2\) : `?order=id);}system('cat /etc/passwd');//`. I thinks that stems from the fact that it's used in a `sprintf` as a `%s`.
 * It's been deprecated in 5.5 and removed in 7, but you could use the regex modifier `/e` to make `preg_replace` evaluate the replacement before using it :  `www.example.com/?replacement=phpinfo()&pattern=/hello/e&base=hello`
 
+## Sources
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* PwnFunction's [video](https://www.youtube.com/watch?v=jkJWA_CWrQs)
+* Misc Research
+
