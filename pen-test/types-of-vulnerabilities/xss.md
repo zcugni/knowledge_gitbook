@@ -94,3 +94,10 @@ By example by injection this script :
 
 The img will be added to the page and request it's source \(the attacker website\) with the cookie attached to it.
 
+## Source
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* PwnFunction [video](https://www.youtube.com/watch?v=EoaDgUgS6QA)
+* [LiveOverflow](https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w)'s multiple videos
+* Misc research
+

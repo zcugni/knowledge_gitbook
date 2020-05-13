@@ -125,3 +125,8 @@ If the db use the GBK charset \(simplified chinese\) and not the application, us
 * `BENCHMARK()`
 * `SLEEP()`
 
+## Source
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* Misc research
+

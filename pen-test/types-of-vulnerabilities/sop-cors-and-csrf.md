@@ -2,8 +2,6 @@
 
 ## SOP - Same Origin Policy
 
-Doc : [https://developer.mozilla.org/fr/docs/Web/Security/Same\_origin\_policy\_for\_JavaScript](https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript)
-
 > La same-origin policy restreint la manière dont un document ou un script chargé depuis une origine peut interagir avec une autre ressource chargée depuis une autre origine.
 
 2 pages ont la même origines si elles utilisent le même protocole \(http vs https\), le même hote et le même port.
@@ -23,8 +21,6 @@ Types d’échanges :
   * `<frame>` & `<iframe>` \(peut être interdit avec un header\)
 
 ## CORS - Cross-Origin Resource Sharing
-
-Doc : [https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 
 Permet au serveur d’autoriser certains échanges ne suivant pas la SOP grâce à des headers qu’il rajoute dans sa réponse.
 
@@ -110,4 +106,14 @@ Pour une attaque en passant par POST, il faut simplement créer un formulaire ay
 La défense contre cela consiste à utiliser des CSRF tokens. Concrètement, cela consiste en un input caché ajouté à tous les formulaires du site contenant une valeur secrète et unique à cet utilisateur. Toute requête arrivant sans cette valeur ne sera pas prise en compte. Vu qu’avec la SOP les autres origines ne peuvent pas accéder aux données du site, ce token ne peut pas être récupéré par l’attaquant.
 
 Par contre, si l’attaqueur trouve un moyen de le leak, c’est game over.
+
+## Source
+
+* MDN Web Docs
+  * [On SOP](%20https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript)
+  * [On CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
+* LiveOverflow's [video](https://www.youtube.com/watch?v=KaEj_qZgiKY)
+* PwnFunction's [video](https://www.youtube.com/watch?v=eWEgUcHPle0)
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* Misc research
 

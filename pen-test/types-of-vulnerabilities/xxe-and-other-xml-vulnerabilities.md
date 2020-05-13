@@ -117,3 +117,9 @@ Nous permettant de nous authentifier systématiquement.
 
 J'imagine que le même genre de chose est possible avec XQuery.
 
+## Source
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* PwnFunction [video](https://youtu.be/gjm6VHZa_8s)
+* Misc research
+

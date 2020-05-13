@@ -6,7 +6,7 @@ description: I'll add way to get shells as i'll use them
 
 ## Explication
 
-Those lines are to use on the target, on the attacker we'll use `nc -lvp <port>` to receive the connexion.
+Those lines are to use on the target, on the attacker we'll use `nc -lvpn <port>` to receive the connexion.
 
 ## PHP
 

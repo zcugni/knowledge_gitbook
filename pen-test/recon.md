@@ -197,3 +197,7 @@ De la même façon, les archives du web ont des fois des fichiers sensibles.
 * Look at comment/source code
 * Look at `robot.txt` file
 
+## Source
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+
