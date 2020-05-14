@@ -143,4 +143,5 @@ J'ai rien compris et ça marche pas avec HMAC apparemment.
 
 * [Hacker101](https://www.hacker101.com/sessions/crypto_crash_course)
 * Misc Research
+* [https://www.varonis.com/blog/pgp-encryption/](https://www.varonis.com/blog/pgp-encryption/)
 
