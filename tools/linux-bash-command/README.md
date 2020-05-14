@@ -322,6 +322,19 @@ Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire s
   * `-r` Actually does the reverse
   * If you want to add content to that file after the new hex, just do `cat other_file >> new_file`
 
+## GPG
+
+* pgp encoding
+* `gpg --gen-key` Generate a key pair with default setting
+* `gpg --export <username> > <file>` Export the public key of the user to a file \(binary format\)
+  * To export the ascii representation of it, add `--armor`
+* `gpg --import <file>` Import public key from file
+* `gpg -r <username> --encrypt <file>` Encrypt file using user's public key \(binary format\)
+  * To get an ascii file as result, add `--armor`
+* `gpg --decrypt <file>` Decrypt file using your private key
+* `gpg --list-keys` To see all the imported keys
+* `gpg --fingerprint <username>` To get the fingerprint of the user's public key
+
 ## Tracing
 
 * `strace` Intercepts system calls made libs to the Linux Kernel
@@ -417,4 +430,5 @@ On peut accéder aux différents éléments ainsi :
 * _Networking for Systems Administrators_ by Michael W. Lucas
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
 * Misc research
+* [https://linux.101hacks.com/unix/gpg-command-examples/](https://linux.101hacks.com/unix/gpg-command-examples/)
 
