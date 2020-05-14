@@ -30,3 +30,9 @@ Si je reçois un :
 
 Je peux spécifier l'algorithme à utiliser avec `-okexAlgorithms=+diffie-hellman-group1-sha1` 
 
+## Sources
+
+* [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
+* DigitalOcean's [How-Tos](https://www.digitalocean.com/docs/droplets/how-to/add-ssh-keys/)
+* Misc research
+

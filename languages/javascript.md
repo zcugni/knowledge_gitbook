@@ -86,3 +86,7 @@ Note :
 * See the javascript bitwise operators part in [https://www.w3schools.com/js/js\_operators.asp](https://www.w3schools.com/js/js_operators.asp)
 * I stopped there : [https://www.w3schools.com/js/js\_arithmetic.asp](https://www.w3schools.com/js/js_arithmetic.asp)
 
+## Source
+
+* [W3C](https://www.w3schools.com/js/default.asp)
+

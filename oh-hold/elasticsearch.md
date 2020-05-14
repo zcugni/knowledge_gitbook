@@ -1,3 +1,9 @@
+---
+description: >-
+  Disclaimer : je suis juste tombée dessus dans une boxe mais j'ai pas tout
+  étudié
+---
+
 # ElasticSearch
 
 ## Généralités
@@ -5,7 +11,6 @@
 * Une sorte de db avec une API Rest qui réponds en JSON.
 * Souvent couplée à une interface Kibana \(node.js\)
 * Souvent couplé à Logstash qui permet de collecter des données de différentes sources \(log, db, etc\) et les envoyer à Elasticsearch
-* Disclaimer : je suis juste tombée dessus dans une boxe mais j'ai pas tout étudier
 
 ## Endpoint
 
@@ -53,4 +58,8 @@ Exemple : `http://ip/_search` renvoi ce genre de json :
 * Donne des infos sur la bd
 * `http://ip/_cat/indices` Permet d'obtenir le nom des "tables"
 * Rajouter `?v` pour avoir le nom des colonnes dans le résultat \(aka, résultat plus lisible\)
+
+## Source
+
+* Elastic Search's Rest Api's [doc](https://www.elastic.co/guide/en/elasticsearch/reference/current/rest-apis.html)
 

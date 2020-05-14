@@ -122,3 +122,8 @@ Mais des fois pour des raisons de comptabilité ce n'est pas possible \(du moins
 
 J'ai rien compris et ça marche pas avec HMAC apparemment.
 
+## Sources
+
+* [Hacker101](https://www.hacker101.com/sessions/crypto_crash_course)
+* Misc Research
+

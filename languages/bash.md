@@ -62,6 +62,7 @@ until test; do cmd; done
 while test; do cmd; done
 
 for var in list; do cmd; done
+
 # if no list is specified, it will iterate the parameters
 for parameter; do cmd; done 
 
@@ -72,7 +73,7 @@ for parameter; do cmd; done
 
 Différent type de test, structure de base :
 
-```text
+```bash
 if cmd1; then
     cmd2
 elif cmd3; then
@@ -93,7 +94,7 @@ Old POSIX test \(so it's portable\)
 
 **if \[\[ condition \]\]**
 
-Upgraded but not POSIX test \(so not portable\). Same but better \(among its extended features, it can test whether a string matches a regular expression\). More examples [here](http://mywiki.wooledge.org/BashFAQ/031).
+Upgraded but not POSIX test \(so not portable\). Same but better \(among its extended features, it can test whether a string matches a regular expression\).
 
 **if \(\(condition\)\)**
 
@@ -124,19 +125,19 @@ Command is executed and the if statement acts according to its exit code.
 
 | New & Old | Sens |
 | :--- | :--- |
-| -gt | greater than |
-| -lt | lesser than |
-| -ge | greater of equal |
-| -le | lesser or equal |
-| -eq | equal |
-| -ne | not equal |
+| `-gt` | greater than |
+| `-lt` | lesser than |
+| `-ge` | greater of equal |
+| `-le` | lesser or equal |
+| `-eq` | equal |
+| `-ne` | not equal |
 
 **Conditions**
 
 | Old | New |
 | :--- | :--- |
-| -a \(and, deprecated\) | `&&` |
-| -o \(or, deprecated\) | ````` |
+| `-a` and, deprecated | `&&` |
+| `-o` or, deprecated | ````` |
 |  | `!` |
 
 **Special**
@@ -212,7 +213,7 @@ On peut rediriger avec `>` et `<` :
 * `cmd1 >> file` Appends à la fin du fichier au lieu de le remplacer
 * `cm1 &> file` Redirects both STDOUT & STDERR \(équivalent à `>&` et `2>&1`\)
 
-Et on peut chainer avec `|` : `time cmd1 | cmd2 | ...`
+Et on peut chaîner avec `|` : `time cmd1 | cmd2 | ...`
 
 * Output of first cmd is fed as input to second cmd, etc
 * `time` is optional and gives the total time of the operation
@@ -225,7 +226,7 @@ Et on peut chainer avec `|` : `time cmd1 | cmd2 | ...`
 * Entre ````` 
 * `$(command)`
 
-## Chainer des commandes
+## Chaîner des commandes
 
 * `cmd1 && cmd2` cmd2 is executed only if cmd1 succeded 
 * `cmd1 || cmd2` cmd2 is executed only if cmd1 failed 
@@ -237,4 +238,10 @@ Et on peut chainer avec `|` : `time cmd1 | cmd2 | ...`
 * `exit nb` Exit the script and returns nb \(0 being success\) 
 * `exit` Exit the script and use it's last cmd return value as the script return value 
 * `source script.sh` Will run the script and add it's variable to your current shell \(`. script.sh` will do the same\)
+
+## Sources
+
+* [TutoriaLinux](https://www.youtube.com/channel/UCvA_wgsX6eFAOXI8Rbg_WiQ)
+* [http://mywiki.wooledge.org/BashFAQ/031](http://mywiki.wooledge.org/BashFAQ/031)
+* Misc research
 

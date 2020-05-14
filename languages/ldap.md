@@ -101,7 +101,7 @@ SYNTAX 1.3.6.1.4.1.1466.115.121.1.50 )
 * Méthode de consultation standardisée \(pour une bd, le SQL est certes standard mais chaque DBMS rajoute une couche différente\)
 * LDAP pré-définit le modèle des données
 
-## _LDAP Data Interchange Format_ \(LDIF\)
+## LDIF - _LDAP Data Interchange Format_
 
 * Format standardisé permettant de représenter les données d'un annuaire LDAP
 * Utilisé pour l'importation/exportation ainsi que pour représenter les opérations \(ajout, suppression modification\) effectuées.
@@ -274,5 +274,9 @@ Pour modifier uniquement l'identifiant de l'élément, on ne précise pas le `ne
 
 ### Abandon
 
-Permet d'annuler une opération en lui fournissant son identifiant. Pas tout les servuers ne la prennent en charge.
+Permet d'annuler une opération en lui fournissant son identifiant. Pas tout les serveurs ne la prennent en charge.
+
+## Sources
+
+Sorry, i don't remember. But i remember that it was complicated to find one good source so this summary is based on a lot of different articles/tutorials/etc.
 

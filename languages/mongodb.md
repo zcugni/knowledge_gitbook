@@ -193,7 +193,7 @@ Les expressions fonctionnent étrangement donc je rajouterais des exemples/expli
 
 | Expression | Description |
 | :--- | :--- |
-| $sum | Si on lui donne un champ, fait la somme de celui-ci, si on lui donne une valeur, aditionne cette valeur à chaque occurence |
+| $sum | Si on lui donne un champ, fait la somme de celui-ci, si on lui donne une valeur, additionne cette valeur à chaque occurrence |
 | $avg |  |
 | $min |  |
 | $max |  |
@@ -278,11 +278,11 @@ There's a bunch of optional options :
 | unique | Enforce unique index \(i think it translate to not accepting documents with duplicate | false |
 | name | Name of the index | Concatenate the names of the indexed fields and sort order |
 | dropDups | Create a unique index by deleting any duplicates | false |
-| sparse | Only reference documents with the spedified fields | false |
+| sparse | Only reference documents with the specified fields | false |
 | expireAfterSeconds | Time to Live in seconds of documents within this collection | false |
 | v | Index version | Depends on MongoDB version |
 | weights | \(in document format\), a number between 1 - 99'999 denoting the importance of a field |  |
-| default\_language | "For a text index, determines the list of stop words and the rules for the stemmer and tokenizer" | english |
+| default\_language | "For a text index, determines the list of stop words and the rules for the stemmer and tokenizer" | English |
 | language\_override | For a text index, specificy the name of the field that override the default language | language |
 
 _Covered Queries_ are queries where all the fields are part of the same index. Sinces indexes are in the RAM, theses are answered without even looking at the document, and as such much faster.
@@ -295,7 +295,7 @@ If the document is in another collection, you can use DBRef, which are document 
 
 * $ref : The collection of the referenced document
 * $id : It's object id
-* $db : It's db \(optionnal\)
+* $db : It's db \(optional\)
 
 Exemple of data :
 
@@ -360,4 +360,8 @@ Example of query :
 
 * In the bin directory, use `mongostat`. It showcase counters of queries, insert, etc as well as page faults & lock percentage
 * In the bin directory, use `mongotop`. Details read & write by collection. By default update each second, give a number of sec as argument to increase that
+
+## Source
+
+* [tutorialspoint](https://www.tutorialspoint.com/mongodb/index.htm)
 

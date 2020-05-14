@@ -1,5 +1,5 @@
 ---
-description: 'Disclaimer : The content is good but the format not so much'
+description: 'Disclaimer : Content is good but format isn''t up to standard'
 ---
 
 # Git
@@ -160,79 +160,80 @@ $ git config --global alias.last 'log -1 HEAD'
 
 * `git help`
 * `git config`
-* `git status`  : \(get filed changed\)
-* `git add`     : stage changes
-* `git log`        : Get details of every commits and pointers of branches
-* `git rm` : untrack and delete the file
-  * `--cached` : untrack the file
-* `git diff`
-  * `--staged` : get exact diff on files not yet staged
-  * `--check` : check les whitespaces
-  * `<commit_sha>~ <commit_sha>` : get diff introduce by this commit only
-* `git commit` : Push change to \(local\) database.
-  * `-m` : Ajoute le titre directement
-  * `--amend` : Remplace le précédent commit par celui-ci \(attention donc, car le précédent est entièrement perdu\)
-* `git remote` : Liste tous les serveurs remote
-  * `-v` : 
-  * `rename <nom>`
-* `git cherry-pick`
-  * `<commit_sha>` : rebase uniquement ce commit
+* `git status` Shows changed files
+* `git add` Stage changes
+* `git log` Show details of every commits and pointers of branches
+* `git rm <file>` Untrack & delete the file
+  * `--cached` Untrack the file
+* `git cherry-pick <commit_sha>` Rebase uniquement ce commit
 * `git fetch`
-  * `<remote>` : Télécharge les données dans nos dossier locaux \(mais ne merge pas automatiquement\).
-  * `--all` : Récupère depuis tous les remotes
-* `git push <remote>`
-  * `<branch>` : si on veut push une branche \(push sur la branche du même nom dans remote\)
-  * `<my_branch:remote_branch>` : push notre branche sur une branche spécifique du remote
-  * `<tagname>` : push un tag
-  * `--delete <branch>`
-  * `--tags`  : push tous les tags
-* `git merge`
-  * `<branch>` : Merge la branche mentionnée dans l’actuelle.
+  * `<remote>` Télécharge les données dans nos dossier locaux \(mais ne merge pas automatiquement\).
+  * `--all` Récupère depuis tous les remotes
+  * Si j'ai `git push -f` et que depuis un autre ordi je veux récupérer ce qui a été fait, mais sans merge, simplement en remplaçant mes fichiers, il faut faire `git fetch` puis`git reset --hard remote/branch`
+* `git merge <branch>` Merge la branche mentionnée dans l’actuelle.
 * `git rebase`
-  * `<branch>` : Rebase \(applique\) la branche actuelle sur la branche mentionnée
-  * `<base_branch> <to_rebase_branch>` : Rebase \(applique\) la seconde branche à la première
+  * `<branch>` Rebase \(applique\) la branche actuelle sur la branche mentionnée
+  * `<base_branch> <to_rebase_branch>` Rebase \(applique\) la seconde branche à la première
+  * `git rebase -i HEAD~3` Rebase interactif pour les 3 derniers commits
+* `git commit`Push change to \(local\) database.
+  * `-m` Ajoute le titre directement
+  * `--amend` Remplace le précédent commit par celui-ci \(lle précédent est entièrement perdu\)
+* `git pull` Fetch et merge automatiquement les données de la branche upstream \(mais vaut mieux explicitement utiliser ces commandes\)
+
+### git diff
+
+* `--staged` Show exact diff on files not yet staged
+* `--check` Check les whitespaces
+* `<commit_sha>~ <commit_sha>` Show diff with this commit
+
+### git remote
+
+* `git remote` Liste tous les serveurs remote
+  * `-v` 
+  * `rename <nom>`
+* `git remote add <name> <link>`
+* `git remote prune <remote_name>` 
+
+### git push
+
+* `git push <remote>`
+  * `<branch>` Push sur la branche du même nom dans remote
+  * `<my_branch:remote_branch>` Push notre branche sur une branche spécifique du remote
+  * `<tagname>` Push un tag
+  * `--delete <branch>`
+  * `--tags`  Push tous les tags
 
 ### git tag
 
-Un tag est une phrase attachée à une version spécifique \(par exemple “v1.0”, “v2.0” pour facilement retrouver les étapes clés du projet\).
-
-2 types de tags existe, les léger et les “annoté”. Les seconds sont simplement une sorte de pointeur avec un nom vers un commit précis, tandis que les seconds contiennent le nom, l’email et le message de la personne les ayant créé. Ils peuvent aussi être checksum et sont ajouté à la bdd.
-
-Options :
-
-`-a <short_name> -m <”message”>` : crée un tag annoté avec un message `-d <tagname>` : supprime le tag
-
-Pour un ancien commit rajouter son checksum à la fin de la commande
+* Un tag est une phrase attachée à une version spécifique \(par exemple “v1.0”, “v2.0”\)
+* 2 types :
+  * Léger : Un pointeur avec un nom vers un commit précis
+  * “annotés” : Plus complet, contiennent le nom, email et message de la personne les ayant créés.
+    * Ils peuvent aussi être checksum et sont ajouté à la bdd.
+* Options :
+  * `-a <short_name> -m <”message”>` Crée un tag annoté avec un message
+  * `-d <tagname>` Supprime le tag
+* Pour un ancien commit rajouter son checksum à la fin de la commande
 
 ### git branch
 
-Liste toutes les branches \(la checkout actuelle est notée avec une \*\)
-
-`<branch>` : crée une nouvelle branche `-d <branch>` : supprime la branche `-v` : liste le dernier commit de chaque branche `-vv` : liste quelle branche traque qui et si elles sont en avances/en retard \(état du last fetch\) `-u <remote><branch>` : se mets à traquer la branche désignée
-
-Ces prochaines options prendront en référence la branche actuelle si aucune n’est précisée ou la branche spécifiée après l’option :
-
-`--merged` : liste des branches déjà merge `--no-merge` : liste des branches pas encore merge
+* Liste toutes les branches \(la checkout actuelle est notée avec une \*\)
+* `<branch>` Crée une nouvelle branche
+* `-d <branch>` Supprime la branche 
+* `-v` Liste le dernier commit de chaque branche 
+* `-vv` Liste quelle branche traque qui et si elles sont en avances/en retard \(état du last fetch\) 
+* `-u <remote><branch>` Se mets à traquer la branche désignée
+* `--merged` Liste des branches déjà merge 
+* `--no-merge` Liste des branches pas encore merge
 
 ### git checkout
 
-`<branch>` : Déplace HEAD sur la branche en question `-b <branch>` : Crée une nouvelle branche et fait pointer HEAD dessus
+* `<branch>` Déplace HEAD sur la branche en question
+* `-b <branch>` Crée une nouvelle branche et fait pointer HEAD dessus
+* `-b <branch> <remote:branch>` Crée une nouvelle branche traquant une autre de remote
+* `--track <remote>/<branch>` Pareil mais sur branche courante \(à vérifier\)
 
-Crée une branche traquant une autre sur un remote :
+## Source
 
-1. `-b <branch> <remote:branch>`
-2. `--track <remote>/<branch>` : la commande au-dessus en plus simple
-3. `<branch>` : fonctionne si la branche n’existe pas encore et si une seule du même nom est sur un seul des remotes
-
-### git pull
-
-Permet de plus ou moins automatiquement fetch et merge les données de la branche upstream. Mais c’est plutôt conseillé de faire explicitement fetch et merge plutôt que cette commande-ci.
-
-## Tips divers
-
-* `git remote prune <remote_name>` 
-* `git rebase -i HEAD~3` 
-* `git remote add <name> <link>` 
-* `git checkout --track <remote>/<branch>`
-* Si j'ai `git push -f` et que depuis un autre ordi je veux récupérer ce qui a été fait, mais sans merge, simplement en remplaçant mes fichiers, il faut faire `git fetch` puis`git reset --hard remote/branch`
+* Git's [book](https://git-scm.com/book/fr/v2)
 

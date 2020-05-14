@@ -134,3 +134,7 @@ return $sql->fetchAll(PDO::FETCH_ASSOC);
 * `empty()` test si une variable est vide \(chaine vide, 0, null\) tandis que `isset()` test si elel est définie.
 * Sécu : `htmlspecialshars()`, `filter_input()`, ...
 
+## Source
+
+* PHP's [doc](https://www.php.net/docs.php)
+

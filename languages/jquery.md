@@ -112,3 +112,7 @@ $("#formulaire").submit(function(e){
 * `dataType` Type de retour \(html, xml, json, text\)
 * Pour `error` et `complete`, le résultat est un objet XHR
 
+## Source
+
+* Jquery's [doc](https://api.jquery.com/)
+

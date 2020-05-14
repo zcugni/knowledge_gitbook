@@ -500,8 +500,10 @@ Il y a différentes façon de gérer `Either`.
 * Utiliser les `bifunctor`
 * Utiliser `either`
 
-## Other tutorial
+## Sources
 
+* Haskell Programming from first principles by Christopher Allen & Julie Moronuki
 * [https://kodimensional.dev/recordwildcards](https://kodimensional.dev/recordwildcards)
 * [https://artyom.me/aeson](https://artyom.me/aeson)
+* Misc research
 

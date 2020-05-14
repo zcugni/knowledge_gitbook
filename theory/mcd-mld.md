@@ -102,5 +102,5 @@ description: >-
 
 ## Source
 
-* One of the course in my computer science school
+* One of the course in [my computer science school](https://edu.ge.ch/site/cfpt-informatique/)
 
