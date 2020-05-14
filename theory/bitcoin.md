@@ -137,7 +137,13 @@ Tous les output désirés reçoivent la même quantité de bitcoins, afin qu'on 
 
 ## Acheter des bitcoins
 
+On peut s'en procurer :
 
+* Des choix pour ces 2 options sont donnés sur le site de Bitcoin :
+  * Avec des exchanges, qui permettent des virements par compte/paypal/carte bancaire, etc et qui demandent souvent de vérifier l'identité avec un passeport/carte
+  * En peer-2-peer, les détails varie en fonction des plateformes
+* A des bancomats spécial pour bitcoin
+* Via [https://buy.bitcoin.com/](https://buy.bitcoin.com/) qui permet de le faire par carte bancaire sans plus de vérif
 
 ## To check
 

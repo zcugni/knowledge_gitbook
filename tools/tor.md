@@ -7,7 +7,6 @@
 * Représente une suite "d'outils" :
   * Tor Browser : Un fork de Firefox qui règle certains de ces problèmes de sécu et permet d'utiliser facilement Tor
   * Tor Network : Le nom donné à l'ensemble des relays \(et utilisateurs ?\)
-  * ... software ?
 * Son but est de fournir plus d'anonymat sur internet, en permettant de cacher qui accède à quel site 
 
 ## Tor Network
@@ -24,14 +23,14 @@
   * Pour le retour, l'exit node encrypte la réponse puis le passe au second relay. Celui-ci ainsi que le premier font de même.
   * Le client est le seul à avoir les 3 clés et donc pouvoir récupérer le message
 * Avec ce système, aucun des nœuds ne connait le circuit complet
-* Vu que les cells font toutes la même taille on ne peut pas deviner si l'on est le 1er ou le 2nd noeud.
 * Celui-ci est modifié toutes les 10min
+* Vu que les cells font toutes la même taille on ne peut pas deviner si l'on est le 1er ou le 2nd noeud.
 * Les échanges à l'intérieur du réseau sont des paquets TCP et non IP, entre autre afin de donner moins de détails.
 * A cause des relays et de la taille des cells, il est plus lent que si l'on accédait à internet normalement.
 
 ### Directory list
 
-* Fournissent des listes signés de relays avec leur config
+* Fournissent des listes signées de relays avec leur config
 * Ont eux-même une propre clé
 * Les adresses des directory \(il n'y en a pas des masses\) ainsi que leur clé publique sont hardcodées dans le logiciel
 
@@ -62,16 +61,16 @@
 
 ### Onion services
 
-* .onion site, aussi appelé "hidden ..."
-* Ces sites ne fonctionnent que via Tor \(.onion n'est pas reconnu par les DNS\)
-* Ce sont des sites qui utilisent aussi Tor, et n'ont pas d'adresses ip
-* Ils définissent des adresses qui sont des "introduction point" et sont représentés par des chaines de .. ou ... caractères, de ce type : ...
-* Nous faisons 2 sauts pour arriver à ce point, et le traffic de ce site fait de même.
-  * Dans certains des trucs que j'ai lu, l'introduction point n'est utilisé que pour choisir un autre point qui servira de rdv aux 2
-  * Mais dans les 2 cas la finalité reste la même : nous-même et le serveur passons chacun par 3 noeuds.
-* Cela permet de ne jamais sortir du network
-* Vu qu'ils ne sont pas indexé, on ne peut pas trouver des .onions par des recherches, il faut que quelqu'un nous donne un lien.
-* dark.fail répertorie une bonne partie des sites les plus connus ainsi que leur miroirs. Il permet aussi de vérifier l'intégrité de ceux-ci.
+* .onion site, aussi appelé "hidden services"
+* Représentés par des adresses de 16 ou 56 caractères, générées aléatoirement à partir d'une clé publique
+* Ces sites ne fonctionnent que via Tor, ils n'ont pas d'adresse IP
+  * .onion n'est pas reconnu par les DNS
+* Ces adresses représentent des "introduction points" qui servent de point de rdv entre nous et le serveur du site
+  * Les 2 faisant donc 3 sauts dans le réseau pour l'atteindre
+  * Cela permet de ne jamais sortir du network
+  * Dans certains des articles que j'ai lu, l'introduction point n'est utilisé que pour choisir un autre point qui servira de rdv aux 2, mais l'idée reste la même
+* Vu qu'ils ne sont pas indexé, on ne peut pas trouver des .onions par des recherches, il faut que quelqu'un nous donne un lien
+* [dark.fail](https://dark.fail/) \(darkfailllnkf4vf.onion\) répertorie une bonne partie des sites les plus connus ainsi que leur miroirs. Il permet aussi de vérifier l'intégrité de ceux-ci.
 
 ### Misc
 
@@ -80,6 +79,6 @@
 
 ## Sources
 
-* Tor website & documentation
+* Tor's [website](https://www.torproject.org/) & [documentation](https://2019.www.torproject.org/docs/documentation.html.en)
 * Misc research
 
