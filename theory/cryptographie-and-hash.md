@@ -62,17 +62,34 @@ Une même clé pour le chiffrement et le déchiffrement, ce qui la rends moins s
 * Rarely used for encrypting data due to performance & complexity
 * Use to securely transmit a symmetric key
 
-## Entrainement
-
--&gt; [https://cryptopals.com/](https://cryptopals.com/)
-
-## One time pad
+### One time pad
 
 * N bits of random data
 * N bits of text
 * XOR each other
 
 Used only one time it's perfect, but you need to have the initial key, which is why we use more complex solution.
+
+## PGP - Pretty Good Privacy
+
+Logiciel permettant de chiffrer des messages en mélangeant chiffrement symétrique et asymétrique \(car l'asymétrique est bien plus lent\)
+
+L'expéditeur :
+
+1. Chiffre le message avec clé symétrique 
+2. Chiffre celle-ci avec la clé publique du destinataire
+3. Envoies le message et la clé chiffré au destinataire
+
+Le destinataire :
+
+1. Déchiffre la clé symétrique avec sa clé privé
+2. Déchiffre le message avec la clé symétrique
+
+Linux utilise gpg pour gérer ces clés, regarder ... pour plus de détails
+
+## Entrainement
+
+-&gt; [https://cryptopals.com](https://cryptopals.com/)
 
 ## Vulnerabilities
 
