@@ -411,3 +411,10 @@ On peut accéder aux différents éléments ainsi :
   * Si on veut piper des commandes qui ont des paramètres, faut les mettre par tas : `bash -c "{echo,string}|{base64,-d}"`
 * `bash -i` Si l'option -i est présente, l'interpréteur est interactif \(utilisé dans des payloads mais je comprends pas entièrement pourquoi\)
 
+## Sources
+
+* Multiple pages of man
+* _Networking for Systems Administrators_ by Michael W. Lucas
+* [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
+* Misc research
+

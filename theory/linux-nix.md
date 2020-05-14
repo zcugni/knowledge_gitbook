@@ -193,3 +193,9 @@ Or use this command :
 * `/etc/crontab/` System crontab
 * There's an `/etc/cron.allow` file and an `/etc/cron.deny` file \(whitelisting is prefered to blacklisting\)
 
+## Sources
+
+* Man pages
+* Misc research
+* [TutoriaLinux](https://www.youtube.com/channel/UCvA_wgsX6eFAOXI8Rbg_WiQ)
+

@@ -28,11 +28,6 @@
 * Vu que les transactions sont à jamais notées dans l'historique, si on peut être relié à une adresse, tout ce que nous avons fait avec elle peut être facilement récupérer
 * Certaines entreprises proposent de perdre nos transactions au milieu d'autre en en générant des similaires pour une petite charge \(en très gros\), ce qui peut un peu aider mais ne règle pas à 100% le problème.
 
-## Sources
-
-* Bitcoin website
-* 3Blue1Brown's [video](https://www.youtube.com/watch?v=bBC-nXj3Ng4)
-
 ## To check
 
 * [Original Bitcoin paper](https://bitcoin.org/bitcoin.pdf) 
@@ -41,4 +36,11 @@
 * Video by [CuriousInventor](https://youtu.be/Lx9zgZCMqXE)
 * Video by [Anders Brownworth](https://youtu.be/_160oMzblY8)
 * [Ethereum white paper](https://goo.gl/XXZddT)
+
+## Sources
+
+* Bitcoin website
+* 3Blue1Brown's [video](https://www.youtube.com/watch?v=bBC-nXj3Ng4)
+
+## 
 

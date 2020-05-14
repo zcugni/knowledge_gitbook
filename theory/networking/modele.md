@@ -249,7 +249,7 @@ The _three-way handshale_ establish a connection between 2 hosts :
 
 * The OS forward the data stream to a program only after the three-way handshake is done. So if the connection stop after it, the problem lies in the server program but if it fails before, the OS didn't complete the connection.
 * A SYN flood attack consist of sending lots of SYN request that never goes past the SYN-ACK stage.
-* When the server and client finished exchanging data, both sides request and acknowledge teardown with states like CLOSE_WAIT, TIME\_WAIT, FIN\_WAIT & LAST\_ACK \(\_four-way hanshake_\).
+* When the server and client finished exchanging data, both sides request and acknowledge teardown with states like _CLOSE_, _WAIT, TIME\_WAIT, FIN\_WAIT & LAST\_ACK \(\_four-way hanshake_\).
 
 **TCP failures**
 

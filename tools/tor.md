@@ -78,3 +78,8 @@
 * Le network est peu adapté pour du peer-to-peer. Evitez de le faire avec, ça surcharge le réseau. \(Ainsi que des trucs de streamings, etc, mais particulièrement les torrents\)
 * Le logiciel en lui-même est signé, et c'est important de vérifier qu'on a effectivement le bon vu qu'entre autre les directory sont définit dans le code.
 
+## Sources
+
+* Tor website & documentation
+* Misc research
+

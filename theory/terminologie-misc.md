@@ -117,3 +117,8 @@ Bitwise operator : exclusive or.
 
 Reversable : If `C = A xor B` then `A = C xor B` \(and `B = C xor A`\)
 
+## Sources
+
+* Misc Research
+* [Pentesterlab](https://pentesterlab.com/)
+

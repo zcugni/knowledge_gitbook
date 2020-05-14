@@ -24,3 +24,7 @@
 * On peut exclure des fichiers/dossiers/etc mais 
 * `-r` Recursive
 
+## Source
+
+* grep's man page
+

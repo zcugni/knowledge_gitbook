@@ -64,5 +64,8 @@ In this mode you can go up the terminal & search/copy, etc.
 | `ctrl-space` | Highlight mode |
 | `alt-w` | Copy |
 
+## Sources
 
+* Man page
+* Misc research
 

@@ -1,3 +1,7 @@
+---
+description: 'Disclaimer : Check "Machine Learning" disclaimer'
+---
+
 # Fonction de coûts
 
 ## Principe général

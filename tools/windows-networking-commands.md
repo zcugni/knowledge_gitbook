@@ -69,3 +69,7 @@ Windows doesn't include `netcat`, but it has been ported
 
 * `ipconfig`
 
+## Source
+
+* _Networking for Systems Administrators_ by Michael W. Lucas
+

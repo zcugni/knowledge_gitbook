@@ -1,6 +1,10 @@
-# Udemy
+---
+description: 'Disclaimer : Check "Machine Learning" disclaimer'
+---
 
-Notation et généralités
+# Udemy Course Summary
+
+## Notation et généralités
 
 Il y a beaucoup de terme différents pour les mêmes choses :
 

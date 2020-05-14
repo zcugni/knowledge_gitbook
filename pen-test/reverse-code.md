@@ -7,3 +7,7 @@ description: 'Disclaimer : not a focus currently, i just add stuff if i stumble 
 * For php file, use `grep -Ri '$_' *` to easily see where user input might play a role
 * See ghidra
 
+## Sources
+
+* [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
+

@@ -114,3 +114,7 @@ On peut aussi directement specifier les prefix dans le 1er élément du document
 xmlns:f="https://www.w3schools.com/furniture">
 ```
 
+## Source
+
+* [W3C](https://www.w3schools.com/xml/default.asp)
+

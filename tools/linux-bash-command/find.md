@@ -73,3 +73,7 @@ Expression will be abbreviated to expr
 | `expr expr` / `expr -a expr` | And |
 | `expr -o expr` | Or |
 
+## Source
+
+* find's man page
+

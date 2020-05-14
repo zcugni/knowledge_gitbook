@@ -220,3 +220,7 @@ Quand un thread n’a pas de chunk de la taille adéquate dans sa tcache, il va 
 * [Advance Doug Lea's malloc exploits](http://phrack.org/issues/61/6.html)
 * [Yet another free\(\) exploitation technique](http://phrack.org/issues/66/6.html)
 
+## Sources
+
+* [Azeria's lab](https://azeria-labs.com/heap-exploitation-part-1-understanding-the-glibc-heap-implementation/)
+

@@ -21,7 +21,7 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
   * `show options` Donne les options de l'exploit
   * `set <option> <value>` Set the given option
   * `run` Run l'exploit avec les options désignées
-  * I a set `LHOST` à `tun0` mais je suis pas sûre de comprendre pourquoi
+  * Il a set `LHOST` à `tun0` mais je suis pas sûre de comprendre pourquoi
   * On peut faire passer les explois web par un proxy`set Proxies http:127.0.0.1:8080`
     * Dans burp, faut avoir mis l'intercept on et avant de forward la request : clic droit "do intercept" -&gt; "response to this request"
     * Faut forward vite car sinon metasploit considère que ça n'a pas marché
@@ -42,4 +42,9 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
   * `sudo gem install bundler:1.17.3`
   * `cd /usr/share/metasploit-framework`
   * `sudo bundle install`
+
+## Sources
+
+* [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
+* Misc research \(aka StackOverflow\)
 

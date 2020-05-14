@@ -76,7 +76,7 @@ Si un cookie est set à une certaine valeur à chaque requête, le sequencer per
 
 ## Pluggins
 
-De nombreux pluggin existent, notamment ces deux :
+De nombreux pluggins existent, notamment ces deux :
 
 * Havertor : Bien plus puissant que Docder
 * Logger++ : Bien utile \(doit être la dernière extension de la liste\)

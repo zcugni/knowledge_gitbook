@@ -47,3 +47,8 @@ Je ne suis pas sûre de la raison dernière chaque caractère réservé.
 | \[ | %5B | ? |
 | \] | %5D | ? |
 
+## Sources
+
+* [W3C](https://www.w3schools.com/tags/ref_urlencode.ASP)
+* Misc Research
+

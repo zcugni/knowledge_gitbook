@@ -49,7 +49,7 @@
 * [URL & CO + URL Encoding](theory/url-and-co-+-url-encoding.md)
 * [Bitcoin](theory/bitcoin.md)
 * [Machine Learning](theory/machine-learning/README.md)
-  * [Udemy](theory/machine-learning/udemy.md)
+  * [Udemy Course Summary](theory/machine-learning/udemy.md)
   * [Fonction de minimisation](theory/machine-learning/fonction-de-minimisation.md)
   * [Fonction de coûts](theory/machine-learning/fonction-de-couts.md)
   * [Coursera](theory/machine-learning/coursera.md)

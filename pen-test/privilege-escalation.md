@@ -23,7 +23,7 @@ J'utilise évidemment les scripts, mais je voulais noter ici les éléments spé
 * Si on arrive sur un **serveur web,** chercher le fichier de config de la db et tenter de se co pour ensuite explorer les tables d'utilisateurs & co
 * Si un script change les droits d'un fichier, si on fait un **lien symbolique** entre ce nom de fichier et un fichier qui nous intéresse, cela changera aussi les droits du fichier qui nous intéresse.
 
-## Source
+## Sources
 
 * [Hack The Box](https://www.hackthebox.eu/)'s Exercices
 * [Ippsec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)'s videos

@@ -6,7 +6,6 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
 
 ## Généralités
 
-* [github](https://github.com/lanjelot/patator)
 * Different module for brute-force \(list-based\) attack. Créer pour centraliser Hydra, les scripts nmap, les modules metasploit, etc.
 
 Actuellement permet de :
@@ -57,4 +56,9 @@ Actuellement permet de :
   * `PROG` Iterate over the output of an external program
   * Use KEYWORD0 as a placeholder, and later 0=...
 * Il a tendance à afficher tout les tests, ce qui peut être relou pour faire ressortir les valides. Y'a des options en fonctions des modules pour trier les résultats, au pire grep dessus.
+
+## Sources
+
+* Patator's [github](https://github.com/lanjelot/patator)
+* Test
 

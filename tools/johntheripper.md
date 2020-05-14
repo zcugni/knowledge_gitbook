@@ -19,7 +19,13 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
 * Soit apt-get install \(mais pareil je crois\)
 * Soit la version jumbo via github
   * Install required tools : `sudo apt-get install build-essential libssl-dev`
-  * Install recommanded ones : `sudo apt-get install yasm libgmp-dev libpcap-dev libnss3-dev libkrb5-dev pkg-config libbz2-dev zlib1g-dev`
+  * Install recommended ones : `sudo apt-get install yasm libgmp-dev libpcap-dev libnss3-dev libkrb5-dev pkg-config libbz2-dev zlib1g-dev`
   * git clone it : `git clone git://github.com/magnumripper/JohnTheRipper -b bleeding-jumbo john`
   * Go it it's `/src` and compile : `./configure && make -s clean && make -sj4`
+
+## Sources
+
+* JohnTheRipper's man page
+* JohnTheRipper's github
+* Misc research \(aka StackOverflow\)
 

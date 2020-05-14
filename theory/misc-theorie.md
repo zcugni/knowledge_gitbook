@@ -104,3 +104,8 @@ XSS et CSRF nécessitent qu’un utilisateur soit déjà authentifié sur l’ap
 
 En dehors de l’accessibilité, etc, il faut tester si après un logout, les cookies fournis à l’authentification sont encore accepté et si l’accès à toutes les pages critiques est bien supprimé.
 
+## Sources
+
+* [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
+* Misc research
+
