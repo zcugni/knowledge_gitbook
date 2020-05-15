@@ -37,11 +37,7 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
 
 * Sur kali il faut lancer `systemctl start postgresql` puis `sudo msfdb init`
 * On peut ensuite utiliser `sudo msfdb run` pour lancer la db et run msfconsole
-* Si j'ai cette erreur `cannot load such file — bundler/setup`, c'est probablement parce que j'ai pas installé ruby. Pour corriger ça, faire ceci : 
-  * `sudo gem update --system`
-  * `sudo gem install bundler:1.17.3`
-  * `cd /usr/share/metasploit-framework`
-  * `sudo bundle install`
+* Si j'ai cette erreur `cannot load such file — bundler/setup`, c'est probablement parce que j'ai pas le bon setup pour ruby. Simplement `sudo gem install bundler`
 
 ## Sources
 
