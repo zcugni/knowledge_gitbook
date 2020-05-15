@@ -92,6 +92,7 @@ Not tested
 ### Exploit
 
 * `searchsploit` is the command-line utility giving easy access to the exploit db
+  * Remember to use `-u` to update it's db
 * [https://exploits.shodan.io/](https://exploits.shodan.io/)
 * [metasploit](https://zcugni.gitbook.io/notes/tools/metasploit-framework)
 * Ces bdds ne sont pas toujours complètes, simplement faire une recherche google "nom exploit" peut s'avérer fructueuse
