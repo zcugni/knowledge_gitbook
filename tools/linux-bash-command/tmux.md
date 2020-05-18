@@ -12,6 +12,7 @@ description: A Terminal Multi-Plexer
   * Commands are send to the tmux server by prefixing them with `ctrl-b`
 * Launched with `tmux`
 * The \* at the bottom shows in which window we are
+* To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` \(not sure if it's permanent or not\)
 
 ## Window
 
@@ -53,7 +54,7 @@ description: A Terminal Multi-Plexer
 | `ctrl-b ]` | Paste |
 | `ctrl-b ?` | **List all key bindings** |
 
-## View Mode
+## Copy Mode
 
 In this mode you can go up the terminal & search/copy, etc.
 
@@ -61,8 +62,11 @@ In this mode you can go up the terminal & search/copy, etc.
 | :--- | :--- |
 | `ctrl-b [` | Enter view mode |
 | `q` | quit |
-| `ctrl-space` | Highlight mode |
+| `space` | Highlight mode |
 | `alt-w` | Copy |
+| `/` | Search \(if we use vi key bindings\) |
+| \(in search mode\) `n` | Next result \(if we use vi key bindings\) |
+| \(in search mode\) `shift-n` | Previous result |
 
 ## Sources
 
