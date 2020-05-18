@@ -61,25 +61,24 @@ Not tested
 * [waybackurls](https://github.com/tomnomnom/waybackurls)
 * [waybackunifier](https://github.com/mhmdiaa/waybackunifier)
 
-### Forced browsing
+## gobuster
 
-* gobuster
-  * installer via `apt-get install gobuster`
-  * quite easy so read help in doubt
-  * default command could be `gobuster dir -u ip/hostname -w wordlist_path -o result_file`
-  * Don't forget to add `-x php,txt` \(for example\) to append ".php" and ".txt" to each name
-    * It's gonna take time but it's worth it. Don't hesitate to add more threads
-  * Increase thread numbers if you're doing a lot of recon
-  * You can put it in a bash loop if you need to do it recursively \(directly in the cmd\):
+* Has 3 mode, to enumerates files/dir, dns or vhost
+* `apt-get install gobuster`
+* Quite easy so read help in doubt
+* My default command for dir : `gobuster dir -u ip/hostname -w wordlist_path -o result_file`
+  * `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` is my default word list
+* Add extensions to each name with `-x php,txt` \(for example\)
+* Increase thread numbers with `-t <nb>`
+* Keep in mind that even if you can't access a dir \(/dev for example\), you might be able to access it's subdir/files \(/dev/backup for example\)
+* Sometimes, a dir won't show up if you don't explicitly use a / after it \(aka `/cgi-bin` don't exist, but `/cgi-bin/` does\). Use  `-f` to add the slash and test for it. \(The majority of the time, it seems to work without, i'm not sure what the diff is\)
+* You can put it in a bash loop if you need to do it recursively \(directly in the cmd\):
 
-    ```bash
-      for $name in example1 example2 admin dev etc;
-          do gobuster dir -u ip/$name w wordlist_path -o $name.txt;
-      done
-    ```
-
-  * \(/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt default word list\)
-  * Keep in mind that even if you can't access a dir \(/dev for example\), you might be able to access it's subdir/files \(/dev/backup for example\)
+  ```bash
+    for $name in example1 example2 admin dev etc;
+        do gobuster dir -u ip/$name w wordlist_path -o $name.txt;
+    done
+  ```
 
 ### Github dork
 

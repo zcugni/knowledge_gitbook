@@ -202,6 +202,7 @@ On peut aussi prendre une string du genre et la transformer en objet avec `unser
 * Processing times might give a hint to the attacker, for example if the error message takes longer to come for an invalid username + invalid password combo than for a valid username + invalid password one
 * Test that some function can't be used more times than intended \(for example discount one\).
 * **Session Fixation** : Si l'application ne fournit pas un nouvel id de session à chaque connexion il est possible de pousser la victime à utiliser un id dont l'attaqueur à la connaissance et donc permettre à celui-ci de se faire passer pour elle.
+* If a service with "Pi" in it's name is used, try to ssh with default Rasberry Pi Credentials \(Pi - Rasberry\)
 
 ## Sources
 

@@ -343,7 +343,7 @@ Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire s
 ## Analyse de fichier
 
 * `exiftool` Read/Write metadata of files
-* `strings` Print the strings of printable characters of a file \(useful for determining content of non-text file\)
+* `strings` Print the strings of printable characters of a file, useful for determining content of non-text file. Can also be used on block device to analyze their content.
 
 ## Traitement json
 
@@ -383,6 +383,15 @@ On peut accéder aux différents éléments ainsi :
 * `.. | jq ".level1 .object .obj_att2"`
 * `.. | jq ".level1 .array[]"`
 * `.. | jq ".level1 .array[0] .array_inner1_3"`
+
+## Disk info
+
+* `df` Report disk space usage, also explicit where things were mounted \(use with  `-lh`\)
+* `mount` Show where things were mounted
+
+{% hint style="info" %}
+I gotta research this mounted stuff in more details
+{% endhint %}
 
 ## Misc
 
