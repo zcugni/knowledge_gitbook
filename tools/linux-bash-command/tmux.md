@@ -2,7 +2,7 @@
 description: A Terminal Multi-Plexer
 ---
 
-# TMUX
+# Tmux
 
 ## Généralités
 
@@ -12,7 +12,7 @@ description: A Terminal Multi-Plexer
   * Commands are send to the tmux server by prefixing them with `ctrl-b`
 * Launched with `tmux`
 * The \* at the bottom shows in which window we are
-* To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` \(not sure if it's permanent or not\)
+* To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` \(add this to the `.tmux.conf file`\)
 
 ## Window
 

@@ -5,7 +5,7 @@ description: >-
   of them
 ---
 
-# Hack tools
+# Pen test tools
 
 ## Disclaimer
 
@@ -66,7 +66,7 @@ Not tested
 * Has 3 mode, to enumerates files/dir, dns or vhost
 * `apt-get install gobuster`
 * Quite easy so read help in doubt
-* My default command for dir : `gobuster dir -u ip/hostname -w wordlist_path -o result_file`
+* My default command for dir : `gobuster dir -u ip/hostname -w wordlist_path -o result_file 2> error_file`
   * `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` is my default word list
 * Add extensions to each name with `-x php,txt` \(for example\)
 * Increase thread numbers with `-t <nb>`
@@ -192,7 +192,8 @@ Not tested
   * Will fuzz places of the string where you wrote "FUZZ"
   * `wfuzz -u url -d "username=asd&password=FUZZ" -w wordlist` \(d specifies post data\)
   * On peut le faire passer par un proxy avec `-p 127.0.0.1:8080`
-  * On peut filtrer les résultats pour cacher les status code/nombre de lignes/nombre de mots/nombre de caractères spécifique avec `--hc/hl/hw/hh ..`
+  * On peut filtrer les résultats pour cacher les status code/nombre de lignes/nombre de mots/nombre de caractères spécifique avec `--hc/hl/hw/hh ..` \(content-length corresponds à hh\)
+  * Il mets des fois super longtemps à ce lancer, je sais pas pourquoi
   * utiliser `''` au lieu de `""` autour des paramètres car certains char peuvent faire bugger le shell s'ils sont interprétés
 * Hydra
 * [Patator](https://zcugni.gitbook.io/notes/tools/patator)

@@ -1,4 +1,4 @@
-# NMAP
+# Nmap
 
 ## Intro
 
@@ -238,12 +238,16 @@ nmap utilise 6 états pour décrire un port :
   * **version** : Extension of the version detection feature
   * **vuln** : Checks for specific known vulnerabilities and report results if found.
 * Scripts are not run in a sandbox and could damage your system. Don't run third parties scripts unless you trust them.
+* Scripts are inside `/usr/share/nmap/scripts` \(at least in kali\)
 * `-sC` Performs a script scan using the default set of scripts
-* `--script=category`
-* `--script "http-*"`
-* `--script "not intrusive"`
-* `--script "default and safe"`
+* `--script ...` Launch a script
+  * `--script <filename>`
+  * `--script=category`
+  * `--script "http-*"`
+  * `--script "not intrusive"`
+  * `--script "default and safe"`
 * `--script-args n1=v1,n2={n3=v3},n4={v4,v5}`
+* To use an nmap script through a proxy, we need to add a proxy listener in burp and have nmap target it. \(So, if we want to test a script against 10.10.10.56, we create a proxy listener that redirect 127.0.0.1:8081 to 10.10.10.56:80 and launch nmap against 127.0.0.1, port 8081\).
 
 ## Timing and performance
 

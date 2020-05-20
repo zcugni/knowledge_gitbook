@@ -21,16 +21,16 @@
 ## Tools
 
 * [Linux / Bash Command](tools/linux-bash-command/README.md)
-  * [TMUX](tools/linux-bash-command/tmux.md)
-  * [NMAP](tools/linux-bash-command/nmap.md)
+  * [Tmux](tools/linux-bash-command/tmux.md)
+  * [Nmap](tools/linux-bash-command/nmap.md)
   * [Find](tools/linux-bash-command/find.md)
   * [Grep](tools/linux-bash-command/grep.md)
   * [tcpdump](tools/linux-bash-command/tcpdump.md)
-* [Hack tools](tools/hack-tools.md)
-* [Burp Proxy](tools/burp-proxy.md)
-* [JohnTheRipper](tools/johntheripper.md)
-* [Metasploit Framework](tools/metasploit-framework.md)
-* [Patator](tools/patator.md)
+* [Pen test tools](tools/hack-tools/README.md)
+  * [Burp Proxy](tools/hack-tools/burp-proxy.md)
+  * [JohnTheRipper](tools/hack-tools/johntheripper.md)
+  * [Metasploit Framework](tools/hack-tools/metasploit-framework.md)
+  * [Patator](tools/hack-tools/patator.md)
 * [Windows networking commands](tools/windows-networking-commands.md)
 * [Tor](tools/tor.md)
 
