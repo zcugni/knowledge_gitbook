@@ -147,6 +147,11 @@ Not tested
 * GFI Lan Guard
 * Nessus
 
+## CMS
+
+* cmsmap
+* WPscan
+
 ## Misc software scan
 
 * Magento : [https://github.com/steverobbins/magescan](magescan)

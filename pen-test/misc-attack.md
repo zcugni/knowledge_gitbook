@@ -203,6 +203,7 @@ On peut aussi prendre une string du genre et la transformer en objet avec `unser
 * Test that some function can't be used more times than intended \(for example discount one\).
 * **Session Fixation** : Si l'application ne fournit pas un nouvel id de session à chaque connexion il est possible de pousser la victime à utiliser un id dont l'attaqueur à la connaissance et donc permettre à celui-ci de se faire passer pour elle.
 * If a service with "Pi" in it's name is used, try to ssh with default Rasberry Pi Credentials \(Pi - Rasberry\)
+* To enumerate user on wordpress, scripts use "url/?author=1", then 2, etc because it redirects to the user name.
 
 ## Sources
 

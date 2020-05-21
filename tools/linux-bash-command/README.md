@@ -251,6 +251,8 @@ Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 
 ## Compression & Decompression
 
+* `.jar` sont des fichiers d'archives de classes java
+
 ### Compress
 
 * `tar -zcvf archive.tar.gz Documents/`
