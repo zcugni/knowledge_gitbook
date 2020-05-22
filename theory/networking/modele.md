@@ -1,4 +1,4 @@
-# Modèle
+# Modèle & Protocoles
 
 ## Généralités
 
@@ -349,6 +349,7 @@ Cookie:  hackthebox_session=eyJpdiI6IkJBTlJ0bzNRVGowUDVrOUZNejl2K3c9PSIsInZhbHVl
 * Path
 * Protocol Version
 * `Host` Domain of the requested ressource
+  * The behavior of the serveur might change depending on that field even if it points to the same ressource \(for example, using the ip address instead of the hostname\)
 * `User-Agent` Client software issuing the request
 * `Accept` Expected format of the response
 * `Accept-Language` Expected \(human\) language of the response

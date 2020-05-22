@@ -193,6 +193,11 @@ Or use this command :
 * `/etc/crontab/` System crontab
 * There's an `/etc/cron.allow` file and an `/etc/cron.deny` file \(whitelisting is prefered to blacklisting\)
 
+## DNS & Host
+
+* On spécifie nos hosts localement dans `/etc/hosts`
+* On définit les serveurs dns qu'on utilise dans `/etc/resolv.conf`
+
 ## Sources
 
 * Man pages

@@ -18,7 +18,7 @@
 * DNS servers come in 2 varieties : authoritative & recursive
 * The first one contains information for specific domain. \(A complete collection of data for a zone is called a _zone file_\)
 * The second one provide DNS lookups for clients.
-* They should be on different machiness.
+* They should be on different machines.
 * Recursive DNS servers cache collected answers until a per-DNS-record timer expires
 * When configuring an host, you need to give it the ip address of it's \(recursive\) DNS server \(if the host use DHCP, it can do that automatically\).
 
@@ -50,6 +50,15 @@ DNS servers grew organically and now handle way too many things, each of these i
   * Some tools print `NODATA` when no valid answer is found
 * `NXDOMAIN` The protocol worked, but there's no authoritative answer for that name
 * `SERVFAIL` Something went wrong and you can't get an answer
+
+## Zone Transfer
+
+*  Les serveurs DNS \(autoritaire ?\) pour des zones données sont généralement dupliqués pour éviter les problèmes
+* Les "Zones Transfer" permettent de copier toutes les entrées \(et donc les host\) d'une _zone_ sur un autre serveur
+  * Donc même si ça ne fonctionne pas pour la root, ça vaut la peine de tester pour d'autres zones
+* Généralement fait via AXFR \(avec `dig`\)
+* Par défaut, n'importe qui peut demander une Zone Transfer. Il faut modifier le fichier de config pour restreindre cette fonctionnalité à certaines ip
+* Généralement, les requêtes DNS se font via UDP, elles passent par TCP quand elles sont trop grosses, ce qui est le cas pour un Zone Transfer, ça peut donc être un bon indicateur que cela est faisable
 
 ## Other location of mapping
 

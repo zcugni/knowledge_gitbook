@@ -39,7 +39,7 @@
 * [Terminologie / Misc](theory/terminologie-misc.md)
 * [Pen test related theory](theory/misc-theorie.md)
 * [Networking](theory/networking/README.md)
-  * [Modèle](theory/networking/modele.md)
+  * [Modèle & Protocoles](theory/networking/modele.md)
   * [Machines](theory/networking/machines.md)
   * [DNS](theory/networking/dns.md)
 * [Linux / \*nix](theory/linux-nix.md)
