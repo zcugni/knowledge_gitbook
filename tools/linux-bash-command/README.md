@@ -238,7 +238,12 @@ They're different on each distro
   * `host <ip> [dns_server]` Gives hostname back \(you can specify a dns server to use\)
   * `-v` Gives more details \(response code, authority, records, etc\)
 * `dig` is the more complete one
-  * ...
+  * `dig <hostname> @[dns_server]`
+  * If no dns server is specified, dig will look into /etc/resolv.conf and if that doesn't work send the query to the local host
+  *  `dig -x <ip>` Reverse look-up
+  * `dig axfr [zone] @[dns_server]`
+    * Ask for a zone transfer
+    * If the zone isn't specified it will use `.` aka root.
 
 ### nmap \(map network\)
 
