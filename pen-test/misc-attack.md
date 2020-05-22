@@ -13,6 +13,10 @@ description: >-
 * The `TRACE` request, which simply returns back the request, can be used in XST \(_Cross-Site Tracing_\). If the attacker can force the browser to do this request, it will send cookies with it and so receive them back in the response, which can be read in js, bypassing the `HttpOnly` rule
 * En général, accepter des méthodes HTTP non-nécessaire est plutôt une mauvaise chose et peut être abusée. \(Aka _HTTP Verb Tampering_\)
 
+## HTTP Redirect Vulnerability
+
+With a proxy, we can change the response code of a response, for example from 302 to 202, which would prevent the server from redirecting. So if the server actually responds with content after a 302, it can be abused.
+
 ## HTTP Parameter pollution
 
 * There’s no official protocol on how to deal with multiple get variables with the same name \(aka [http://test.com/?user=asd&user=xyz](http://test.com/?user=asd&user=xyz)\)

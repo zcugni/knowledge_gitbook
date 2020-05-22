@@ -230,15 +230,15 @@ They're different on each distro
 * Traceroute servers \(find them on internet\) lets you run traceroute from them, so that you can see if the problem lies within the host you're hoping through or from the return route it's using with you.
 * To see if the dropped packets are a separate occurrence or an ongoing issue, just run multiple traceroute. `mtr` does that automatically.
 
-### DNS \(host command\)
+### DNS
 
-* Don't use `nslookup` on Unix because it was once the standard but it's been abandonned and then resurrected, so it's hard to know if your version is a decent one.
-* Use `host` instead for basic queries. 
-* For more complex one, eiter BIND \(Berkley Internet Name Daemon\)'s `dig` or Unbound's `unbound-host`
-* `host hostname` Gives ip back
-* `host ip` Gives hostname back \(in the result the ip is also reversed but don't pay attention\)
-* For both case you can add a specific DNS IP as a third parameter to query it
-* `-v` Gives more details \(response code, authority, records, ...\)
+* `nslookup` Has been deprecated and then brought back so depending on the version it's not the best, just use other tools
+* `host` is the simple one 
+  * `host <hostname> [dns_server]` Gives ip back \(you can specify a dns server to use\)
+  * `host <ip> [dns_server]` Gives hostname back \(you can specify a dns server to use\)
+  * `-v` Gives more details \(response code, authority, records, etc\)
+* `dig` is the more complete one
+  * ...
 
 ### nmap \(map network\)
 
