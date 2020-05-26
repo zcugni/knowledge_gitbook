@@ -8,7 +8,7 @@
 * [Recon](pen-test/recon.md)
 * [Get Shell](pen-test/get-shell.md)
 * [Privilege Escalation](pen-test/privilege-escalation.md)
-* [Types of vulnerabilities](pen-test/types-of-vulnerabilities/README.md)
+* [Vulnerabilities](pen-test/types-of-vulnerabilities/README.md)
   * [XXE and other XML vulnerabilities](pen-test/types-of-vulnerabilities/xxe-and-other-xml-vulnerabilities.md)
   * [XSS - Cross-Site Scripting](pen-test/types-of-vulnerabilities/xss.md)
   * [SQL Injection](pen-test/types-of-vulnerabilities/sql-injection.md)
@@ -17,7 +17,7 @@
   * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
 * [Misc Attack](pen-test/misc-attack.md)
 * [Reverse engineering](pen-test/reverse-code.md)
-* [Theory](pen-test/misc-theorie.md)
+* [Good Practices](pen-test/good-practices.md)
 
 ## Tools
 
