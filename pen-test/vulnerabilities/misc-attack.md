@@ -1,7 +1,5 @@
 ---
-description: >-
-  Disclaimer : Some of theses are duplicates of concept i better explained
-  elsewhere, i'll clean it one day
+description: 'Disclaimer : This isn''t clean, don''t use it for now'
 ---
 
 # Misc Attack

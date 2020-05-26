@@ -8,14 +8,14 @@
 * [Recon](pen-test/recon.md)
 * [Get Shell](pen-test/get-shell.md)
 * [Privilege Escalation](pen-test/privilege-escalation.md)
-* [Vulnerabilities](pen-test/types-of-vulnerabilities/README.md)
-  * [XXE and other XML vulnerabilities](pen-test/types-of-vulnerabilities/xxe-and-other-xml-vulnerabilities.md)
-  * [XSS - Cross-Site Scripting](pen-test/types-of-vulnerabilities/xss.md)
-  * [SQL Injection](pen-test/types-of-vulnerabilities/sql-injection.md)
-  * [CSRF - Cross-Site Request Forgery](pen-test/types-of-vulnerabilities/sop-cors-and-csrf.md)
-  * [RCE](pen-test/types-of-vulnerabilities/remote-code-execution.md)
-  * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
-* [Misc Attack](pen-test/misc-attack.md)
+* [Vulnerabilities](pen-test/vulnerabilities/README.md)
+  * [XXE and other XML vulnerabilities](pen-test/vulnerabilities/xml-xxe-vuln.md)
+  * [XSS - Cross-Site Scripting](pen-test/vulnerabilities/xss.md)
+  * [SQL Injection](pen-test/vulnerabilities/sqli.md)
+  * [CSRF - Cross-Site Request Forgery](pen-test/vulnerabilities/csrf.md)
+  * [RCE](pen-test/vulnerabilities/rce.md)
+  * [Broken Access Control & File Inclusion](pen-test/vulnerabilities/broken-access-control-and-file-inclusion.md)
+  * [Misc Attack](pen-test/vulnerabilities/misc-attack.md)
 * [Reverse engineering](pen-test/reverse-code.md)
 * [Good Practices](pen-test/good-practices.md)
 
@@ -26,6 +26,8 @@
   * [Nmap](tools/linux-bash-command/nmap.md)
   * [Find](tools/linux-bash-command/find.md)
   * [Grep](tools/linux-bash-command/grep.md)
+  * [SSH](tools/linux-bash-command/ssh.md)
+  * [Git Commands](tools/linux-bash-command/git-commands.md)
   * [tcpdump](tools/linux-bash-command/tcpdump.md)
 * [Pen test tools](tools/hack-tools/README.md)
   * [Burp Proxy](tools/hack-tools/burp-proxy.md)
@@ -50,6 +52,7 @@
   * [Fonction de coûts](theory/machine-learning/fonction-de-couts.md)
   * [Coursera](theory/machine-learning/coursera.md)
   * [Backward Elimination](theory/machine-learning/backward-elimination.md)
+* [Git Theory](theory/git.md)
 
 ## Networking & Web
 
@@ -84,9 +87,7 @@
 ## Oh hold
 
 * [To Do](oh-hold/misc.md)
-* [Git](oh-hold/git.md)
 * [MySQL](oh-hold/mysql.md)
-* [SSH](oh-hold/ssh.md)
 * [ElasticSearch](oh-hold/elasticsearch.md)
 * [Finger](oh-hold/finger.md)
 * [Redis](oh-hold/redis.md)

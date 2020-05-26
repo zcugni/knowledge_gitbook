@@ -5,14 +5,6 @@
 * J'ignore si l'abréviation RCE correspond à _Remote Code Execution_ ou _Remote Command Execution_, les deux étaient utilisés pour le même genre de failles dans le cours.
 * Possibilité d'exécuter des commandes de l'OS sur le serveur.
 
-## Workflow
-
-1. Discover on which language the server runs \(python, php, ruby, etc\), and if possible which version
-2. Try to break the input by inserting a `'` or an `"`
-3. Try to reconstruct it after the break with just simple text
-4. In function of the language, try to run a simple OS command in lieu of the dummy text
-5. Construct the final payload
-
 ## Language specifics to run commands
 
 * PHP

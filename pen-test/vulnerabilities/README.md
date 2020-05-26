@@ -1,7 +1,5 @@
 # Vulnerabilities
 
-
-
 ## Injection
 
 * Nearly all attacks are an injection of a form or another.
@@ -9,7 +7,7 @@
 * Often, a payload will contain comment characters to comment out the genuine part of the code \(therefore replacing it by the vicious one\)
 * Or the vicious part might close the original statement and add a new one afterwards
 
-## SSRF - Server Side Requestion Forgery
+## SSRF - Server Side Request Forgery
 
 * Make request in the name of the server, so with it's rights.
 
@@ -31,4 +29,8 @@
 * Certain dev sanitize aussi à la main les chaines, et cela peut souvent être bypass en doublant des éléments/les mélangeant de façon étrange
 * Si les sanitizer ne sont pas récursif, on peut aussi les bypass en fragmentant nos inputs.
 * Adding null byte `%00` to terminate a string earlier
+
+{% hint style="info" %}
+Add the stuff that's in xss & rce \(checks others too\)
+{% endhint %}
 
