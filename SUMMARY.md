@@ -12,7 +12,7 @@
   * [XXE and other XML vulnerabilities](pen-test/types-of-vulnerabilities/xxe-and-other-xml-vulnerabilities.md)
   * [XSS - Cross-Site Scripting](pen-test/types-of-vulnerabilities/xss.md)
   * [SQL Injection](pen-test/types-of-vulnerabilities/sql-injection.md)
-  * [SOP, CORS & CSRF](pen-test/types-of-vulnerabilities/sop-cors-and-csrf.md)
+  * [CSRF - Cross-Site Request Forgery](pen-test/types-of-vulnerabilities/sop-cors-and-csrf.md)
   * [RCE](pen-test/types-of-vulnerabilities/remote-code-execution.md)
   * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
 * [Misc Attack](pen-test/misc-attack.md)
@@ -36,11 +36,6 @@
 
 ## Theory
 
-* [Networking](theory/networking/README.md)
-  * [Modèle & Protocoles](theory/networking/modele.md)
-  * [Machines](theory/networking/machines.md)
-  * [DNS](theory/networking/dns.md)
-  * [URL & CO + URL Encoding](theory/networking/url-and-co-+-url-encoding.md)
 * [Linux / \*nix](theory/linux-nix.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
 * [Misc](theory/misc/README.md)
@@ -55,6 +50,17 @@
   * [Fonction de coûts](theory/machine-learning/fonction-de-couts.md)
   * [Coursera](theory/machine-learning/coursera.md)
   * [Backward Elimination](theory/machine-learning/backward-elimination.md)
+
+## Networking & Web
+
+* [Modèle & Protocoles](networking-and-web/modele/README.md)
+  * [Layer 1 - Physical](networking-and-web/modele/layer-1-physical.md)
+  * [Layer 2 - Datalink](networking-and-web/modele/layer-2-datalink.md)
+  * [Layer 3 - Network](networking-and-web/modele/layer-3-network.md)
+  * [Layer 4 - Transport](networking-and-web/modele/layer-4-transport.md)
+  * [Layer 5 - Application](networking-and-web/modele/layer-5-application.md)
+* [Machines](networking-and-web/machines.md)
+* [DNS](networking-and-web/dns.md)
 
 ## Languages
 

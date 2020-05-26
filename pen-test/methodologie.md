@@ -23,7 +23,7 @@ Exemple d'un déroulement :
 
 ## Nmap
 
-1. Do a quick nmap to get you started \(only most popular ports\)
+1. Do a quick [nmap](https://zcugni.gitbook.io/notes/tools/linux-bash-command/nmap) to get you started \(only most popular ports\)
 2. Once it's finished, and while you explore the first result, do a full nmap
 
 ## Web

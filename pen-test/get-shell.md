@@ -4,9 +4,8 @@ description: I'll add way to get shells as i'll use them
 
 # Get Shell
 
-## Explication
-
-Those lines are to use on the target, on the attacker we'll use `nc -lvpn <port>` to receive the connexion.
+* Those lines are to use on the target, on the attacker we'll use `nc -lvpn <port>` to receive the connection.
+* Check [pentestmonkey](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet) for more example
 
 ## PHP
 

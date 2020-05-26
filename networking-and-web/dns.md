@@ -11,7 +11,7 @@
 * Domain names are divided by zones \(each dot separate them\). All top level domains \(.com, .net, etc\) are contained in the _root zone_.
 * DNS is very hierarchical and zone inside other ones are called child zones.
 
-![](../../.gitbook/assets/dns.png)
+![](../.gitbook/assets/dns.png)
 
 ## Authoritative & Recursive DNS
 

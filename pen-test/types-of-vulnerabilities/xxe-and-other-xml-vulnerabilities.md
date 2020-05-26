@@ -89,12 +89,11 @@ By doing this kind of request we can DDOS
 <foo>&xxe;</foo>
 ```
 
-See also "A Billion Laugh" attack
-
 ### Ressources supplémentaires
 
 * [https://www.acunetix.com/blog/articles/band-xml-external-entity-oob-xxe/](https://www.acunetix.com/blog/articles/band-xml-external-entity-oob-xxe/) 
 * [https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/](https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/)
+* See also "A Billion Laugh" attack
 
 ## XPath Injection
 
@@ -104,16 +103,14 @@ Exemple :
 
 Cette requête récupère le compte correspondant à "gandalf" avec le mdp "!3c" `string(//user[username/text()=’gandalf’ and password/text()=’!c3’]/account/text())`
 
-En insérant ces valeurs :
-
-* Username: ‘ or ‘1’ = ‘1
-* Password: ‘ or ‘1’ = ‘1 
-
-Elle deviendrait cela :
+On peut s'authentifier en la transformant ainsi :
 
 `string(//user[username/text()=’’ or ‘1’ = ‘1’ and password/text()=’’ or ‘1’ = ‘1’]/account/text())`
 
-Nous permettant de nous authentifier systématiquement.
+En insérant ces valeurs :
+
+* Username: ‘ or ‘1’ = ‘1
+* Password: ‘ or ‘1’ = ‘1
 
 J'imagine que le même genre de chose est possible avec XQuery.
 
