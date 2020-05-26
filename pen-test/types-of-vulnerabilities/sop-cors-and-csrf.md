@@ -22,9 +22,6 @@ Par contre, si l’attaqueur trouve un moyen de le leak, c’est game over.
 
 ## Sources
 
-* MDN Web Docs
-  * [On SOP](%20https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript)
-  * [On CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
 * LiveOverflow's [video](https://www.youtube.com/watch?v=KaEj_qZgiKY)
 * PwnFunction's [video](https://www.youtube.com/watch?v=eWEgUcHPle0)
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)

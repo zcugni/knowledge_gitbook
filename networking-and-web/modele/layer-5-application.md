@@ -245,7 +245,7 @@ Ces headers sont présents dans la requête du client pour décrire sa futur req
 
 ## Sources
 
-En plus de celle données ici, :
+En plus de celle données [ici](https://zcugni.gitbook.io/notes/networking-and-web/modele#sources) :
 
 * MDN Web Docs
   * [On SOP](%20https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript)
