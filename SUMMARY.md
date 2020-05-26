@@ -17,6 +17,7 @@
   * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
 * [Misc Attack](pen-test/misc-attack.md)
 * [Reverse engineering](pen-test/reverse-code.md)
+* [Pen test](pen-test/misc-theorie.md)
 
 ## Tools
 
@@ -32,22 +33,22 @@
   * [Metasploit Framework](tools/hack-tools/metasploit-framework.md)
   * [Patator](tools/hack-tools/patator.md)
 * [Windows networking commands](tools/windows-networking-commands.md)
-* [Tor](tools/tor.md)
 
 ## Theory
 
-* [Terminologie / Misc](theory/terminologie-misc.md)
-* [Pen test related theory](theory/misc-theorie.md)
 * [Networking](theory/networking/README.md)
   * [Modèle & Protocoles](theory/networking/modele.md)
   * [Machines](theory/networking/machines.md)
   * [DNS](theory/networking/dns.md)
+  * [URL & CO + URL Encoding](theory/networking/url-and-co-+-url-encoding.md)
 * [Linux / \*nix](theory/linux-nix.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
-* [MCD / MLD](theory/mcd-mld.md)
-* [Memory Allocation \(linux, glibc\)](theory/memory-allocation-linux-glibc.md)
-* [URL & CO + URL Encoding](theory/url-and-co-+-url-encoding.md)
-* [Bitcoin](theory/bitcoin.md)
+* [Misc](theory/misc/README.md)
+  * [Terminologie](theory/misc/terminologie-misc.md)
+  * [Tor](theory/misc/tor.md)
+  * [Bitcoin](theory/misc/bitcoin.md)
+  * [Memory Allocation \(linux, glibc\)](theory/misc/memory-allocation-linux-glibc.md)
+  * [MCD / MLD](theory/misc/mcd-mld.md)
 * [Machine Learning](theory/machine-learning/README.md)
   * [Udemy Course Summary](theory/machine-learning/udemy.md)
   * [Fonction de minimisation](theory/machine-learning/fonction-de-minimisation.md)

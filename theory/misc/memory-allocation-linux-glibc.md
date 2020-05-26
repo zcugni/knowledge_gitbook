@@ -10,7 +10,7 @@ description: >-
 
 Quand on exécute un programme, celui-ci reçoit un “address space” propre de mémoire virtuelle continue, elle est structurée ainsi :
 
-![](../.gitbook/assets/structure_memory.png)
+![](../../.gitbook/assets/structure_memory.png)
 
 * environment : variables d’env et arguments de ligne de commande
 * stack : argument de fonction, valeur de retour, valeur automatique \(toutes les variables déclarée sans malloc\). Grandit vers le bas \(enfin, le haut si on parle d’adresses\)
@@ -51,7 +51,7 @@ Ce résumé se concentre sur le _glibc heap allocator_, aka heap allocations pou
 
 Les développeurs doivent suivre ces règles basiques s’ils veulent éviter des vulnérabilités simples.
 
-![](../.gitbook/assets/dev_rules.png)
+![](../../.gitbook/assets/dev_rules.png)
 
 En C++, on utilise plutôt `new` et `delete`, mais je suppose que la logique que j’explique par la suite vaut pour eux aussi.
 
@@ -75,7 +75,7 @@ Tandis que les nouvelles arenas et heap sont elles créées au moyen de `mmap` a
 
 Elles sont ensuite agrandies en utilisant `mprotect` pour changer ce flag à `PROT_READ` ou `PROT_WRITE`.
 
-![](../.gitbook/assets/subheap.png)
+![](../../.gitbook/assets/subheap.png)
 
 ## Heap Allocation Logic
 
@@ -93,7 +93,7 @@ Pour des requêtes d’allocations particulièrement grandes, le heap manager ut
 
 ### Structure des chunks alloués
 
-![](../.gitbook/assets/allocated_chunks.png)
+![](../../.gitbook/assets/allocated_chunks.png)
 
 Si j’ai bien compris, avoir le _prev\_size_ et le flag _P_ permet de plus rapidement/facilement fusionner les chunks quand il y a en des libres adjacents.
 
@@ -112,7 +112,7 @@ Ainsi, `free` commence d’abord par faire quelques checks \(ceux-ci peuvent êt
 
 ### Structure des chunks libérés
 
-![](../.gitbook/assets/freed_chunk.png)
+![](../../.gitbook/assets/freed_chunk.png)
 
 ### Processus de libération
 
@@ -135,25 +135,25 @@ Au lieu de simplement mettre tous les chunks libérés dans une liste chaînée,
 
 The small, large, and unsorted bins all live together in the same array in the heap manager’s source code.
 
-![](../.gitbook/assets/bins.png)
+![](../../.gitbook/assets/bins.png)
 
 #### Small Bins
 
 Pour toutes les tailles de 16 à 504 \(par multiple de 8\), il y a une small bin correspondante. Ainsi, les chunks sont automatiquement trié par taille et rapide à récupérer.
 
-![](../.gitbook/assets/small_bins.png)
+![](../../.gitbook/assets/small_bins.png)
 
 #### Large Bins
 
 Il n’est évidemment pas viable de faire cela pour chaque taille possible de chunk, donc les bins plus large représente elle des ranges de taille. Celles-ci ne sont pas les même tout le long du tableau d’ailleurs, mais s’espacent de plus en plus \(l’image sera plus parlante\) :
 
-![](../.gitbook/assets/large_bins.png)
+![](../../.gitbook/assets/large_bins.png)
 
 #### Unsorted Bin
 
 Il arrive souvent que plusieurs chunks soit libéré à la suite pour ensuite ensuite être directement alloué pour à peu prêt la même taille. Pour cette raison, avant de ranger les chunks dans leur bin respectives, il les fusionne avec leur voisin libre puis les range dans la “unsorted bin”. During malloc, each item on the unsorted bin is checked to see if it “fits” the request. If it does, malloc can use it immediately. If it does not, malloc then puts the chunk into its corresponding bin.
 
-![](../.gitbook/assets/unsorted_bins.png)
+![](../../.gitbook/assets/unsorted_bins.png)
 
 #### Fast Bin
 
@@ -169,7 +169,7 @@ L’inconvénient est que les chunks ne sont jamais libéré/nettoyé entièreme
 
 Cela arrive quand une allocation est demandée pour un chunk plus grand que ce qu’accepte les fast bin, quand on libère un chunk de plus de 64kb \(valeur heuristique\) ou quand `malloc_trim` ou `mallopt` sont appelés.
 
-![](../.gitbook/assets/fast_bin.png)
+![](../../.gitbook/assets/fast_bin.png)
 
 #### TCache \(per thread cache\) bin
 

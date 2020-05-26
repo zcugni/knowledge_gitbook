@@ -2,7 +2,7 @@
 description: To polish
 ---
 
-# Terminologie / Misc
+# Terminologie
 
 ## Binaire
 

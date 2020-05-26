@@ -22,11 +22,10 @@ description: >-
   * [https://dnsdumpster.com/](https://dnsdumpster.com/)
   * [https://github.com/aboul3la/Sublist3r](https://github.com/aboul3la/Sublist3r)
 
-## Map the network \(host discovery\)
+## Host discovery
 
 * Quand on nous donne une range d'ip, on veut identifier quels sont les host live parmi toutes celles dispo.
-* On peut faire du ping sweep \(pinger toutes les adresses de la range\) avec `fping`
-* Ou simplement utiliser `nmap` qui a plein d'options pensées pour
+* On peut faire du ping sweep \(pinger toutes les adresses de la range\) avec `fping` ou `nmap`
 
 ## Fingerprint the OS
 

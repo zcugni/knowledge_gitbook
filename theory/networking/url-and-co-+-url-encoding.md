@@ -9,7 +9,7 @@
 
 ## Anatomie d'une URL
 
-![](../.gitbook/assets/url_anatomy.png)
+![](../../.gitbook/assets/url_anatomy.png)
 
 * Le scheme peut aussi être `file://` auquel cas c'est le chemin vers une ressource locale
 * Il peut y avoir plusieurs paramètres dans la _Query String_ séparés par des `&`
