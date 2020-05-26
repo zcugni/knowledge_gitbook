@@ -1,6 +1,6 @@
 # CSRF - Cross-Site Request Forgery
 
-Pour ces 2 attaques, l’utilisateur doit passer sur  _notre_  site, ayant soit une image ou un formulaire vicieux \(expliqué plus bas\) qui le feront charger des informations du site victime avec les cookies actuels de l’utilisateur.
+Pour ces 2 attaques, l’utilisateur doit passer sur _notre_  site, ayant soit une image ou un formulaire vicieux \(expliqué plus bas\) qui le feront charger des informations du site victime avec les cookies actuels de l’utilisateur.
 
 ## Attaque avec GET
 

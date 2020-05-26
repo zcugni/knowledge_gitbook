@@ -18,7 +18,7 @@
 * PHP
   * `system("command")`
 * Python
-  * os.system\("command"\) and variants
+  * `os.system("command")` and variants
   * Do that inside an `str()`
   * If you need to import os.system, use this function in str\(\) : `__import__('os').system(...)`
 * Ruby

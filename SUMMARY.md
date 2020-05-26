@@ -17,7 +17,7 @@
   * [Broken Access Control & File Inclusion](pen-test/types-of-vulnerabilities/broken-access-control-and-file-inclusion.md)
 * [Misc Attack](pen-test/misc-attack.md)
 * [Reverse engineering](pen-test/reverse-code.md)
-* [Pen test](pen-test/misc-theorie.md)
+* [Theory](pen-test/misc-theorie.md)
 
 ## Tools
 

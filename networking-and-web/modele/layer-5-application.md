@@ -109,6 +109,12 @@ Content-Length: 48
 * When you logging \(for exemple\), your're only given a session id cookie, which is subsequently used to retrieve your info \(instead of having a cookie for each info\).
 * \(Session id can also be sent via GET parameters\)
 
+## Local Storage
+
+Aussi appelé _Web Storage_ ou _Offline Storage_ permet de stocker des données en pair de clé-valeur sur le client \(liées à un domaine en particulier, il suit la SOP\). La capacité de stockage est plus grande que celle des cookies et ces données-ci ne sont pas envoyées au serveur.
+
+Le _localStorage_ est persistant tandis que le _sessionStorage_ est vidé à la fermeture de la fenêtre. Les deux sont accessible en js \(via `setItem` et `getItem`, avec les risques que cela sous-entends.
+
 ## URL
 
 ### Terminologie

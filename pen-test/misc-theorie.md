@@ -1,74 +1,34 @@
-# Pen test
+# Theory
 
-## Parser Differentials
+## Injection
 
-De **nombreux** bugs viennent de différence de comportement entre des parsers pour une même string :
+* Nearly all attacks are an injection of a form or another.
+* The goal is to get a vicious string interpreted by whatever technology is used.
+* Often, a payload will contain comment characters to comment out the genuine part of the code \(therefore replacing it by the vicious one\)
+* Or the vicious part might close the original statement and add a new one afterwards
 
-* In client vs in server
-* In js context vs no js context \(browser vs template with dom purify for example. `noscript` would react differently in those two\). \(Obviously already solved, just an example\)
-* html parser \(because `<div>` context\) vs js parser \(because `<script>` context\)
-* etc..
+## SSRF - Server Side Requestion Forgery
 
-C’est notamment un problème récurrents dans les “urls parsing” \(même les librairies de base de python ne sont pas toujours d’accord sur l'interprétation par exemple\).
+* Make request in the name of the server, so with it's rights.
 
-C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
+## Types of attacks
 
-## Inband, Out-of-band & error based
-
-Certains genre d'attaque se retrouvent un peu partout :
-
-* Inband : Le résultat nous est directement renvoyé
-* Out-of-band/blind : On doit forcer l'app à nous fait parvenir le résultat autrement \(par exemple via une requête contenant les données vers notre serveur\)
-* Error based : On fait ressortir les données qu'on veut via les messages d'erreurs
+* **Inband** : Le résultat nous est directement renvoyé/affiché
+* **Out-of-band** : On doit forcer l'app a nous faire parvenir le résultat autrement \(par exemple via une requête vers notre server contenant les données\)
+* **Blind \(oracle\)** : Le résultat ne nous est pas directement retourné, mais l'application réagit différement en fonction de celui-ci. 
+  * Ca nous permet par exemple de trouver un mdp caractère par caratère. 
+  * Look for : 
+    * Difference in wording
+    * Difference in response status code
+    * Time-based difference
+* **Error based** : On fait ressortir les données qu'on veut via les messages d'erreurs
 
 ## Bypassing sanitizers
 
-1. Assez couramment, seul certains encodages sont vérifiés donc certains de ces cas pourraient par exemple passés :
-
-Pour `../` :
-
-* %2e%2e%2f 
-* %2e%2e/ 
-* ..%2f
-* ..%c0%af
-
-Pour `../` :
-
-* %2e%2e%5c
-* %2e%2e\
-* ..%5c
-* %252e%252e%255c
-* ..%255c
-* ..%c1%9c
-* Certain dev sanitize aussi à la main les chaines, et cela peut souvent être bypass en doublant des éléments/les mélangeant de façon étrange.
-
-Par exemple ces tests :
-
-```text
-filename = Request.QueryString(“file”); 
-Replace(filename, “/”,”\”);
-Replace(filename, “..\”,””);
-```
-
-Aurait cette vulnérabilité :
-
-```text
-file=....//....//boot.ini 
-file=....\\....\\boot.ini 
-file= ..\..\boot.ini
-```
-
-1. Si les sanitizer ne sont pas récursif, on peut aussi les bypass en fragmentant nos inputs :
-
-\[ajouter un example\]
-
-1. Adding null byte `%00` to terminate a string earlier
-
-## Local Storage
-
-Aussi appelé _Web Storage_ ou _Offline Storage_ permet de stocker des données en pair de clé-valeur sur le client \(liées à un domaine en particulier, il suit la SOP\). La capacité de stockage est plus grande que celle des cookies et ces données-ci ne sont pas envoyées au serveur.
-
-Le _localStorage_ est persistant tandis que le _sessionStorage_ est vidé à la fermeture de la fenêtre. Les deux sont accessible en js \(via `setItem` et `getItem`, avec les risques que cela sous-entends.
+* Try to unicode encode \(`%2e` for `/` for example\) or double unicode encode \(`%c0%af` for `/` for example\)
+* Certain dev sanitize aussi à la main les chaines, et cela peut souvent être bypass en doublant des éléments/les mélangeant de façon étrange
+* Si les sanitizer ne sont pas récursif, on peut aussi les bypass en fragmentant nos inputs.
+* Adding null byte `%00` to terminate a string earlier
 
 ## Logging good practice
 

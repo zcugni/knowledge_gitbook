@@ -38,9 +38,8 @@ L'input est directement inséré dans le DOM \(donc sans passer par le serveur\)
 
 #### Tips & Tricks
 
-Un tag `<script>alert();</script>` inséré via `inner.html` ne sera en fait pas executé. 
-
-Vaut mieux passer par un `<img src="test" onerror="alert(1337)" />`, ou encore plus simple : `<svg onload="alert(1337)">`
+* Un tag `<script>alert();</script>` inséré via `inner.html` ne sera en fait pas executé. 
+*  Vaut mieux passer par un `<img src="test" onerror="alert(1337)" />`, ou encore plus simple : `<svg onload="alert(1337)">`
 
 ### Polygots
 

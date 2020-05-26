@@ -190,6 +190,19 @@ On peut aussi prendre une string du genre et la transformer en objet avec `unser
 * Si le client reçoit des données depuis une vue json, en l'accédant via firefox, il va tenté de l'interprêter et la formatter, et son parseur eut buggé sur un payload alors qu'il fonctionne. **Utiliser burp pour analyser les réponses**
 * Si on dl un ficher dans le navigateur, firefox mettra comme date de dernière modification la date du jour, tandis que si on le dl avec wget, on récup la vraie
 
+## Parser Differentials
+
+De nombreux bugs viennent de différence de comportement entre des parsers pour une même string :
+
+* In client vs in server
+* In js context vs no js context \(browser vs template with dom purify for example. `noscript` would react differently in those two\). \(Obviously already solved, just an example\)
+* html parser \(because `<div>` context\) vs js parser \(because `<script>` context\)
+* etc..
+
+C’est notamment un problème récurrents dans les “urls parsing” \(même les librairies de base de python ne sont pas toujours d’accord sur l'interprétation par exemple\).
+
+C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
+
 ## Tips &/ Tricks
 
 * Keep in mind that even if you can't access an directory of a website \(ip/dev/ for example\), you might be able to access it's subdir/files \(ip/dev/backup for example\)

