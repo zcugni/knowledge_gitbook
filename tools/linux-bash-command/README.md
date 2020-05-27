@@ -36,9 +36,9 @@
 | `mkdir <dir>` | Create dir |
 | `mv <old> <new>` | Move file \(can rename\) |
 | `rm <file>` | Remove file |
-| `rm <path> -r` | Remove dir |
-| `head <file> -n x` | First x \(default 10\) lines of file |
-| `tail <file> -n x` | Last x \(default 10\) lines of file |
+| `rm -r <path>` | Remove dir |
+| `head <file> [-n <nb>]` | First nb \(default 10\) lines of file |
+| `tail <file> [-n <nb>]` | Last nb \(default 10\) lines of file |
 | `tail -f <file>` | Last 10 lines and keep following \(showing new content\) |
 
 ## View info / file
@@ -238,10 +238,10 @@ They're different on each distro
   * `host <ip> [dns_server]` Gives hostname back \(you can specify a dns server to use\)
   * `-v` Gives more details \(response code, authority, records, etc\)
 * `dig` is the more complete one
-  * `dig <hostname> @[dns_server]`
+  * `dig <hostname> [@dns_server]`
   * If no dns server is specified, dig will look into /etc/resolv.conf and if that doesn't work send the query to the local host
   *  `dig -x <ip>` Reverse look-up
-  * `dig axfr [zone] @[dns_server]`
+  * `dig axfr [zone] [@dns_server]`
     * Ask for a zone transfer
     * If the zone isn't specified it will use `.` aka root.
 
@@ -318,7 +318,7 @@ Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire s
 
 ### Base64
 
-* `base64 -d file` Decode
+* `base64 -d <file>` Decode
   * Si on ne veut pas le faire depuis un fichier on peut faire ainsi `echo "..." | base64 -d`
 
 ### Hex to bin
