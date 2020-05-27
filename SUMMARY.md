@@ -22,6 +22,7 @@
 ## Tools
 
 * [Linux / Bash Command](tools/linux-bash-command/README.md)
+  * [Sudo, su, sudoers, etc](tools/linux-bash-command/sudo-su-sudoers-etc.md)
   * [Tmux](tools/linux-bash-command/tmux.md)
   * [Nmap](tools/linux-bash-command/nmap.md)
   * [Find](tools/linux-bash-command/find.md)

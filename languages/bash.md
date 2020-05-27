@@ -2,11 +2,21 @@
 
 ## Terminologie
 
+### Bash, shell, terminal, etc
+
 Bash \(_Bourne-Again-Shell_\) est le shell, ou _command line interpreter_ pour l'os GNU. Il est compatible avec `sh` et intègre des fonctionnalités du _Korn Shell_ `ksh` et du _C Shell_ `csh`.
 
 Shell est un _macro processor that executes commands_. Un shell unix est à la fois un _command interpreter_ et un langage de programmation.
 
 > Terminal, shell & command line are often used interchangeably to indicate a text based system for navigating your OS. Command line is very windows centric terminology, terminal is very mac centric.
+
+### Interactive, login & pseudo shell
+
+**Interactive** shell are simply shells. We call them that for cmd that generate them. For exemple, sudo can either send a cmd to a shell and just give back the result, or return an interactive shell to use.
+
+**Login** shell are interactive shell that simulate the state you get at login. So it clears env var, read login files like `.profile`, etc
+
+**Pseudo**-shell \(or pseudo terminal ?\) are independent from the process/session that spawns them, so there's less security issue. The spawner act as a proxy \(i guess\). \(It's kind of like a sandbox ?\)
 
 ## Variable
 
