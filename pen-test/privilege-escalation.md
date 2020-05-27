@@ -10,16 +10,22 @@ It is still under development.
 
 ## Kernel exploits
 
-* Check kernel version with `cat /proc/version` & `uname -a`
-* He also gives tools to do that, go check \([https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)\)
+* Check kernel version with `cat /proc/version` & `uname -a` to see if it's vulnerable
+* He also gives some github with compiled exploit and tools that helps finding exploit, go check [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)
 
-## Sudo exploits
+## Sudo
+
+### Exploits
 
 Based on the vulnerable versions given in searchsploit, we can check if sudo is vulnerable with :
 
 ```bash
 sudo -V | grep "Sudo ver" | grep "1.6.8p9\|1.6.9p18\|1.8.14\|1.8.20\|1.6.9p21\|1.7.2p4\|1\.8\.[0123]$\|1\.3\.[^1]\|1\.4\.\d*\|1\.5\.\d*\|1\.6\.\d*\|1.5$\|1.6$"
 ```
+
+### Rights
+
+
 
 ## Software exploit
 
@@ -244,10 +250,8 @@ Then, when you call the suid binary, this function will be executed
 
 J'utilise évidemment les scripts, mais je voulais noter ici les éléments spécifiques à chercher pour résoudre certaines boxes.
 
-* Check la **date de la distribution** linux, si elle a ne serait-ce qu'un peu plus d'une année c'est probable qu'une exploit existe
 * Fichiers `.bak` sensible ?
 * **Ports** ouverts sur localhost ? \(Port forward si besoin\)
-* `sudo -l` Check les commandes \(root ?\) possible pour cet utilisateur. Si on les lances avec `sudo` ce qu'elles font sera exécuté par root
 * Un job **cron** lancé par un utilisateur aura ces droits, donc si on arrive à faire en sorte que ce qu'il appelle lance un shell, on en aura un avec des droits
 * Obtenir la liste de tout les fichiers own par root mais n'appartenant pas au groupe de root \(script custom\) : `find / -user root ! -group root -ls 2> /dev/null`
   * Si on arrive à devenir un des membres d'un de ces groupes et si un de ces fichiers nous permet de lancer une commande, celle-ci sera lancée en tant que root 
@@ -255,7 +259,6 @@ J'utilise évidemment les scripts, mais je voulais noter ici les éléments spé
   * On peut trouver un process appelé ainsi via pspy par exemple, qui regarde tous les process appelé au fil du temps et donne leur commandes au passage.
 * On peut lancer un shell depuis **vim** avec `:!/bin/bash`, donc si celui-ci est lancé par root, le shell créé le sera aussi
 * Si on y a accès, check `.bash_history` pour voir s'il ne leak pas des mdp ou des fichiers intéressants
-* Vérifier que les fichiers ayant un **SUID** ne puisse pas être hijack
 * Si on arrive sur un **serveur web,** chercher le fichier de config de la db et tenter de se co pour ensuite explorer les tables d'utilisateurs & co
 * Si un script change les droits d'un fichier, si on fait un **lien symbolique** entre ce nom de fichier et un fichier qui nous intéresse, cela changera aussi les droits du fichier qui nous intéresse.
 
