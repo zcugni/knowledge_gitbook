@@ -40,6 +40,7 @@
 ## Theory
 
 * [Linux / \*nix](theory/linux-nix.md)
+* [Systemd](theory/systemd.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
 * [Misc](theory/misc/README.md)
   * [Terminologie](theory/misc/terminologie-misc.md)

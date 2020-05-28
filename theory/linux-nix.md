@@ -72,7 +72,7 @@ In linux, everything is a file. File extensions doesn't have a meaning for linux
     * `w` Ecriture
     * `x` _E_xécution
 * Il y a aussi des permissions spéciales : le SUID & SGID
-  * **SUID** permet d'exécuter \(et de lire/écrire ?\) un fichier avec les droits de son créateur \(ou avec ceux de root ? je suis pas certaine\) au lieu de le faire avec les droits de l'utilisateur lançant la commande. Ca permet par exemple aux utilisateurs d'utiliser la commande `passwd` pour changer leur mdp alors qu'il leur faut pour cela écrire dans /etc/passwd \(réservé à root\). 
+  * **SUID** permet d'exécuter un fichier avec les droits de son créateur \(ou avec ceux de root ? je suis pas certaine\) au lieu de le faire avec les droits de l'utilisateur lançant la commande. Ca permet par exemple aux utilisateurs d'utiliser la commande `passwd` pour changer leur mdp alors qu'il leur faut pour cela écrire dans /etc/passwd \(réservé à root\). 
   * **SGID** fonctionne de la même façon, à part qu'il utilisera les droits du groupe. De plus, si celui-ci est appliqué à un dossier, tous ces fichiers appartiendront au même groupe.
   * Les deux sont représentés par un `s` au lieu du `x`\(soit de l'utilisateur, soit du groupe\). Si ceux-ci n'ont pas le droit d'exécution, ce sera à la place un `S` majuscule.
 * Les permissions ont aussi une notation sous forme de nombre :

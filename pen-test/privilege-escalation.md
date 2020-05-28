@@ -13,6 +13,24 @@ It is still under development.
 * Check kernel version with `cat /proc/version` & `uname -a` to see if it's vulnerable
 * He also gives some github with compiled exploit and tools that helps finding exploit, go check [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)
 
+## User
+
+Get some basic info about users
+
+```bash
+id # Me & my groups
+cat /etc/passwd | cut -d: -f1 # All users
+cat /etc/passwd | grep "sh$" # Users with console
+awk -F: '($3 == "0") {print}' /etc/passwd # Superusers
+w # Currently login users
+last | tail # Login history
+```
+
+### Big UID
+
+Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74),  [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
+**Exploit it** using: **`systemd-run -t /bin/bash`**
+
 ## Sudo
 
 ### Exploits
@@ -25,7 +43,25 @@ sudo -V | grep "Sudo ver" | grep "1.6.8p9\|1.6.9p18\|1.8.14\|1.8.20\|1.6.9p21\|1
 
 ### Rights
 
+Check what you can run with `sudo -l`. Depending on the cmd and the options, you might be able to do shell escapes. Check [gtfobins](https://gtfobins.github.io/).
 
+## SUID
+
+See if you can hijack them in any way \(i'll give example later\)
+
+```bash
+find / -perm -4000 2>/dev/null #Find all SUID binaries
+```
+
+## $PATH
+
+If you can write in some folder of $PATH, you may priv esc by creating a backdoor with the name of the cmd called. If it's called without an absolute path, or if your folder is before it's original one in the $PATH, your exe is going to be used.
+
+You can find called processes in cron or with _pspy_ for example.
+
+## Services
+
+Check if you can write to any `.services` files or overwrite binaries called by them. If so, you can use a backdoor whenever the service is started, restarted or stopped.
 
 ## Software exploit
 
@@ -35,40 +71,6 @@ rpm -qa #Centos
 ```
 
 If you have SSH access to the machine you could also use **openVAS** to check for outdated and vulnerable software installed inside the machine.
-
-## Users
-
-```bash
-id #Me?
-cat /etc/passwd | cut -d: -f1 #All users
-cat /etc/passwd | grep "sh$" #Users with console
-awk -F: '($3 == "0") {print}' /etc/passwd #Superusers
-w #Currently login users
-last | tail #Login history
-```
-
-### Big UID
-
-Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74),  [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
-**Exploit it** using: **`systemd-run -t /bin/bash`**
-
-## **Groups**
-
-Check the group thingy
-
-## $PATH
-
-If you find that you can **write inside some folder of the $PATH** you may be able to escalate privileges by **creating a backdoor inside the writable folder** with the name of some command that is going to be executed by a different user \(root ideally\) and that is **not loaded from a folder that is located previous** to your writable folder in $PATH.
-
-## Services
-
-### Writable _.service_ files
-
-Check if you can write any `.service` file, if you can, you **could modify it** so it **executes** your **backdoor when** the service is **started**, **restarted** or **stopped** \(maybe you will need to wait until the machine is rebooted\).
-
-### Writable service binaries
-
-Keep in mid that if you have **write permissions over binaries being executed by services**, you can change them for backdoors so when the services get re-executed the backdoors will be executed.
 
 ## Systemd
 
@@ -255,9 +257,6 @@ J'utilise évidemment les scripts, mais je voulais noter ici les éléments spé
 * Un job **cron** lancé par un utilisateur aura ces droits, donc si on arrive à faire en sorte que ce qu'il appelle lance un shell, on en aura un avec des droits
 * Obtenir la liste de tout les fichiers own par root mais n'appartenant pas au groupe de root \(script custom\) : `find / -user root ! -group root -ls 2> /dev/null`
   * Si on arrive à devenir un des membres d'un de ces groupes et si un de ces fichiers nous permet de lancer une commande, celle-ci sera lancée en tant que root 
-* Si on peut écrire dans un des répertoires spécifiés dans le **$PATH**, en particulier si on peut écrire dans le premier, il nous suffit de trouver un programme appelé sans chemin absolu pour le hijack. \(En créant un fichier du même nom dans le dit répertoire, attention : **le rendre exécutable**\).
-  * On peut trouver un process appelé ainsi via pspy par exemple, qui regarde tous les process appelé au fil du temps et donne leur commandes au passage.
-* On peut lancer un shell depuis **vim** avec `:!/bin/bash`, donc si celui-ci est lancé par root, le shell créé le sera aussi
 * Si on y a accès, check `.bash_history` pour voir s'il ne leak pas des mdp ou des fichiers intéressants
 * Si on arrive sur un **serveur web,** chercher le fichier de config de la db et tenter de se co pour ensuite explorer les tables d'utilisateurs & co
 * Si un script change les droits d'un fichier, si on fait un **lien symbolique** entre ce nom de fichier et un fichier qui nous intéresse, cela changera aussi les droits du fichier qui nous intéresse.
