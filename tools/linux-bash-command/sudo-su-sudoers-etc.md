@@ -1,7 +1,5 @@
 # Sudo, su, sudoers, etc
 
-## 
-
 ## Su
 
 * Lets you get an interactive shell or run a cmd as another user, given that you know it's password
