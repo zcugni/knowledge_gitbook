@@ -4,7 +4,7 @@
 
 I know linpeas & linenum are good priv esc scripts, but as i'm new to that, all this information kinds of overwhelm me. I prefer to do it step by step myself.
 
-So i'm going to describe what to check for step by step here. This is **heavily** taken from hacktricks \(linpeas author\), but i'm modifying some stuff and adding what i learned in hack the box.
+So i'm going to describe what to check for step by step here. This is **heavily** taken from [hacktricks](https://book.hacktricks.xyz/) \(linpeas's author\), but i'm modifying some stuff and adding what I learned in hack the box.
 
 It is still under development.
 

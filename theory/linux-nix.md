@@ -8,24 +8,35 @@ Read this book : [Unix Linux System Administration Handbook](https://www.amazon.
 
 ## File system
 
-In linux, everything is a file. File extensions doesn't have a meaning for linux, but are often parsed by other programs and help human gain context.
+* In linux, everything is a file. 
+* File extensions also don't matters but we use them because they're parsed by other programs and help human gain context.
 
-### Virtual files
+### Pseudo file system
 
-* These are special \(virtual ?\) one that have a special meaning
-* They are of size 0, because they are created the moment we read them
-* They give basic information and are usually parsed by other programs
+* These are special file systems which contain informations about the current running system.
+* They only exist in the RAM, have a size of 0, and don't persist after a reboot
+* They're often parsed by other programs to be shown in a more pleasing manner or act upon
 * Complete description available in `man hier` \(for hierarchy\)
 
 #### /proc/
 
-* Info on processes, each one has a directory with a bunch of files.
-* Common info files are :
-  * cmd : what cmd the process is currently running
-  * cmdline : what cmd spawned the process
-  * cwd \(directory\) : if you list it, show a list of where the process is operating from
-  * environ : env variable
-  * maps : memory mapping
+* `man proc`
+* `/proc/[pid]/` Each sub directory is a process \(identified by it's pid\), and contains information about itself such as :
+  * `/attr/` Security-related attributes
+  * `cmd` Which cmd the process is currently running
+  * `cmdline` Which cmd spawned the process
+  * `comm` Name of the process
+  * `cwd/` symbolic link to the working directory of the process
+  * `environ` State of the env variable when the process was spawned
+  * `exe` Symbolic link to executable
+  * `stat` Status of the process, used by `ps`
+  * `status` Same info but more human readable
+  * Diverse files on memory mapping, groups, file descriptors, threads, mount points, namespace, timers, etc
+* Varied info files, such as :
+  * `/proc/cmdline` Arguments given to the kernel at boot
+  * `/proc/filesystems` List all file systems supported by the kernel
+  * `/proc/version` Kernel's version
+* Diverse files about bus, devices, mounts, groups, cpu, network, kernel variable \(sys\), partitions, timers, etc 
 
 #### /etc/
 

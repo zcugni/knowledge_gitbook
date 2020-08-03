@@ -48,10 +48,10 @@
 
 ### Handshakes
 
-The _three-way handshale_ establish a connection between 2 hosts :
+The _three-way handshake_ establish a connection between 2 hosts :
 
 1. _SYN-SENT_. A _synchronization request_ \(SYN request\) is sent by the client. It comes from a random high-numbered port on the client to a specific port on the server. A random _seq_ number is chosen
-2. _SYN-ACK_. The server acknowledge the request \(the _ack_ number is the initial syn seq one + 1\) and respond with it's own SYN request \(with another randon seq number\). The request comes from the requested port on the server to the client source port. 
+2. _SYN-ACK_. The server acknowledge the request \(the _ack_ number is the initial syn seq one + 1\) and respond with it's own SYN request \(with another random seq number\). The request comes from the requested port on the server to the client source port. 
 3. _ACK_. The client acknowledge the server SYN request, the connection is established. \(Also by upping the seq number by 1\)
 
 ![](../../.gitbook/assets/ack.png)
