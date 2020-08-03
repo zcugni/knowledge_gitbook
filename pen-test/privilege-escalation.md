@@ -1,5 +1,9 @@
 # Privilege Escalation
 
+## To add
+
+hashes of passwd
+
 ## Disclaimer / Explanation
 
 I know linpeas & linenum are good priv esc scripts, but as i'm new to that, all this information kinds of overwhelm me. I prefer to do it step by step myself.
@@ -10,9 +14,9 @@ It is still under development.
 
 ## Kernel exploits
 
-* Check kernel version with `cat /proc/version` or `uname -a` to see if it's vulnerable
-* There's tools and compiled exploit available, check 
-  * [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)
+* Check the kernel version with `cat /proc/version` or `uname -a`
+* Use google and searchsploit to see if it's vulnerable
+* There's also tools and compiled exploit available at [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)
 
 ## User
 
@@ -32,9 +36,20 @@ last | tail # Login history
 Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74),  [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
 **Exploit it** using: **`systemd-run -t /bin/bash`**
 
+{% hint style="info" %}
+I'll detail it more if i stumble upon it one day
+{% endhint %}
+
 ## Groups
 
+{% hint style="info" %}
+Those attacks seem interesting but i'm waiting to see them in action to detail them more
+{% endhint %}
 
+* [pkexec](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#pe-method-1)
+* [disk group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#disk-group) \(Also in Hack the Box's [Falalel](https://www.youtube.com/watch?v=CUbWpteTfio)\)
+* [video group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#video-group)
+* I won't detail here vulns linked to docker or lxc groups, i'll write a page about them if i use them one day.
 
 ## Sudo
 
@@ -48,7 +63,10 @@ sudo -V | grep "Sudo ver" | grep "1.6.8p9\|1.6.9p18\|1.8.14\|1.8.20\|1.6.9p21\|1
 
 ### Rights
 
-Check what you can run with `sudo -l`. Depending on the cmd and the options, you might be able to do shell escapes. Check [gtfobins](https://gtfobins.github.io/).
+Check what you can run with `sudo -l` :
+
+* If permissions are to permissive, you may be able to priv esc just by using one of the authorized cmds
+* There's also a lot of shell escapes, check [gtfobins](https://gtfobins.github.io/)
 
 ## SUID
 
@@ -265,6 +283,8 @@ J'utilise évidemment les scripts, mais je voulais noter ici les éléments spé
 * Si on y a accès, check `.bash_history` pour voir s'il ne leak pas des mdp ou des fichiers intéressants
 * Si on arrive sur un **serveur web,** chercher le fichier de config de la db et tenter de se co pour ensuite explorer les tables d'utilisateurs & co
 * Si un script change les droits d'un fichier, si on fait un **lien symbolique** entre ce nom de fichier et un fichier qui nous intéresse, cela changera aussi les droits du fichier qui nous intéresse.
+
+
 
 ## Sources
 
