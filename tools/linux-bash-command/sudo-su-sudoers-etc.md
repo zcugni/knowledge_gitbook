@@ -1,9 +1,11 @@
 # Sudo, su, sudoers, etc
 
+## 
+
 ## Su
 
-* Let's you get an interactive shell or run a cmd as another user, given that you know it's password
-* Won't change the current directory, but will update $HOME & $SHELL to that of the user
+* Lets you get an interactive shell or run a cmd as another user, given that you know it's password
+* Won't change the current directory, but will update `$HOME` & `$SHELL` to that of the user
 * If no user is specified, _root_ is assumed
 * Without options : returns a _root interactive shell_
 * Utilisation :
@@ -65,19 +67,21 @@
 * File : `/etc/sudoers`
   * `/etc/sudo.conf` Specify which policy plugin to use \(by default this one\)
 * I won't describe the whole man page, there's lot of options so i'll just focus and the basic use
+* Le fichier contient d'abord une liste d'alias puis une liste de règles les utilisant.
 
 ### Alias
 
 * Format de base `<Alias_Type> <NAME> = <value1, value2, ...>`
 * On peut déclarer plusieurs alias du même type sur une seule ligne en les séparant par des `:` `<Alias_Type> <NAME1> = <value1, value2, ..> : <NAME2> = <value>`
-* _User\_Alias_ - List of users, can be given by :
-  * Username
-  * System groups \(prefixed by %\)
-  * Netgroups \(prefixed by +\)
-* _Runas\_Alias_ - List of users \(given by UID, prefixed by \#\)
-* _Host\_Alias_ - List of hostname, ip addresses, networks and netgroups \(prefixed by +\)
-  * If no netmask is specified, the netmask of the hosts ethernet interface\(s\) will be used
-* _Cmd\_Alias / Cmnd\_Alias_ - List of cmds & dir \(will include all it's file but no sub dir\)
+* Ces différents types existent :
+  * _User\_Alias_ - List of users, given by :
+    * Username
+    * System groups \(prefixed by %\)
+    * Netgroups \(prefixed by +\)
+  * _Runas\_Alias_ - List of users \(given by UID, prefixed by \#\)
+  * _Host\_Alias_ - List of hostname, ip addresses, networks and netgroups \(prefixed by +\)
+    * If no netmask is specified, the netmask of the hosts ethernet interface\(s\) will be used
+  * _Cmd\_Alias / Cmnd\_Alias_ - List of cmds & dir \(will include all it's file but no sub dir\)
 * Prefix an element with `!` to exclude it
 * The alias `ALL` is built-in and can be used for each type
 
@@ -108,12 +112,12 @@ Cmd_Alias ADMIN_CMDS = /usr/sbin/passwd, /usr/sbin/useradd, /usr/sbin/userdel, /
 * The user list describe who this rule applies to
 * The host list describe on which host it is applied
 * The operator list describe who the user must run as to use the cmd \(by using `-u` or `-g`\).
-  * Format `(user : group)` \(those can be list\)
+  * Format `(user : group)` \(those can be a list\)
   * Optional, by default must be run by root
   * If group is empty, no group can be specified
   * If user is empty, it must be run by the invoking user and any of the given groups
   * If both are empty, it can only be run by the invoking user
-* You can specify a runas by cmd `(user : group) cmd1, cmd2, (user : group) cmd3`
+* You can specify an operator by cmd `(user : group) cmd1, cmd2, (user : group) cmd3`
 * The tag list are options, the most useful are  :
   * `EXEC` / `NOEXEC` Authorize or prevent the user from launching a shell from another cmd \(like in vim, aka shell escape\)
   * `PASSWD` / `NOPASSWD` Will need to authenticate or not

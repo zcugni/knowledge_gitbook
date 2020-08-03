@@ -10,19 +10,20 @@ It is still under development.
 
 ## Kernel exploits
 
-* Check kernel version with `cat /proc/version` & `uname -a` to see if it's vulnerable
-* He also gives some github with compiled exploit and tools that helps finding exploit, go check [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)
+* Check kernel version with `cat /proc/version` or `uname -a` to see if it's vulnerable
+* There's tools and compiled exploit available, check 
+  * [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)
 
 ## User
 
 Get some basic info about users
 
 ```bash
-id # Me & my groups
+id || (whoami && groups) 2> /dev/null # Me & my groups
 cat /etc/passwd | cut -d: -f1 # All users
 cat /etc/passwd | grep "sh$" # Users with console
 awk -F: '($3 == "0") {print}' /etc/passwd # Superusers
-w # Currently login users
+w # Currently logged in users
 last | tail # Login history
 ```
 
@@ -30,6 +31,10 @@ last | tail # Login history
 
 Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74),  [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
 **Exploit it** using: **`systemd-run -t /bin/bash`**
+
+## Groups
+
+
 
 ## Sudo
 
@@ -70,7 +75,7 @@ dpkg -l #Debian
 rpm -qa #Centos
 ```
 
-If you have SSH access to the machine you could also use **openVAS** to check for outdated and vulnerable software installed inside the machine.
+If you have SSH access you can also use **openVAS** to check for vulnerable software.
 
 ## Systemd
 
@@ -92,7 +97,7 @@ top -n 1
 
 ### Process memory
 
-Some services of a server save **credentials in clear text inside the memory**. If you have access to the memory of a FTP service \(for example\) you could get the Heap and search inside of it the credentials.
+Some services of a server save **credentials in clear text inside the memory**. If you have access to the memory of an FTP service \(for example\) you could get the Heap and search inside it for credentials.
 
 ```bash
 gdb -p <FTP_PROCESS_PID>
@@ -105,7 +110,7 @@ strings /tmp/mem_ftp #User and password
 
 #### /proc/$pid/maps &  /proc/$pid/mem
 
-For a given process ID, **maps shows how memory is mapped within that processes'** virtual address space; it also shows the **permissions of each mapped region**. The **mem** psuedo file **exposes the processes memory itself**. From the **maps** file we know which **memory regions are readable** and their offsets. We use this information to **seek into the mem file and dump all readable regions** to a file.
+For a given process ID, **maps shows how memory is mapped within that processes's** virtual address space; it also shows the **permissions of each mapped region**. The **mem** pseudo file **exposes the processes memory itself**. From the **maps** file we know which **memory regions are readable** and their offsets. We use this information to **seek into the mem file and dump all readable regions** to a file.
 
 To dump a process memory you could use:
 

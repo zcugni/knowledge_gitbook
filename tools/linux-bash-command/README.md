@@ -415,6 +415,7 @@ I gotta research this mounted stuff in more details
 | `history` | Shows history of cmd |
 | `watch -n <sec_interval> <cmd>` | Execute une cmd à une intervalle donnée |
 | `htop` | Mix entre `w` & `top` avec une interface ncurse |
+| `uname` | Gives info on kernel version \(use `-a` for everything\) |
 
 * \*\(1\) With parameters, `set` can also set our unset predefined shell options.
 * \*\(2\) Une version plus détaillée d'`history` est dispo dans `/home/user/.bash_history` mais n'est lisible que par cet utilisateur. La commande semble plus laxiste dans les droits même si elle est moins précise dans le résultat.
