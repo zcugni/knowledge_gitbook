@@ -6,9 +6,7 @@
 * C'est LA commande de prédilection pour ce genre de chose
 * J'ai détaillé les options qui me paraissent les plus utiles, mais il y en a plus dans le man
 * Pour certaines qui me semblent trop pointues actuellement mais qui seront sûrement utile, je les ai uniquement mentionnées
-* My default command : `sudo nmap -v -p- -sC -sV -oN nmap_res.nmap ip`
-  * Add `-Pn` if you don't need host discovery
-  * Remove `-p-` if you first want to do a fast pass
+* My default command : `sudo nmap -v [-p-] [-Pn] -sC -sV -oN nmap_res.nmap <ip>`
 
 ## Définir les targets
 

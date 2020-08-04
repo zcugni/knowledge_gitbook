@@ -26,7 +26,7 @@ Ces commandes peuvent être utilisées constamment :
 | Commande | Effet |
 | :--- | :--- |
 | `search ...` | Montre les modules correspondant aux termes cherchés |
-| `use <module_path>` | Select module \(exploit\) |
+| `use <module_path | module_number>` | Select module \(exploit\) |
 | `back` | Un-select a module \(you don't need to, the other cmds can be used even if you have a selected module\). |
 | `info <module_path>` | Shows basic descriptions, options, etc of a module |
 |  `exit` & `quit` | Exit the console |

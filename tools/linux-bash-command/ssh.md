@@ -9,10 +9,11 @@
 
 ## Generate key pair
 
-* Générer une paire public-privé \(on the client\) : `ssh-keygen -t rsa` \(`-t rsa` est optionnel en vrai, c'est le setting par défaut\)
-  * C'est bien de les laisser dans le dossier par défaut `/home/USER/.ssh/`
+* Générer une pair public-privé \(sur le clien\) : `ssh-keygen [-t rsa]`
+  * \(`-t rsa` est le setting par défaut\)
+  * Créés dans`/home/USER/.ssh/`
   * La clé privée se nomme `id_rsa` et la publique `id_rsa.pub`
-  * Le passphrase permet de protéger la clé privé plus fortement, même obtenue elle ne sera pas utilisable. Mais il faut l'écrire à chaque co du coup
+  * Le passphrase permet de protéger la clé privé plus fortement, même obtenue elle ne sera pas utilisable. Mais il faut l'écrire à chaque fois du coup
 * Il faut ensuite ajouté sa publique key dans le fichier `/home/USER/.ssh/authorized_keys` du serveur
   * La méthode la plus simple pour le faire est d'utiliser cette commande `ssh-copy-id user@ip`
 

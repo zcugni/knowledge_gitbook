@@ -2,10 +2,9 @@
 
 ## Généralités
 
-* Je ne vais résumer ici que les infomations qui me semble régulièrement utiles, go voir le man si j'ai besoin de quelque chose de spécifique
-* Il y a par exemple toute une histoire de gestion des liens symboliques.
-* Structure d'une commande : `find <origin_path> <general options> <search specific options> <actions>`
-* If not specified, origin is `.`
+* Find est très complet, donc je ne vais détailler que l'essentiel ici
+* Structure d'une commande : `find <origin_path> [general_options] <search_options> [actions]`
+* Faut le coupler à `2>/dev/null` à cause de tout les Permission denied.
 
 ## General options
 

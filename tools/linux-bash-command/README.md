@@ -139,7 +139,7 @@ Les net-tools \(`netstat` & `ifconfig`\) ont été dépréciés car ils n'étaie
 * `nestat -r` : `ip route` \(iproute2 ? check that\)
 * `netstat -i` : `ip -s link`
 * `netstat -g` : `ip maddr`
-* `ifconfig` : `ip`
+* `ifconfig` : `ip a`
 
 ### Ports stat
 

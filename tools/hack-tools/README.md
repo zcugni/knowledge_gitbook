@@ -66,10 +66,9 @@ Not tested
 * Has 3 mode, to enumerates files/dir, dns or vhost
 * `apt-get install gobuster`
 * Quite easy so read help in doubt
-* My default command for dir : `gobuster dir -u ip/hostname -w wordlist_path -o result_file 2> error_file`
+* My default command for dir : `gobuster dir -u <ip | hostname> -w <wordlist_path> [-x php, txt] [-t 10] -o <result_file> 2> <error_file>` 
   * `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` is my default word list
-* Add extensions to each name with `-x php,txt` \(for example\)
-* Increase thread numbers with `-t <nb>`
+  * `-x` To add extension, `-t` for threads number
 * Keep in mind that even if you can't access a dir \(/dev for example\), you might be able to access it's subdir/files \(/dev/backup for example\)
 * Sometimes, a dir won't show up if you don't explicitly use a / after it \(aka `/cgi-bin` don't exist, but `/cgi-bin/` does\). Use  `-f` to add the slash and test for it. \(The majority of the time, it seems to work without, i'm not sure what the diff is\)
 * You can put it in a bash loop if you need to do it recursively \(directly in the cmd\):
