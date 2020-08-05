@@ -1,12 +1,18 @@
 # Systemd
 
+## Disclaimer
+
+Normalement j'avais lu une bonne partie des pages du man à ce sujet, mais je crois que je n'avais pas entièrement finaliser ce résumer et j'ai pas envie de me relancer dans ce monstre de systemd donc je vais me faire confiance.
+
+Tout n'est probablement pas exact mais ça donne une bonne idée du truc.
+
 ## Généralités
 
 * System & service manager lancé après le boot pour démarrer ce qui est nécessaire.
 * A remplacé `init`, basé sur `upstart` \(pour mac\)
   * En partie mal reçu car considéré comme ne suivant pas la philosophie de Linux \(il fait trop de choses\). Malgré tout, mtn répandu partout.
   * Il est en partit background compatible avec init et ces SysV script
-* Lancé soit au boot \(avec un PID de 1\), soit au login de chaque user
+* Lancé au boot \(avec un PID de 1\) et au login de chaque user \(pour leur propre instances des services\)
 * Rarement utilisé directement par les utilisateurs, il vaut mieux passé par `systemctl` pour cela
 * On boot, systemd read `default.target` which is usually a symbolic link to `graphical.target` or `multi-user.target`
 
@@ -33,28 +39,12 @@
 | Slice | `.slice` | Associated with Linux Control Group nodes, allowing resources to be restricted or assigned to any processes associated with the slice. The name reflects its hierarchical position within the `cgroup` tree. Units are placed in certain slices by default depending on their type. |
 | Scope | `.scope` | Created automatically from information received from bus interfaces. Used to manage sets of system processes that are created externally. |
 
-### Special  directories
-
-* `/lib/systemd/system/` Base unit written here on installation, don't edit them
-* `/run/systemd/system/` Files created at runtime
-* `/usr/lib/systemd/user/` Unit files installed by packages, don't edit them
-* `/etc/systemd/system/` Unit files that extend or overwrite a service
-  * To extend or overwrite only some of the directives of a file, create a `<unit_name>.d/` dir and write them into a `.conf` file.
-* The read order is as follows : `/usr/lib/systemd/user/ -> /run/systemd/system/ -> /etc/systemd/system/`
-* All symbolic link files \(to others units\) in `<unit_name>.wants/`& `<unit_name>.requires/` will be added to the Wants & Requires directives of it's unit.
-
-{% hint style="info" %}
-Check the template thingy
-{% endhint %}
-
-### Base config section
+### General Config
 
 * Options are space separated list \(except for Description\)
 * Format `Option=value_list`
 
 #### \[UNIT\]
-
-Main options are as follows :
 
 | Option | Description |
 | :--- | :--- |
@@ -70,7 +60,7 @@ Main options are as follows :
 
 #### \[INSTALL\]
 
-* Those are not used by systemd during runtime but by  the `enable` & `disable` commands of systemctl
+* Those are not used by systemd during runtime but by  the `enable` & `disable` commands of `systemctl`
 
 | Option | Description |
 | :--- | :--- |
@@ -79,25 +69,42 @@ Main options are as follows :
 | Also | Target units to install/uninstall when this one is |
 
 {% hint style="info" %}
-Read the uri & daemon man
+* Read the uri & daemon man
+* Check default instance
+{% endhint %}
 
-Check default instance
+### Special  directories
+
+* `/lib/systemd/system/` Base unit written here on installation, don't edit them
+* `/run/systemd/system/` Files created at runtime
+* `/usr/lib/systemd/user/` Unit files installed by packages, don't edit them
+* `/etc/systemd/system/` Unit files that extend or overwrite a service
+  * To extend or overwrite only some of the directives of a file, create a `<unit_name>.d/` dir and write them into a `.conf` file.
+* The read order is as follows : `/usr/lib/systemd/user/ -> /run/systemd/system/ -> /etc/systemd/system/`
+* All symbolic link files \(to others units\) in `<unit_name>.wants/`& `<unit_name>.requires/` will be added to the Wants & Requires directives of it's unit.
+
+{% hint style="info" %}
+Check the template thingy
 {% endhint %}
 
 ## Systemctl
 
-* Check & control the state of the "systemd" system and service manager
+* Control the state of systemd
+* Options :
+  * `list-units`
+  * `list-sockets`
+  * `list-timers`
+  * `start <unit>`
+  * `stop <unit>`
+  * `reload <unit>`
+  * `restart <unit>`
+  * `status <unit>`
+  * `show-environment` Shows the `$PATH` used by `systemd`
+  * ...
 
-| Options |
-| :--- |
-| `list-units` |
-| `list-sockets` |
-| `list-timers` |
-| `start ...` |
-| `stop ...` |
-| `reload ...` |
-| `restart ...` |
-| `status ...` |
+{% hint style="info" %}
+There's a lot more but quite straightforward. I'll add it when i'll use it
+{% endhint %}
 
 ## Sources
 

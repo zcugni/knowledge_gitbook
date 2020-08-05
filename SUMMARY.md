@@ -39,8 +39,9 @@
 
 ## Theory
 
-* [Linux / \*nix](theory/linux-nix.md)
-* [Systemd](theory/systemd.md)
+* [Linux / \*nix](theory/linux-nix/README.md)
+  * [File system](theory/linux-nix/file-system.md)
+  * [Systemd](theory/linux-nix/systemd.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
 * [Misc](theory/misc/README.md)
   * [Terminologie](theory/misc/terminologie-misc.md)
