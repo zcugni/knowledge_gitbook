@@ -18,7 +18,7 @@ It is still under development.
 * Use google and searchsploit to see if it's vulnerable
 * There's also tools and compiled exploit available at [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#kernel-exploits](https://book.hacktricks.xyz/linux-unix/privilege-escalation#kernel-exploits)
 
-## User
+## Gain info on user
 
 Get some basic info about users
 
@@ -39,17 +39,6 @@ Some Linux versions were affected by a bug that allow users with **UID &gt; INT\
 {% hint style="info" %}
 I'll detail it more if i stumble upon it one day
 {% endhint %}
-
-## Groups
-
-{% hint style="info" %}
-Those attacks seem interesting but i'm waiting to see them in action to detail them more
-{% endhint %}
-
-* [pkexec](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#pe-method-1)
-* [disk group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#disk-group) \(Also in Hack the Box's [Falalel](https://www.youtube.com/watch?v=CUbWpteTfio)\)
-* [video group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#video-group)
-* I won't detail here vulns linked to docker or lxc groups, i'll write a page about them if i use them one day.
 
 ## Sudo
 
@@ -76,34 +65,36 @@ See if you can hijack them in any way \(i'll give example later\)
 find / -perm -4000 2>/dev/null #Find all SUID binaries
 ```
 
-## $PATH
+## Exploit groups
 
-If you can write in some folder referenced by `$PATH`, you can create a backdoor by writing a file named like the binary.
+{% hint style="info" %}
+Those attacks seem interesting but i'm waiting to see them in action to detail them more
+{% endhint %}
 
-If the binary is called without an absolute path, or if your folder is before it's original one in the `$PATH`, yours is going to be used.
+* [pkexec](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#pe-method-1)
+* [disk group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#disk-group) \(Also in Hack the Box's [Falalel](https://www.youtube.com/watch?v=CUbWpteTfio)\)
+* [video group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#video-group)
+* I won't detail here vulns linked to docker or lxc groups, i'll write a page about them if i use them one day.
+
+{% hint style="info" %}
+Ajouter la partie de hack the box, ou un groupe à plus de droits que nous donc on commence par l'obtenir.
+{% endhint %}
+
+## Hijack $PATH
+
+If you can write in some folder referenced by `$PATH`, you can create a backdoor by writing a file named like a called binary. If it's called without an absolute path, or if your folder is before it's original one in the `$PATH`, yours is going to be used.
 
 You can find called processes in `cron` or with [pspy](https://zcugni.gitbook.io/notes/tools/hack-tools#process-analysis) for example.
 
-## Services
+### Systemd
 
-Check if you can write to any `.services` files or overwrite binaries called by them. If so, you can use a backdoor whenever the service is started, restarted or stopped.
+Les fichiers `.service` exécutent des commandes, tandis que les `.timer` exécutent des services et les `.socket` réagissent aux connexions. On peut donc utiliser les 3 pour créer une backdoor si comme pour `$PATH` on peut hijack un chemin.
 
-## Software exploit
+## Dbus
 
-```bash
-dpkg -l #Debian
-rpm -qa #Centos
-```
-
-If you have SSH access you can also use **openVAS** to check for vulnerable software.
-
-## Systemd
-
-Check the systemd thingy
-
-## Sockets
-
-Check the socket thingy
+{% hint style="info" %}
+Read [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#d-bus](https://book.hacktricks.xyz/linux-unix/privilege-escalation#d-bus)
+{% endhint %}
 
 ## Processes
 
@@ -272,6 +263,15 @@ export -f /usr/sbin/service
 ```
 
 Then, when you call the suid binary, this function will be executed
+
+## Software exploit
+
+```bash
+dpkg -l #Debian
+rpm -qa #Centos
+```
+
+If you have SSH access you can also use **openVAS** to check for vulnerable software.
 
 ## Hack the box
 

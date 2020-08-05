@@ -2,9 +2,22 @@
 
 ## Disclaimer
 
-Normalement j'avais lu une bonne partie des pages du man à ce sujet, mais je crois que je n'avais pas entièrement finaliser ce résumer et j'ai pas envie de me relancer dans ce monstre de systemd donc je vais me faire confiance.
+Je n'arrive pas à trouver toutes les informations dans la documentation, donc certaines choses ne sont pas très claire.
 
-Tout n'est probablement pas exact mais ça donne une bonne idée du truc.
+Par exemple, dans un de mes fichiers `.mount` il est écrit cela :
+
+```text
+[Mount]
+Type=admin
+# Add a dummy argument after pkexec, or '/bin/sh -c' will eat the first argument in '$@'
+Exec=/bin/sh -c 'pkexec /usr/libexec/gvfsd-admin "$@" --address $DBUS_SESSION_BUS_ADDRESS' gvfsd-admin
+AutoMount=false
+DBusName=org.gtk.vfs.mountpoint_admin
+MountPerClient=true
+
+```
+
+Mais aucune trace de `DBusName` et `MountPerClient`, même dans `man systemd.mount`, `man systemd.exec, man systemd.kill` et `man systemd.unit`..
 
 ## Généralités
 
@@ -99,7 +112,6 @@ Check the template thingy
   * `reload <unit>`
   * `restart <unit>`
   * `status <unit>`
-  * `show-environment` Shows the `$PATH` used by `systemd`
   * ...
 
 {% hint style="info" %}
