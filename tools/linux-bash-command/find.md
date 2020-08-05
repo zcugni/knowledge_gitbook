@@ -24,7 +24,7 @@
 | `-empty` | File or directory is empty |
 | `-executable` / `-readable` / `-writable` | Files with these permissions for the current user. |
 | `-group <name>` / `-user <name>` |  |
-| `-name <pattern>` / `-iname <pattern>` | Files which name matches the pattern, iname is case-insensitive |
+| `-name <"pattern">` / `-iname <"pattern">` | Files which name matches the pattern, iname is case-insensitive |
 | `-path <pattern>` / `-ipath <pattern>` | Files which path matches the pattern, ipath is case-insensitive \(2\) |
 | `-regex <regex_pattern>` |  |
 

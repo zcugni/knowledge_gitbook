@@ -78,9 +78,11 @@ find / -perm -4000 2>/dev/null #Find all SUID binaries
 
 ## $PATH
 
-If you can write in some folder of $PATH, you may priv esc by creating a backdoor with the name of the cmd called. If it's called without an absolute path, or if your folder is before it's original one in the $PATH, your exe is going to be used.
+If you can write in some folder referenced by `$PATH`, you can create a backdoor by writing a file named like the binary.
 
-You can find called processes in cron or with _pspy_ for example.
+If the binary is called without an absolute path, or if your folder is before it's original one in the `$PATH`, yours is going to be used.
+
+You can find called processes in `cron` or with [pspy](https://zcugni.gitbook.io/notes/tools/hack-tools#process-analysis) for example.
 
 ## Services
 

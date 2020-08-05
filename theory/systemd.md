@@ -8,30 +8,21 @@
   * Il est en partit background compatible avec init et ces SysV script
 * Lancé soit au boot \(avec un PID de 1\), soit au login de chaque user
 * Rarement utilisé directement par les utilisateurs, il vaut mieux passé par `systemctl` pour cela
-
-
-
-
-
-* On boot, systemd read `default.target` which is usually a symlink to `graphical.target` or `multi-user.target`
-* Process spawned by systemd are placed under control groups \(cgroups\) of the name of the unit 
-
-{% hint style="info" %}
-Check what cgroups are
-{% endhint %}
+* On boot, systemd read `default.target` which is usually a symbolic link to `graphical.target` or `multi-user.target`
 
 ## Units
 
 * Systemd permet de gérer différentes entités appelées des _Unit_. Il y a en a 11
-* Leur configuration est écrite dans des fichiers, avec des sections communes à toutes et des sections réservés à certains types
+* Leur configuration est écrite dans des fichiers, avec des sections communes à toutes et des sections réservées à certains types
 * Elles peuvent aussi être générées par des scripts
+* Process spawned by systemd are placed under control groups \(cgroups\) of the name of the unit 
 
 ### Types
 
 | Type | Extension | Description |
 | :--- | :--- | :--- |
 | Service | `.service` | Describe how to manage a service |
-| Socket | `.socket` | Describes a network/IPC socket, or a FIFO buffer that `systemd` uses for socket-based activation. Always has an associated `.service` file that will be started when activity is seen on the socket. |
+| Socket | `.socket` | Describes a network/IPC socket or a FIFO buffer that `systemd` uses for socket-based activation. Always has an associated `.service` file that will be started when activity is seen on the socket. |
 | Target | `.target` | Provides synchronization points for other units when booting up or changing states. Can be used to bring the system to a new state. Other units specify their relation to targets to become tied to the target’s operations. |
 | Device | `.device` | Describe a device that needs systemd \(not all of them do\) |
 | Mount | `.mount` | Control mount points. Named after the mount path \(with - instead of /\). Entries within `/etc/fstab` can have units created automatically. |
@@ -42,17 +33,15 @@ Check what cgroups are
 | Slice | `.slice` | Associated with Linux Control Group nodes, allowing resources to be restricted or assigned to any processes associated with the slice. The name reflects its hierarchical position within the `cgroup` tree. Units are placed in certain slices by default depending on their type. |
 | Scope | `.scope` | Created automatically from information received from bus interfaces. Used to manage sets of system processes that are created externally. |
 
-### Files &  dir
+### Special  directories
 
-* Systemd reads files from different directories
-* All symlink files \(to others units\) in `.wants/`& `.requires/` \(appended to the unit name\) will be added to it's Wants & Requires directives
-* The base unit files are written in  `/lib/systemd/system` when installed, don't edit them
-  * Overwrite them by creating files with the same name in `/etc/systemd/system`
-  * To extend or overwrite only some of the directives of a unit file, you need to create a `.d` directory of the same name are write them into a `.conf` file
-* Files created at runtime are written into `/run/systemd/system`, which is read after /lib/systemd/system but before /etc/systemd/system
-* The `/usr/lib/systemd/user/` directory is the default location where unit files are installed by packages. Unit files in the default directory should not be altered.
-* The `/run/systemd/system/` directory is the runtime location for unit files.
-* The `/etc/systemd/system/` directory stores unit files that extend a service. This directory will take precedence over unit files located anywhere else in the system.
+* `/lib/systemd/system/` Base unit written here on installation, don't edit them
+* `/run/systemd/system/` Files created at runtime
+* `/usr/lib/systemd/user/` Unit files installed by packages, don't edit them
+* `/etc/systemd/system/` Unit files that extend or overwrite a service
+  * To extend or overwrite only some of the directives of a file, create a `<unit_name>.d/` dir and write them into a `.conf` file.
+* The read order is as follows : `/usr/lib/systemd/user/ -> /run/systemd/system/ -> /etc/systemd/system/`
+* All symbolic link files \(to others units\) in `<unit_name>.wants/`& `<unit_name>.requires/` will be added to the Wants & Requires directives of it's unit.
 
 {% hint style="info" %}
 Check the template thingy
@@ -61,7 +50,7 @@ Check the template thingy
 ### Base config section
 
 * Options are space separated list \(except for Description\)
-* Format `Option=value list`
+* Format `Option=value_list`
 
 #### \[UNIT\]
 
@@ -77,7 +66,7 @@ Main options are as follows :
 | Conflicts | Can't run simultaneously to target units, the others will be stopped |
 | Before/After | Target units must be started before or after another one. They'll also be stopped in the opposing order. If these aren't set, they will be started/stopped in parallel. If one is started and the other stopped, the shutdown is always done first. |
 
-* There's also condition that you can specify that will skip the launch of a unit without putting it in a fail state. These let's you start a unit depending of the kernel/runtime environment, etc. but i won't describe them in details
+* There's also conditions that you can specify that will skip the launch of a unit without putting it in a fail state. These let's you start a unit depending of the kernel/runtime environment, etc. but i won't describe them in details
 
 #### \[INSTALL\]
 
@@ -85,30 +74,30 @@ Main options are as follows :
 
 | Option | Description |
 | :--- | :--- |
-| Alias | Symlink will be created from those names to this unit. Not supported by mount, slice, swap, and automount units |
-| WantedBy / RequiredBy | Adds a symlink to this unit in the .wants/ and .requires/ directory of the target units |
+| Alias | Symbolic links will be created from those names to this unit. Not supported by mount, slice, swap, and automount units |
+| WantedBy / RequiredBy | Adds a symbolic link to this unit in the .wants/ and .requires/ directory of the target units |
 | Also | Target units to install/uninstall when this one is |
-
-Check default instance
 
 {% hint style="info" %}
 Read the uri & daemon man
+
+Check default instance
 {% endhint %}
 
 ## Systemctl
 
 * Check & control the state of the "systemd" system and service manager
 
-| Options | Description |
-| :--- | :--- |
-| `list-units` |  |
-| `list-sockets` |  |
-| `list-timers` |  |
-| `start ...` |  |
-| `stop ...` |  |
-| `reload ...` |  |
-| `restart ...` |  |
-| `status ...` |  |
+| Options |
+| :--- |
+| `list-units` |
+| `list-sockets` |
+| `list-timers` |
+| `start ...` |
+| `stop ...` |
+| `reload ...` |
+| `restart ...` |
+| `status ...` |
 
 ## Sources
 

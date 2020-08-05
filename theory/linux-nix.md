@@ -105,35 +105,30 @@ This is why you should always use the full path to the executable, because if so
   * zsh osef aussi de .profile, mais pour avoir un setup plus globale, j'ai mis la règle dans .profile et j'ai  `source $HOME/.profile` dans `.zshrc`
   * Théoriquement, dans `/etc/profile` ça devrait concerné tout le monde, mais pour moi ça marchait pas
   * De même pour `/etc/login.defs`, peut-être que ça affectait effectivement la variable mais que celle-ci était ensuite override par les clauses des fichiers de zsh & co
-* Pour le modifier juste pour cette session, utilisé `export PATH=$PATH:new_path`
-
-Or use this command :
-
-* `export PATH=$PATH:new_path` &lt;- ne marche que pour la session courante
+* Pour le modifier juste pour cette session, utiliser`export PATH=$PATH:new_path`
 
 ## Process
 
-* Any thing running
-* Each process has an address space
-* Each process has an id \(_PID_\) 
-* First process : à l'époque `init`, maintenant `systemd` \(to check\)
-* Chaque process à un parent, quand celui-ci meurt, le 1er pest attribué en tant que parent
-* `uid` : quel utilisateur own le process
-* `euid` : permet de donner au process des droits différents de ceux de l'utilisateur l'ayant généré
-* "niceness" : Determines it's priority in the cpu/ressource usage \(the nicer it is, the less it's gonna use it\)
+* Anything running
+* Each process has an address space and an id \(_PID_\) 
+* First process : before `init`, now [`systemd`](https://zcugni.gitbook.io/notes/theory/systemd)
+* Each process has a parent. If it dies, the previous one is attributed as parent
+* _Uid_ : Who owns the process
+* _Euid_ : Lets you give other permissions than the ones of the owner to the process.
+* "Niceness" : Determines it's priority in the cpu/ressource usage \(the nicer it is, the less it's gonna use it\)
 
 ### Signals
 
-* Signals can be send \(to processes\) by the kernel or other processes
-* Terminate tells the process to terminate, kill just does it directly.
-* Les process peuvent décider de bloquer ou d'ignored des signaux, mis à part `SIGKILL` et `SIGSTOP`
+* Signals can be send to processes by the kernel or other processes
+* "Terminate" ask the process to terminate itself, "kill" just does it directly.
+* Processes can decide to block and ignore signals, except for `SIGKILL` & `SIGSTOP`
 
-### Etat
+### State
 
-* Runnable : eligible to be schedule for cpu time
-* Sleeping : waiting for something
-* Zombie state : finished doing what it should and waiting to give back the info and be killed
-* Stopped : was doing something but `SIGSTOP` received and waiting for `SIGCON`
+* Runnable : Eligible to be schedule for cpu time
+* Sleeping : Waiting for something
+* Zombie state : Finished doing what it should and waiting to give back the info and be killed
+* Stopped : Was doing something but `SIGSTOP` received and waiting for `SIGCON`
 
 ## Password
 
@@ -148,7 +143,7 @@ Or use this command :
 * Field separated by colons
 * 7 fields :
   * Username
-  * Password present : an x indicate that a password hash is written in /etc/shadow \(don't know if there's always an x\)
+  * Password present : an x indicate that a password hash is written in /etc/shadow
   * UID \(User ID\)
   * GID \(Group ID\)
   * Comment field
@@ -160,9 +155,9 @@ Or use this command :
 
 * Stores password hash
 * Only readable & writable by root
-* One entry per user listed in /etc/passwd
+* One entry per user listed in `/etc/passwd`
 * Fields separated by colons
-* x fields :
+* 8 fields :
   * Username
   * Password hash, format is usually : `$id$salt$hashed`. The id represent the hash algorithm :
     * 1 : MD5
@@ -170,9 +165,9 @@ Or use this command :
     * 2y : Blowfish
     * 5 : SHA-256
     * 6 : SHA-512
-  * Last change : days since Jan 1, 1970 that password was last changed
-  * Minimum days between password change
-  * Maximum days between password change
+  * Last change : days since Jan 1, 1970 since the password was last changed
+  * Min days between password change
+  * Max days between password change
   * How many days in advance should the user be warn of expiration
   * Number of days after expiration to disable account
   * Date of expiration \(number of days since Jan 1, 1970\)
@@ -187,7 +182,7 @@ Or use this command :
 
 **Format** 
 
-* min hour day\_of\_month month\_of\_year week\_day cmd
+* `<min> <hour> <day_of_month> <month_of_year> <week_day> <cmd>`
 * Jobs written in the system crontab have an extra field before the cmd for the user id
 * Instead of time, you can also specify "boot" to have the cmd run at boot
 
