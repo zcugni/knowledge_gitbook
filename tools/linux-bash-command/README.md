@@ -122,6 +122,31 @@ Change file owner
 
 * \*\(1\) Par défaut ceux utilisant le plus de puissance en premier
 
+### PS
+
+* Display information on active process
+* Il accepte plusieurs style de paramètre :
+  * Unix \(par ex `-a`\)
+  * BSD \(sans \`-\` : `a`\)
+  * Les long \(`--a`\)
+  * Du coup y'a des options redondantes entre chacun
+* By default, ps select all processes with the same EUID as the current user and associated with the same terminal as the invoker.
+
+| Option | Effect |
+| :--- | :--- |
+| `a` | Lift the BSD "only yourself" restriction |
+| `-A`/`-e` | Select all processes |
+| `-N ..` | Not ... |
+| `x` | Lift the BSD "must have a terminal" restriction |
+| `T` | Select all processes associated with this terminal |
+| `r` | Only running processes |
+| `-p <pid_list>` / `p <pid_list>` | Select by PID |
+| `-c <cmd_list>` | Select by cmd |
+| `-t <terminal_list>` / `t <terminal_list>` | Select by terminal |
+| `-u <euid_list>` / `U <euid_list>` | Select by EUID |
+| `u` | Display in user-oriented format |
+| `-f` | Display in full format listing |
+
 ## Alias
 
 * `alias name="cmd -param"`

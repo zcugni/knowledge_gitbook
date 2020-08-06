@@ -84,27 +84,20 @@ Ajouter la partie de hack the box, ou un groupe à plus de droits que nous donc 
 
 If you can write in some folder referenced by `$PATH`, you can create a backdoor by writing a file named like a called binary. If it's called without an absolute path, or if your folder is before it's original one in the `$PATH`, yours is going to be used.
 
-You can find called processes in `cron` or with [pspy](https://zcugni.gitbook.io/notes/tools/hack-tools#process-analysis) for example.
-
 ### Systemd
 
 Les fichiers `.service` exécutent des commandes, tandis que les `.timer` exécutent des services et les `.socket` réagissent aux connexions. On peut donc utiliser les 3 pour créer une backdoor si comme pour `$PATH` on peut hijack un chemin.
 
-## Dbus
-
-{% hint style="info" %}
-Read [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#d-bus](https://book.hacktricks.xyz/linux-unix/privilege-escalation#d-bus)
-{% endhint %}
-
 ## Processes
 
-Take a look to what processes are being executed and check if any process has more privileges that it should \(maybe a tomcat being executed by root?\)
+Check which process are running and if they have more rights than they should.
 
 ```bash
 ps aux
-ps -ef
-top -n 1
+top # Will update continuously
 ```
+
+There's also tools like [pspy](https://github.com/DominicBreuker/pspy.git).
 
 ### Process memory
 
@@ -119,14 +112,11 @@ gdb -p <FTP_PROCESS_PID>
 strings /tmp/mem_ftp #User and password
 ```
 
-#### /proc/$pid/maps &  /proc/$pid/mem
+## Dbus
 
-For a given process ID, **maps shows how memory is mapped within that processes's** virtual address space; it also shows the **permissions of each mapped region**. The **mem** pseudo file **exposes the processes memory itself**. From the **maps** file we know which **memory regions are readable** and their offsets. We use this information to **seek into the mem file and dump all readable regions** to a file.
-
-To dump a process memory you could use:
-
-* [https://github.com/hajzer/bash-memory-dump](https://github.com/hajzer/bash-memory-dump) \(root is required\)
-* Script A.5 from [https://www.delaat.net/rp/2016-2017/p97/report.pdf](https://www.delaat.net/rp/2016-2017/p97/report.pdf) \(root is required\)
+{% hint style="info" %}
+Read [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#d-bus](https://book.hacktricks.xyz/linux-unix/privilege-escalation#d-bus)
+{% endhint %}
 
 ## Scheduled jobs
 
