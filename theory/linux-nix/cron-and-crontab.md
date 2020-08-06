@@ -1,7 +1,5 @@
 # Cron & Crontab
 
-
-
 ## Cron & Crontab
 
 * Lets you plan cmd execution

