@@ -62,7 +62,7 @@
 | /usr/ |  |
 | /var/ | Various, contains /var/log |
 
-### File description & Permission
+## File description & Permission
 
 * `ls -l` les représente ainsi : `-rw-r--r--`
   * Le premier char nous indique le type

