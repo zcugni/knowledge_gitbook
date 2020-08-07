@@ -150,7 +150,7 @@ If you have SSH access you can also use **openVAS** to check for vulnerable soft
 
 ## Open Shell Session
 
-Check if there's any interesting  tmux or screen session that you can connect to.
+Check if there's any interesting  [tmux](https://app.gitbook.com/@zcugni/s/notes/~/drafts/-ME8c67PWhoFo8pMESCD/tools/linux-bash-command/tmux) or [screen](https://zcugni.gitbook.io/notes/tools/linux-bash-command#screen-multi-plexer) session that you can connect to.
 
 ## Hack the box
 
