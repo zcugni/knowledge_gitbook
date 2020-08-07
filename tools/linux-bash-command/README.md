@@ -445,9 +445,13 @@ I gotta research this mounted stuff in more details
 * \*\(1\) With parameters, `set` can also set our unset predefined shell options.
 * \*\(2\) Une version plus détaillée d'`history` est dispo dans `/home/user/.bash_history` mais n'est lisible que par cet utilisateur. La commande semble plus laxiste dans les droits même si elle est moins précise dans le résultat.
 
-## Tmux
+## Screen Multi-plexer
 
-[tmux](https://zcugni.gitbook.io/notes/tools/tmux)
+* [Tmux](https://zcugni.gitbook.io/notes/tools/tmux)
+* Screen
+  * `screen -ls` To list sessions
+  * `screen -r <session_name>` To attach to the session
+  * `screen -dr <session_name>` To detach others and then attach to the session
 
 ## Script cmd
 

@@ -8,15 +8,20 @@ description: A Terminal Multi-Plexer
 
 * Lets you :
   * Cut your term's windows into panes
-  * Detach a session from a shell, making it \(for example\) possible to close an ssh connexion but keep the command running.
-  * Commands are send to the tmux server by prefixing them with `ctrl-b`
-* Launched with `tmux`
-* The \* at the bottom shows in which window we are
-* To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` \(add this to the `.tmux.conf file`\)
+  * Attach/Detach a shell \(client\) to a session
+    * This lets you keep a session running on a remote machine even if your ssh connection closed \(for example\)
+    * You can share sessions with others
+    * A session is displayed on screen by a client and all sessions are managed by a single server. The server and each client are separate processes which communicate through a socket in /tmp.
+* Launched with `tmux`, while in it, prefix commands with `ctrl-b`
+* The \* at the bottom shows in which window you are
+* To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` 
+  * Add this to the `.tmux.conf` file
 
 ## Window
 
-| Commande | Effet |
+These shortcut also exist in written cmd, but that's less practical.
+
+| Command | Effect |
 | :--- | :--- |
 | `ctrl-b c` | Creates a new window |
 | `ctrl-b ,` | Rename window |
@@ -27,7 +32,9 @@ description: A Terminal Multi-Plexer
 
 ## Pane
 
-| Commande | Effet |
+These shortcut also exist in written cmd, but that's less practical.
+
+| Command | Effect |
 | :--- | :--- |
 | `ctrl-b %` | Split pane vertically |
 | `ctrl-b "` | Split pane horizontally |
@@ -40,16 +47,22 @@ description: A Terminal Multi-Plexer
 
 ## Session
 
-| Commande | Effet |
+| Command | Effect |
 | :--- | :--- |
-| `tmux new -s <name>` | Creates a new session |
-| `ctrl-b d` | Detach the session from the shell |
-| `tmux attach -t <name>` | Attach the tmux session to the shell |
-| `tmux list-sessions` | List all sessions |
+| `tmux new -s <session_name>` | Creates a new session |
+| `ctrl-b d` | Detach the shell from the session |
+| `tmux ls` | List all sessions |
+| `tmux lsc` | List all clients |
+| `tmux attach [-t <session_name>]` | Attach the shell to the tmux session |
+| `tmux attach [-dt <session_name>]` | First detach other clients \(shells\) and then attach our shell to the session |
+| `tmux detach [-s <session_name>] [-t <client>]` | Detach everyone from a session or a specific client |
+| `tmux kill-server` | Kill the server, clients & sessions |
+| `tmux kill-session [-t <session_name>]` | Destroy the session, closing all windows linked only to it & detach all client from it. |
+| `tmux rename [-t <session_name>] <new_name>` | Rename a session |
 
 ## Misc
 
-| Commande | Effet |
+| Command | Effect |
 | :--- | :--- |
 | `ctrl-b ]` | Paste |
 | `ctrl-b ?` | **List all key bindings** |
@@ -58,7 +71,7 @@ description: A Terminal Multi-Plexer
 
 In this mode you can go up the terminal & search/copy, etc.
 
-| Commande | Effet |
+| Command | Effect |
 | :--- | :--- |
 | `ctrl-b [` | Enter view mode |
 | `q` | quit |
