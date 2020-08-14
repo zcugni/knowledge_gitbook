@@ -15,7 +15,7 @@
 * Une cli rends l'utilisation plus aisée
   * Installation : `apt-get install redis-tools`
   * Utilisation : `redis-cli -h ip`
-    * Pour set une variable dans redis à partir d'un cat/echo : `cat key.txt | redis-cli -h ip -x set ssh_key`
+    * Pour set une variable dans redis à partir d'un cat/echo : `cat <file> | redis-cli -h <ip> -x set <var>`
     * `-x` permet de récupérer la dernière valeur de stdin \(voir commande pour set\)
 * On peut aussi directement utiliser netcat pour envoyer les commandes `nc ip 6379`
 * Le _home directory_ de redis est `/var/lib/redis`

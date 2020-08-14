@@ -21,15 +21,16 @@ This is why you should always use the full path to the executable, because if so
 ## Hierarchy
 
 * `man hier`
-* /etc/
+* `/etc/`
   * Configuration files
   * `/etc/passwd` & `/etc/shadow` : used for password, read [this](https://zcugni.gitbook.io/notes/theory/linux-nix#password)
-* /opt/
+* `/opt/`
   * For optional software, the guideline is not really defined
-* /dev/
+* `/dev/`
   * All devices
   * Regular part disk are written in the form "sda1", "sda2", "sdb1". The letter representing the disk and the number the partition.
   * Contains \(for bash\) /dev/tcp/ to connect to
+* `/proc/` is detailed [here](https://zcugni.gitbook.io/notes/theory/linux-nix/file-system#proc)
 * Others :
 
 | Directory | Content |

@@ -2,7 +2,7 @@
 
 ## Disclaimer / Explanation
 
-I know linpeas & linenum are good priv esc scripts, but as i'm new to that, all this information kinds of overwhelm me. I prefer to do it step by step myself.
+I know linpeas & linenum are good priv esc scripts, but as I'm new to that, all this information is kind of overwhelming. I prefer to do it step by step myself.
 
 So i'm going to describe what to check for step by step here. This is **heavily** taken from [hacktricks](https://book.hacktricks.xyz/) \(linpeas's author\), but i'm modifying some stuff and adding what I learned in hack the box.
 
@@ -139,6 +139,55 @@ rsync -a *.sh rsync://host.back/src/rbd
 # Create a file called "-e sh myscript.sh" to have the script execute our file
 ```
 
+## Read sensible data
+
+* Password :
+  * Read`/etc/passwd/` To gain an idea of users
+  * Try to crack the passwords in `/etc/shadow` if you have access
+  * Use [LaZagne](https://github.com/AlessandroZ/LaZagne) to extract password from files
+* Check for interesting files in :
+  * `/tmp/`
+  * `/var/tmp/`
+  * `/var/mail`
+  * `/var/spool/mail`
+  * `/etc/exports`
+* Shell :
+  * Read history if you can : `find / -name "*_history"`
+  * Check config in `.profile` & `.bashrc`
+* Web files : 
+
+```bash
+ls -alhR /var/www/ 2>/dev/null
+ls -alhR /srv/www/htdocs/ 2>/dev/null
+ls -alhR /usr/local/www/apache22/data/
+ls -alhR /opt/lampp/htdocs/ 2>/dev/null
+```
+
+* Backups :`find / -type f ( -name "backup" -o -name ".bak" -o -name ".bck" -o -name "*.bk" ) 2>/dev/nulll` \(hacktricks has a version that searches only in some folders, use it if it's too long\)
+* Others :
+  * `.sudo_as_admin_successful`
+  * `httpd.conf`
+  * `.plan`
+  * `htpasswd`
+  * `.git-credentials`
+  * `.rhosts`
+  * `hosts.equiv`
+* Read `env`
+
+### Writable files
+
+* Linpeas also check for writable files by you, but it's then too long to read, so i'll maybe try to do a more concise script.
+* Read [python library hijacking](https://book.hacktricks.xyz/linux-unix/privilege-escalation#python-library-hijacking)
+* Read [logrotate exploitation](https://book.hacktricks.xyz/linux-unix/privilege-escalation#logrotate-exploitation)
+
+{% hint style="info" %}
+Disclaimer : i'm not alway sure what to search for in those files
+{% endhint %}
+
+## Open Shell Session
+
+Check if there's any interesting [tmux](https://app.gitbook.com/@zcugni/s/notes/~/drafts/-ME8c67PWhoFo8pMESCD/tools/linux-bash-command/tmux) or [screen](https://zcugni.gitbook.io/notes/tools/linux-bash-command#screen-multi-plexer) session that you can connect to.
+
 ## Software exploit
 
 ```bash
@@ -148,19 +197,13 @@ rpm -qa #Centos
 
 If you have SSH access you can also use **openVAS** to check for vulnerable software.
 
-## Open Shell Session
-
-Check if there's any interesting  [tmux](https://app.gitbook.com/@zcugni/s/notes/~/drafts/-ME8c67PWhoFo8pMESCD/tools/linux-bash-command/tmux) or [screen](https://zcugni.gitbook.io/notes/tools/linux-bash-command#screen-multi-plexer) session that you can connect to.
-
 ## Hack the box
 
 J'utilise évidemment les scripts, mais je voulais noter ici les éléments spécifiques à chercher pour résoudre certaines boxes.
 
-* Fichiers `.bak` sensible ?
 * **Ports** ouverts sur localhost ? \(Port forward si besoin\)
 * Obtenir la liste de tout les fichiers own par root mais n'appartenant pas au groupe de root \(script custom\) : `find / -user root ! -group root -ls 2> /dev/null`
   * Si on arrive à devenir un des membres d'un de ces groupes et si un de ces fichiers nous permet de lancer une commande, celle-ci sera lancée en tant que root 
-* Si on y a accès, check `.bash_history` pour voir s'il ne leak pas des mdp ou des fichiers intéressants
 * Si on arrive sur un **serveur web,** chercher le fichier de config de la db et tenter de se co pour ensuite explorer les tables d'utilisateurs & co
 * Si un script change les droits d'un fichier, si on fait un **lien symbolique** entre ce nom de fichier et un fichier qui nous intéresse, cela changera aussi les droits du fichier qui nous intéresse.
 
@@ -169,8 +212,6 @@ J'utilise évidemment les scripts, mais je voulais noter ici les éléments spé
 ### Capabilities
 
 It seem a bit advance & specific, but might be interesting. Check [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#capabilities](https://book.hacktricks.xyz/linux-unix/privilege-escalation#capabilities)
-
-### Password hash
 
 ## Sources
 

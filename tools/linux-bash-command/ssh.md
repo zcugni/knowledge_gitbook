@@ -78,7 +78,7 @@ There's a lot of options so i won't detail them all. I should read it completely
   * `prohibit-password`: Only with keys
   * `forced-commands-only`: Only with keys and if a cmd has been specified
   * `no`
-* **AuthorizedKeysFile : Specifies the files** 
+* **AuthorizedKeysFile :** Specifies the files that are checked for authorized keys
 * **AllowAgentForwarding :** See note
 
 ### Both
