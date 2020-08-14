@@ -462,7 +462,7 @@ I gotta research this mounted stuff in more details
   * Will replay recording in the shell with `scriptreplay -s myscript.log -t time.log`
 * `ctrl-d` or exit to stop recording
 
-## Bash specific commands
+## Bash tips
 
 * `bash -c "cmd string"` Execute la chaîne
   * S'il y a d'autres arguments après celle-ci, ils sont transmis comme des arguments transitionnels commençant par $0
