@@ -7,15 +7,14 @@
 
 ## Pseudo file system
 
-* These are special file systems which contain informations about the current running system.
+* These are special file systems that contain information about the current running system.
 * They only exist in the RAM, have a size of 0, and don't persist after a reboot
 * They're often parsed by other programs to be shown in a more pleasing manner or act upon
-* Complete description available in `man hier` \(for hierarchy\)
 
 ### /proc/
 
 * `man proc`
-* `/proc/[pid]/` Each sub directory is a process \(identified by it's pid\), and contains information about itself such as :
+* `/proc/[pid]/` Each subdirectory is a process \(identified by its pid\) and contains information about itself such as :
   * `/attr/` Security-related attributes
   * `cmd` Which cmd the process is currently running
   * `cmdline` Which cmd spawned the process
@@ -24,43 +23,13 @@
   * `environ` State of the env variable when the process was spawned
   * `exe` Symbolic link to executable
   * `stat` Status of the process, used by `ps`
-  * `status` Same info but more human readable
+  * `status` Same info but more human-readable
   * Diverse files on memory mapping, groups, file descriptors, threads, mount points, namespace, timers, etc
 * Varied info files, such as :
   * `/proc/cmdline` Arguments given to the kernel at boot
   * `/proc/filesystems` List all file systems supported by the kernel
   * `/proc/version` Kernel's version
-* Diverse files about bus, devices, mounts, groups, cpu, network, kernel variable \(sys\), partitions, timers, etc 
-
-### /etc/
-
-* Directory for all the configuration data
-* /etc/passwd & /etc/shadow : used for password, check section below
-* /etc/group : contains the user group list
-
-### /opt/
-
-* For optional software, guideline not really defined, not often used
-* However, in kali there's all the pen test tools in /usr/share/
-* Also, it's writable by root but readable by others, so it might be interesting as a common folder among users for tools
-
-### /dev/
-
-* All devices
-* Regular part disk are written in the form "sda1", "sda2", "sdb1". The letter representing the disk and the number the partition.
-* Contains \(for bash\) /dev/tcp/ to connect to
-
-### Others
-
-| Directory | Content |
-| :--- | :--- |
-| /sbin/ & /bin/ | Secure binaries \(need root\) & "normal" binaries |
-| /tmp/ | For temporary files, blown away each restart |
-| /home/ & /root/ | Home for users and root's home |
-| /lib/ & /lib64/ | Shared librairies \(dll in windows\) |
-| /boot/ | kernel & kernel files |
-| /usr/ |  |
-| /var/ | Various, contains /var/log |
+* Diverse files about bus, devices, mounts, groups, cpu, network, kernel variable \(sys\), partitions, timers, etc
 
 ## File description & Permission
 
