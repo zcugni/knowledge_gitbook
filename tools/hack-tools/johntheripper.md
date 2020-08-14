@@ -7,7 +7,7 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
 ## Généralités
 
 * `sudo john file_to_crack --wordlist=rockyou.txt`
-* [Jumbo version](https://github.com/magnumripper/JohnTheRipper) has scripts available \(in the run folder\) to convert other format to a john crackable format :
+* [Jumbo version](https://github.com/magnumripper/JohnTheRipper) has scripts available \(in the `run` folder\) to convert other format to a john crackable format :
   * `ssh2john` Convert an ssh key to crack the password \(not the passphrase, or so i think\)
   * `zip2john` Convert a zip file that needs a password to crack it
 * Il auto-detect les modes de hash les plus connus
