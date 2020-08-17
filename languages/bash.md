@@ -4,7 +4,7 @@
 
 ### Bash, shell, terminal, etc
 
-Bash \(_Bourne-Again-Shell_\) est le shell, ou _command line interpreter_ pour l'os GNU. Il est compatible avec `sh` et intègre des fonctionnalités du _Korn Shell_ `ksh` et du _C Shell_ `csh`.
+Bash \(_Bourne-Again-Shell_\) est le shell \(command line interpreter\) de l'os GNU. Il est compatible avec `sh` et intègre des fonctionnalités du _Korn Shell_ `ksh` et du _C Shell_ `csh`.
 
 Shell est un _macro processor that executes commands_. Un shell unix est à la fois un _command interpreter_ et un langage de programmation.
 
@@ -17,6 +17,11 @@ Shell est un _macro processor that executes commands_. Un shell unix est à la f
 **Login** shell are interactive shell that simulate the state you get at login. So it clears env var, read login files like `.profile`, etc
 
 **Pseudo**-shell \(or pseudo terminal ?\) are independent from the process/session that spawns them, so there's less security issue. The spawner act as a proxy \(i guess\). \(It's kind of like a sandbox ?\)
+
+## Shebang
+
+* Little com at the start of the script that indicates to the machine the path to the interpreter to use \(if it hasn't been specified, like when you launch in that way :`./script`\)
+* Generally, use `#!/bin/bash`
 
 ## Variable
 
@@ -39,9 +44,6 @@ echo "str is ${var}s." # On peut
 ## Quoting
 
 ```bash
-#!/bin/bash
-# The above line is called a she-bang
-
 echo 'won t be interpreted'
 echo "\$,\`,\\ will be interpreted"
 echo "this is a `cmd_to_be_interpreted`."
@@ -81,15 +83,16 @@ for parameter; do cmd; done
 
 ## Condition - If
 
-Différent type de test, structure de base :
+* C'est plutôt le bordel car il y a eu plusieurs versions au fil du temps qui n'ont pas les mêmes symboles.
+* Généralement, utiliser cela :
 
 ```bash
-if cmd1; then
-    cmd2
-elif cmd3; then
-    cmd4
+if (( condition )); then
+    # cmd...
+elif (( condition )); then
+    # cmd...
 else
-    cmd5
+    # cmd...
 fi
 ```
 
@@ -98,49 +101,42 @@ fi
 
 ### Type de test
 
-**if \[ condition \]**
-
-Old POSIX test \(so it's portable\)
-
-**if \[\[ condition \]\]**
-
-Upgraded but not POSIX test \(so not portable\). Same but better \(among its extended features, it can test whether a string matches a regular expression\).
-
-**if \(\(condition\)\)**
-
-Another ksh extension that bash and zsh also support \(but not POSIX\). This performs arithmetic. It returns an exit code of zero \(true\) if the result of the arithmetic calculation is nonzero.
-
-**if \(command\)**
-
-This runs command in a subshell. When command completes, it sets an exit code and the if statement acts accordingly.
-
-A typical reason for using a subshell like this is to limit the side-effects of a command if it requires variable assignments or other changes to the shell's environment. Such changes do not remain after the subshell completes.
-
-**if command**
-
-Command is executed and the if statement acts according to its exit code.
+* `if [ condition ] / if test condition`
+  * POSIX compliant
+  * Old, so lots of downside, for exemple if one part of the condition evaluate to an empty string, it doesn't work
+* `if [[ condition ]]`
+  * Upgraded, for exemple it can test whether a string matches a regular expression and the problem of empty strings doesn't exist anymore
+  * Not POSIX compliant. but supported by bash
+* **`if ((condition))`**
+  * Upgraded
+  * Not POSIX compliant, but supported by ****ksh, bash & zsh
+  * Use symbols similar to other languages for comparison
+* `if (command)`
+  * Runs the command in a subshell. When it completes, it sets an exit code and the if statement acts accordingly.
+  * Used to limits side-effects for commands that need special var or other changes to the shell's environment. Those disappear with the subshell
+* `if command` The command is executed and the if statement acts accordingly to its exit code.
 
 ### Opérateurs
 
-**String comparaison**
+**String comparison**
 
-| Old | New |
+| In \[\[ \]\] | In \(\( \)\) |
 | :--- | :--- |
 | `>` \(pas systématique\) | `>` |
 | `<` \(pas systématique\) | `<` |
 | `=` | `=` ou `==` |
 | `!=` | `!=` |
 
-**Integer comparaison**
+**Integer comparison**
 
-| New & Old | Sens |
-| :--- | :--- |
-| `-gt` | greater than |
-| `-lt` | lesser than |
-| `-ge` | greater of equal |
-| `-le` | lesser or equal |
-| `-eq` | equal |
-| `-ne` | not equal |
+| In \[\[ \]\] | In \(\( \)\) | Sens |
+| :--- | :--- | :--- |
+| `-gt` |  | greater than |
+| `-lt` |  | lesser than |
+| `-ge` |  | greater of equal |
+| `-le` |  | lesser or equal |
+| `-eq` |  | equal |
+| `-ne` |  | not equal |
 
 **Conditions**
 
@@ -175,6 +171,20 @@ file="file name"
 ```
 
 Avec le nouveau ce n'est pas nécessaire.
+
+
+
+
+
+## test
+
+* Bash and other shells don't use the same syntax for test, and they don't have the same capabilities
+* It's a bit unclear, and i wasn't able to test everything
+* `if [[ condition ]]`
+  * Les espaces après le `[` et avant le `]` sont nécessaires
+  * Opérateurs pour les strings : `=`, `==`, `>`, `<`, `>=`, `<=`
+  * Opérateurs pour les nombres : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le`
+  * Not POSIX compliant but supported by bash
 
 ## Condition - Case
 
@@ -254,4 +264,7 @@ Et on peut chaîner avec `|` : `time cmd1 | cmd2 | ...`
 * [TutoriaLinux](https://www.youtube.com/channel/UCvA_wgsX6eFAOXI8Rbg_WiQ)
 * [http://mywiki.wooledge.org/BashFAQ/031](http://mywiki.wooledge.org/BashFAQ/031)
 * Misc research
+* [https://unix.stackexchange.com/questions/278707/comparing-integers-arithmetic-expression-or-conditional-expression](https://unix.stackexchange.com/questions/278707/comparing-integers-arithmetic-expression-or-conditional-expression)
+* [https://unix.stackexchange.com/questions/32210/why-does-parameter-expansion-with-spaces-without-quotes-work-inside-double-brack](https://unix.stackexchange.com/questions/32210/why-does-parameter-expansion-with-spaces-without-quotes-work-inside-double-brack)
+* [https://ryanstutorials.net/bash-scripting-tutorial/bash-arithmetic.php](https://ryanstutorials.net/bash-scripting-tutorial/bash-arithmetic.php)
 

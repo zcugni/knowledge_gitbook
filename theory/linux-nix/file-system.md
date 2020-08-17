@@ -41,18 +41,13 @@
     * `b` Block device \(anything that can store\)
     * `c` Character device file \(mouse or keyboard\)
   * Puis les permissions sont divisées en 3 catégories : le propriétaire, le groupe et les autres
-  * La présence d'une lettre indique une permissions :
+  * La présence d'une lettre indique une permission :
     * `r` Lecture
     * `w` Ecriture
-    * `x` _E_xécution
-* Il y a aussi des permissions spéciales : le SUID & SGID
-  * **SUID** permet d'exécuter un fichier avec les droits de son créateur \(ou avec ceux de root ? je suis pas certaine\) au lieu de le faire avec les droits de l'utilisateur lançant la commande. Ca permet par exemple aux utilisateurs d'utiliser la commande `passwd` pour changer leur mdp alors qu'il leur faut pour cela écrire dans /etc/passwd \(réservé à root\). 
-  * **SGID** fonctionne de la même façon, à part qu'il utilisera les droits du groupe. De plus, si celui-ci est appliqué à un dossier, tous ces fichiers appartiendront au même groupe.
-  * Les deux sont représentés par un `s` au lieu du `x`\(soit de l'utilisateur, soit du groupe\). Si ceux-ci n'ont pas le droit d'exécution, ce sera à la place un `S` majuscule.
-* Les permissions ont aussi une notation sous forme de nombre :
-  * Read : 4
-  * Write : 2
-  * Execute : 1
-  * SUID : 4 avant le reste
-  * SGID : 2 avant le reste
+    * `x` Exécution
+    * `s` SUID/SGID avec exécution \(à la place du x\)
+* SUID & SGID
+  * Ils permettent d'exécuter un fichier avec les droits de son créateur au lieu de le faire avec les droits de l'utilisateur lançant la commande
+  * SUID utilisera l'utilisateur, SGID le groupe
+  * `passwd` est un exemple type vu qu'il est lancé par les utilisateurs mais qu'il lui faut modifier `/etc/passwd` \(écrivable uniquement par root\).
 
