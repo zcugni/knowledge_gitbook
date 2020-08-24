@@ -83,13 +83,17 @@ for parameter; do cmd; done
 
 ## Condition - If
 
-* C'est plutôt le bordel car il y a eu plusieurs versions au fil du temps qui n'ont pas les mêmes symboles.
+### Généralités
+
+* Il y a plusieur syntaxe permettant d'écrire un if, plus ou moins vielles et plus ou moins complètes.
+* Tout les interpreter \(bash, sh, zsh, etc\), ne réagissent pas tous de la même façon. Les explications ci-dessous fonctionne pour **bash.**
+* J'ai fait un [script de test](https://github.com/zcugni/misc_script/blob/master/test.sh) pour vérifier le comportement. Use it with `bash test.sh`, `sh test.sh`, etc to see the difference
 * Généralement, utiliser cela :
 
 ```bash
-if (( condition )); then
+if [[ condition ]]; then
     # cmd...
-elif (( condition )); then
+elif [[ condition ]]; then
     # cmd...
 else
     # cmd...
@@ -101,90 +105,39 @@ fi
 
 ### Type de test
 
-* `if [ condition ] / if test condition`
-  * POSIX compliant
-  * Old, so lots of downside, for exemple if one part of the condition evaluate to an empty string, it doesn't work
+* Attention, si on utilise un symbole non géré, il n'y aura pas forcément d'erreur, mais le résultat pourra être erroné.
 * `if [[ condition ]]`
-  * Upgraded, for exemple it can test whether a string matches a regular expression and the problem of empty strings doesn't exist anymore
-  * Not POSIX compliant. but supported by bash
-* **`if ((condition))`**
-  * Upgraded
-  * Not POSIX compliant, but supported by ****ksh, bash & zsh
-  * Use symbols similar to other languages for comparison
+  * Les espaces après le `[` et avant le `]` sont nécessaires
+  * Opérateurs pour les strings : `=`, `==`, `>`, `<`
+  * Opérateurs pour les nombres : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le`, `=`, `==`, `!=`, `>`, `<`
+  * `&&`, `||`
+  * Not POSIX compliant but supported by bash
+  * Support regular expression
+* `if (( condition ))`
+  * Utilisé uniquement pour les comparaisons numériques \(y'aura pas forcément d'erreur pour les strings, cf le warning d'en dessus\)
+  * `==, !=, >, <, >=, <=`
+  * `&&, ||`
+* `if [ condition ]`
+  * Old \[\[ \]\] version, alias to `test`
+  * Les espaces après le `[` et avant le `]` sont nécessaires
+  * Opérateurs pour les strings  : `=`, `==`
+  * Opérateurs pour les nombres : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le, =, ==, !=`
+  * `-o`, `-a`
+  * If one part of the equation evaluate to an empty string, it won't work
+  * Si une variable contient une chaine avec des espaces, il faut l'entourer de `"` :
+  * ```bash
+    file="file name"
+    [ -f "$file" ] && echo "$file is a regular file"
+    ```
+* Il existe aussi des symboles particulier permettant de travailler avec des fichiers, par exemple `-e` ou `-nt` mais je ne les ai pas encore utilisé
+
+### Test avec commande
+
+* Il existe aussi des syntaxes mélangeant `if` avec une commande, mais ce n'est pas tout à fait la même chose.
 * `if (command)`
   * Runs the command in a subshell. When it completes, it sets an exit code and the if statement acts accordingly.
   * Used to limits side-effects for commands that need special var or other changes to the shell's environment. Those disappear with the subshell
 * `if command` The command is executed and the if statement acts accordingly to its exit code.
-
-### Opérateurs
-
-**String comparison**
-
-| In \[\[ \]\] | In \(\( \)\) |
-| :--- | :--- |
-| `>` \(pas systématique\) | `>` |
-| `<` \(pas systématique\) | `<` |
-| `=` | `=` ou `==` |
-| `!=` | `!=` |
-
-**Integer comparison**
-
-| In \[\[ \]\] | In \(\( \)\) | Sens |
-| :--- | :--- | :--- |
-| `-gt` |  | greater than |
-| `-lt` |  | lesser than |
-| `-ge` |  | greater of equal |
-| `-le` |  | lesser or equal |
-| `-eq` |  | equal |
-| `-ne` |  | not equal |
-
-**Conditions**
-
-| Old | New |
-| :--- | :--- |
-| `-a` and, deprecated | `&&` |
-| `-o` or, deprecated | ````` |
-|  | `!` |
-
-**Special**
-
-Commun :
-
-* `-f`
-* `-s`
-* `-n`
-* `-z`
-
-Spécifique au nouveau :
-
-* `-e file` File or directory exist
-* `file1 -nt / -ot file2` File1 is newer/older than file2
-* `file1 -ef file2` Files are the same
-
-**Autre**
-
-Quand une variable contient des strings séparées par des espaces, avec l'ancien test il fallait l'entouré de " " :
-
-```bash
-file="file name"
-[ -f "$file" ] && echo "$file is a regular file"
-```
-
-Avec le nouveau ce n'est pas nécessaire.
-
-
-
-
-
-## test
-
-* Bash and other shells don't use the same syntax for test, and they don't have the same capabilities
-* It's a bit unclear, and i wasn't able to test everything
-* `if [[ condition ]]`
-  * Les espaces après le `[` et avant le `]` sont nécessaires
-  * Opérateurs pour les strings : `=`, `==`, `>`, `<`, `>=`, `<=`
-  * Opérateurs pour les nombres : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le`
-  * Not POSIX compliant but supported by bash
 
 ## Condition - Case
 
@@ -263,8 +216,6 @@ Et on peut chaîner avec `|` : `time cmd1 | cmd2 | ...`
 
 * [TutoriaLinux](https://www.youtube.com/channel/UCvA_wgsX6eFAOXI8Rbg_WiQ)
 * [http://mywiki.wooledge.org/BashFAQ/031](http://mywiki.wooledge.org/BashFAQ/031)
+* Stack Exchange \(principally [this](https://unix.stackexchange.com/questions/32210/why-does-parameter-expansion-with-spaces-without-quotes-work-inside-double-brack) and [this](https://unix.stackexchange.com/questions/278707/comparing-integers-arithmetic-expression-or-conditional-expression)\)
 * Misc research
-* [https://unix.stackexchange.com/questions/278707/comparing-integers-arithmetic-expression-or-conditional-expression](https://unix.stackexchange.com/questions/278707/comparing-integers-arithmetic-expression-or-conditional-expression)
-* [https://unix.stackexchange.com/questions/32210/why-does-parameter-expansion-with-spaces-without-quotes-work-inside-double-brack](https://unix.stackexchange.com/questions/32210/why-does-parameter-expansion-with-spaces-without-quotes-work-inside-double-brack)
-* [https://ryanstutorials.net/bash-scripting-tutorial/bash-arithmetic.php](https://ryanstutorials.net/bash-scripting-tutorial/bash-arithmetic.php)
 
