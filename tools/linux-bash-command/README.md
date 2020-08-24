@@ -62,10 +62,103 @@
 | `uniq` | Returns only unique result |
 | `wc` | Word count |
 
+## Compression & Decompression
+
+* `.jar` sont des fichiers d'archives de classes java
+
+### Compress
+
+* `tar -zcvf archive.tar.gz Documents/`
+  * z : z-zipping \(compress\)
+  * c : create archive
+  * v : verbose mode
+  * f : create archive of name "archive.tar.gz" \(adding gz is good practice when you zipped\)
+  * Documents/ : archiving all the content of this directory
+* `gzip file.gz`
+* `bzip2 file.bz2`
+
+### Decompress
+
+* `tar -zxf archive.tar.gz`
+  * x : extract
+  * z : for zip file
+* `gzip -d file.gz`
+* `gunzip file.gz`
+* `bzip2 -d file.bz2`
+
+### tarbomb
+
+A tarbomb is a compressed file that when uncompressed will generate a lot of files/directory.
+
+Good practice is to do that `tar -zcvf archive.tar.gz Documents/`, bad practice is to be _in_ Documents/ and do that `tar -zcvf archive.tar.gz`.
+
+The first one will generate only 1 uncompressed directory, the second one will generate multiples.
+
+## Transfert fichier
+
+### scp
+
+* Through ssh
+* Remote to local : `scp username@ip:file local_dir`
+* Local to remote : `scp file user@ip:remote_dir`
+* Be mindful of the `:` ! 
+* \(Absolute path, so /home/user/etc\)
+
+### wget & curl
+
+* `wget ip:port/path`
+  * add `-O destination` if needed, default is current folder & original name 
+* `curl ip:port/path`
+  * `-s` To not have the banner
+
+Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire sur le disque, faudrait que je regarde
+
+### python
+
+* Sur l'attaquant `python -m HttpSimpleServer` \(va créer un serveur dispo sur 8000\)
+* Utiliser wget ou curl pour récup un fichier. Le root du serveur est le dossier dans lequel il a été lancé
+
+### Copié-Collé encodé
+
+* En fonction de la taille du fichier ça peut être plus simple de le base64, copier le résultat puis de le décoder et rediriger dans un fichier dans le terminal de destination
+
+## Hex dump
+
+* There's multiple tools to see the hex dump of a file
+* `xxd` My preferred one
+  * `xxd <in_file> [out_file]` Dump it's hexa, with it's ascii equivalent
+  * `xxd -r -p <in_file> <out_file>`
+    * The `-p` is necessary to write the hex in a friendly manner \(without offset, etc\)
+    * `<in_file>` can be set as the standard input with `-`
+    * If you want to add content to that file after the new hex, just do `cat other_file >> new_file`
+  * `-e` Switch to little-endian
+  * `-b` Switch to binary representation \(`-r` doesn't work with it\)
+* `hexdump <file>` Dump it's hexa, but i find the format less friendly \(it doesn't show the ascii equivalent and the endianness is inversed from xxd\)
+
+## Encoding
+
+### Base64
+
+* `base64 -d <file>` Decode
+  * Si on ne veut pas le faire depuis un fichier on peut faire ainsi `echo "..." | base64 -d`
+
 ## Recherche
 
 * [Find](https://zcugni.gitbook.io/notes/tools/linux-bash-command/find)
 * [Grep](https://zcugni.gitbook.io/notes/tools/linux-bash-command/grep)
+
+## Analyse de fichier
+
+* `exiftool` Read/Write metadata of files
+* `strings` Print the strings of printable characters of a file, useful for determining content of non-text file. Can also be used on block device to analyze their content.
+
+### File
+
+* Classify a file, perform 3 tests : Filesystem, Magic & Language \(one after the other, stop if the previous one succeeded\). 
+  * Filesystem test use the return of `stat`, file type depending on your system \(sockets, symlink, etc\), are intuited here.
+  * Magic test check for the magic number of the file \(a predefined number near the beginning of the file's data, that describe it's type\). The db of corresponding entries comes form the compiled binary in `/usr/share/misc/magic.mgc` and user additions in `/etc/magic`
+  * Language test checks for character set 
+* Le retour contient généralement soit `text`, soit `executable`, soit `data` dans sa description, on peut donc baser des scripts là-dessus.
 
 ## Permission
 
@@ -281,81 +374,6 @@ Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 * `httprint -P0 -h <target ip> -s <signature file>`
 * `P0` to avoid pinging \(web server generally don't respond\)
 
-## Compression & Decompression
-
-* `.jar` sont des fichiers d'archives de classes java
-
-### Compress
-
-* `tar -zcvf archive.tar.gz Documents/`
-  * z : z-zipping \(compress\)
-  * c : create archive
-  * v : verbose mode
-  * f : create archive of name "archive.tar.gz" \(adding gz is good practice when you zipped\)
-  * Documents/ : archiving all the content of this directory
-* `gzip file.gz`
-* `bzip2 file.bz2`
-
-### Decompress
-
-* `tar -zxf archive.tar.gz`
-  * x : extract
-  * z : for zip file
-* `gzip -d file.gz`
-* `gunzip file.gz`
-* `bzip2 -d file.bz2`
-
-### tarbomb
-
-A tarbomb is a compressed file that when uncompressed will generate a lot of files/directory.
-
-Good practice is to do that `tar -zcvf archive.tar.gz Documents/`, bad practice is to be _in_ Documents/ and do that `tar -zcvf archive.tar.gz`.
-
-The first one will generate only 1 uncompressed directory, the second one will generate multiples.
-
-## Transfert fichier
-
-### scp
-
-* Through ssh
-* Remote to local : `scp username@ip:file local_dir`
-* Local to remote : `scp file user@ip:remote_dir`
-* Be mindful of the `:` ! 
-* \(Absolute path, so /home/user/etc\)
-
-### wget & curl
-
-* `wget ip:port/path`
-  * add `-O destination` if needed, default is current folder & original name 
-* `curl ip:port/path`
-  * `-s` To not have the banner
-
-Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire sur le disque, faudrait que je regarde
-
-### python
-
-* Sur l'attaquant `python -m HttpSimpleServer` \(va créer un serveur dispo sur 8000\)
-* Utiliser wget ou curl pour récup un fichier. Le root du serveur est le dossier dans lequel il a été lancé
-
-### Copié-Collé encodé
-
-* En fonction de la taille du fichier ça peut être plus simple de le base64, copier le résultat puis de le décoder et rediriger dans un fichier dans le terminal de destination
-
-## Encoding
-
-### Base64
-
-* `base64 -d <file>` Decode
-  * Si on ne veut pas le faire depuis un fichier on peut faire ainsi `echo "..." | base64 -d`
-
-### Hex to bin
-
-* `xxd` Dump a file in hexa
-* `echo "FF D8 FF DB" | xxd -r -p > new_file` Convert the hex back to binary and write it in a file
-  * `-p` Let you write the hex in a more friendly manner \(without offset, etc\)
-  * `-r` Actually does the reverse
-  * If you want to add content to that file after the new hex, just do `cat other_file >> new_file`
-
 ## GPG
 
 * pgp encoding
@@ -373,11 +391,6 @@ Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire s
 
 * `strace` Intercepts system calls made libs to the Linux Kernel
 * `ltrace` Intercepts library & system calls made by your application to libs
-
-## Analyse de fichier
-
-* `exiftool` Read/Write metadata of files
-* `strings` Print the strings of printable characters of a file, useful for determining content of non-text file. Can also be used on block device to analyze their content.
 
 ## Traitement json
 
@@ -423,30 +436,6 @@ On peut accéder aux différents éléments ainsi :
 * `df` Report disk space usage, also explicit where things were mounted \(use with  `-lh`\)
 * `mount` Show where things were mounted
 
-{% hint style="info" %}
-I gotta research this mounted stuff in more details
-{% endhint %}
-
-## Misc
-
-| Commande | Définition |
-| :--- | :--- |
-| `ln -s <real_file> <link_file>` | Create symbolic link |
-| `clear` | Clear shell |
-| `man <cmd>` | Manuel de la cmd |
-| `sudo` | Super user do |
-| `sudo !!` | Run last cmd as root |
-| `tree` | Tree view of directory/files |
-| `which <cmd>` | Show binary location of cmd |
-| `set` | List shell var & func \*\(1\) |
-| `history` | Shows history of cmd |
-| `watch -n <sec_interval> <cmd>` | Execute une cmd à une intervalle donnée |
-| `htop` | Mix entre `w` & `top` avec une interface ncurse |
-| `uname` | Gives info on kernel version \(use `-a` for everything\) |
-
-* \*\(1\) With parameters, `set` can also set our unset predefined shell options.
-* \*\(2\) Une version plus détaillée d'`history` est dispo dans `/home/user/.bash_history` mais n'est lisible que par cet utilisateur. La commande semble plus laxiste dans les droits même si elle est moins précise dans le résultat.
-
 ## Screen Multi-plexer
 
 * [Tmux](https://zcugni.gitbook.io/notes/tools/tmux)
@@ -471,6 +460,26 @@ I gotta research this mounted stuff in more details
   * On peut éviter d'avoir des espaces en faisant cela `bash -c "{echo,string}"` au lieu de `bash -c "echo string"`
   * Si on veut piper des commandes qui ont des paramètres, faut les mettre par tas : `bash -c "{echo,string}|{base64,-d}"`
 * `bash -i` Si l'option -i est présente, l'interpréteur est interactif \(utilisé dans des payloads mais je comprends pas entièrement pourquoi\)
+
+## Misc
+
+| Commande | Définition |
+| :--- | :--- |
+| `ln -s <real_file> <link_file>` | Create symbolic link |
+| `clear` | Clear shell |
+| `man <cmd>` | Manuel de la cmd |
+| `sudo` | Super user do |
+| `sudo !!` | Run last cmd as root |
+| `tree` | Tree view of directory/files |
+| `which <cmd>` | Show binary location of cmd |
+| `set` | List shell var & func \*\(1\) |
+| `history` | Shows history of cmd |
+| `watch -n <sec_interval> <cmd>` | Execute une cmd à une intervalle donnée |
+| `htop` | Mix entre `w` & `top` avec une interface ncurse |
+| `uname` | Gives info on kernel version \(use `-a` for everything\) |
+
+* \*\(1\) With parameters, `set` can also set our unset predefined shell options.
+* \*\(2\) Une version plus détaillée d'`history` est dispo dans `/home/user/.bash_history` mais n'est lisible que par cet utilisateur. La commande semble plus laxiste dans les droits même si elle est moins précise dans le résultat.
 
 ## Sources
 

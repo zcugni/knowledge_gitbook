@@ -65,7 +65,6 @@ Not tested
 
 * Has 3 mode, to enumerates files/dir, dns or vhost
 * `apt-get install gobuster`
-* Quite easy so read help in doubt
 * My default command for dir : `gobuster dir -u <ip | hostname> -w <wordlist_path> [-x php, txt] [-t 10] -o <result_file> 2> <error_file>` 
   * `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` is my default word list
   * `-x` To add extension, `-t` for threads number
