@@ -48,6 +48,7 @@
     * `s` SUID/SGID avec exécution \(à la place du x\)
 * SUID & SGID
   * Ils permettent d'exécuter un fichier avec les droits de son créateur au lieu de le faire avec les droits de l'utilisateur lançant la commande
+  * Pour des raisons de sécurité, **cela ne fonctionnera que sur les exe, pas sur les scripts** \([ref](https://unix.stackexchange.com/questions/364/allow-setuid-on-shell-scripts)\)
   * SUID utilisera l'utilisateur, SGID le groupe
   * `passwd` est un exemple type vu qu'il est lancé par les utilisateurs mais qu'il lui faut modifier `/etc/passwd` \(écrivable uniquement par root\).
 
