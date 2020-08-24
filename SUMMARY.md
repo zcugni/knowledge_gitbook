@@ -22,14 +22,15 @@
 ## Tools
 
 * [Linux / Bash Command](tools/linux-bash-command/README.md)
+  * [Net tools / commands](tools/linux-bash-command/net-tools-commands/README.md)
+    * [Nmap](tools/linux-bash-command/net-tools-commands/nmap.md)
+    * [tcpdump](tools/linux-bash-command/net-tools-commands/tcpdump.md)
   * [Sudo, su, sudoers, etc](tools/linux-bash-command/sudo-su-sudoers-etc.md)
   * [Tmux](tools/linux-bash-command/tmux.md)
-  * [Nmap](tools/linux-bash-command/nmap.md)
   * [Find](tools/linux-bash-command/find.md)
   * [Grep](tools/linux-bash-command/grep.md)
   * [SSH](tools/linux-bash-command/ssh.md)
   * [Git Commands](tools/linux-bash-command/git-commands.md)
-  * [tcpdump](tools/linux-bash-command/tcpdump.md)
 * [Pen test tools](tools/hack-tools/README.md)
   * [Burp Proxy](tools/hack-tools/burp-proxy.md)
   * [JohnTheRipper](tools/hack-tools/johntheripper.md)
