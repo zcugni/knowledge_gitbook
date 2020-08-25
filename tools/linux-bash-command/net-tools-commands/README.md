@@ -92,10 +92,9 @@ Les net-tools \(`netstat` & `ifconfig`\) ont été dépréciés car ils n'étaie
 
 ## Ping
 
-* Sonar-like request basically saying "Hello ? Are you there ?"
-* Does not give any information about the host's services
-* Needs one argument, the hostname or ip address of the host
-* Successful pings tells you the speed of the response
+* Basic tool to check if you can communicate with a machine
+* When you make a server send you a ping, don't forget to use `-c <nb>` because if it does it continuously , it might hold it \(it won't do anything else\)
+* Use [tcpdump](https://zcugni.gitbook.io/notes/tools/linux-bash-command/net-tools-commands/tcpdump) to check for pings arriving to your machine
 
 ### Sweep ping
 
