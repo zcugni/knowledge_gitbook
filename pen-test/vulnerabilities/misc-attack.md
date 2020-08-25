@@ -201,14 +201,18 @@ C’est notamment un problème récurrents dans les “urls parsing” \(même l
 
 C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
 
+## Bypass of checks
+
+* If file type \(aka **mime type**\) is deduced from the magic number, add arbitrary ones that are accepted at the start of the file
+* Some versions of apache will execute scripts with `.php.jpg` or  `.php3` as extensions for example
+
 ## Tips & Tricks
 
-* Keep in mind that even if you can't access an directory of a website \(ip/dev/ for example\), you might be able to access it's subdir/files \(ip/dev/backup for example\)
-* when it ends with `==` it’s usually base64
+* When it ends with `==` it’s usually base64
 * Resource : [https://repo.zenk-security.com/](https://repo.zenk-security.com/)
 * MySQL's `LIKE` comparison isn't case sensitive
 * MySQL's `=` comparison isn't case sensitive & doesn't care about trailing spaces
-* A weird way to write a file is to `cat > fine_name << EoF`, then write your text, and write EoF at the end.
+* A weird way to write a file is to `cat > file_name << EoF`, then write your text, and write EoF at the end.
 * Many web servers and application servers provide, in a default installation, sample applications and files that have vulnerabilities
 * _HTTP Strict Transport Security_ \(HSTS\) is a request header specifying that all exchanged must be done over HTTPS.
 * If `Cache-Control` is not  set to `must re-validate`, using the “back” button of the browser will show the previous page and it’s information, which may be sensitive if it was for a login for example. Other Cache-Control options will control how page are cached, and if wrongly set will enable finding sensitive information in the browser \(aka forced browsing\)

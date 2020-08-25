@@ -29,10 +29,6 @@ The application directly expose sensible files \(disclosing information, backup/
 * _Files Inclusion_ abuse arbitrary "require/include" used in application
   * LFI \(local\) can only include local files \(through path traversal probably\)
   * RFI \(remote\) can include any file
-* Bypass of checks :
-  * If file type \(aka **mime type**\) is deduced from the magic number, add arbitrary ones that are accepted at the start of the file
-  * If `.php` is not accepted, you can use `.php3`
-  * Certaine config d'apache permettent d'exécuter des fichiers ayant ce genre d'extensions `.php.jpg` ce qui peut être pratique pour bypass des vérifs de sécu
 * On a pas besoin de connaitre la structure exacte des dossiers car même si on mets trop de `../../` ça marchera quand même.
 * Windows est plus vulnérable que linux car on peut faire ça `test/../../../file.txt` même si _test_ n'existe pas, ce qui facilite des cas où le chemin est concaténé à autre chose.
 * Check if extension are added programmatically and try to cut the string with `%00` if it's the case

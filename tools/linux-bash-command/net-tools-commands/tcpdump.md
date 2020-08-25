@@ -6,10 +6,12 @@
 * It's language _Berkeley Packet Filter_ \(BPF\) has become a standard and almost all other packet-sniffer tools understand it
 * Console-based
 * Modern OS run tcpdump in a sandbox so there shouldn't be security problems
+* Use with `sudo` 
 * `tcpdump -D` to see which interface you can attach to
 * `tcpdump -i <interface>` Attach to an interface, use name or number
 * `tcpdump -n` Hide DNS request traffic
-* To check if you received a ping, use `tcpdump -i tun0 -n icmp`
+* To check if you received a ping, use `tcpdump -n -i <interface> icmp`
+  * Use the interface linked to the ip you pinged
 
 ## Example of an UDP packet
 
@@ -64,6 +66,7 @@ Response :
 | Expression | Meaning |
 | :--- | :--- |
 | `arp` | Only arp traffic |
+| `icmp` | Only icmp traffic \(ping\) |
 | `ether host <mac>` | Only traffic avec la machine ayant cette mac adresse |
 | `ip` | Only ip traffic |
 | `ip host <hostname_or_ip>` | Only ip traffic from the specified machine |

