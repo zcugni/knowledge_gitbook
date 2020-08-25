@@ -58,21 +58,20 @@ They're different on each distro
 
 ### Netcat
 
-* Lets you **generate arbitrary TCP/IP traffic.**
-* It can also **simulate sockets** and report on the data they receive.
-* netcat is an old tool that has been forked, rewritten, extended and improved many times.
+* Lets you **generate arbitrary TCP/IP traffic** and **simulate sockets** to listen to traffic
+* It's an old tool that has been forked, rewritten, extended and improved many times.
   * The openBSD version is the most popular \(and it support IPv6\).
 * **Defaults using TCP**, for UPD use `-u` \(the protocol doesn't imply an answer, but netcat will listen for one and display it\)
-* `netcat <hostname> <port>` If the client establish a TCP session, you'll get a blank line. 
-  * Netcat hasn't sent any data but it has completed the three-way handshake. You can then write your own request \(`GET / HTTP/1.1`\)
-* `netcat -l <port>` Creates netcat listeners
-* `-v` Shows errors
-* You can use netcat to transfer files by redirecting the input of a listener to a file and using `netcat -q o <ip> <port> < file` on the sender machine \(or `-N` on some distribution\).
-  * The data is sent in clear.
-* You can also attach a command shell to a netcat listener but that's a security issue \(anyone connecting to the port will have shell access\)
-* To send a command through netcat, it's easier to prepare it with echo before `echo "ping -c 1 my_ip" | nc their_ip their_port` 
+* `netcat <hostname> <port>` If the client establish a TCP session, you'll get a blank line.
+  * The three-way handshake is done, but no request has been made. You can then write your own :`GET / HTTP/1.1`
+* The basic listen command is `nc -lnvp <port>`
+  * `-l` Listen mode
+  * `-n` Numeric-only IP address, no DNS
+  * `-v` Verbose
+  * `-p <port>` Specify local port
+* `-c <command>` Execute command after connect \(use with caution\)
 
-### Traceroute \(Follow packet\)
+### Traceroute
 
 * Lets you follow the packets as they travel between hosts
 * `traceroute destination_host`
@@ -111,12 +110,13 @@ They're different on each distro
     * Ask for a zone transfer
     * If the zone isn't specified it will use `.` aka root.
 
-### nmap \(map network\)
+### nmap
 
 Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 
-### httprint \(fingerprint web server\)
+### httprint
 
+* Let's you fingerprint a web server
 * `httprint -P0 -h <target ip> -s <signature file>`
 * `P0` to avoid pinging \(web server generally don't respond\)
 
