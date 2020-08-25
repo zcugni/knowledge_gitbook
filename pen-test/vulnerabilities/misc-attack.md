@@ -201,14 +201,13 @@ C’est notamment un problème récurrents dans les “urls parsing” \(même l
 
 C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
 
-## Tips &/ Tricks
+## Tips & Tricks
 
 * Keep in mind that even if you can't access an directory of a website \(ip/dev/ for example\), you might be able to access it's subdir/files \(ip/dev/backup for example\)
 * when it ends with `==` it’s usually base64
 * Resource : [https://repo.zenk-security.com/](https://repo.zenk-security.com/)
 * MySQL's `LIKE` comparison isn't case sensitive
 * MySQL's `=` comparison isn't case sensitive & doesn't care about trailing spaces
-* To send yourself a ping back, you can do this on the victim `ping -c 1 ip` and launch `tcpdump -i tun0 -n icmp` on your machine
 * A weird way to write a file is to `cat > fine_name << EoF`, then write your text, and write EoF at the end.
 * Many web servers and application servers provide, in a default installation, sample applications and files that have vulnerabilities
 * _HTTP Strict Transport Security_ \(HSTS\) is a request header specifying that all exchanged must be done over HTTPS.

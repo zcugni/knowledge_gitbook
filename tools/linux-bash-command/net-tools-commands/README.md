@@ -1,6 +1,6 @@
 # Net tools / commands
 
-### Remplacement
+## Remplacement
 
 Les net-tools \(`netstat` & `ifconfig`\) ont été dépréciés car ils n'étaient plus maintenu. Voici l'équivalent de certaines commandes :
 
@@ -10,58 +10,26 @@ Les net-tools \(`netstat` & `ifconfig`\) ont été dépréciés car ils n'étaie
 * `netstat -g` : `ip maddr`
 * `ifconfig` : `ip a`
 
-### Ports stat
+## nmap
 
-* Run as root
+* Map the network
+* Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 
-| Commande | Définition |
-| :--- | :--- |
-| `ss -t` | See tcp port |
-| `ss -u` | See udp port |
-| `ss -p` | See program attach to the port |
-| `ss -l` | See listening port |
-| `ss -n` | Numeric name |
-
-### Ping
-
-* Sonar-like request basically saying "Hello ? Are you there ?"
-* Does not give any information about the host's services
-* Needs one argument, the hostname or ip address of the host
-* Successful pings tells you the speed of the response
-
-#### Sweep ping
-
-* `fping -a -g 10.54.12.0/24`
-  * `-a` To show only live host
-  * `-g` To do a ping sweep instead of a simple ping 
-  * Redirects error to `2>/dev/null` because you'll always get some
-
-### ARP
-
-* `arp -a` montre la table contenant ces infos :
-  * Le hostname \(représenté par un ? s'il est inconnu\). Il est trouvé via le _System Name Service_, ce qui peut être inutilement long. Utiliser `-n` pour ne pas l'obtenir.
-  * Le temps d'expiration
-  * Souvent, la propre mac adresse de l'appareil est harcodée et notée comme permanente
-* `apr ip` Montre une entrée spécifique de la table
-
-### ND command
-
-They're different on each distro
-
-### Packet sniffing
+## Packet sniffing
 
 * [tcpdump](https://zcugni.gitbook.io/notes/tools/linux-bash-command/tcpdump)
+  * Dump certain part or all the traffic
 * Wireshark
   * Traffic analysis tool
   * Graphic interface
   * Always install Wireshark in a disposable virtual machine for security reasons
 
-### Netcat
+## Netcat
 
-* Lets you **generate arbitrary TCP/IP traffic** and **simulate sockets** to listen to traffic
+* Generate traffic & simulate sockets to listen
 * It's an old tool that has been forked, rewritten, extended and improved many times.
   * The openBSD version is the most popular \(and it support IPv6\).
-* **Defaults using TCP**, for UPD use `-u` \(the protocol doesn't imply an answer, but netcat will listen for one and display it\)
+* Defaults using TCP, for UPD use `-u` \(the protocol doesn't imply an answer, but netcat will listen for one and display it\)
 * `netcat <hostname> <port>` If the client establish a TCP session, you'll get a blank line.
   * The three-way handshake is done, but no request has been made. You can then write your own :`GET / HTTP/1.1`
 * The basic listen command is `nc -lnvp <port>`
@@ -71,7 +39,7 @@ They're different on each distro
   * `-p <port>` Specify local port
 * `-c <command>` Execute command after connect \(use with caution\)
 
-### Traceroute
+## Traceroute
 
 * Lets you follow the packets as they travel between hosts
 * `traceroute destination_host`
@@ -80,7 +48,7 @@ They're different on each distro
 * A lost packet is represented by a \*. A few one is normal
 * Disable DNS lookups with `-n`
 
-#### Errors
+### Errors
 
 * A line of `***` means that the previous host forwarded a packet, but no response came back so traceroute can't print an hostname or ip.
   * It can mean that the host filters UDP or ICMP.
@@ -95,7 +63,7 @@ They're different on each distro
 * Traceroute servers \(find them on internet\) lets you run traceroute from them, so that you can see if the problem lies within the host you're hoping through or from the return route it's using with you.
 * To see if the dropped packets are a separate occurrence or an ongoing issue, just run multiple traceroute. `mtr` does that automatically.
 
-### DNS
+## DNS
 
 * `nslookup` Has been deprecated and then brought back so depending on the version it's not the best, just use other tools
 * `host` is the simple one 
@@ -110,11 +78,45 @@ They're different on each distro
     * Ask for a zone transfer
     * If the zone isn't specified it will use `.` aka root.
 
-### nmap
+## Ports stat
 
-Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
+* Run as root
 
-### httprint
+| Commande | Définition |
+| :--- | :--- |
+| `ss -t` | See tcp port |
+| `ss -u` | See udp port |
+| `ss -p` | See program attach to the port |
+| `ss -l` | See listening port |
+| `ss -n` | Numeric name |
+
+## Ping
+
+* Sonar-like request basically saying "Hello ? Are you there ?"
+* Does not give any information about the host's services
+* Needs one argument, the hostname or ip address of the host
+* Successful pings tells you the speed of the response
+
+### Sweep ping
+
+* `fping -a -g 10.54.12.0/24`
+  * `-a` To show only live host
+  * `-g` To do a ping sweep instead of a simple ping 
+  * Redirects error to `2>/dev/null` because you'll always get some
+
+## ARP
+
+* `arp -a` montre la table contenant ces infos :
+  * Le hostname \(représenté par un ? s'il est inconnu\). Il est trouvé via le _System Name Service_, ce qui peut être inutilement long. Utiliser `-n` pour ne pas l'obtenir.
+  * Le temps d'expiration
+  * Souvent, la propre mac adresse de l'appareil est harcodée et notée comme permanente
+* `apr ip` Montre une entrée spécifique de la table
+
+## ND command
+
+They're different on each distro
+
+## httprint
 
 * Let's you fingerprint a web server
 * `httprint -P0 -h <target ip> -s <signature file>`

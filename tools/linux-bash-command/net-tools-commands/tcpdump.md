@@ -9,6 +9,7 @@
 * `tcpdump -D` to see which interface you can attach to
 * `tcpdump -i <interface>` Attach to an interface, use name or number
 * `tcpdump -n` Hide DNS request traffic
+* To check if you received a ping, use `tcpdump -i tun0 -n icmp`
 
 ## Example of an UDP packet
 
