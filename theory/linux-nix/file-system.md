@@ -2,12 +2,12 @@
 
 ## Introduction
 
-* In linux, everything is a file. 
-* File extensions also don't matters but we use them because they're parsed by other programs and help human gain context.
+* In linux, a lot of things are represented by file system
+* File extensions don't matters but we use them because they're parsed by other programs and help human gain context.
 
 ## Pseudo file system
 
-* These are special file systems that contain information about the current running system.
+* These are special file systems that contain information about the current running system
 * They only exist in the RAM, have a size of 0, and don't persist after a reboot
 * They're often parsed by other programs to be shown in a more pleasing manner or act upon
 
@@ -51,4 +51,8 @@
   * Pour des raisons de sécurité, **cela ne fonctionnera que sur les exe, pas sur les scripts** \([ref](https://unix.stackexchange.com/questions/364/allow-setuid-on-shell-scripts)\)
   * SUID utilisera l'utilisateur, SGID le groupe
   * `passwd` est un exemple type vu qu'il est lancé par les utilisateurs mais qu'il lui faut modifier `/etc/passwd` \(écrivable uniquement par root\).
+
+## Sources
+
+* man pages
 

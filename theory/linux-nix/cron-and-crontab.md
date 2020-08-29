@@ -1,19 +1,19 @@
 # Cron & Crontab
 
-## Cron & Crontab
+## Generalities
 
 * Lets you plan cmd execution
 * Can mail or log the result
 * Widespread use
 
-**Commandes**
+## **Commands**
 
 * `crontab -l` List your crontab 
 * `crontab -e` Edit your crontab 
 * `crontab -u <username>` \(As root\) Select crontab of another user
 * `crontab -r` Remove your crontab
 
-**Format** 
+## **Format** 
 
 * `<min> <hour> <month_day> <month> <week_day> <cmd>`
   * Min : 0-60
@@ -39,13 +39,13 @@
 * Steps are possible : `*/2` in the day field means "every other day"
 * In the cmd  `%` will be changed into newlines character, and anything following will be sent as standard input.
 
-**Example**
+## **Example**
 
 * `15 10 * * 3-5 echo "test" >> /home/lyssei/test.txt`
 * `15 10 1-10/2 * 5 cmd` At 10h15 every fifth day of the week & for day 1-10 of the month, un jour sur deux
 * `15 10 1,2,3,7 * 5 cmd` At 10h15 every fifth day of the week and the 1,2,3 & 7th day of the month
 
-**Fichiers**
+## **Files**
 
 * You shouldn't edit them directly, use `crontab` instead
 * `/var/spool/cron/crontabs/` User's crontab
@@ -53,4 +53,8 @@
   * In Debian, it's configured to run all exe owned \(and only writable by\) root in `/etc/cron.hourly/`, `/etc/cron.daily/`, `/etc/cron.weekly/` and `/etc/cron.monthly/`
 * `/etc/cron.d/` Program specific crontab
 * `/etc/cron.allow` Whitelist user who can use `crontab`, `/etc/cron.deny` blacklist them. If the 2 are present, `.allow` is used
+
+## Sources
+
+* man pages
 
