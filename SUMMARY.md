@@ -41,6 +41,7 @@
 ## Theory
 
 * [Linux / \*nix](theory/linux-nix/README.md)
+  * [Cgroups](theory/linux-nix/cgroups.md)
   * [Cron & Crontab](theory/linux-nix/cron-and-crontab.md)
   * [File system](theory/linux-nix/file-system.md)
   * [Systemd](theory/linux-nix/systemd.md)
