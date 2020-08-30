@@ -22,6 +22,7 @@
 ## Tools
 
 * [Linux / Bash Command](tools/linux-bash-command/README.md)
+  * [Mount](tools/linux-bash-command/mount.md)
   * [Net tools / commands](tools/linux-bash-command/net-tools-commands/README.md)
     * [Nmap](tools/linux-bash-command/net-tools-commands/nmap.md)
     * [tcpdump](tools/linux-bash-command/net-tools-commands/tcpdump.md)

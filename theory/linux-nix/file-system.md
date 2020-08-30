@@ -1,13 +1,15 @@
 # File system
 
-## Introduction
+## Generalities
 
-* In linux, a lot of things are represented by file system
+* All files accessible in a Unix system are a part of one big tree rooted at `/`
+* These files can be spread out on different devices, so they need to be mounted to the main tree, that is \(i think\) a VFS \(virtual file system\)
+* Lots of things are represented by filesystem \(for example systemd or cgroups\)
 * File extensions don't matters but we use them because they're parsed by other programs and help human gain context.
 
 ## Pseudo file system
 
-* These are special file systems that contain information about the current running system
+* These are special filesystems that contain information about the current running system
 * They only exist in the RAM, have a size of 0, and don't persist after a reboot
 * They're often parsed by other programs to be shown in a more pleasing manner or act upon
 
@@ -16,6 +18,7 @@
 * `man proc`
 * `/proc/[pid]/` Each subdirectory is a process \(identified by its pid\) and contains information about itself such as :
   * `/attr/` Security-related attributes
+  * `cgroup` To which cgroup the process belong
   * `cmd` Which cmd the process is currently running
   * `cmdline` Which cmd spawned the process
   * `comm` Name of the process
