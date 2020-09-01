@@ -3,9 +3,27 @@
 ## Generalities
 
 * All files accessible in a Unix system are a part of one big tree rooted at `/`
-* These files can be spread out on different devices, so they need to be mounted to the main tree, that is \(i think\) a VFS \(virtual file system\)
-* Lots of things are represented by filesystem \(for example systemd or cgroups\)
+* These files can be spread out on different devices, so they need to be mounted to the main tree, that is a VFS \(virtual file system\)
+* Lots of things are represented by filesystems \(for example systemd or cgroups\)
 * File extensions don't matters but we use them because they're parsed by other programs and help human gain context.
+
+## Special files
+
+* They're interface for a device driver, when a request is made \(aka read or write\), the associated driver deals with it
+* They're stored in `/dev`
+* There's 2 types of special files :
+  * Character special files \(or character device files\) : each character is handled one by one
+  * Block special files \(or block device files\) : calls can be buffered, characters are handled block by block
+
+## File descriptor
+
+* Each file created or opened get an associated file descriptor that can be use to target the file with read or write call \(for example\)
+* File descriptor are per processes, you can check all the fd of a process in `/proc/[PID]/fd`
+  * So the same file might be accessed from different fd number depending on the process
+* There's 3 special fd :
+  * 0 : STDIN
+  * 1 : STDOUT
+  * 2 : STDERR
 
 ## Pseudo file system
 
@@ -58,4 +76,6 @@
 ## Sources
 
 * man pages
+* Stack overflow - [Special files](https://unix.stackexchange.com/questions/60034/what-are-character-special-and-block-special-files-in-a-unix-system)
+* Stack overflow - [File descriptor](https://stackoverflow.com/questions/5256599/what-are-file-descriptors-explained-in-simple-terms)
 
