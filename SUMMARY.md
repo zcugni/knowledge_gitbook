@@ -94,9 +94,9 @@
 
 ## Oh hold
 
-* [To Do](oh-hold/misc.md)
 * [MySQL](oh-hold/mysql.md)
 * [ElasticSearch](oh-hold/elasticsearch.md)
 * [Finger](oh-hold/finger.md)
 * [Redis](oh-hold/redis.md)
+* [Microcorruption notes](oh-hold/microcorruption-notes.md)
 
