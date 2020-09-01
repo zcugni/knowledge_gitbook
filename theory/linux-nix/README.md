@@ -29,7 +29,7 @@ This is why you should always use the full path to the executable, because if so
 * `/dev/`
   * All devices
   * Regular part disk are written in the form "sda1", "sda2", "sdb1". The letter representing the disk and the number the partition.
-  * Contains \(for bash\) /dev/tcp/ to connect to
+  * Contains \(in bash\) `/dev/tcp/` to connect to
 * `/proc/` is detailed [here](https://zcugni.gitbook.io/notes/theory/linux-nix/file-system#proc)
 * Others :
 
@@ -50,7 +50,7 @@ This is why you should always use the full path to the executable, because if so
 * First process : before `init`, now [`systemd`](https://zcugni.gitbook.io/notes/theory/systemd)
 * Each process has a parent. If it dies, the previous one is attributed as parent
 * _Uid_ : Who owns the process
-* _Euid_ : Lets you give other permissions than the ones of the owner to the process.
+* _Euid_ : Lets you give other permissions than the ones of the process's owner
 * "Niceness" : Determines its priority in the cpu/resource usage \(the nicer it is, the less it's gonna use it\)
 
 ### Signals
@@ -65,6 +65,13 @@ This is why you should always use the full path to the executable, because if so
 * Sleeping : Waiting for something
 * Zombie state : Finished doing what it should and waiting to give back the info and be killed
 * Stopped : Was doing something but `SIGSTOP` received and waiting for `SIGCON`
+
+## Sockets
+
+* Sockets are an interface through which processes communicate, either locally or remotely
+* They're kind of like pipes, but more complex
+* They're identified through socket descriptor \(which are actually file descriptor\)
+* They're different types of socket that enable communicating through udp, tcp, internally, etc..
 
 ## Password
 
@@ -117,6 +124,7 @@ This is why you should always use the full path to the executable, because if so
 ## Sources
 
 * Man pages
+* Stack Overflow - [Sockets](https://unix.stackexchange.com/questions/16311/what-is-a-socket)
 * Misc research
 * [TutoriaLinux](https://www.youtube.com/channel/UCvA_wgsX6eFAOXI8Rbg_WiQ)
 
