@@ -222,6 +222,7 @@ C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
 * **Session Fixation** : Si l'application ne fournit pas un nouvel id de session à chaque connexion il est possible de pousser la victime à utiliser un id dont l'attaqueur à la connaissance et donc permettre à celui-ci de se faire passer pour elle.
 * If a service with "Pi" in it's name is used, try to ssh with default Rasberry Pi Credentials \(Pi - Rasberry\)
 * To enumerate user on wordpress, scripts use "url/?author=1", then 2, etc because it redirects to the user name.
+* Linux's ping default ttl is of 64, while windows's is of 127
 
 ## Sources
 

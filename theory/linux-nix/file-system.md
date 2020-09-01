@@ -4,7 +4,7 @@
 
 * All files accessible in a Unix system are a part of one big tree rooted at `/`
 * These files can be spread out on different devices, so they need to be mounted to the main tree, that is a VFS \(virtual file system\)
-* Lots of things are represented by filesystems \(for example systemd or cgroups\)
+* In Linux, every thing is a file or represented by filesystems \(for example systemd or cgroups\)
 * File extensions don't matters but we use them because they're parsed by other programs and help human gain context.
 
 ## Special files
