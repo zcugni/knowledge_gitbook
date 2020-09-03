@@ -58,6 +58,11 @@ I might not always use the right terms.
 | `pop arg1` | `mov @sp+, agr1` | Pops the stack to arg1, so set arg1 to `sp`and increment `sp` |
 | `call arg1` | / | Calls a function, for that it pushes the current value of  `pc` to the stack and then changes `pc` to arg1 |
 |  `ret` | `mov @sp+, pc` | Return \(aka exit\) a function, so pops the stack to `pc` |
+| `inc arg1` | `add #1,arg1` | Increment |
+| `incd arg1` | `add #`2`,arg1` | Double Increment |
+| `dec arg1` | `sub #1,arg1` | Decrement |
+| `decd arg1` | `sub #2,arg1` | Double Decrement |
+| `swpb` | / | Swap bytes \(for example, swap 007d to 7d00\) |
 
 ### Double operand
 
@@ -87,11 +92,18 @@ I might not always use the right terms.
   * `jge` Greater or equal
   * `jl` Less
 
+## Interrupts
+
+* There's a bunch of special interrupts from the exercises of microcorruption.com
+* These are special-purpose functions of the device
+* To use them, call the `INT` function, but first, push the interrupt code to the stack \(for example 0x7d\)
+* An explanation of all interrupts is given by the game manual
+
 ## Sources
 
-* microcorruption.com
-* [https://razvioverflow.github.io/](https://razvioverflow.github.io/microcorruption)
-* [https://en.wikipedia.org/wiki/TI\_MSP430](https://en.wikipedia.org/wiki/TI_MSP430)
+* [microcorruption.com](microcorruption-notes.md)
+* [razvioverflow](https://razvioverflow.github.io/microcorruption/)
+* Wikipedia's [page ](https://en.wikipedia.org/wiki/TI_MSP430)about the TI MSP430
 
 
 
