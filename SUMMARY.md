@@ -48,6 +48,7 @@
   * [File system](theory/linux-nix/file-system.md)
   * [Systemd](theory/linux-nix/systemd.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
+* [Binary, hex & bytes](theory/binary-hex-and-bytes.md)
 * [Misc](theory/misc/README.md)
   * [Terminologie](theory/misc/terminologie-misc.md)
   * [Tor](theory/misc/tor.md)

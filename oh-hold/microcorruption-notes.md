@@ -27,21 +27,6 @@ I might not always use the right terms.
     * C \(carry\)
   * R3 for `cg` \(Constant generation\)
 
-{% hint style="info" %}
-This should't be here, i'll move it later.  
-  
-There's different way to represent bits in memory, called endianness.
-
-* In **big-endian** the **most** significant byte _\(the leftmost byte\)_ is stored first, at the lowest address.
-* In **little-endian** the **least** significant byte _\(the rightmost byte\)_ is stored first, at the lowest address.
-
-\(Big-endian being the most logical to me\)
-
-read this : [https://betterexplained.com/articles/understanding-big-and-little-endian-byte-order/](https://betterexplained.com/articles/understanding-big-and-little-endian-byte-order/)
-
-In 16-bit, each pair of byte is reverse, in 64,-bit, each 4-bytes is reverse, etc 
-{% endhint %}
-
 ## Instructions
 
 * I won't detail all instructions, only the most useful to me
@@ -60,19 +45,6 @@ In 16-bit, each pair of byte is reverse, in 64,-bit, each 4-bytes is reverse, et
 * There's also suffix :
   * `.b` Byte operation
   * `.w` Word operation
-
-{% hint style="info" %}
-This shouldn't be here, i'll move it later :
-
-* A `bit` is the base unit in computer science
-* 4 bits are a `nibble` or a `half-byte`
-* 8 bits are a `byte`
-* 16 bits are a `word`
-* 32 bits are a `double word` \(dword\)
-* 64 bits are a `quad word (qword)`
-{% endhint %}
-
-
 
 ### Single operand
 
