@@ -6,38 +6,17 @@ description: >-
 
 # Memory Allocation \(linux, glibc\)
 
-## Intro
-
-Quand on exécute un programme, celui-ci reçoit un “address space” propre de mémoire virtuelle continue, elle est structurée ainsi :
-
-![](../../.gitbook/assets/structure_memory.png)
-
-* environment : variables d’env et arguments de ligne de commande
-* stack : argument de fonction, valeur de retour, valeur automatique \(toutes les variables déclarée sans malloc\). Grandit vers le bas \(enfin, le haut si on parle d’adresses\)
-* heap : toutes variables dynamiquement allouées, aussi appelée "free store". Grandit vers le haut \(enfin, le bas pour les adresses\)
-* uninitialized data : des variables statiques/globales initialisées à 0
-* initialized data : des variables statiques/globales initialisées
-* text : le programme \(le code\). C’est noté text, mais ca m’etonnerait pas que ce soit le binaire plutôt.
-
-## Mémoire physique
-
-Il existe 2 types de mémoire physique principaux, la mémoire vive \(RAM\) et la mémoire morte \(disque dur\).
-
-La RAM est la _main memory_ et celle utilisée par le CPU. Elle s’appelle _Random Access Memory_ car celui-ci peut accéder à n’importe quelle partie de cette mémoire directement \(cela prendra toujours le même temps\). Les données dans la RAM sont perdues quand on coupe l’alimentation.
-
-La mémoire morte est elle la _secondary memory_ et est bien plus grosse. Elle est aussi conservée sans alimentation.
-
 ## Mémoire virtuelle
 
 Elle est divisée en _page_ \(d’en général 4kb\). La _page table_ permet de mapper chaque page virtuelle \(aussi dite logique\) à la mémoire physique \(aussi dite _page frame_\). La traduction entre adresses virtuelles et physiques est gérée par le _Memory Management Unit_ \(MMU\). En guise d’optimisation, il conserve les mapping utilisés récemment dans le _Translation Lookaside Buffer_ \(TLB\).
 
-Si la RAM est pleine, le CPU peut transférer des pages dans la mémoire morte et les récupérer après quand elles sont demandées, c’est ce qu’on appelle le _swapping_. Il existe différent algorithmes permettant de déterminer quelle page déplacer, et quand le CPU passe plus de temps à les échanger qu'à exécuter des instructions, on appelle ça du _trashing_.
+Si la RAM est pleine, le CPU peut transférer des pages dans la mémoire de masse et les récupérer après quand elles sont demandées, c’est ce qu’on appelle le _swapping_. Il existe différent algorithmes permettant de déterminer quelle page déplacer, et quand le CPU passe plus de temps à les échanger qu'à exécuter des instructions, on appelle ça du _trashing_.
 
 Si le processus demande l'accès à une adresse qui ne peut pas être traduite en adresse physique \(car il n’en a pas les droits par exemple\), une `segmentation fault` est générée.
 
 Par contre, si la page correspondante n’est pas chargée dans la RAM \(car elle a été swappée\), cela génère une `page fault`, et il va falloir la récupérer avant de continuer.
 
-Cette utilisation de la mémoire morte, si elle n’est pas excessive, permet de simuler beaucoup plus d’espaces qu’il n’y en a réellement dans la RAM.
+Cette utilisation de la mémoire de masse, si elle n’est pas excessive, permet de simuler beaucoup plus d’espaces qu’il n’y en a réellement dans la RAM.
 
 ## Heap allocation - introduction
 
