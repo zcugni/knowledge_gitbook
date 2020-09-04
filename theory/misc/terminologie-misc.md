@@ -4,24 +4,40 @@ description: To polish
 
 # Terminologie
 
-## Binaire
+## List vs Array
 
-* Un octet \(ou byte\), est composé de 8 bits. Plus on avance vers la gauche, plus le “poids” du bits est élevé
-* Une des façons d’écrire un nombre négatif est de mettre le tout premier bit à 1.
-
-## Listes & tableaux
-
-* La raison pour laquelle on peut accéder à une case d’un tableau par son index, c’est qu’on lui a réservé un espace mémoire côte à côte, et que donc, quand on accède à une certaine case, on accède en fait à l’adresse mémoire de la 1ere + \(l’index \* la taille des choses stockées\).
-* Définir le type du tableau permet donc d’indiquer de quel “pas” on doit avancer pour chaque élément.
-* Une liste quant à elle n’a pas de zone réservée au préalable, donc on a pas besoin de réserver un espace dès le début, mais on ne peut pas non plus accéder à un index en particulier.
+* Since array get a pre-allocated space of a defined size, each data of the array is next to each other in memory
+  * This is why we can use the base address + index \(aka array\[x\]\) to get to the desired part
+    * The index is multiplied by the size of the data's type
+  * This is also why you can't just extend them
+* List don't get pre-allocated, so the different data can be at different places in memory
+  * Which is way we need a pointer to the next one, and why we need to run through each node
+  * This is also why we can remove or add node whenever we want
 
 ## Heap vs stack
 
-* Initialement, “Heap” et “Stack” désignaent simplement deux listes, une en type d’arbre, l’autre en LIFO.
-* Mais ces noms ont ensuite été donné aux deux endroits de la mémoire vive utilisée par les programme, la heap et le stack. \(Plus que deux endroits, c’est deux façon de gérer une partie de la mémoire j’imagine\).
-* La stack est plus rapide d’accès que la heap, mais plus petite.
-* Les variables locales et les appels de fonctions sont conservés sur la stack tandis que toutes les variables dynamiquement allouées sont conservées sur la heap.
+* Heap & stack are data structure, the first one is a tree and the other a LIFO list
+* These names also reference 2 areas of the memory \(RAM\)
+* Stack
+  * Faster
+  * Smaller
+  * We push function, parameters & local variable to it
+* Heap
+  * Slower
+  * Bigger
+  * Used for dynamic allocation \(with, for example, `malloc`\)
+* Les variables locales, les appels de fonctions sont conservés sur la stack tandis que toutes les variables dynamiquement allouées sont conservées sur la heap.
 * Les deux utilisent la RAM \(la mémoire vive de l’ordi, en opposition avec les disques durs, qu’on appelle apparemment aussi mémoire de masse\).
+
+## RAM vs Hard Drive
+
+* The RAM \(Random Access Memory\) is used by programs &  co
+  * It's fast
+  * It's volatile \(meaning its content disappear on power off\)
+  * It's called "Random" because any part of the memory can be accessed regardless of where it's written
+* Hard drive & co are the storage unit \(also called "mémoire de masse" in french\)
+  * It's slower
+  * It's persistent \(doesn't disappear on power off\)
 
 ## Race Condition & Mutex
 
