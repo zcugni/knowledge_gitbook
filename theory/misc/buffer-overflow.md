@@ -52,5 +52,10 @@ This is how the registers and the stack are modified when you call a function :
 * This enables us to decide which instruction will be read next
 * Remark : The local variables are at lower addresses than the return address. Since array grow towards higher addresses, it's possible to override the return address.
 
+## Sources
+
+* [dhavalkapil.com](https://dhavalkapil.com/blogs/Buffer-Overflow-Exploit/)
+* [Stack overflow](https://security.stackexchange.com/questions/135786/if-the-stack-grows-downwards-how-can-a-buffer-overflow-overwrite-content-above)
+
 
 

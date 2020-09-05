@@ -16,7 +16,7 @@ description: To polish
 
 ## Heap vs stack
 
-* Heap & stack are data structure, the first one is a tree and the other a LIFO list
+* Heap & stack are data structures, the first one is a tree and the other a LIFO list
 * These names also reference 2 areas of the memory \(RAM\)
 * Stack
   * Faster
@@ -25,9 +25,8 @@ description: To polish
 * Heap
   * Slower
   * Bigger
-  * Used for dynamic allocation \(with, for example, `malloc`\)
-* Les variables locales, les appels de fonctions sont conservés sur la stack tandis que toutes les variables dynamiquement allouées sont conservées sur la heap.
-* Les deux utilisent la RAM \(la mémoire vive de l’ordi, en opposition avec les disques durs, qu’on appelle apparemment aussi mémoire de masse\).
+  * Used for dynamic allocation \(with for example `malloc`\)
+* Return address, parameters and local variables are stored in the stack
 
 ## RAM vs Hard Drive
 
@@ -136,5 +135,6 @@ Reversable : If `C = A xor B` then `A = C xor B` \(and `B = C xor A`\)
 ## Sources
 
 * Misc Research
+* [blackblaze.com](https://www.backblaze.com/blog/whats-diff-ram-vs-storage/)
 * [Pentesterlab](https://pentesterlab.com/)
 

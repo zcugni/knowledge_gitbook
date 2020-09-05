@@ -14,5 +14,9 @@
 * Initialized global & static var
 * Text : used by the loader, often read-only
 
+## Sources
+
+* [dhavalkapil.com](https://dhavalkapil.com/blogs/Buffer-Overflow-Exploit/)
+
 
 
