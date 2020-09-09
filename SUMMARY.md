@@ -50,7 +50,7 @@
 * [Misc](theory/misc/README.md)
   * [Binary, hex & bytes](theory/misc/binary-hex-and-bytes.md)
   * [Bitcoin](theory/misc/bitcoin.md)
-  * [Buffer Overflow](theory/misc/buffer-overflow.md)
+  * [Buffer Overflow & Shellcode](theory/misc/buffer-overflow.md)
   * [MCD / MLD](theory/misc/mcd-mld.md)
   * [Memory Allocation \(linux, glibc\)](theory/misc/memory-allocation-linux-glibc.md)
   * [Process memory](theory/misc/untitled.md)
@@ -101,4 +101,8 @@
 * [Finger](oh-hold/finger.md)
 * [Redis](oh-hold/redis.md)
 * [Microcorruption notes](oh-hold/microcorruption-notes.md)
+
+---
+
+* [Kerberos](kerberos.md)
 

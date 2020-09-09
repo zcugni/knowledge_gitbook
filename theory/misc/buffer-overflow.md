@@ -1,10 +1,10 @@
-# Buffer Overflow
+# Buffer Overflow & Shellcode
 
 ## Prerequisite
 
 To explain how a buffer overflow works, I first need to describe what the memory of a process running looks like and how the registers are use.
 
-### Register
+### Registers
 
 These three interest us :
 
@@ -37,8 +37,8 @@ This is how the registers and the stack are modified when you call a function :
   * Set **bp** to **sp** \(so the **return address**\)
   * Push **local variables** to the stack, **sp** is changed
 * Just before the function returns, this is the state
-  * The stack is filled by the **arguments**, the **return address** and the **old pb** address
-  * **ip** Stills points to the `func` address
+  * The stack is filled by the **arguments**, the **return address** and the **old bp** address
+  * **ip** Points to the `ret` call 
   * **sp** Points to the **old bp**
   * **bp** Points to the **return address**
 * These are the steps taken to return the function :
@@ -51,6 +51,12 @@ This is how the registers and the stack are modified when you call a function :
 * Buffer Overflows work by overflowing the local variable so that they write over the **return address**
 * This enables us to decide which instruction will be read next
 * Remark : The local variables are at lower addresses than the return address. Since array grow towards higher addresses, it's possible to override the return address.
+
+## Shellcode
+
+* Once you redirected the `ip` to your malicious input, you can do whatever you want with it, like call other instructions.
+* Don't forget that if some type of bits are sanitized, you can for example use registers to store values and do arithmetic operations. 
+  * For example, if you need to push a certain value as parameter but it's gonna be sanitized, you can move another value to a register, add or subtract from it so that it equals what you want, and push the register instead of directly the value.
 
 ## Sources
 

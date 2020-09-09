@@ -36,7 +36,7 @@ Le but d'un chiffrement est de protéger du contenu et de le rendre récupérabl
 
 ### Symétrique
 
-Une même clé pour le chiffrement et le déchiffrement, ce qui la rends moins sécu.
+Une même clé secrète est utilisée pour le chiffrement et le déchiffrement, ce qui la rends moins sécu.
 
 #### Stream
 

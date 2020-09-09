@@ -35,6 +35,23 @@
   * Big-endian is read in the same way we would \(at least in occidental languages\)
   * Little-endian lets you directly access the lowest byte, and so rapidly check if it's an even or odd number \(for example\)
 
+## Bitwise operators
+
+* This is the truth table, it shows what result the operator would give for any combination of A & B
+
+| A | B | AND \(&\) | OR \(\|\) | XOR \(^\) |
+| :--- | :--- | :--- | :--- | :--- |
+| 0 | 0 | 0 | 0 | 0 |
+| 0 | 1 | 0 | 1 | 1 |
+| 1 | 0 | 0 | 1 | 1 |
+| 1 | 1 | 1 | 1 | 0 |
+
+* There's also a NOT \(~\), which gives the opposite of the value
+* Given two binary numbers a bitwise operation will compare each bit one by one, for example, with an OR :
+  * A = 00101010 
+  * B = 10100100
+  * res = 10101110
+
 ## Hex
 
 * Hex is base-16

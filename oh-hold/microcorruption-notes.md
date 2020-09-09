@@ -22,7 +22,7 @@ I might not always use the right terms.
   * R0 for `pc`
   * R1 for `sp`
   * R2 for `sr` \(Status Register\) - Flags used by conditional jumps
-    * Z \(zero\)
+    * Z \(zero\) \(It's set when it's value is 0003\)
     * N \(negative\)
     * C \(carry\)
   * R3 for `cg` \(Constant generation\)
@@ -99,9 +99,14 @@ I might not always use the right terms.
 * To use them, call the `INT` function, but first, push the interrupt code to the stack \(for example 0x7d\)
 * An explanation of all interrupts is given by the game manual
 
+## Disassemble
+
+* Some functions/instructions might not be written into memory when you launch a program \(they can be written from a loop afterwards for example\)
+* In this case, they won't be initially disassemble by your debugger, you need to do it explicitly afterwards \(with an online tool for example\)
+
 ## Sources
 
-* [microcorruption.com](microcorruption-notes.md)
+* [microcorruption.com](https://microcorruption.com/)
 * [razvioverflow](https://razvioverflow.github.io/microcorruption/)
 * Wikipedia's [page ](https://en.wikipedia.org/wiki/TI_MSP430)about the TI MSP430
 

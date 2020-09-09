@@ -119,19 +119,6 @@ They spread over the network by exploiting os & software vulnerabilities or by u
 
 They're usually part of another malware and they offer an entry point into the target system.
 
-## XOR
-
-Bitwise operator : exclusive or.
-
-| A | B | Result |
-| :--- | :--- | :--- |
-| 0 | 0 | 0 |
-| 1 | 1 | 0 |
-| 0 | 1 | 1 |
-| 1 | 0 | 1 |
-
-Reversable : If `C = A xor B` then `A = C xor B` \(and `B = C xor A`\)
-
 ## Sources
 
 * Misc Research

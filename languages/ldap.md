@@ -1,6 +1,6 @@
 ---
 description: >-
-  Disclaimer : Not complete. Also, I've just read the doc and not use it. C'est
+  Disclaimer : Not complete. Also, I've just read the doc and not used it. C'est
   une base pour quand je tomberais dessus, auquel cas je
   compléterais/corrigerais cette entrée
 ---
