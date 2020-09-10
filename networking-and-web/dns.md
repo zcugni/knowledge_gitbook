@@ -1,46 +1,101 @@
 # DNS
 
-## Généralités
+## Generalities
 
-* DNS \(_Domain Name System_\) is the world's must successful distributed database
-* Map human-friendly hostnames to ip addresses
-* Forward DNS maps hostnames to IP addresses, reverse DNS does the opposite
-* Forward DNS can return multiple addresses, reverse should only return 1
-* Runs on TCP & UDP on port 53
-* A DNS server \(also called a _nameserver_\) searches for and collects address to hostname mappings
-* Domain names are divided by zones \(each dot separate them\). All top level domains \(.com, .net, etc\) are contained in the _root zone_.
-* DNS is very hierarchical and zone inside other ones are called child zones.
+* The _Domain Name System_ \(DNS\) is the world's must successful distributed database 
+* Maps human-friendly hostnames to ip addresses
+  * Hostname to addresses is called forward and it can return multiple addresses
+  * Addresses to hostname is called reverse and should only return 1 entry
+* Use UDP except when the request are too big \(for example for zone transfer\)
+* Runs on port 53
+* A DNS server \(also called a _nameserver_\) searches for and collects the mappings
+* Domain names are divided by zones \(each dot separate them\)
+  * All top level domains \(.com, .net, etc\) are contained in the _root zone_
+* DNS is hierarchical and zone inside other ones are called child zones
 
 ![](../.gitbook/assets/dns.png)
 
 ## Authoritative & Recursive DNS
 
-* DNS servers come in 2 varieties : 
-  * **Authoritative** : contains information for specific domain. \(A complete collection of data for a zone is called a _zone file_\)
-  * **Recursive** : provides DNS lookups for clients.
-* They should be on different machines.
-* Recursive DNS servers cache collected answers until a per-DNS-record timer expires
+* DNS servers comes in 2 sorts and should be on different machines
+
+### Authoritative
+
+* Contains information for specific domains
+* A complete collection of data for a zone is called a _zone file_
+* Authoritative servers are duplicated 
+  * To copy all the entries from a zone to another server, we use _zone transfer_
+    * Done via AXFR with `dig`
+    * By default, anybody can ask for a zone transfer
+
+### Recursive
+
+* Provides DNS lookups for clients
+* Cache collected answers until a per-DNS-record timer expires
 * When configuring an host, you need to give it the ip address of it's \(recursive\) DNS server \(if the host use DHCP, it can do that automatically\).
 
 ### Request process
 
-1. When you ask for a page, your computer ask a recursive nameserver for the A record containing the corresponding IP address. 
-2. If it doesn't have the response in it's cache, the nameserver transfer the request to the corresponding root name server. 
-3. It gives back the address of the corresponding child zone and so on until you arrive at the authoritative server of the address. 
-4. So for www.example.com, you first ask .com, which gives back the address of www.example.com, which gives back example.com which returns the answer.
+* When you request a page, your computer ask a recursive nameserver for the A record containing the corresponding IP address
+* If it doesn't have the response in it's cache, the nameserver transfer the request to the corresponding root name server
+* It gives back the address of the corresponding child zone and so on until you arrive at the authoritative server of the address
+* So for www.example.com, you first ask .com, which gives back the address of www.example.com, which gives back example.com which returns the answer.
 
 ## Record types
 
-DNS servers grew organically and now handle way too many things, each of these is contained within a record. Here's a few :
+* DNS servers grew organically and now handle way too many things
+* Those are some of the records type :
 
-| Record name | Info |
-| :--- | :--- |
-| A | IPv4 address |
-| AAAA | IPv6 address |
-| PTR \(pointer\) | Hostname |
-| SOA \(Start of Authority\) | Timing & responsibility info for the zone you're searching \(1\) |
-| CNAME \(canonical name\) | DNS alias, redirecting one name to another |
-| MX \(mail exchanger\) | Identifies one of the mail servers for a zone |
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Record name</th>
+      <th style="text-align:left">Info</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">A</td>
+      <td style="text-align:left">Maps a hostname to an IPv4 address</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">AAAA</td>
+      <td style="text-align:left">Maps a hostname to an</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">CNAME (canonical name)</td>
+      <td style="text-align:left">Maps an alias to a hostname</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">PTR (pointer)</td>
+      <td style="text-align:left">Maps an IPv4 address to a hostname. The reverse of an A record.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">NS</td>
+      <td style="text-align:left">Specifies a name server for a domain</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">SOA (Start of Authority)</td>
+      <td style="text-align:left">Timing &amp; responsibility info for the zone you&apos;re searching (1)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">SRV</td>
+      <td style="text-align:left">Used to locate servers that host specific services</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">MX (mail exchanger)</td>
+      <td style="text-align:left">Used to locate a mail server</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">TXT</td>
+      <td style="text-align:left">
+        <p></p>
+        <p>Can contain various data. Often used for verifying domains and security
+          reasons.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 \(1\) Aka "How long should a recursive nameserver cache entries" or "Who do i contact for problems with this domain ?"
 
@@ -51,15 +106,6 @@ DNS servers grew organically and now handle way too many things, each of these i
 * `NXDOMAIN` The protocol worked, but there's no authoritative answer for that name
 * `SERVFAIL` Something went wrong and you can't get an answer
 
-## Zone Transfer
-
-*  Les serveurs DNS \(autoritaire ?\) pour des zones données sont généralement dupliqués pour éviter les problèmes
-* Les "Zones Transfer" permettent de copier toutes les entrées \(et donc les host\) d'une _zone_ sur un autre serveur
-  * Donc même si ça ne fonctionne pas pour la root, ça vaut la peine de tester pour d'autres zones
-* Généralement fait via AXFR \(avec `dig`\)
-* Par défaut, n'importe qui peut demander une Zone Transfer. Il faut modifier le fichier de config pour restreindre cette fonctionnalité à certaines ip
-* Généralement, les requêtes DNS se font via UDP, elles passent par TCP quand elles sont trop grosses, ce qui est le cas pour un Zone Transfer, ça peut donc être un bon indicateur que cela est faisable
-
 ## Other location of mapping
 
 * You can add local mappings into the host file
@@ -67,8 +113,8 @@ DNS servers grew organically and now handle way too many things, each of these i
   * `C:\\Windows\System32\drivers\etc\hosts`
   * Format : `ipaddress hostname aliases`
   * Lookup in an host file is faster than querying a DNS, but the difference shouldn't be important
-* Name resolution can can even be done with LDAP or other local db
-* The system checks it's source in a specific order and takes the first answer it finds.
-* Windows always checks the host file first
-* Unix let you config this in `/etc/nsswitch.conf` or `/etc/host`
+* Name resolution can even be done with LDAP or other local db
+* The system checks it's source in a specific order and takes the first answer it finds
+  * Windows always checks the host file first
+  * Unix let you config this in `/etc/nsswitch.conf` or `/etc/host`
 
