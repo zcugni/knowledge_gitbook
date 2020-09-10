@@ -11,6 +11,7 @@
 * Use [Kerberos ](https://zcugni.gitbook.io/notes/kerberos)for authentication
 * Use [LDAP ](https://zcugni.gitbook.io/notes/languages/ldap)as it's access protocol
 * Needs a DNS to work
+  * SVR records are used to locate domain controllers
 * Abbreviated AD
 
 ## Objects
@@ -35,6 +36,11 @@ These are some of the default types :
 * **Contacts** : used for email 
 * **Shared Folder**
 * **Shared Printer**
+* **Connection** : Specifies which domain controllers replicate with each other, how often and their naming contexts
+* **Subnets**
+* **Site :** A collection of subnet
+* **Site link** : Configure which sites are connected to each other 
+* **Site link Bridge :** Represent the connection in itself \(between sites\)
 
 ### **Attributes**
 
@@ -68,14 +74,21 @@ These are some of the default types :
 
 * Abbreviated AD DS
 * The main role, that deals with the principle functionalities
-* Additional server with this role are named _domain controller_
+* Additional server with this role are named **domain controller**
 * It's main functions are \(represented as roles\) :
   * **Schema Master** : A forest wide role that handles all the changes to the schema 
   * **Domain Naming Master** : A forest wide role that handles domain names \(add & remove operation for example\)
   * **PDC Emulator** : Handles password changes, user lockouts, group policy and is the time server for the clients
   * **RID Master** : When objects are created, they're assigned a unique SID and a relative id \(RID\). This role ensures that there's no duplicate SID, and no duplicate RID within a same domain 
   * **Infrastructure master** : A domain wide role used to reference objects in other domains
-* They're all installed on the first domain controller of a new forest, but you can then move them
+  * They're all installed on the first domain controller of a new forest, but you can then move them
+* When you install this service, it'll automatically create the DNS SRV records in those folders :
+  * `Forward Lookup Zones/<domain_name>/_msdcs/dc/_sites/Default-First-Site-Name/_tcp`
+  * `Forward Lookup Zones/<domain_name>/_msdcs/dc/_tcp`
+* Replication of domain controller : 
+  * The **Knowledge Consistency Checker** \(KCC\) is a process that runs on all dc and generates a replication topology based off the sites, subnets and site link objects
+  * Intra-Site Replication : Replication between dc within a same site 
+  * Inter-Site Replication : Replication between dc within separates site 
 
 ### Others
 
@@ -129,10 +142,6 @@ These are some of the default types :
 
 * [docs.microsoft.com](https://docs.microsoft.com/en-us/archive/blogs/ashwinexchange/understanding-active-directory-for-beginners-part-1)
 * [activedirectorypro.com](https://activedirectorypro.com/glossary/)
-
-
-
-* to check : [https://www.windows-active-directory.com/](https://www.windows-active-directory.com/)
 
 
 

@@ -8,8 +8,8 @@
   * Addresses to hostname is called reverse and should only return 1 entry
 * Use UDP except when the request are too big \(for example for zone transfer\)
 * Runs on port 53
-* A DNS server \(also called a _nameserver_\) searches for and collects the mappings
-* Domain names are divided by zones \(each dot separate them\)
+* A DNS server \(also called a **nameserver**\) searches for and collects the mappings
+* Domain names are divided by **zones** \(each dot separate them\)
   * All top level domains \(.com, .net, etc\) are contained in the _root zone_
 * DNS is hierarchical and zone inside other ones are called child zones
 
@@ -117,4 +117,15 @@
 * The system checks it's source in a specific order and takes the first answer it finds
   * Windows always checks the host file first
   * Unix let you config this in `/etc/nsswitch.conf` or `/etc/host`
+
+## Dynamic DNS \(DDNS\)
+
+* A method for clients to register and dynamically update their resource records with a DNS server
+* This allows clients that use DHCP to auto update their DNS record when their IP address changes
+
+## Sources
+
+* _Networking for Systems Administrators_ by Michael W. Lucas
+* [Techninjistics](https://www.youtube.com/user/techninjistics)
+* [activedirectorypro.com](https://activedirectorypro.com/glossary/#dns)
 
