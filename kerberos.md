@@ -6,6 +6,7 @@
 * It follows the Single Sign-On principle \(SSO\) \(with one authentication, all the services are available\)
 * Kerberos use a system of tickets and a trusted third party
 * It use symmetric key for encryption
+* Used by default in Windows
 
 ## Entities
 
@@ -27,6 +28,7 @@
   * A session key created by the AS
     * Used to encrypt communication between the client and the TGS
   * One shared between the TGS and the server \(used for service tickets\)
+* Tickets use timestamps and won't be valid if the time seem incorrect
 
 ## Process
 
