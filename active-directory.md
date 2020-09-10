@@ -13,12 +13,6 @@
 * Needs a DNS to work
 * Abbreviated AD
 
-## Misc
-
-* 2 naming convention
-  * UPN \(user@domain\)
-  * The ldap one
-
 ## Terminology
 
 ### Objects
@@ -101,20 +95,29 @@
 * **userPrincipalName** \(UPN\) : Login name \(in the `user@domain` format\)
 * **objectGUID** : Uniquely identify a user account
 * **sAmAccountName** : Old format for logon 
-
-a finir 
-
-* **objectSID** – This attribute is the security identifier \(SID\) of the user. The SID is used by the server to identify a user and their group membership to authorize users access to domain resources. 
-* **sIDHistory** – This attribute contains previous SIDs for the user object. This is only needed if a user has moved to another domain. 
-* **Relative Distinguished Name \(RDN\)** – The RDN is the first component of the distinguished name. It is the name of the object in Active Directory relative to its location in the hierarchical structure of AD
-* **Distinguished Name \(DN\)** – The DN attribute locates objects in the directory. This attribute is commonly used by services and applications to locate objects in Active Directory. a DN is made up of the following components: 
-  * CN – common name
+* **objectSID** : Security identifier \(SID\) of the user,  used by the server to identify a user and their group membership to authorize access to resources 
+* **sIDHistory** : Contains previous SIDs of the user, only needed if the user was moved to another domain
+* **Relative Distinguished Name** \(RDN\) : A part of the DN
+* **Distinguished Name** \(DN\) – Full path to the object, made of :
+  * CN – common name \(lowest in the hierarchy\)
   * OU – organizational unit
-  * DC – domain component
+  * DC – domain component \(highest in the hierarchy\) 
 
-There are many classes and attributes unless your programming or troubleshooting some advanced issue it is not necessary to know everything about the schema. 
+### Groups
 
+* Two types :
+  * **Distribution** : Used for email 
+  * **Security** : Used for permissions
+* There's 3 scopes for groups :
+  * **Universal** : Any object 
+  * **Global** : Can contain objects from the domain and be used in any tree or forest 
+  * **Domain Local** : Can contain objects from any domain but can only be applied to the domain it was created in
 
+## AD services
+
+#### Active Directory Web Services \(ADWS\)
+
+This service was introduced in Windows Server 2008 R2. It is automatically installed with ADDS or ADLDS role and is configured to run automatically. This service provides remote management of any local directory services.
 
 ## Others
 
