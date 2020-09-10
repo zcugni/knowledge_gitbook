@@ -2,7 +2,7 @@
 
 ## Généralités
 
-* DNS \(_Domain Name System_\) is the world's must successful distributed databse.
+* DNS \(_Domain Name System_\) is the world's must successful distributed database
 * Map human-friendly hostnames to ip addresses
 * Forward DNS maps hostnames to IP addresses, reverse DNS does the opposite
 * Forward DNS can return multiple addresses, reverse should only return 1
@@ -15,9 +15,9 @@
 
 ## Authoritative & Recursive DNS
 
-* DNS servers come in 2 varieties : authoritative & recursive
-* The first one contains information for specific domain. \(A complete collection of data for a zone is called a _zone file_\)
-* The second one provide DNS lookups for clients.
+* DNS servers come in 2 varieties : 
+  * **Authoritative** : contains information for specific domain. \(A complete collection of data for a zone is called a _zone file_\)
+  * **Recursive** : provides DNS lookups for clients.
 * They should be on different machines.
 * Recursive DNS servers cache collected answers until a per-DNS-record timer expires
 * When configuring an host, you need to give it the ip address of it's \(recursive\) DNS server \(if the host use DHCP, it can do that automatically\).
@@ -65,7 +65,7 @@ DNS servers grew organically and now handle way too many things, each of these i
 * You can add local mappings into the host file
   * `/etc/hosts/`
   * `C:\\Windows\System32\drivers\etc\hosts`
-  * Format : ipaddress hostname aliases
+  * Format : `ipaddress hostname aliases`
   * Lookup in an host file is faster than querying a DNS, but the difference shouldn't be important
 * Name resolution can can even be done with LDAP or other local db
 * The system checks it's source in a specific order and takes the first answer it finds.

@@ -62,54 +62,23 @@ These are some of the default types :
   * The first domain deployed in a forest is the _root domain, it doesn't change_
   * It contains the Enterprise Admins and Schema Admins groups
 
-## Terminology
-
-### Global Catalog \(GC\) server
-
-* Contains a full replica of all objects
-* Used to perform forest wide searches
-* By default the first domain controller in a domain is designated as the GC server  
-
-### Jet Database Engine
-
-* The Active Directory database is based on Microsoft’s Jet Blue engine
-* It utilizes the Extensible Storage Engine \(ESE\)
-* The database is a single file named `ntds.dit`
-* By default it's stored in the `%SYSTEMROOT%\NTDS` folder and each domain controller 
-
-### Read-Only Domain Controller \(RODC\) server
-
-* Holds a read-only copy of the AD database
-* Use for branch office location or location with poor security
-
-### Schema
-
-* Defines every object class \(and their attributes\) that can be used in a forest
-
-### SYSVOL
-
-* A shared folder on each DC
-* The default location is `%SYSTEMROOT%\SYSVOL\sysvol`
-* Contains :
-  * Group Policy Objects
-  * Folders
-  * Scripts
-  * Junction Points
-
 ## AD services
 
-* AD Domain Service : The server that runs the Active Directory Domain Service role
-  * Domain controller : another server that runs the Active Directory Domain Service role
-  * It's advised to run multiples for redundancy
-  * **FSMO**
-    * Functions of a domain controller \(represented as roles\)
-    * They're all installed on the first domain controller of a new forest, but you can then move them
-    * Available roles :
-      * **Schema Master** : A forest wide role that handles all the changes to the Active Directory schema 
-      * **Domain Naming Master** : A forest wide role that handles domain names \(add & remove operation for example\)
-      * **PDC Emulator** : Handles password changes, user lockouts, group policy and is the time server for the clients
-      * **RID Master** : When objects are created, they're assigned a unique SID and a relative id \(RID\). This role ensures that they're no duplicate SID, and no duplicate RID within a same domain 
-      * **Infrastructure master** : A domain wide role used to reference objects in other domains
+### Domain Service
+
+* Abbreviated AD DS
+* The main role, that deals with the principle functionalities
+* Additional server with this role are named _domain controller_
+* It's main functions are \(represented as roles\) :
+  * **Schema Master** : A forest wide role that handles all the changes to the schema 
+  * **Domain Naming Master** : A forest wide role that handles domain names \(add & remove operation for example\)
+  * **PDC Emulator** : Handles password changes, user lockouts, group policy and is the time server for the clients
+  * **RID Master** : When objects are created, they're assigned a unique SID and a relative id \(RID\). This role ensures that there's no duplicate SID, and no duplicate RID within a same domain 
+  * **Infrastructure master** : A domain wide role used to reference objects in other domains
+* They're all installed on the first domain controller of a new forest, but you can then move them
+
+### Others
+
 * AD Web Services \(ADWS\)
   * Automatically installed with ADDS or ADLDS role and configured to run automatically
   * Provides remote management of any local directory services
@@ -122,9 +91,39 @@ These are some of the default types :
 * AD Rights Management Services \(AD RMS\)
   * Protects documents by defining who can open, modify, print, forward, etc documents 
 
-## Others
+## Other terms
 
-What is root domain in Active Directory?
+### Schema
+
+* Defines every object class \(and their attributes\) that can be used in a forest
+
+### Global Catalog \(GC\) server
+
+* Contains a full replica of all objects
+* Used to perform forest wide searches
+* By default the first domain controller in a domain is designated as the GC server  
+
+### Jet Database Engine
+
+* The database is based on the Jet Blue engine
+* It utilizes the Extensible Storage Engine \(ESE\)
+* The database is a single file named `ntds.dit`
+* By default it's stored in the `%SYSTEMROOT%\NTDS` folder and each domain controller 
+
+### Read-Only Domain Controller \(RODC\) server
+
+* Holds a read-only copy of the database
+* Used for branch office location or location with poor security
+
+### SYSVOL
+
+* A shared folder on each DC
+* The default location is `%SYSTEMROOT%\SYSVOL\sysvol`
+* Contains :
+  * Group Policy Objects
+  * Folders
+  * Scripts
+  * Junction Points
 
 ## Sources
 
