@@ -16,7 +16,6 @@
   * [RCE](pen-test/vulnerabilities/rce.md)
   * [Broken Access Control & File Inclusion](pen-test/vulnerabilities/broken-access-control-and-file-inclusion.md)
   * [Misc Attack](pen-test/vulnerabilities/misc-attack.md)
-* [Reverse engineering](pen-test/reverse-code.md)
 * [Good Practices](pen-test/good-practices.md)
 
 ## Tools
@@ -62,7 +61,7 @@
   * [Fonction de coûts](theory/machine-learning/fonction-de-couts.md)
   * [Coursera](theory/machine-learning/coursera.md)
   * [Backward Elimination](theory/machine-learning/backward-elimination.md)
-* [Git Theory](theory/git.md)
+* [Git](theory/git.md)
 
 ## Networking & Web
 

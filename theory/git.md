@@ -2,7 +2,7 @@
 description: 'Disclaimer : Content is good but format isn''t up to standard'
 ---
 
-# Git Theory
+# Git
 
 ## Évolutions des gestionnaires de contrôles
 
