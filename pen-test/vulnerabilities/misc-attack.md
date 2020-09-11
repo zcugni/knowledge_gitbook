@@ -201,6 +201,14 @@ C’est notamment un problème récurrents dans les “urls parsing” \(même l
 
 C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
 
+## Kerberoast
+
+* This is a vulnerability using Active Directory and Kerberos
+* 2 aspects make this attack possible :
+  * Kerberos user can ask for tickets for services they don't have the rights to use
+  * AD services tickets are encrypted with the NTLM hash of the service account instead of a more random/secure option
+* Because of all of that, we can ask for multiple tickets and then crack the password of the service account
+
 ## Bypass of checks
 
 * If file type \(aka **mime type**\) is deduced from the magic number, add arbitrary ones that are accepted at the start of the file
@@ -231,5 +239,6 @@ C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
 * [PwnFunction](https://www.youtube.com/channel/UCW6MNdOsqv2E9AjQkv9we7A/videos)
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
 * [Pentesterlab](https://pentesterlab.com/)
+* For kerberoast : [geekeries.org](https://geekeries.org/2016/11/kerberoasting-active-directory-a-la-rotissoire/?cn-reloaded=1) \(in french\), [pentestlab.blog](https://pentestlab.blog/2018/06/12/kerberoast/), [scip.ch](%20https://www.scip.ch/en/?labs.20181011)
 * Misc research
 

@@ -37,8 +37,9 @@
   * A TGT
   * The session key used as a secret key to encrypt communication with the TGS
 * The client use it's TGT to ask the TGS for a service ticket \(the request is encrypted\)
-* If the user has the right to use this service, the TGS gives back service ticket \(encrypted\)
+* The TGS gives back a service ticket \(encrypted\)
   * The request is encrypted with the key of the user, but the ticket in itself is encrypted with the key of the server/service, the user don't understand it
+  * The TGS doesn't check that the user has the right to use the service, it's the service itself that will check that later. As such, a user can ask for services he doesn't have the right to use.
 * The client connect to the service with the ticket
 
 ## Sources
@@ -47,6 +48,7 @@
 * [devensys.com](https://blog.devensys.com/kerberos-principe-de-fonctionnement/) \(in french\)
 * [doubleoctopus.com](https://doubleoctopus.com/security-wiki/authentication/ticket-granting-tickets/)
 * [varonis.fr](https://blog.varonis.fr/explication-de-lauthentification-kerberos/) \(in french\)
+* [beta.hackndo.com](https://beta.hackndo.com/service-principal-name-spn/) \(in french\)
 
 
 

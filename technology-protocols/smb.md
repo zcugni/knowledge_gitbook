@@ -10,3 +10,7 @@
 * It runs on port 445 via TCP
   * The older version runs over NetBIOS on port 139
 
+## Shares
+
+* IPC$ **:** With an anonymous null session you can access the IPC$ share and interact with services exposed via named pipes
+

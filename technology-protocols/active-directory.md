@@ -70,6 +70,16 @@ These are some of the default types :
 
 ## AD services
 
+* Services are organized in classes, some of those are :
+  * www
+  * LDAP
+  * SqlServer
+  * DNS
+  * CIFS
+* A service is identified by it's _Service Principal Name_ \(SPN\)
+  * It looks like that `service_class/hostname:port/name`
+  * The port and name are optional
+
 ### Domain Service
 
 * Abbreviated AD DS
@@ -92,16 +102,16 @@ These are some of the default types :
 
 ### Others
 
-* AD Web Services \(ADWS\)
+* **AD Web Services** \(ADWS\)
   * Automatically installed with ADDS or ADLDS role and configured to run automatically
   * Provides remote management of any local directory services
-* AD Certificate Services \(AD CS\)
+* **AD Certificate Services** \(AD CS\)
   * A  server role that allows you to build a public key infrastructure \(PKI\) and provide digital certificates
-* AD Federation Services \(AD FS\)
+* **AD Federation Services** \(AD FS\)
   * Lets you sign in to other services \(like office\) through AD
-* AD Lightweight Directory Services \(AD LDS\)
+* **AD Lightweight Directory Services** \(AD LDS\)
   * Provides directory services using the LDAP protocol without the need to deploy domain controllers. 
-* AD Rights Management Services \(AD RMS\)
+* **AD Rights Management Services** \(AD RMS\)
   * Protects documents by defining who can open, modify, print, forward, etc documents 
 
 ## Other terms
