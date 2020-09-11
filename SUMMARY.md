@@ -106,4 +106,5 @@
 
 * [Kerberos](kerberos.md)
 * [Active Directory](active-directory.md)
+* [SMB](smb.md)
 
