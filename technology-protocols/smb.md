@@ -14,3 +14,16 @@
 
 * IPC$ **:** With an anonymous null session you can access the IPC$ share and interact with services exposed via named pipes
 
+## smbclient
+
+* Part of the samba suite
+* Lets you communicate with an SMB server
+* `smbclient [options] //<server_netbios_name>[/service_name]`
+  * The netbios name might be an ip
+* `-L` List all available services
+* For the password, you can either :
+  * Give it in the command
+  * Wait for a prompt
+    * It will ask for one even if it's not needed, just hit enter if it's the case
+  * Disable the prompt with `-N`
+
