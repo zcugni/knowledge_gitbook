@@ -150,14 +150,29 @@ Not tested
 * cmsmap
 * WPscan
 
+## SMB mapping <a id="m_4937061005691869274gmail-smb-mapping"></a>
+
+* `smbmap`
+* The man is well done, check it
+* `-H <ip>` \(Mandatory\)
+* `-d <domain_name>`
+* `-u <username>`
+* `-R [share_name]` Recursively list all dirs & files within the share
+  * If you don't specifies the share, it will go through all of them
+  * To download a file, use : `smbmap -H <ip> -R [share_name] -A <file_name> [-q]`
+    * The `-q` is useful because it's quite verbose
+
+## Impacket
+
+* A collection of python scripts for working with network protocols
+* There's a lot of example scripts that you can use as is, like :
+  * GetADUsers.py, which enumerate AD users
+  * GetUserSPN.py, which will get a user SPN that you can crack \(for kerberoast\)
+
 ## Misc software scan
 
 * Magento : [https://github.com/steverobbins/magescan](magescan)
 * Joomla : [joomscan](https://www.securiteinfo.com/attaques/hacking/outils/joomscan.shtml)
-
-## Stegonography
-
-* steghide
 
 ## Password craking
 
@@ -205,6 +220,7 @@ Not tested
 ## Misc
 
 * [https://gchq.github.io/CyberChef/](CyberChef) Permet d’enchaîner pleins d'actions de cmd sur une string/un fichier, etc \(genre décompresser puis base64 puis hexdump, etc\)
+* Stegonography : steghide
 
 ## Sources
 
