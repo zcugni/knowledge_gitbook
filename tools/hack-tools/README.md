@@ -182,7 +182,8 @@ Not tested
 * Hashcat
   * `hashcat -a 0 -m 20 hash:salt path/to/rockyou.txt`
     * `-a` Définit le type d'attaque \(0 pour une attaque dico je pense\)
-    * `-m` Le mode de hash, y'en a plein de différents. 20 Correspond à un md5 avec un salt append
+    * `-m` Le mode de hash, y'en a plein de différents, regarder les examples pour trouver le bon
+      *  20 Correspond à un md5 avec un salt append
   * Assez optimisé \(mais ces améliorations ne marchent qu'avec certains hardware\)
   * Les modes semblent plus simple d'utilisation qu'avec John
 

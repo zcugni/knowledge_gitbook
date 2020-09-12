@@ -207,7 +207,7 @@ C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
 * 2 aspects make this attack possible :
   * Kerberos user can ask for tickets for services they don't have the rights to use
   * AD services tickets are encrypted with the NTLM hash of the service account instead of a more random/secure option
-* Because of all of that, we can ask for multiple tickets and then crack the password of the service account
+* Because of all of that, we can ask for tickets and then crack the password of the service account
 
 ## Bypass of checks
 
