@@ -48,7 +48,6 @@
   * [Systemd](theory/linux-nix/systemd.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
 * [Low Level](theory/low-level/README.md)
-  * [Assembly](theory/low-level/microcorruption-notes.md)
   * [Binary, hex & bytes](theory/low-level/binary-hex-and-bytes.md)
   * [Memory Allocation \(linux, glibc\)](theory/low-level/memory-allocation-linux-glibc.md)
   * [Process memory](theory/low-level/untitled.md)
@@ -78,6 +77,15 @@
 
 ## Languages
 
+* [Assembly](languages/microcorruption-notes.md)
+* [Bash](languages/bash.md)
+* [C](languages/c.md)
+* [Haskell](languages/haskell.md)
+* [Javascript](languages/javascript/README.md)
+  * [Jquery](languages/javascript/jquery.md)
+* [LDAP](languages/ldap.md)
+* [MongoDB](languages/mongodb.md)
+* [PHP](languages/php.md)
 * [Python](languages/python/README.md)
   * [Syntaxe](languages/python/syntax.md)
   * [Norme](languages/python/norme.md)
@@ -86,14 +94,6 @@
   * [XML DTD](languages/xml/xml-dtd.md)
   * [XPATH](languages/xml/xpath.md)
   * [Autre Ajouts](languages/xml/autre-ajouts.md)
-* [Bash](languages/bash.md)
-* [MongoDB](languages/mongodb.md)
-* [LDAP](languages/ldap.md)
-* [PHP](languages/php.md)
-* [C](languages/c.md)
-* [Haskell](languages/haskell.md)
-* [Javascript](languages/javascript.md)
-* [Jquery](languages/jquery.md)
 
 ## Technology / Protocols
 

@@ -1,5 +1,5 @@
 ---
-description: 'Disclaimer : This note is not complete not up to current standard'
+description: 'Disclaimer : This note is not complete & not up to current standard'
 ---
 
 # Javascript
