@@ -1,68 +1,107 @@
----
-description: >-
-  Disclaimer : This is a summary of the OWASP pen testing book and some
-  information found here and there. Some part overlap with the methodology page.
-  I haven't update it in a while.
----
+# Test
 
-# Recon
+## Misc knowleadge
+
+* Usually, to fingerprint we compare to a db of signature \(of headers, errors, etc\)
+
+## Example
+
+* Start broad to get an idea of attack vectors and then go deeper on specific areas
+* An example of the process : 
+  * Do a rapid nmap \(only the principle ports\)
+  * If there's a web techno, do the first 3 steps
+  * Run a second nmap when the first one is finished \(with all the port this time\)
+  * Follow the instructions regarding each techno
 
 ## Social Info
 
-* Any useful info on employees
-* Linkedin, Facebook, Instagram, etc
-* Crunchbase website
-* whois database/cmd \(gives info on the owner of the domain\)
-* Identify email pattern
+* Use the whois database/cmd to gain info on the owner of the domain
+* I don't really do that but it could be useful :
+  * Gain info on the business and it's employees through the crunchbase website, social medias, etc
+  * Identify email pattern
 
 ## IP Space and domains
 
 * Define the range of IP and domains in scope
-* To enumerate sub domain, brute-force with plausible list
+* To enumerate sub domain, brute-force with plausible list \(see Tools\)
 
-## Host discovery
+## Nmap
 
-* Identify which host are live within an IP range
-* Do a ping sweep \(aka ping all addresses\) with `fping` or`nmap`
+The next 3 steps can be done through `nmap` :
 
-## Fingerprint the OS
+* **Host discovery** - Identifying the live hosts within an IP range
+  * You do that through a _ping sweep_ \(aka ping all the addresses\)
+  * The alternative to `nmap` is `fping`
+* **Fingerprint the OS** - Identify which OS is running
+  * You can also do it offline with a capture of the traffic with [https://lcamtuf.coredump.cx/p0f3/](https://lcamtuf.coredump.cx/p0f3/)
+* **Port Scanning** - Identify open ports and what's listening on them
+  * An alternative to `nmap` is `masscan` \(more efficient but less precise\)
+  * Start with a fast scan \(only the principal ports\) and after that run a full one \(all the ports\) so you can start working on the first result while the complete one proceeds.
 
-* Une fois qu'on a une liste de live host, on veut savoir quel OS tourne dessus. Pour cela, on compare les réponses qu'on obtient à une db de signature.
-* Offline sur une capture du traffic qu'on a prise, avec [https://lcamtuf.coredump.cx/p0f3/](https://lcamtuf.coredump.cx/p0f3/)
-* Ou en direct avec `nmap`
 
-## Port Scanning
 
-* Permet de savoir quel port sont ouvert et les services qui écoutent dessus
-* On fait cela avec `nmap` ou `massscan` \(qui est plus performant mais moins précis\)
-* Plus l'infrastructure est grande, plus il est probable qu'un firewall filtre certaines requêtes
+## Web
 
-## Fingerprint web Server
+* Test `index.html`, `index.php`, etc to define the language used
+* Check `robots.txt` & `sitemap.xml`
+* Run [gobuster](https://zcugni.gitbook.io/notes/tools/hack-tools#forced-browsing) 
+  * First with extensions \(at least `txt`\)
+  * Then recursively on interesting directories
+  * Eventually with `-f` for the `/` \(also recursively\)
+  * This should be done while you research other stuff
+* Check the source code for :
+  * Automatically generated content \(by framework, etc\)
+  * Interesting comments
+  * The code in itself
+* Check how links are composed, if it's wrongly configured it can be a bit weird \(for example : [http://index.php/rest\_of\_link](http://index.php/rest_of_link)\)
+* For every input :
+  * Check reaction to `'` & `"` \(depending on reaction, check basic sqli injection\)
+  * Check basic XSS \(script & img, note what type of protection is in place\)
+  * If it's in php and some input are reflected, try to do `<?php phpinfo(); ?>`
+* For every url :
+  * Check if anything is reflected on the page \(and if `'` & `"` break things\)
+  * Try accessing page out of orders \(for example directly an /edit/\)
+  * Changing GET request for POST and vice-versa
 
-* Dispo dans les _response header_, sous l’en-tête _Server_
-* Si obfusqué, peut être déduit du format de la réponse
-  * Ordre d'en-têtes différent
-  * Réponse à une requête mal-formée différente
-* Utiliser `httprint`
+## For each tech
 
-## Fingerprint server-side language
+* Get the version
+  * Search "enumarate &lt;tech&gt;" or "scan &lt;tech&gt;" on google to see if there's some tools already
+  * If it's open source, check the github 
+* Test searchsploit, metasploit & google "exploit tech"
 
-What language is used on the server : php, ruby, python, node, ..? Look at :
+## Fingerprint
 
-* Methods of concatenation
-* Errors
-* Request headers
-* If you're already at a working command injection, try a language specific function/constant, like `str(True)` in python
+* Web server :
+  * Check the _Server_ header in the response header
+  * If it's obfuscated, check :
+    * The order of the headers
+    * The response to a malformed request
+  * Use `httprint`
+* Server-side language :
+  * Try `index.html`, `index.php`, etc
+  * Test methods of concatenation
+  * Check errors & request headers
+* Web application framework :
+  * Check the response header
+  * If obfuscated, check :
+    * Cookie's names
+    * Certain files/directories
+    * Comment
+    * Html meta tag
+    * etc
+* BDD
+  * Check the errors
+  * The concatenation techniques
+  * The comments
 
-## Fingerprint web application framework
 
-* Dispo dans les _response header_
-* Si obfusqué peut être déduit :
-  * Du nom des cookies
-  * De certains fichiers/dossiers présent
-  * De commentaires
-  * De meta tag html
-  * etc
+
+
+
+
+
+
 
 ## Fingerprint base de données
 

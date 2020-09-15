@@ -26,6 +26,11 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 * [https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)\)
 * Password list : [skullssecurity](https://wiki.skullsecurity.org/Passwords)
 
+## Enumarate sub domain
+
+* [https://dnsdumpster.com/](https://dnsdumpster.com/)
+* [https://github.com/aboul3la/Sublist3r](https://github.com/aboul3la/Sublist3r)
+
 ## Proxy
 
 [Burp Proxy](https://zcugni.gitbook.io/notes/tools/burp-proxy)
@@ -69,7 +74,7 @@ Not tested
   * `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` is my default word list
   * `-x` To add extension, `-t` for threads number
 * Keep in mind that even if you can't access a dir \(/dev for example\), you might be able to access it's subdir/files \(/dev/backup for example\)
-* Sometimes, a dir won't show up if you don't explicitly use a / after it \(aka `/cgi-bin` don't exist, but `/cgi-bin/` does\). Use  `-f` to add the slash and test for it. \(The majority of the time, it seems to work without, i'm not sure what the diff is\)
+* Sometimes, a dir won't show up if you don't explicitly use a `/` after it \(aka `/cgi-bin` don't exist, but `/cgi-bin/` does\). Use  `-f` to add the slash and test for it. \(The majority of the time, it seems to work without, i'm not sure what the diff is\)
 * You can put it in a bash loop if you need to do it recursively \(directly in the cmd\):
 
   ```bash

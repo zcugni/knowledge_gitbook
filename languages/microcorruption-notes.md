@@ -44,6 +44,7 @@ I might not always use the right terms.
   * `$` The current value of `pc` \(you can do `$+y`\)
 * There's also suffix :
   * `.b` Byte operation
+    * For example a `cmp.b` on registers will only use the two lower bytes for it, not the whole value
   * `.w` Word operation
 
 ### Single operand
@@ -109,6 +110,7 @@ I might not always use the right terms.
 * [microcorruption.com](https://microcorruption.com/)
 * [razvioverflow](https://razvioverflow.github.io/microcorruption/)
 * Wikipedia's [page ](https://en.wikipedia.org/wiki/TI_MSP430)about the TI MSP430
+* [jaimelightfoot.com](https://jaimelightfoot.com/blog/)
 
 
 

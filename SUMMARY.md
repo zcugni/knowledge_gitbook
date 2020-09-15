@@ -4,7 +4,8 @@
 
 ## Pen test
 
-* [Méthodologie](pen-test/methodologie.md)
+* [Test](pen-test/test.md)
+* [Methodology](pen-test/methodologie.md)
 * [Recon](pen-test/recon.md)
 * [Get Shell](pen-test/get-shell.md)
 * [Privilege Escalation](pen-test/privilege-escalation.md)
@@ -47,10 +48,9 @@
   * [File system](theory/linux-nix/file-system.md)
   * [Systemd](theory/linux-nix/systemd.md)
 * [Cryptographie & Hash](theory/cryptographie-and-hash.md)
-* [Low Level](theory/low-level/README.md)
-  * [Binary, hex & bytes](theory/low-level/binary-hex-and-bytes.md)
-  * [Memory Allocation \(linux, glibc\)](theory/low-level/memory-allocation-linux-glibc.md)
-  * [Process memory](theory/low-level/untitled.md)
+* [Memory](theory/memory/README.md)
+  * [Memory Allocation \(linux, glibc\)](theory/memory/memory-allocation-linux-glibc.md)
+* [Binary, hex & bytes](theory/binary-hex-and-bytes.md)
 * [Misc](theory/misc/README.md)
   * [Bitcoin](theory/misc/bitcoin.md)
   * [MCD / MLD](theory/misc/mcd-mld.md)

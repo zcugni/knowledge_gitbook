@@ -2,14 +2,14 @@
 
 ## Injection
 
-* Nearly all attacks are an injection of a form or another.
-* The goal is to get a vicious string interpreted by whatever technology is used.
+* Nearly all attacks are an injection of a form or another
+* The goal is to get a vicious string interpreted by whatever technology is used
 * Often, a payload will contain comment characters to comment out the genuine part of the code \(therefore replacing it by the vicious one\)
 * Or the vicious part might close the original statement and add a new one afterwards
 
 ## SSRF - Server Side Request Forgery
 
-* Make request in the name of the server, so with it's rights.
+* Make request in the name of the server, so with it's rights
 
 ## Types of attacks
 
