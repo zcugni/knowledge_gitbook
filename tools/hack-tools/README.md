@@ -21,6 +21,7 @@ Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des
 * [SecList](https://github.com/danielmiessler/SecLists)
 * [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 * [OWASP's CheatSheet](https://github.com/OWASP/CheatSheetSeries/tree/master/cheatsheets)
+* [https://www.owasp.org/index.php/XSS\_Filter\_Evasion\_Cheat\_Sheet](https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet)
 * [Google Hacking Database](https://www.exploit-db.com/google-hacking-database)
 * Keywords for credentials/etc : [random\_robbie](https://github.com/random-robbie/keywords/blob/master/keywords.txt)
 * [https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)\)

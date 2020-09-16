@@ -2,11 +2,10 @@
 
 ## XML injection
 
-Si nos inputs sont directement ajoutés en tant que nœud dans un doc xml, on peut :
-
-* Inject malformed string to break the parser
-* Modify information with well crafted payload
-* If the xml is converted to html, `<![CDATA[]]>` might just be stripped, making it possible to inject other script undetected
+* If our input is directly injected as a node inside an xml doc, we can :
+  * Inject malformed string to break the parser
+  * Modify information with well crafted payload
+* If the xml is converted to html, `<![CDATA[]]>` might just be stripped, making it possible to inject other script undetected : 
 
 ```markup
 <html>
@@ -41,7 +40,7 @@ Si nos inputs sont directement ajoutés en tant que nœud dans un doc xml, on pe
 <ssrf>&request;</ssrf>
 ```
 
-### Out-of-band \(blind\)
+### Out-of-band
 
 ```markup
 <!-- test.xml-->
@@ -55,7 +54,7 @@ Si nos inputs sont directement ajoutés en tant que nœud dans un doc xml, on pe
 %wrapper;
 ```
 
-Au cas où le contenu du fichier ferait bugger le parser, on peut abuser de _CDTATA_ :
+* If the content of the file would break the parser, use `<![CDATA[]]>` :
 
 ```markup
 <!-- test.xml-->
@@ -82,15 +81,15 @@ Au cas où le contenu du fichier ferait bugger le parser, on peut abuser de _CDT
 <foo>&xxe;</foo>
 ```
 
-### Ressources supplémentaires
+### Additionnal ressources
 
-* [https://www.acunetix.com/blog/articles/band-xml-external-entity-oob-xxe/](https://www.acunetix.com/blog/articles/band-xml-external-entity-oob-xxe/) 
-* [https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/](https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/)
+* [acunetix.com](https://www.acunetix.com/blog/articles/band-xml-external-entity-oob-xxe/)  
+* [mohemiv.com](https://mohemiv.com/all/exploiting-xxe-with-local-dtd-files/)
 * See also "A Billion Laugh" attack
 
 ## XPath Injection
 
-Elles suivent la même logique que les injections SQL \(`‘or ‘1’ = ‘1`\)
+* Same logic as SQL injection : `‘or ‘1’ = ‘1`
 
 ```text
 # this :
@@ -100,7 +99,7 @@ string(//user[user/text()=’gandalf’ and pass/text()=’qwertasd123’]/accou
 string(//user[user/text()=’gandalf’ and pass/text()=’’ or ‘1’ = ‘1’]/account/text())
 ```
 
-J'imagine que le même genre de chose est possible avec XQuery.
+* I guess the same is possible with XQuery
 
 ## Sources
 
