@@ -1,4 +1,4 @@
-# Privilege Escalation
+# Linux Privilege Escalation
 
 ## Disclaimer / Explanation
 
@@ -16,8 +16,6 @@ It is still under development.
 
 ## Gain info on user
 
-Get some basic info about users
-
 ```bash
 id || (whoami && groups) 2> /dev/null # Me & my groups
 cat /etc/passwd | cut -d: -f1 # All users
@@ -27,20 +25,11 @@ w # Currently logged in users
 last | tail # Login history
 ```
 
-### Big UID
-
-Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74),  [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
-**Exploit it** using: **`systemd-run -t /bin/bash`**
-
-{% hint style="info" %}
-I'll detail it more if i stumble upon it one day
-{% endhint %}
-
 ## Sudo
 
 ### Exploits
 
-Based on the vulnerable versions given in searchsploit, we can check if sudo is vulnerable with :
+* According to searchsploit, check if it's a vulnerable version of sudo :
 
 ```bash
 sudo -V | grep "Sudo ver" | grep "1.6.8p9\|1.6.9p18\|1.8.14\|1.8.20\|1.6.9p21\|1.7.2p4\|1\.8\.[0123]$\|1\.3\.[^1]\|1\.4\.\d*\|1\.5\.\d*\|1\.6\.\d*\|1.5$\|1.6$"
@@ -48,69 +37,49 @@ sudo -V | grep "Sudo ver" | grep "1.6.8p9\|1.6.9p18\|1.8.14\|1.8.20\|1.6.9p21\|1
 
 ### Rights
 
-Check what you can run with `sudo -l` :
-
-* If permissions are to permissive, you may be able to priv esc just by using one of the authorized cmds
-* There's also a lot of shell escapes, check [gtfobins](https://gtfobins.github.io/)
+* Check what you can run with `sudo -l` :
+  * If it's too permissive, you may be able to priv esc just by using one of the authorized cmds
+  * There's also a lot of shell escapes, check [gtfobins](https://gtfobins.github.io/)
 
 ## SUID
 
-Check if any program has the suid bit set when they shouldn't, you may be able to hijack a cmd.
+* Check if any program has the suid bit set when they shouldn't, you may be able to hijack a cmd :
 
 ```bash
 find / -perm -4000 2> /dev/null #Find all SUID binaries
 find / -perm -2000 2> /dev/null # Find all SGID binaries
 ```
 
-### Lib
-
-{% hint style="info" %}
-There's some vuln with librairies, but i'll wait to stumble upon it to detail/verify/re-word it.
-
-Check :
-
-* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#ld\_preload](https://book.hacktricks.xyz/linux-unix/privilege-escalation#ld_preload)
-* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#suid-binary-so-injection](https://book.hacktricks.xyz/linux-unix/privilege-escalation#suid-binary-so-injection)
-* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#etc-ld-so-conf-d](https://book.hacktricks.xyz/linux-unix/privilege-escalation#etc-ld-so-conf-d)
-{% endhint %}
-
-## Exploit groups
-
-{% hint style="info" %}
-Those attacks seem interesting but i'm waiting to see them in action to detail them more
-{% endhint %}
-
-* [pkexec](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#pe-method-1)
-* [disk group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#disk-group) \(Also in Hack the Box's [Falalel](https://www.youtube.com/watch?v=CUbWpteTfio)\)
-* [video group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#video-group)
-* I won't detail here vulns linked to docker or lxc groups, i'll write a page about them if i use them one day.
-
-{% hint style="info" %}
-Ajouter la partie de hack the box, ou un groupe à plus de droits que nous donc on commence par l'obtenir.
-{% endhint %}
-
 ## Hijack $PATH
 
-If you can write in some folder referenced by `$PATH`, you can create a backdoor by writing a file named like a called binary. If it's called without an absolute path, or if your folder is before it's original one in the `$PATH`, yours is going to be used.
+* Given that : 
+  * A cmd is called without an absolute path to it's binary
+  * You can write in some folder referenced by `$PATH`
+  * This folder is referenced earlier than the folder of the cmd's binary
+* You can create a backdoor by writing a file named like the binary
 
 ### Systemd
 
-Les fichiers `.service` exécutent des commandes, tandis que les `.timer` exécutent des services et les `.socket` réagissent aux connexions. On peut donc utiliser les 3 pour créer une backdoor si comme pour `$PATH` on peut hijack un chemin.
+* With the same logic, you can hijack 3 types of systemd files :
+  * `.service`, which execute cmds
+  * `.timer`, which execute services
+  * `.socket`, whichreacts to connection
 
 ## Processes
 
-Check which process are running and if they have more rights than they should.
+* Check which process are running and if they have more rights than they should :
 
 ```bash
 ps aux
 top # Will update continuously
 ```
 
-There's also tools like [pspy](https://github.com/DominicBreuker/pspy.git).
+* There's also tools like [pspy](https://github.com/DominicBreuker/pspy.git)
 
 ### Process memory
 
-Some services of a server save **credentials in clear text inside the memory**. If you have access to the memory of an FTP service \(for example\) you could get the Heap and search inside it for credentials.
+* Some services save **credentials in clear text inside the memory**
+* For example, if you have access to the memory of an FTP service you could do that :
 
 ```bash
 gdb -p <FTP_PROCESS_PID>
@@ -121,17 +90,12 @@ gdb -p <FTP_PROCESS_PID>
 strings /tmp/mem_ftp #User and password
 ```
 
-## Dbus
-
-{% hint style="info" %}
-Read [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#d-bus](https://book.hacktricks.xyz/linux-unix/privilege-escalation#d-bus)
-{% endhint %}
-
 ## Cron
 
-Check crontab to see if relative paths \(same logic as with `$PATH`\), symbolic links or wildcards are used, or any weird/not secure stuff is done.
-
-With wildcard you can do this kind of thing : 
+* Check crontab to see if any of those are used : 
+  * Relative paths \(same logic as with `$PATH`\)
+  * Symbolic links
+  * Wildcards, you can do these types of things with them :
 
 ```bash
 # Line present in the root cron : 
@@ -142,7 +106,7 @@ rsync -a *.sh rsync://host.back/src/rbd
 ## Read sensible data
 
 * Password :
-  * Read`/etc/passwd/` To gain an idea of users
+  * Read`/etc/passwd/` to gain an idea of users
   * Try to crack the passwords in `/etc/shadow` if you have access
   * Use [LaZagne](https://github.com/AlessandroZ/LaZagne) to extract password from files
 * Check for interesting files in :
@@ -174,16 +138,6 @@ ls -alhR /opt/lampp/htdocs/ 2>/dev/null
   * `hosts.equiv`
 * Read `env`
 
-### Writable files
-
-* Linpeas also check for writable files by you, but it's then too long to read, so i'll maybe try to do a more concise script.
-* Read [python library hijacking](https://book.hacktricks.xyz/linux-unix/privilege-escalation#python-library-hijacking)
-* Read [logrotate exploitation](https://book.hacktricks.xyz/linux-unix/privilege-escalation#logrotate-exploitation)
-
-{% hint style="info" %}
-Disclaimer : i'm not alway sure what to search for in those files
-{% endhint %}
-
 ## Open Shell Session
 
 Check if there's any interesting [tmux](https://app.gitbook.com/@zcugni/s/notes/~/drafts/-ME8c67PWhoFo8pMESCD/tools/linux-bash-command/tmux) or [screen](https://zcugni.gitbook.io/notes/tools/linux-bash-command#screen-multi-plexer) session that you can connect to.
@@ -209,9 +163,40 @@ J'utilise évidemment les scripts, mais je voulais noter ici les éléments spé
 
 ## To add
 
+### Big UID
+
+Some Linux versions were affected by a bug that allow users with **UID &gt; INT\_MAX** to escalate privileges. More info: [here](https://gitlab.freedesktop.org/polkit/polkit/issues/74),  [here](https://github.com/mirchr/security-research/blob/master/vulnerabilities/CVE-2018-19788.sh) and [here](https://twitter.com/paragonsec/status/1071152249529884674).  
+**Exploit it** using: **`systemd-run -t /bin/bash`**
+
 ### Capabilities
 
 It seem a bit advance & specific, but might be interesting. Check [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#capabilities](https://book.hacktricks.xyz/linux-unix/privilege-escalation#capabilities)
+
+### Dbus
+
+Read [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#d-bus](https://book.hacktricks.xyz/linux-unix/privilege-escalation#d-bus)
+
+### Exploit groups
+
+* [pkexec](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#pe-method-1)
+* [disk group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#disk-group) \(Also in Hack the Box's [Falalel](https://www.youtube.com/watch?v=CUbWpteTfio)\)
+* [video group](https://book.hacktricks.xyz/linux-unix/privilege-escalation/interesting-groups-linux-pe#video-group)
+* I won't detail here vulns linked to docker or lxc groups, i'll write a page about them if i use them one day.
+
+{% hint style="info" %}
+Ajouter la partie de hack the box, ou un groupe à plus de droits que nous donc on commence par l'obtenir.
+{% endhint %}
+
+### Lib
+
+* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#ld\_preload](https://book.hacktricks.xyz/linux-unix/privilege-escalation#ld_preload) [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#suid-binary-so-injection](https://book.hacktricks.xyz/linux-unix/privilege-escalation#suid-binary-so-injection) 
+* [https://book.hacktricks.xyz/linux-unix/privilege-escalation\#etc-ld-so-conf-d](https://book.hacktricks.xyz/linux-unix/privilege-escalation#etc-ld-so-conf-d)
+
+### Writable files
+
+* Linpeas also check for writable files by you, but then it's too long to read..
+* Read [python library hijacking](https://book.hacktricks.xyz/linux-unix/privilege-escalation#python-library-hijacking)
+* Read [logrotate exploitation](https://book.hacktricks.xyz/linux-unix/privilege-escalation#logrotate-exploitation)
 
 ## Sources
 

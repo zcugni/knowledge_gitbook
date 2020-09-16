@@ -5,10 +5,8 @@
 ## Pen test
 
 * [Test](pen-test/test.md)
-* [Methodology](pen-test/methodologie.md)
-* [Recon](pen-test/recon.md)
 * [Get Shell](pen-test/get-shell.md)
-* [Privilege Escalation](pen-test/privilege-escalation.md)
+* [Linux Privilege Escalation](pen-test/privilege-escalation.md)
 * [Vulnerabilities](pen-test/vulnerabilities/README.md)
   * [XXE and other XML vulnerabilities](pen-test/vulnerabilities/xml-xxe-vuln.md)
   * [XSS - Cross-Site Scripting](pen-test/vulnerabilities/xss.md)

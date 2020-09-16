@@ -1,16 +1,5 @@
 # Test
 
-## Architecture
-
-Partir d’un postulat simple et le contester au fur et à mesure. C’est lié au proxy, firewall, etc, donc je vais résumer ce qui est conseillé mais je comprends pas tout.
-
-* Network scans on the web server to see if the ports are being filtered
-* Network packet test for firewalls
-* Analysis of web server banner for reverse proxy
-* Checking if answers are what we expect \(might not be if a reverse proxy/firewall is present.. i believe\).
-* Testing the response time to see if the request are cached by a reverse proxy
-* Network load balancers are detected by comparing multiple request’s response to see if they go to different servers. \(For example the Date may change or the load balancer may add cookies/headers\)
-
 ## Example
 
 * Start broad to get an idea of attack vectors and then go deeper on specific areas
@@ -146,6 +135,19 @@ The next 3 steps can be done through [`nmap`](https://zcugni.gitbook.io/notes/to
   * Check if anything is reflected on the page \(and if `'` & `"` break things\)
   * Try accessing page out of orders \(for example directly an /edit/\)
   * Changing GET request for POST and vice-versa
+
+
+
+## Network Architecture
+
+* Try to understand the network architecture through :
+  * Port scan \(to see what's filtered\)
+  * Network packet test for firewalls
+  * Analysis of web server banner for reverse proxy
+  * Checking if answers are what we expect \(might not be if a reverse proxy/firewall is present\)
+  * Testing the response time to see if the request are cached by a reverse proxy
+  * Network load balancers are detected by comparing multiple request’s response to see if they go to different servers
+    * The date may change or the load balancer may add cookies/headers
 
 ## Source
 
