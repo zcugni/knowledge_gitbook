@@ -32,7 +32,16 @@ From the console, you can use normal SQL request. Use `exit;` to exit it.
 
 ![](../.gitbook/assets/information_schema.png)
 
-## Misc
+### Read / Write
 
-* MariaDb tourne sous mySQL
+* We can write with `into outfile 'path'`
+* You can read with `load_file(‘name’)`
+* You can't bypass the `'` in this case so if they're escaped it won't work
+
+### Misc
+
+* You can't accumulate request with  `;`
+* There's 2 types of users : `USER() &` `CURRENT_USER()`
+* Comments : `--` \(The space is important\) ou `#`
+* MariaDB runs with MySQL
 
