@@ -6,7 +6,7 @@
 * Won't change the current directory, but will update `$HOME` & `$SHELL` to that of the user
 * If no user is specified, _root_ is assumed
 * Without options : returns a _root interactive shell_
-* Utilisation :
+* Use :
   * `su [-l | --pty] [-c <cmd> |& -s <shell> |& -g <group>] [user]`
   * `su [--pty |& -c <cmd> |& -s <shell> |& -g <group> |& -p] [user]`
 

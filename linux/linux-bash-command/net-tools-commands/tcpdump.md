@@ -1,6 +1,6 @@
 # tcpdump
 
-## Généralités
+## Generalities
 
 * Ported on every OS, some change the default behavior quite a lot, install the unmodified version if it's problematic
 * It's language _Berkeley Packet Filter_ \(BPF\) has become a standard and almost all other packet-sniffer tools understand it

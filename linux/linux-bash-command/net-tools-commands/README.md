@@ -1,14 +1,13 @@
 # Net tools / commands
 
-## Remplacement
+## Replacement of net-tools
 
-Les net-tools \(`netstat` & `ifconfig`\) ont été dépréciés car ils n'étaient plus maintenu. Voici l'équivalent de certaines commandes :
-
-* `netstat` : `ss`
-* `nestat -r` : `ip route` \(iproute2 ? check that\)
-* `netstat -i` : `ip -s link`
-* `netstat -g` : `ip maddr`
-* `ifconfig` : `ip a`
+* `netstat` & `ifconfig` are depreciated, use this instead :
+  * `netstat` : `ss`
+  * `nestat -r` : `ip route` \(iproute2 ? check that\)
+  * `netstat -i` : `ip -s link`
+  * `netstat -g` : `ip maddr`
+  * `ifconfig` : `ip a`
 
 ## nmap
 
@@ -65,6 +64,8 @@ Les net-tools \(`netstat` & `ifconfig`\) ont été dépréciés car ils n'étaie
 
 ## DNS
 
+* Specifies host in : `/etc/hosts`
+* Specifies which DNS server to use in : `/etc/resolv.conf`
 * `nslookup` Has been deprecated and then brought back so depending on the version it's not the best, just use other tools
 * `host` is the simple one 
   * `host <hostname> [dns_server]` Gives ip back \(you can specify a dns server to use\)
@@ -76,7 +77,7 @@ Les net-tools \(`netstat` & `ifconfig`\) ont été dépréciés car ils n'étaie
   *  `dig -x <ip>` Reverse look-up
   * `dig axfr [zone] [@dns_server]`
     * Ask for a zone transfer
-    * If the zone isn't specified it will use `.` aka root.
+    * If the zone isn't specified it will use `.` aka root
 
 ## Ports stat
 

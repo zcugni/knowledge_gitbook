@@ -112,7 +112,7 @@ Mais avant cela, la règle de base est de systématiquement générer une nouvel
 
 Le protocole fonctionne globalement ainsi :
 
-![Protocol Schema](../../.gitbook/assets/coinjoin.jpg)
+![Protocol Schema](../.gitbook/assets/coinjoin.jpg)
 
 En gros, un utilisateur va se faire passer pour 2 utilisateurs différents, A \(ici Alice\) et B \(ici Bob\).
 

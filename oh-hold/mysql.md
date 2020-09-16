@@ -49,4 +49,6 @@ From the console, you can use normal SQL request. Use `exit;` to exit it.
 * There's 2 types of users : `USER() &` `CURRENT_USER()`
 * Comments : `--` \(The space is important\) ou `#`
 * MariaDB runs with MySQL
+* MySQL's `LIKE` comparison isn't case sensitive
+* MySQL's `=` comparison isn't case sensitive & doesn't care about trailing spaces
 

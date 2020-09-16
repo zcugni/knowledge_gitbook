@@ -45,3 +45,22 @@ function handler(event) {
 
 Si l'origine est mal vérifiée ou si les dev sont trop confiant de la sécurité des données transmises, des failles peuvent survenir.
 
+### Jinga 2
+
+* To get it to execute something, navigate the available class by iterating `{{.__class__.mro()[x]}}` until you stumble on one that might have multiple functions \(like _object_\)
+* Check it's subclasses with `{{.__class__.mro()[x].__subclasses__()}}` and search for something useful within it something useful \(like `popen`\)
+* Use it with `{{.__class__.mro()[x].__subclasses__()[y](COMMAND)}}`
+
+## Serialization
+
+* In php and other languages, we can serialize an object, which gives you a string describing it
+  * For example`O:8:"siteuser":2:{s:8:"username";s:5:"admin";s:8:"password";s:3:"aaa"}` gives you the following info :
+    * The name takes 8 chars
+    * It has 2 attributes which are strings
+    * etc
+* Unserializing lets you create an object from such a string
+
+## Misc
+
+* `.jar` are archives files of java classes
+

@@ -63,12 +63,6 @@ When unnecessary HTTP methods are accepted, we can abuse it, but I haven't resea
   * Error code
   * Page's title
 
-## SSI Injection
-
-{% hint style="info" %}
-It's possible to do Server-Side Include injection, but i need to find some example
-{% endhint %}
-
 ## Open redirect
 
 * Allows us to redirect a user to any page
@@ -97,15 +91,15 @@ I forgot how to use that to our advantages
 * Removes `<script>` and not terminated tags : `<a`
 * `tel` is one of the few accepted protocols so `tel:alert(1337)` will work
 
+## Unserialize
+
+* If the app unserialize a string without checking it, you can abuse it
+
 ## Click jacking
 
 * By integrating a page into an iframe and making in transparent, we can make the user click on element without him knowing
 * To protect from that client side, use _frame busting_
 * To protect from that server side, use `X-frame-options` which determine who can put our site into an iframe
-
-## Path Injection
-
-* If a part of the url is a reflected in the page, we can inject it
 
 ## LDAP vulnerabilities
 
@@ -120,49 +114,13 @@ I forgot how to use that to our advantages
 * However, since it's automatic some protection might be missing
 * If you can't change the url by adding a `.json`, you can force it to fed you this type of response by changing the accept header of the request to : `Accept : application/json`
 
-## Server Side Template Injection
+## Firefox particularities
 
-To test if that is possible, inject `{{4-3}}` if it's interpreted, you might be able to do something. This isn't specific to python flask's jinga 2 apparently, Server Side Template often use that.
-
-### Jinga 2
-
-To get it to execute something, you can navigate the available class by iterating `{{.__class__.mro()[x]}}` until you stumble on one that might have multiple functions \(like _object_\).
-
-You can then check it's subclasses with `{{.__class__.mro()[x].__subclasses__()}}` and search within it something useful \(like _popen_\).
-
-You can finally use it with `{{.__class__.mro()[x].__subclasses__()[y](COMMAND)}}`. If it's subprocess.popen, there's some parameters to add in order to specify arguments of the command, etc, check the doc.
-
-### Twig \(1.9.0\)
-
-`{{_self.env.registerUndefinedFilterCallback('exec')}}{{_self.env.getFilter('uname')}}`
-
-## Retrieve php source code
-
-If you have a path traversal vul, you can do this `www.example.com?file=php://filter/read=convert.base64-encode/resource=page.php` \(or without the .php if it is added automatically\). This will base64 content before returning it. \(I'm guessing that if i don't base64 it, it won't return it because it's server code\)
-
-## Serialization vuln
-
-En php \(mais je suppose que ça fonctionne de la même façon sur d'autres langages\), on peut serialize un objet. ça le transforme en une string le représentant : `O:8:"siteuser":2:{s:8:"username";s:5:"admin";s:8:"password";s:3:"aaa"}` -&gt; Objet dont le nom fait 8 caractères contenant 2 attributs : des strings \(lire la doc pour la syntaxe complète\).
-
-On peut aussi prendre une string du genre et la transformer en objet avec `unserialize`. **Doing this on unsanitized input can enable code execution** and other vuln.
-
-## Particularité firefox
-
-* Si le client reçoit des données depuis une vue json, en l'accédant via firefox, il va tenté de l'interprêter et la formatter, et son parseur eut buggé sur un payload alors qu'il fonctionne. **Utiliser burp pour analyser les réponses**
-* Si on dl un ficher dans le navigateur, firefox mettra comme date de dernière modification la date du jour, tandis que si on le dl avec wget, on récup la vraie
-
-## Parser Differentials
-
-De nombreux bugs viennent de différence de comportement entre des parsers pour une même string :
-
-* In client vs in server
-* In js context vs no js context \(browser vs template with dom purify for example. `noscript` would react differently in those two\). \(Obviously already solved, just an example\)
-* html parser \(because `<div>` context\) vs js parser \(because `<script>` context\)
-* etc..
-
-C’est notamment un problème récurrents dans les “urls parsing” \(même les librairies de base de python ne sont pas toujours d’accord sur l'interprétation par exemple\).
-
-C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
+* If the client receive data from a json view, if you access it via firefox it will try to interpret it and format it
+  * However, the parser might fail when the application might not, giving you the impression that your payload does not work
+  * **Use burp to analyze the response instead**
+* If you download a file in the browser, firefox will set the modification date to today
+  * Download it with `wget` if you want need the real one instead
 
 ## Kerberoast
 
@@ -172,17 +130,10 @@ C’est aussi un facilitateur des mutation xss \(ou l’idée en elle-même ?\).
   * AD services tickets are encrypted with the NTLM hash of the service account instead of a more random/secure option
 * Because of all of that, we can ask for tickets and then crack the password of the service account
 
-## Bypass of checks
-
-* If file type \(aka **mime type**\) is deduced from the magic number, add arbitrary ones that are accepted at the start of the file
-* Some versions of apache will execute scripts with `.php.jpg` or  `.php3` as extensions for example
-
 ## Tips & Tricks
 
 * When it ends with `==` it’s usually base64
 * Resource : [https://repo.zenk-security.com/](https://repo.zenk-security.com/)
-* MySQL's `LIKE` comparison isn't case sensitive
-* MySQL's `=` comparison isn't case sensitive & doesn't care about trailing spaces
 * A weird way to write a file is to `cat > file_name << EoF`, then write your text, and write EoF at the end.
 * Many web servers and application servers provide, in a default installation, sample applications and files that have vulnerabilities
 * _HTTP Strict Transport Security_ \(HSTS\) is a request header specifying that all exchanged must be done over HTTPS.

@@ -1,6 +1,6 @@
 # Find
 
-## Généralités
+## Generalities
 
 * Find est très complet, donc je ne vais détailler que l'essentiel ici
 * Structure d'une commande : `find <origin_path> [general_options] <search_options> [actions]`

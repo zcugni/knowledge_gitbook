@@ -1,6 +1,4 @@
-# Test
-
-## Example
+# Methodology / Recon
 
 * Start broad to get an idea of attack vectors and then go deeper on specific areas
 

@@ -2,7 +2,7 @@
 description: To polish
 ---
 
-# Terminologie
+# Terminology
 
 ## List vs Array
 

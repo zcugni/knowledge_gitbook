@@ -1,4 +1,4 @@
-# Linux / \*nix
+# Theory
 
 {% hint style="info" %}
 Read this book : [Unix Linux System Administration Handbook](https://www.amazon.fr/UNIX-Linux-System-Administration-Handbook/dp/0134277554)
@@ -42,29 +42,6 @@ This is why you should always use the full path to the executable, because if so
 | /boot/ | kernel & kernel files |
 | /usr/ |  |
 | /var/ | Various, contains /var/log |
-
-## Process
-
-* Anything running
-* Each process has an address space and an id \(_PID_\) 
-* First process : before `init`, now [`systemd`](https://zcugni.gitbook.io/notes/theory/systemd)
-* Each process has a parent. If it dies, the previous one is attributed as parent
-* _Uid_ : Who owns the process
-* _Euid_ : Lets you give other permissions than the ones of the process's owner
-* "Niceness" : Determines its priority in the cpu/resource usage \(the nicer it is, the less it's gonna use it\)
-
-### Signals
-
-* Signals can be sent to processes by the kernel or other processes
-* "Terminate" ask the process to terminate itself, "kill" just does it directly.
-* Processes can decide to block and ignore signals, except for `SIGKILL` & `SIGSTOP`
-
-### State
-
-* Runnable : Eligible to be scheduled for CPU time
-* Sleeping : Waiting for something
-* Zombie state : Finished doing what it should and waiting to give back the info and be killed
-* Stopped : Was doing something but `SIGSTOP` received and waiting for `SIGCON`
 
 ## Sockets
 
@@ -115,11 +92,6 @@ This is why you should always use the full path to the executable, because if so
   * Number of days after expiration to disable the account
   * Date of expiration \(number of days since Jan 1, 1970\)
 * Accounts that don't have a password can't log in, and there's an `*` or a `!` in their hash field.
-
-## DNS & Host
-
-* On spécifie nos hosts localement dans `/etc/hosts`
-* On définit les serveurs dns qu'on utilise dans `/etc/resolv.conf`
 
 ## Sources
 

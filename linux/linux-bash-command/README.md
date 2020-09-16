@@ -1,4 +1,4 @@
-# Linux / Bash Command
+# Command
 
 ## Command line shortcut
 
@@ -14,9 +14,9 @@
 | `ctrl-c` | Interrupt |
 | `ctrl-l` | Clear |
 
-## Déplacement
+## Location
 
-| Commande | Définition |
+| Command | Definition |
 | :--- | :--- |
 | `pwd` | Print working dir |
 | `.` | Current dir |
@@ -27,9 +27,9 @@
 | `cd path` | Change current dir to path |
 | `cd -` | Switch between last 2 dir |
 
-## Fichier & Dossier
+## Files & Directory
 
-| Commande | Définition |
+| Command | Definition |
 | :--- | :--- |
 | `touch <path>` | Create empty file |
 | `cp <src> <dest>` | Copy file |
@@ -53,9 +53,9 @@
 | `ls -l` | List files with size & permissions |
 | `ls -lh` | Same but in human readable format |
 
-## Manipulation de string
+## String manipulation
 
-| Commande | Définition |
+| Command | Definition |
 | :--- | :--- |
 | `cut -d<symbol> -f<part>` | Cut at the delimiter and returns the part |
 | `sort -bf` | Ignore leading whitespace and case insensitive |
@@ -63,8 +63,6 @@
 | `wc` | Word count |
 
 ## Compression & Decompression
-
-* `.jar` sont des fichiers d'archives de classes java
 
 ### Compress
 
@@ -88,13 +86,12 @@
 
 ### tarbomb
 
-A tarbomb is a compressed file that when uncompressed will generate a lot of files/directory.
+* A compressed file that when uncompressed will generate a lot of files/directory
+* Good practice is to do that`tar -zcvf archive.tar.gz Documents/`
+  * Bad practice is to be _in_ Documents/ and do that `tar -zcvf archive.tar.gz`
+  * The first one will generate only 1 uncompressed directory, the second one will generate multiples
 
-Good practice is to do that `tar -zcvf archive.tar.gz Documents/`, bad practice is to be _in_ Documents/ and do that `tar -zcvf archive.tar.gz`.
-
-The first one will generate only 1 uncompressed directory, the second one will generate multiples.
-
-## Transfert fichier
+## File transfer
 
 ### scp
 
@@ -111,16 +108,19 @@ The first one will generate only 1 uncompressed directory, the second one will g
 * `curl ip:port/path`
   * `-s` To not have the banner
 
-Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire sur le disque, faudrait que je regarde
+{% hint style="info" %}
+There's a way to directly execute a file without writing it to a disk, check that
+{% endhint %}
 
 ### python
 
-* Sur l'attaquant `python -m HttpSimpleServer` \(va créer un serveur dispo sur 8000\)
-* Utiliser wget ou curl pour récup un fichier. Le root du serveur est le dossier dans lequel il a été lancé
+* On the attacker machine : `python -m HttpSimpleServer` \(will create a server available at port 8000\)
+* Use wget/curl to retrieve the file
+*  The root of the server is the directory in which this command was executed
 
-### Copié-Collé encodé
+### Copy-paste encoded
 
-* En fonction de la taille du fichier ça peut être plus simple de le base64, copier le résultat puis de le décoder et rediriger dans un fichier dans le terminal de destination
+* Depending on the size of the file, it's might be easier to base64 encode it, copy the result then decode it in the destination terminal
 
 ## Hex dump
 
@@ -140,14 +140,14 @@ Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire s
 ### Base64
 
 * `base64 -d <file>` Decode
-  * Si on ne veut pas le faire depuis un fichier on peut faire ainsi `echo "..." | base64 -d`
+  * To do it from a file use `echo <file_name> | base64 -d`
 
 ## Recherche
 
 * [Find](https://zcugni.gitbook.io/notes/tools/linux-bash-command/find)
 * [Grep](https://zcugni.gitbook.io/notes/tools/linux-bash-command/grep)
 
-## Analyse de fichier
+## File analysis
 
 * `exiftool` Read/Write metadata of files
 * `strings` Print the strings of printable characters of a file, useful for determining content of non-text file. Can also be used on block device to analyze their content.
@@ -158,32 +158,7 @@ Pour les 2 y'a apparemment moyen de direct exécuter le fichier sans l'écrire s
   * Filesystem test use the return of `stat`, file type depending on your system \(sockets, symlink, etc\), are intuited here.
   * Magic test check for the magic number of the file \(a predefined number near the beginning of the file's data, that describe it's type\). The db of corresponding entries comes form the compiled binary in `/usr/share/misc/magic.mgc` and user additions in `/etc/magic`
   * Language test checks for character set 
-* Le retour contient généralement soit `text`, soit `executable`, soit `data` dans sa description, on peut donc baser des scripts là-dessus.
-
-## Permission
-
-### chmod
-
-* Représente ainsi les permissions :
-  * Read : `r` / `4`
-  * Write : `w` / `2`
-  * Execute : `x` / `1`
-  * Rien :  `-` / `0`
-  * SUID avec exécution : `s` \(à la place du x\) / 4 \(avant le reste\)
-  * SGID avec exécution : `s` \(à la place du x\) ou 2 \(avant le reste\)
-  * SUID sans exécution : `S` \(à la place du x\) / 4 \(avant le reste\)
-  * SGID sans exécution : `S` \(à la place du x\) ou 2 \(avant le reste\)
-  * `u` : L'utilisateur auquel appartient le fichier
-  * `g` : Le groupe auquel appartient le fichier
-  * `o` : Les autres
-* Permet de set les permissions de différentes façons :
-  * `chmod u+w file`, `chmod u-x file`, `chmod u=wr file`, `chmod u+s file` Ajoute, supprime ou définit les droits de l'utilisateur \(remplacer par _g_ ou _o_ si nécessaire\)
-  * `chmod 754 file` Définit les droits pour chaque groupe en les additionnant
-  * `chmod 4755 file` Same mais en ajoutant le SUID
-
-### chown
-
-Change file owner
+* The return will either contain `text`, `executable` or `data` in the description, so you can base script on that
 
 ## Users & password
 
@@ -201,57 +176,12 @@ Change file owner
 
 \*\(1\) : who's logged in, from where, when and what they are currently running
 
-## Process
-
-| Commande | Définition |
-| :--- | :--- |
-| `kill -l` | List signal |
-| `kill <signal_nb> <pid>` | Send signals \(default `SIGTERM`\) |
-| `killall <name>` | Sends to all processes starting by name |
-| `pkill -u <username>` | Kill all username's processes |
-| `nice` | Set niceness of process |
-| `renice` | Change niceness of process |
-| `ps` | List running processes |
-| `which <name>` | Tell where the binary is located |
-| `top` | List running processes \*\(1\) |
-
-* \*\(1\) Par défaut ceux utilisant le plus de puissance en premier
-
-### PS
-
-* Display information on active process
-* Il accepte plusieurs style de paramètre :
-  * Unix \(par ex `-a`\)
-  * BSD \(sans \`-\` : `a`\)
-  * Les long \(`--a`\)
-  * Du coup y'a des options redondantes entre chacun
-* By default, ps select all processes with the same EUID as the current user and associated with the same terminal as the invoker.
-
-| Option | Effect |
-| :--- | :--- |
-| `a` | Lift the BSD "only yourself" restriction |
-| `-A`/`-e` | Select all processes |
-| `-N ..` | Not ... |
-| `x` | Lift the BSD "must have a terminal" restriction |
-| `T` | Select all processes associated with this terminal |
-| `r` | Only running processes |
-| `-p <pid_list>` / `p <pid_list>` | Select by PID |
-| `-c <cmd_list>` | Select by cmd |
-| `-t <terminal_list>` / `t <terminal_list>` | Select by terminal |
-| `-u <euid_list>` / `U <euid_list>` | Select by EUID |
-| `u` | Display in user-oriented format |
-| `-f` | Display in full format listing |
-
 ## Alias
 
 * `alias name="cmd -param"`
 * Does not persist outside the shell. To make it definitive, add it to the .rc file \(example : `/home/user/.bashrc`\)
 * `alias` List all aliases
 * `unalias alias_name`
-
-## Net cmd
-
-
 
 ## GPG
 
@@ -303,12 +233,11 @@ With this kind of json :
 }
 ```
 
-On peut accéder aux différents éléments ainsi :
-
-* `.. | jq ".level1"`
-* `.. | jq ".level1 .object .obj_att2"`
-* `.. | jq ".level1 .array[]"`
-* `.. | jq ".level1 .array[0] .array_inner1_3"`
+* You can access different element like that :
+  * `.. | jq ".level1"`
+  * `.. | jq ".level1 .object .obj_att2"`
+  * `.. | jq ".level1 .array[]"`
+  * `.. | jq ".level1 .array[0] .array_inner1_3"`
 
 ## Disk info
 

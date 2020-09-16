@@ -5,7 +5,7 @@ description: >-
   of them
 ---
 
-# Pen test tools
+# Tools
 
 ## Disclaimer
 
