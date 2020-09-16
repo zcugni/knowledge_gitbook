@@ -22,6 +22,16 @@ From the console, you can use normal SQL request. Use `exit;` to exit it.
 * `show tables;` Shows tables names
 * `describe table_name;` Shows specific table rows
 
+## Information Gathering
+
+* Version :
+  * `@@version`
+  * `VERSION()`
+* Database name : `DATABASE()`
+* La vue INFORMATION\_SCHEMA nous donne ce genre d’info :
+
+![](../.gitbook/assets/information_schema.png)
+
 ## Misc
 
 * MariaDb tourne sous mySQL
