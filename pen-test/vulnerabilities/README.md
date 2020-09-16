@@ -4,18 +4,20 @@
 
 * Nearly all attacks are an injection of a form or another
 * The goal is to get a vicious string interpreted by whatever technology is used
+* To get out of the original string/instruction in which the input is inserted, you can :
+  * Add comment symbol
+  * Close the original statement \(with `;` for example\) and add yours afterwards
+  * Use concatenation
 * Often, a payload will contain comment characters to comment out the genuine part of the code \(therefore replacing it by the vicious one\)
 * Or the vicious part might close the original statement and add a new one afterwards
-
-## SSRF - Server Side Request Forgery
-
-* Make request in the name of the server, so with it's rights
 
 ## Types of attacks
 
 * **Inband** : The result is directly visible \(sent or displayed\)
-* **Out-of-band** : We must force the app to send the result from another way
-  * For example by adding it as a cookie or parameter to a request made to our server
+* **Out-of-band** : We must force the app to send the result from another way : 
+  * By adding it as a cookie or parameter to a request made to our server
+  * By pipping the result to netcat to send it back to us
+  * etc
 * **Blind \(oracle\)** : The result isn't retrievable, but the application reacts differently in function of it
   * With that, you can get an mdp char by char for example
   * Look for differences in : 
@@ -43,4 +45,8 @@
 {% hint style="info" %}
 Add the stuff that's in xss & rce \(checks others too\)
 {% endhint %}
+
+## SSRF - Server Side Request Forgery
+
+* Make request in the name of the server, so with it's rights
 
