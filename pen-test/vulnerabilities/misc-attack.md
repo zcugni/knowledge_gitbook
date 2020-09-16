@@ -4,166 +4,129 @@ description: 'Disclaimer : This isn''t clean, don''t use it for now'
 
 # Misc Attack
 
-## HTTP Method
+## SSRF - Server Side Request Forgery
 
-* Sometimes checks implemented for GET requests aren’t for HEAD one, which then permit to blindly simulate authorized GET requests
-* Same goes for methods names that don’t exist
-* The `TRACE` request, which simply returns back the request, can be used in XST \(_Cross-Site Tracing_\). If the attacker can force the browser to do this request, it will send cookies with it and so receive them back in the response, which can be read in js, bypassing the `HttpOnly` rule
-* En général, accepter des méthodes HTTP non-nécessaire est plutôt une mauvaise chose et peut être abusée. \(Aka _HTTP Verb Tampering_\)
+* Make request in the name of the server, so with it's rights
 
-## HTTP Redirect Vulnerability
+## RCE
 
-With a proxy, we can change the response code of a response, for example from 302 to 202, which would prevent the server from redirecting. So if the server actually responds with content after a 302, it can be abused.
+* I'm not sure if it stands for _**Remote Code Execution**_ or _**Remote Command Execution**_
+* It allows us to execute commands on the server
+* Language specific commands :
+  * PHP : `system(<command>)`
+  * Ruby : `command`
+  * Python
+    * `os.system(<command>)` and variants
+    * Do that inside an `str()`
+    * If you need to import os.system, use this function in str\(\) : `__import__('os').system(...)`
 
-## HTTP Parameter pollution
+## HTTP
+
+### Parameter pollution
 
 * There’s no official protocol on how to deal with multiple get variables with the same name \(aka [http://test.com/?user=asd&user=xyz](http://test.com/?user=asd&user=xyz)\)
 * Some parser will take the first one, some the last and others will concatenate all of them
 * We can abuse this by overriding values, create a vicious payload by concatenating all of them, or taking advantage of parser differentials to pass different values to the different services.
 
-Cette string sera interprétée ainsi par différents language :
+### Cross-site Tracing
 
-\[img\]
+* The `TRACE` request simply returns back the request
+* If we can force the browser to do it, it'll send cookies with it and so receive them back in the response, which can be read in js, bypassing the `HttpOnly` rule
 
-## RIA Cross Domain Policy
+### Redirect
 
-Rich Internet Applications \(RIA\) use a `crossdomain.xml` or `clientaccesspolicy.xml` file to specifies the permissions that a web client such as Java, Adobe Flash, Adobe Reader, etc. uses to access data across different domains. There’s a master file at the root and maybe sub files in the subdirectory. Too permissive files will enable _CSRF_.
+* If a server responds with content after a 302 \(which it shouldn't\) but then redirects \(which it should\), we can use a proxy to change the status code of the response and change it from a 302 to a 202 \(preventing it from redirecting\)
+
+### Method mismatch
+
+{% hint style="info" %}
+I'm not really sure how i wanted to abuse it but i wrote that : 
+
+* Checks implemented for GET requests might not be for HEAD ones
+* Same goes for methods names that don’t exist
+{% endhint %}
+
+### Verb Tampering
+
+{% hint style="info" %}
+When unnecessary HTTP methods are accepted, we can abuse it, but I haven't research how
+{% endhint %}
 
 ## Brute-Forcing Username
 
-Les sites ne répondent pas toujours de la même façon face à un utilisateur inexistant ou un mdp invalide, ce qui permet d'énumérer les noms d'utilisateurs.
-
-La différence peut être présente dans :
-
-* La réponse textuelle
-* La réponse de la requête
-* Les pages de redirection
-* Des paramètres de lien
-* Les error code renvoyées
-* Les titres de page 
-* La réponse donnée par la page de récupération de message
+* Website don't always respond the same way to a non-existent user and an incorrect password, we can use it to enumerate users
+* Look for differences in :
+  * HTTP response 
+  * Text
+  * Redirection
+  * Link parameters
+  * Error code
+  * Page's title
 
 ## SSI Injection
 
-_Server-Side Include_ permet aux serveurs web d’avoir un peu de code dynamique dans des pages html sans utiliser un langage complet.
+{% hint style="info" %}
+It's possible to do Server-Side Include injection, but i need to find some example
+{% endhint %}
 
-Ce sont des directives que le serveur web parse avant de fournir la page finale.
+## Open redirect
 
-Exemple \(liste non-exhaustive\):
-
-* `<!--#echo var=”DATE_LOCAL”-->` Print l’heure
-* `<!--#include virtual=”path”-->` Inclus le contenu du fichier
-* `<!--#exec cmd=”ls”-->` Inclus le retour de la commande système spécifiée \(si la configuration le permet\)
-* Des fichiers `.shtml` sous-entendent l'utilisation de _SSI_ \(mais l’extension n’est pas pas obligatoire, donc son absence ne signifie pas qu’elles ne le sont pas\).
-
-Ces caractères sont utilisés dans des directives :
-
-* `<` & `>`
-* `#`
-* `=`
-* `/`
-* `.`
-* `“`
-* `-`
-* \[a-zA-Z0-9\]
-
-S’ils ne sont pas sanitize, il est donc possible d’en abuser.
-
-On peut aussi les utiliser dans les header HTTP si l’application les utilise pour générer dynamiquement des pages :
-
-```text
-GET / HTTP/1.0 
-Referer: <!--#exec cmd=”/bin/ps ax”-->
-User-Agent: <!--#include virtual=”/proc/version”-->
-```
-
-## Open redirect vulnerability
-
-* Open redirects nous permettent de rediriger l'utilisateur vers n'importe quelle page
-* It happens when a page redirect to a link given as an url parameter : abc.com/?url=xyz.com
-* This can be used server-side, for example with php `header(“location: $var”)` or in flask/other framework’s `redirect()` function.
-* As well as client side, with `window.location` in js and some meta tags in html
+* Allows us to redirect a user to any page
+* This happens when we can control the redirect instruction of a page, which can come from:
+  * A get parameter : [https://abc.com/?url=xyz.com](https://abc.com/?url=xyz.com)
+  * JS's `window.location`
+  * Html's meta tag
+  * PHP's header : `header("location: $var")`
+  * Server-side framework \(like flask's `redirect()`\)
 * It's one of the based concepts of phishing attacks
-* Ca peut aussi être utilisé pour récupérer des cookies/etc si on fait en sorte que l'utilisateur atteigne notre site. [https://webhook.site/](https://webhook.site/) permet d'enregistrer les requêtes faite sur une adresse qu'il nous donne.
-* Restricted redirect are on the other end restricted to only some subdomains
-* Quand il y a un filtre vérifiant que l'adresse commence par "/", on peut par exemple mettre "//google.com", les navigateurs comprennent les "//".
-* Don't forget that the whole 127.0.0.1/8 subnet is localhost, so if 127.0.0.1 is filtered, try that or localhost
-
-## Web Messaging
-
-En plus des CORS, il y a un autre moyen permettant à 2 domaines de communiquer : _Cross Domain Messaging_.
-
-La messaging API introduit une fonction `postMessage()` contenant le message et le domaine de destination. De même, un event existe pour détecter la réception d'un message.
-
-Exemple :
-
-```javascript
-// Send message :
-
-iframe1.contentWindow.postMessage(“Hello world”,”http://
-www.example.com”);
-
-// Receive message :
-window.addEventListener(“message”, handler, true);
-function handler(event) {
-    if(event.origin === ‘chat.example.com’) {
-     /* process message (event.data) */
-    } else {
-     /* ignore messages from untrusted domains */
-    }
-}
-```
-
-Si l'origine est mal vérifiée ou si les dev sont trop confiant de la sécurité des données transmises, des failles peuvent survenir.
+* It can also be use to retrieve cookies if the target is our website
+* Restricted redirect are restricted to only some subdomains
+* Check [Bypassing Sanitizers](https://zcugni.gitbook.io/notes/pen-test/vulnerabilities#bypassing-sanitizers)
 
 ## Dom Clobbering
 
-* Pour chaque élément ayant un id dans une page, une variable js correspondante est créée \(à part si elle existe déjà\)
-* De plus, elle ne représente pas toujours la même chose en fonction du type de l'élément
+* For each element with an id in the page, a corresponding js var is created \(except if it already exist\)
+* It's doesn't represent the same thing in function of the type of the element
+
+{% hint style="info" %}
+I forgot how to use that to our advantages
+{% endhint %}
 
 ## Dom Purify
 
-* Il enlève les `<script>` mais aussi  des tags non terminés `<a`
-* Par contre il accepte des tags entiers `<a>`, `<img>`, etc
-* tel est l'un des rare protocoles accepté, donc `tel:alert(1337)` est accepté dans un href par exemple
+* Removes `<script>` and not terminated tags : `<a`
+* `tel` is one of the few accepted protocols so `tel:alert(1337)` will work
 
 ## Click jacking
 
-En intégrant une page dans une iframe et en la rendant transparente en CSS, on peut pousser l'utilisateur à cliquer sur des éléments sans qu'il ne le sache.
-
-Client-Side on s'en protège avec le _frame busting_ mais j'ai pas tout compris et server-side avec `X-frame-options` qui définit qui peut mettre notre site dans une iframe.
+* By integrating a page into an iframe and making in transparent, we can make the user click on element without him knowing
+* To protect from that client side, use _frame busting_
+* To protect from that server side, use `X-frame-options` which determine who can put our site into an iframe
 
 ## Path Injection
 
-* En plus des path traversal/etc, si une partie de l'url se retrouve dans la page, des path _injection_ sont possible.
-
-## Encoding
-
-* Try to double url encode, aka '/' -&gt; `%252f` \(%25 = %, %2f = /\)
+* If a part of the url is a reflected in the page, we can inject it
 
 ## LDAP vulnerabilities
 
-* Faire un bind anonyme \(en ne mettant rien dans le body de la request\), peut permettre d'être authentifié \(d'autant plus si les droits d'accès sont mal configurés\)
-* Authentication will often look like that : `(&(cn=[INPUT1])(userPassword=HASH[INPUT2]))`, to which we can give this payload `?name=admin)(userPassword=*))%00&password=*`. On ré-écrit le filtre nous même \(le `%00` permet d'empêcher le serveur de rajouter sa partie\)
-* Tester la possibilité de casser des filtres avec `)`
-
-## JSFuck
-
-JSFuck is a valid javascritp syntax using only 6 characters : `[`, `]`, `(`, `)`, `+`, `!`. It can be use to bypass filters
+* We might be able to authenticate by doing an anonymous bind \(by putting nothing into the body of the request\)
+* Example of payloads given this authentication `(&(cn=[INPUT1])(userPassword=HASH[INPUT2]))` :
+  * `?name=admin)(userPassword=*))%00&password=*`
+* Try to break filters with `)`
 
 ## Multiple view of framework
 
-Framework often automatically generate multiple view for a data. So an user.html may have an equivalent user.json format. However, since it's automatic and not necesseraly thought by the dev, some protection for sensible data might be missing on this format.
-
-By the way, if you can't change the url by adding a `.json`, you can force it to fed you this type of responce by changing the accept header of the request to : `Accept : application/json`
+* Framework often automatically generate multiple view for a data, so an `user.html` may have an equivalent `user.json` format
+* However, since it's automatic some protection might be missing
+* If you can't change the url by adding a `.json`, you can force it to fed you this type of response by changing the accept header of the request to : `Accept : application/json`
 
 ## Server Side Template Injection
 
-To test if that is possible, inject `{{4-3}}` if it's interpreted, you might be able to do somehting. This isn't specific to python flask's jinga 2 apparently, Server Side Template often use that.
+To test if that is possible, inject `{{4-3}}` if it's interpreted, you might be able to do something. This isn't specific to python flask's jinga 2 apparently, Server Side Template often use that.
 
 ### Jinga 2
 
-To get it to execute something, you can naviguate the available class by iterating `{{.__class__.mro()[x]}}` until you stumble on one that might have multiple functions \(like _object_\).
+To get it to execute something, you can navigate the available class by iterating `{{.__class__.mro()[x]}}` until you stumble on one that might have multiple functions \(like _object_\).
 
 You can then check it's subclasses with `{{.__class__.mro()[x].__subclasses__()}}` and search within it something useful \(like _popen_\).
 

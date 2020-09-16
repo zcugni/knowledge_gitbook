@@ -42,8 +42,6 @@ XSS payloads made from a mixture of encoding/repetition/comments/etc that make i
 * Check which chars are escaped by using them with an easily recognizable safe string
 * Use lists with _burp intruder_
 * If `<script>` aren't accepted, use events like `onfocus`, `onload`, etc
-  * You can accumulate functions in these event by separating them with `;`
-* `<sCRipt>` tag aren't case sensitive
 * Other places for xss :
   * Concatenated http parameter pollution
   * Url of action form : `javascript:alert(1337)`
@@ -55,8 +53,8 @@ XSS payloads made from a mixture of encoding/repetition/comments/etc that make i
 
 * Exist in Chrome, not in Firefox and I don't know for the rest
 * Broadly speaking, it detects XSS injection by comparing what is given in the url with the scripts of the page
-  * Because of that, we can inject a script that a normal part of the page in the url to actually disable it
-* Might soon disapear because it create vulnerabitilies and gives a false impression of security to devs
+* Because of that, we can inject in the url a script that's a normal part of the page to disable it
+* Might soon disappear because it create vulnerabilities and gives a false impression of security to devs
 
 ## Get a cookie with that
 

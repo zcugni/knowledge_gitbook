@@ -32,6 +32,11 @@ From the console, you can use normal SQL request. Use `exit;` to exit it.
 
 ![](../.gitbook/assets/information_schema.png)
 
+### Single Quote Escape
+
+* If the db use the GBK charset \(simplified chinese\) and not the application, using `\xBF'` \(URL-encoded as `%bf%27`\) will prevent `addslashes` \(php function\) from correctly escaping the quote
+  * Explained  [here](http://shiflett.org/blog/2006/addslashes-versus-mysql-real-escape-string)
+
 ### Read / Write
 
 * We can write with `into outfile 'path'`

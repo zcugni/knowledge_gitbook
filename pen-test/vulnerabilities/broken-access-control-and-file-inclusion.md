@@ -2,36 +2,36 @@
 
 ## Concept
 
-* Class of vulnerabilities that lets you access/use files/informations/functions that you shouldn't be able to.
-* Les nuances entre chaque attaque sont assez minimes donc j'ai un peu tendance à toutes les regroupées en 1 seul concept.
+* Class of vulnerabilities that lets you access/use files/data/functions that you shouldn't be able to
+* These attacks are quite similar, so I tends to see them as one class of vulnerabilities
 
-## IDOR -  _Insecure Direct Object Reference_
+## IDOR & Force Browsing
 
-The application directly expose reference to an object \(user details, etc\) without checking authorization : [http://website.com/orders?id=1213](http://website.com/orders?id=1213)
+* IDOR stands for _Insecure Direct Object Reference_
+* These two happens when the app directly expose sensible things without checking authorization
+* Force Browsing is for files \(aka a backup file that you can access
+* IDOR is for object reference \(so with ids, etc\) :  [http://website.com/orders?id=1213](http://website.com/orders?id=1213)
+* The application directly expose sensible files \(disclosing information, backup/old files with vulnerabilities corrected in newer versions, etc\).
 
-De ce que j'ai compris, ça sous-entends généralement l'utilisation d'un id, etc, comparé au forced browsing.
+{% hint style="info" %}
+Maybe i should add stuff about backup, extensions, etc
+{% endhint %}
 
 ## MFLAC - _Missing Function Level Access Control_
 
-This happens when an access control isn't done at the function level, meaning that if you have this link : [https://website/changepwd?id=dasfaf-rwtwt-864864864](https://website/changepwd?id=dasfaf-rwtwt-864864864)
-
-You can give it the id of another user and the function will execute none the less.
-
-De ce que j'ai compris, la diff avec IDOR c'est que même si la page en elle-même a des protections, si on fait directement une requête forgée de toute pièce, celle-ci sera acceptée.
-
-## Forced Browsing
-
-The application directly expose sensible files \(disclosing information, backup/old files with vulnerabilities corrected in newer versions, etc\).
+* This happens when access control isn't done at the function level
+* Given a function that change a password and doesn't check that you have the right to do it \(because the web page does it beforehand\)
+  * If you forge a request and send it through a proxy \(so bypass the verification\), you can change the password of anyone
 
 ## Directory Traversal & File Inclusion
 
 * With _Directory Traversal_ we can access \(and read/execute\) sensible files by moving inside directories with this kind of payloads : `../../../../etc/passwd`
-* _Files Inclusion_ abuse arbitrary "require/include" used in application
+* _Files Inclusion_ abuse arbitrary  `require` & `include` used in application
   * LFI \(local\) can only include local files \(through path traversal probably\)
   * RFI \(remote\) can include any file
-* On a pas besoin de connaitre la structure exacte des dossiers car même si on mets trop de `../../` ça marchera quand même.
-* Windows est plus vulnérable que linux car on peut faire ça `test/../../../file.txt` même si _test_ n'existe pas, ce qui facilite des cas où le chemin est concaténé à autre chose.
-* Check if extension are added programmatically and try to cut the string with `%00` if it's the case
+* You don't necessarily need to know the exact hierarchy of the directories, if you write too many `../../` it might still work
+* Windows is more vulnerable than linux because you can do `test/../../../file.txt` even if file.txt doesn't exist, meaning that if concatenation is done by the application, it won't break your payload
+* Check if extension are added automatically and try to cut the string with `%00` if it's the case
 
 ## Sources
 

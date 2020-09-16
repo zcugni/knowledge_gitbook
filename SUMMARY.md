@@ -12,7 +12,6 @@
   * [XSS - Cross-Site Scripting](pen-test/vulnerabilities/xss.md)
   * [SQL Injection](pen-test/vulnerabilities/sqli.md)
   * [CSRF - Cross-Site Request Forgery](pen-test/vulnerabilities/csrf.md)
-  * [RCE](pen-test/vulnerabilities/rce.md)
   * [Broken Access Control & File Inclusion](pen-test/vulnerabilities/broken-access-control-and-file-inclusion.md)
   * [Misc Attack](pen-test/vulnerabilities/misc-attack.md)
 * [Buffer Overflow & Shellcode](pen-test/buffer-overflow.md)
@@ -107,4 +106,5 @@
 * [Finger](oh-hold/finger.md)
 * [Méthodologie reverse engienering](oh-hold/methodologie-reverse-engienering.md)
 * [BDD Language differencies](oh-hold/bdd-language-differencies.md)
+* [Misc](oh-hold/misc.md)
 
