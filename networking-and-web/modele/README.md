@@ -1,21 +1,28 @@
 # Modèle & Protocoles
 
-## Généralités
+## Generalities
 
-* Technos divisées en couche
-* Si une couche inférieur ne fonctionne pas, celle du dessus non plus
-* Chaque couche ne communique qu'avec celles adjacentes
-* 2 modèles
-  * _Open System Interconnect_ \(OSI\) : 7 couches, détaillé mais peu représentatif
-  * TCP/IP : 5 couches, détaillé ici
+* Tech, protocols, etc are divided by layer
+* If an inferior layer doesn't work, the ones above won't either
+* Each layer communicates only with the 2 adjacents one
+* There's 2 models :
+  * Open System Interconnect \(OSI\) : 7 layers, detailed but not representative
+  * TCP/IP : 5 layers, more representative, I detailed it here
 
-## Communication entre couche
+## Communication between layers
 
-Chaque "paquet" d'information \(sens global du terme\) est composé de l'header du protocol + son payload. Pour passer d'une couche à l'autre, les informations sont encapsulée et le combo devient le payload de la prochaine couche.
+* Data is transmitted by creating a pack of the payload and the header of the protocol and giving it to the next layer
+* The header + payload combo becomes the payload of the next layer, which then adds it's header to it
+* This process is called _encapsulation_
 
 ![](../../.gitbook/assets/encapsulation.png)
 
-Les informations de la data link \(la mac adresse\), est modifiée à chaque hop, tandis que celle de l'ip de destination reste pour tout le trajet.
+* Information in the data link layer \(like the mac address\) change at each hop
+* While the ip address of the destination stays the same
+
+## Layer 1 - Physical
+
+The first layer is composed of the physical aspect, like cable, radio waves, etc
 
 ## Troubleshooting
 

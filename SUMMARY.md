@@ -30,7 +30,6 @@
 ## Networking & Web
 
 * [Modèle & Protocoles](networking-and-web/modele/README.md)
-  * [Layer 1 - Physical](networking-and-web/modele/layer-1-physical.md)
   * [Layer 2 - Datalink](networking-and-web/modele/layer-2-datalink.md)
   * [Layer 3 - Network](networking-and-web/modele/layer-3-network.md)
   * [Layer 4 - Transport](networking-and-web/modele/layer-4-transport.md)
