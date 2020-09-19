@@ -1,11 +1,11 @@
 # XML
 
-## Généralités
+## Generalities
 
-* Abréviation de eXtensible Markup Language
-* Conçu pour le transport et le stockage des données
-* Décrit ce que _sont_ les données \(tandis qu’HTML décrit ce à quoi elles ressemblent\)
-* Certains caractères sont systématiquement interprété par le parser, il faut donc utiliser des _entity_ :
+* Stands for eXtensible Markup Language
+* Use for transporting and stocking data
+* Describe what are the data \(while HTML discribe their structure\)
+* Some characters are reserved and so you need to use _entities_
 
 | Caractère | Entity |
 | :--- | :--- |
@@ -15,39 +15,33 @@
 | `'` | `&apos;` |
 | `"` | `&quot;` |
 
-* `<!-- Ceci est un commentaire -->`
-* `<!-- Ceci est un -- commentaire invalide -->`
+* `<!-- This is a comment -->`
+* `<!-- This is -- an invalid comment -->`
 
 ## Structure
 
-* Description du document optionnel \(obligatoirement en premier\) :
+* The description of the document is optional but needs to be first if there :`?xml version="1.0" encoding="UTF-8"?>` 
+* It's hierarchical 
+* There's a root element to all others \(beside the description\)
 
-  `<?xml version="1.0" encoding="UTF-8"?>` 
+## Tags/elements/nodes
 
-* Un élément parent à tous les autres \(en dehors de la description\)
-* Structure hiérarchique pour le reste
-
-## Tags/éléments/nœuds
-
-* Ces 3 termes sont synonymes
+* These 3 terms are synonyms
 * `<elementName></elementName>`
-* Aucun nom prédéfinis, mis à part pour le `<?xml>` \(et ces variantes type `<Xml>`\)
+* No predefined name, except for `<?xml>` \(and it's variant `<Xml>`\)
 * Case-sensitive
-* Commence par une lettre ou un \_
-* Ne peut contenir des espaces
-* Peut contenir des lettres/nombres/`_`/`.`
-* Peuvent être vide `<element></element>` et se fermer tout seul `<element />`
-* Un élément entouré de CDATA ne sera pas interprété `<![CDATA[content]]>`
+* Begins with a letter or an `_`
+* Can't contain spaces
+* Can contain letters, numbers, `_`, `.`
+* Element can be empty `<element></element` and close by themselves `<element />`
+* An element inside CDATA won't be interpreted `<![CDATA[content]]>`
 
-## Attributs
+## Attributes
 
-* Possibilité d'ajouter des attributs aux tags :
-
-  `<elementName attributeName="attribute value"></elementName>`
-
-* Aucun prédéfinis 
-* Toujours entre `“”` \(ou `‘’`\) même si ce sont des nombres/autres
-* En général, les metadata \(par exemple un id\) devraient être des attributs, tandis que les données en elles-mêmes \(par exemple une date\) devraient être des tags.
+* You can add them to tags : `<elementName attributeName="attribute value"></elementName>`
+* Non predefined
+* Always between `"` or `'`
+* Generally speaking, metadata \(like an id\)  should be attributes while data \(like a date\)  should be nodes
 
 ## Exemple
 
@@ -77,7 +71,7 @@
 
 ## Namespace
 
-Si on a 2 éléments avec un même nom mais ne représentant pas le même type d'informations, on peut préciser des namespace.
+* Two differentiate element with the same name but not representing the same thins, use namespaces
 
 ```markup
 <table xmlns="http://www.w3.org/TR/html4/">
@@ -88,7 +82,7 @@ Si on a 2 éléments avec un même nom mais ne représentant pas le même type d
 </table>
 ```
 
-On peut aussi préciser un prefix à utiliser `xmlns:prefix="URI"` \(le lien n'est pas suivis par le parser et est juste informatif\) :
+* You can set a prefix with `xmlns:prefix="URI"`
 
 ```markup
 <root>
@@ -107,12 +101,14 @@ On peut aussi préciser un prefix à utiliser `xmlns:prefix="URI"` \(le lien n'e
 </root>
 ```
 
-On peut aussi directement specifier les prefix dans le 1er élément du document :
+* You can also specify prefix in the first element of the document :
 
 ```markup
 <root xmlns:h="http://www.w3.org/TR/html4/"
 xmlns:f="https://www.w3schools.com/furniture">
 ```
+
+* The link aren't followed by the parser
 
 ## Source
 

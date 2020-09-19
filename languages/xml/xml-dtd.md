@@ -1,10 +1,10 @@
 # XML DTD
 
-* DTD pour _Document Type Definition_
-* Définit la structure que devrait avoir un document xml
-* On spécifie le DTD avant le premier nœud \(hors description\) dans un élément `<!DOCTYPE>` \(qui n'a pas de `/` fermante\)
-  * Déclaration dans le fichier `<!DOCTYPE root_name [...]>`
-  * Inclusion d'un fichier externe `<!DOCTYPE root_name SYSTEM "file">`
+* Stands for **Document Type Definition**
+* Defines the structure that the xml document should have
+* Specifies the DTD inside the first node \(beside the description\), in a `<!DOCTYPE>` \(without a closing `/` \)
+* You can write it directly inside the document `<!DOCTYPE root_name [...]`
+* Or include an external file `<!DOCTYPE root_name SYSTEM "file">`
 
 ## Elément
 

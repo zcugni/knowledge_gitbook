@@ -6,15 +6,15 @@ description: 'Disclaimer : This is an old and not up to current standard note'
 
 ## Variable
 
-* Commence par un $ puis une lettre. 
-* Ensuite lettre et chiffre, mais pas de caractères spéciaux.
-* Le type est deviné et peut changer en cours d’exécution.
-* Constante : `DEFINE("NOM_CONST", "valeur");`
-  * On l'écrit en majuscule. Il n’y a pas de $, même quand on l'appelle.
+* Starts with an `$` and then a letter
+* Letters & number are accepted, not special characters
+* The type is guessed and can change during execution
+* Constant : `DEFINE("NOM_CONST", "valeur");`
+  * In caps, no $
 
 ## String
 
-* Même si on peut faire `$string[0]`, les strings ne sont pas des tableaux de lettres -&gt; `count()` inutile.
+* Even though we can do `$string[0]` strings aren't array, `count()` is useless
 * Si on entoure une chaîne par `" "` ce qui est dedans est interprété, au contraire de `' '`.
 * Concaténation avec `.`
 * Ecrire `$_SESSION["bla"]` entre des " " : `${_SESSION["bla"]}`
