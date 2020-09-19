@@ -1,4 +1,4 @@
-# Modèle & Protocoles
+# Models & Protocols
 
 ## Generalities
 
@@ -37,7 +37,6 @@ The first layer is composed of the physical aspect, like cable, radio waves, etc
 ## Sources
 
 * _Networking for Systems Administrators_ by Michael W. Lucas
-* [Techninjistics](https://www.youtube.com/user/techninjistics)
 * Pentesterlab
 * Misc Research
 

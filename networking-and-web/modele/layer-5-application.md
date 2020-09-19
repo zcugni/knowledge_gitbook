@@ -1,10 +1,9 @@
 # Layer 5 - Application
 
-## Généralités
+## Generalities
 
-Le modèle OSI sépare cette couche en 3 \(session, présentation & application\), mais dans les faits ils sont souvent mélangés, comme dans le modèle TCP/IP.
-
-Cela peut être HTTP, LDAP, SMTP, etc.
+* The OSI model divides this layer in 3 \(session, presentation & application\) but in reality they're often mixed, like in the TCP/IP model
+* Some tech of this layer are : HTTP, LDAP, SMTP, etc.
 
 ## HTTP
 
@@ -24,9 +23,9 @@ Cookie:  hackthebox_session=eyJpdiI6IkJBTlJ0bzNRVGowUDVrOUZNejl2K3c9PSIsInZhbHVl
 ```
 
 * HTTP Verb :
-  * `GET` Demande une ressource, prends des paramètres avec ?key=value après le lien
-  * `POST` Submit form data \(celle-ci sont dans le message body\)
-  * `HEAD` Demande uniquement les en-têtes d'une réponse et non la réponse au complet
+  * `GET` Ask for a ressource by adding `key=value` parameters after an `?` in a link
+  * `POST` Submit form data \(they're in the message body\)
+  * `HEAD` Ask for the the headers that would be given if the request was a GET
   * `PUT` Upload a file to the server
   * `DELETE` Remove a file from the server
   * `OPTIONS` Query the server for accepted Verbs
@@ -40,7 +39,7 @@ Cookie:  hackthebox_session=eyJpdiI6IkJBTlJ0bzNRVGowUDVrOUZNejl2K3c9PSIsInZhbHVl
 * `Accept-Language` Expected \(human\) language of the response
 * `Accept-Encoding` Expected encoding \(aka compression method\)
 * `Connection` What to do with it, with `keep-alive` it will be re-use next time \(i think\)
-* `Referer` Last page visited \(i think\)
+* `Referer` Last page visited
 
 ### Response
 
@@ -81,177 +80,168 @@ Content-Length: 48
 * `Cache-Control` Cache policy
 * `Content-type` Describe the format
 * `Content-Encoding` Describe the encoding \(the compression method\)
-* `Server` \(Optionnal\) Header of the server generating the response
-* `Content-Length` Lenght of the message body in bytes
+* `Server` \(Optional\) Header of the server generating the response
+* `Content-Length` Length of the message body in bytes
 
 ### HTTPS
 
-* Stands for HTTP Secure, it's run through over SSL/TLS
+* Stands for HTTP Secure, it's runs over SSL/TLS
 
 ## Cookies
 
-* Set par le serveur via une en-tête `Set-Cookie` dans la réponse :
+* Set by the server via the `Set-Cookie` header in the response :
 
   `Set-Cookie: name=value; expires=Mon, 23-Mar-2020 20:35:24 GMT; Max-Age=7200; path=/; secure`
 
-* Ils peuvent avoir tout ces attributs :
-  * `Secure` Ne sera transmis que pour des requêtes https
-  * `HttpOnly` Ne peut pas être récupéré par du js \(pas supporté par tous les navigateurs\)
-  * `Domain` Définit le domaine pour lequel le cookie sera envoyé. Par défaut le _host name_ du serveur générant le cookie. Il est transmis pour le domaine et ces sous-domaines \(ex: s’il est set à app.mydomain.com, il sera aussi transmis pour plop.app.mydomain.com, mais pas pour tut.mydomain.com\).
-  * `Path` Définit le chemin plus précis \(dans le serveur web\) pour lequel le cookie sera envoyé \(ex : /myapp/\).
-  * `expires` Par défaut, les cookies ne sont valide que pour la session active du navigateur et sont supprimé à la fin de celle-ci \(j’imagine quand on ferme le navigateur ?\). Avec ce flag, on peut définir une date précise d’expiration pour les rendre plus persistant.
-* Les cookies ne sont envoyés qu'au domain/chemin correspondant quand ils ne sont pas expirés et que la situation corresponds à leur flag
+* Can have these attributes :
+  * `Secure` Will only be transmitted with https request
+  * `HttpOnly` Can't be retrieved in js \(not supported by every browser\)
+  * `Domain` Define the domain for which the cookies will be sent
+    * By default, it's the host name of the server generating the cookie
+    * Transmitted for the domain and it's sub-domains
+  * `Path` Define the precise path for which the cookies is sent
+  * `expires` By default, cookies are only valid for the current session of the browser and are deleted when it closes \(i think\)
+    * With this flag, you can define an expiration date
 
 ## Session
 
-* Session keeps the state & information of the client server-side.
-* Ca permet d'éviter tout les échanges de données dû au cookies.
-* When you logging \(for exemple\), your're only given a session id cookie, which is subsequently used to retrieve your info \(instead of having a cookie for each info\).
-* \(Session id can also be sent via GET parameters\)
+* Session keeps the state & information of the client server-side
+* This allows you to avoids transmitting all data through cookies
+* When you login \(for exemple\), your're only given a session id cookie, which is subsequently used to retrieve your info \(instead of having a cookie for each info\)
+* Session id can also be sent via GET parameters
 
 ## Local Storage
 
-Aussi appelé _Web Storage_ ou _Offline Storage_ permet de stocker des données en pair de clé-valeur sur le client \(liées à un domaine en particulier, il suit la SOP\). La capacité de stockage est plus grande que celle des cookies et ces données-ci ne sont pas envoyées au serveur.
-
-Le _localStorage_ est persistant tandis que le _sessionStorage_ est vidé à la fermeture de la fenêtre. Les deux sont accessible en js \(via `setItem` et `getItem`, avec les risques que cela sous-entends.
+* Also called **Web Storage** or **Offline Storage**
+* Let you store data as key-value pair on the client
+  * Linked to a particular domain, it follows SOP
+* The storage capacity is bigger than that of cookies, and data aren't sent to the server
+* The `localStorage` is persistant, while the `sessionStorage` is emptied when you close a window
+  * Both are accessible in js via `setItem` & `getItem`
 
 ## URL
 
-### Terminologie
+### Terminology
 
-* Uniform Ressource Identifier \(_URI_\) : Permet d'identifier une ressource \(irl, correspond à un nom\).
-* Uniform Ressource Locator \(_URL_\) : Permet de localiser une ressource \(irl, correspond à une adresse\).
-* Uniform Ressource Name \(_URN_\) : Permet d'identifier une ressource dans l'espace et le temps de façon unique \(irl, un ISBN d'un livre\).
-* Les URL & URN sont des URI, mais l'opposé n'est pas systématique.
+* **Uniform Ressource Identifier** _\(URI\)_ Identifies a ressource \(like a name\)
+* **Uniform Ressource Locator** _\(URL\)_ Locate a ressource \(like an address\)
+* **Uniform Ressource Name** _\(URN\)_ Identifies a ressource uniquely' \(like the ISBN of a book\)
+* URL & URN are URIs, but the opposite isn't always true
 
-### Anatomie
+### Anatomy
 
 ![](../../.gitbook/assets/url_anatomy.png)
 
-* Le scheme peut aussi être `file://` auquel cas c'est le chemin vers une ressource locale
-* Il peut y avoir plusieurs paramètres dans la _Query String_ séparés par des `&`
-* Le terme _Query String_ semble couramment utilisé mais n'est, je crois, pas officiel
-* On peut aussi spécifier l'utilisateur et le mot de passe avant le domaine : `https://username:password@example.com`
-* Le _Fragment Identifier_ est en fait une ancre dans la page
-* Elle peut être plus complexe que cela, mais c'est l'utilisation générale qu'on en fait
+* If the scheme is `file://` it reference a local ressource
+* There can be multiple parameters in the **Query String**, separated by `&`
+* You can specify the username & password before the domain :`https://username:password@example.com`
+* The **Fragment Identifier** is a page anchor
 
 ### Encoding
 
-Etant donné que certains caractères ont une signification spéciale pour les URL, ils sont réservés et si l'on veut les utiliser hors de ce contexte il faut les encoder. De plus, l'espace n'est pas permis et est remplacé soit par un `+` soit par `%25`.
+* Some chars have special meaning and needs to be encoded to be use normally 
 
-Je ne suis pas sûre de la raison dernière chaque caractère réservé.
-
-| Caractère | Encodage | Signification |
+| Char | Encoding | Signification |
 | :--- | :--- | :--- |
-|  | %20 | Espace |
-| ! | %21 | ? |
-| \# | %23 | Delimits the fragment identifier |
-| $ | %24 | ? |
-| % | %25 | Encode string |
-| & | %26 | Delimits query string's parameters |
-| ' | %27 | ? |
-| \( | %28 | ? |
-| \) | %29 | ? |
-| \* | %2A | ? |
-| + | %2B | Utilisé pour encoder un espace |
-| , | %2C | Alternative à ; |
-| / | %2F | Delimits path segment |
-| : | %3A | Delimits the scheme from the host and the host from the port |
-| ; | %3B | I'm not sure |
-| = | %3D | Delimits name/value pairs in the query string |
-| ? | %3F | Delimits the start of the query string |
-| @ | %40 | Delimits user info from the host |
-| \[ | %5B | ? |
-| \] | %5D | ? |
+|  | `%20` or `+` | Space |
+| `!` | `%21` |  |
+| `#` | `%23` | Delimits the fragment identifier |
+| `$` | `%24` |  |
+| `%` | `%25` | Encode string |
+| `&` | `%26` | Delimits query string's parameters |
+| `'` | `%27` |  |
+| `(` | `%28` |  |
+| `)` | `%29` |  |
+| `*` | `%2A` |  |
+| `+` | `%2B` | Use to encode a space |
+| `,` | `%2C` | Alternative to `;` |
+| `/` | `%2F` | Delimits path segment |
+| `:` | `%3A` | Delimits the scheme from the host and the host from the port |
+| `;` | `%3B` |  |
+| `=` | `%3D` | Delimits key-value pairs in the query string |
+| `?` | `%3F` | Delimits the start of the query string |
+| `@` | `%40` | Delimits user info from the host |
+| `[` | `%5B` |  |
+| `]` | `%5D` |  |
 
 ## SOP - Same Origin Policy
 
-> La same-origin policy restreint la manière dont un document ou un script chargé depuis une origine peut interagir avec une autre ressource chargée depuis une autre origine.
-
-2 pages ont la même origines si elles utilisent le même protocole \(http vs https\), le même hote et le même port.
-
-Types d’échanges :
-
-* Ecriture - globalement autorisée
-  * Lien
-  * Redirection
-  * Formulaire
-* Embarqués - en partie autorisé
-  * `<script src=”..”></script>` \(les messages d’erreurs de syntaxe ne sont dispo que pour une même origine par contre\)
-  * `<link rel=”stylesheet” href=”...”>` \(mais ils doivent avoir un header `content-type`. Restrictions en fonction des navigateurs\)
-  * `<img>`, `<video>`, `<audio>`
-  * Plugins avec `<object>`, `<embed>`, `<applet>`
-  * `@font-face` en fonction des navigateurs
-  * `<frame>` & `<iframe>` \(peut être interdit avec un header\)
+* It restrain how an origin can interact with a ressource from another origin
+* 2 pages have the same origin if they share :
+  * The same protocol \(http vs https\)
+  * The same host
+  * The same port
+* Type of exchanges :
+  * Generally authorized
+    * Link
+    * Redirection
+    * Forms
+  * Authorized only in part :
+    * `<script src=”..”></script>` Error message are visible only to the same origin
+    * `<link rel=”stylesheet” href=”...”>` The `content-type` header must be present and there's restrictions depending on the browser
+    * `<img>`, `<video>`, `<audio>`
+    * Plugins avec `<object>`, `<embed>`, `<applet>`
+    * `@font-face` Depending of the browsers
+    * `<frame>` & `<iframe>` Can be forbidden by an header
 
 ## CORS - Cross-Origin Resource Sharing
 
-Permet au serveur d’autoriser certains échanges ne suivant pas la SOP grâce à des headers qu’il rajoute dans sa réponse.
+Can autorise some exchanges that don't follow SOP restriction by adding headers in the response
 
-### Type d’headers \(dans la réponse du serveur\)
+### Type of headers \(in the response\)
 
-* `Access-Control-Allow-Origin : * | <origin>` : autorise des requêtes cross-origine venant de n’importe quel domaine ou d’un domaine spécifique.
-* `Access-Control-Allow-Credentials : true (false if not specified)` : permet de faire des requêtes avec des cookies.
-  * Si ce header n’est pas présent dans la réponse du serveur, une requête avec cookie sera rejetée par le navigateur. 
-  * Pour que ce header soit prit en compte, `Access-Control-Allow-Origin` doit obligatoirement spécifié une origine précise.
-* Plus toutes celles de réponse à un preflight, voir plus bas.
+* `Access-Control-Allow-Origin : * | <origin>` Autorise cross-origin request from one specific domain or any domain
+* `Access-Control-Allow-Credentials : true` ****
+  * False if not specified
+  * Allows request with cookies
+  * `Access-Control-Allow-Origin` Must specifies a precise origin
+* All the ones in a preflight response, see below
 
-### Requêtes “normales”
+### Normal request
 
-Les requêtes respectant ces conditions ne triggereront pas de preflight.
+Request following these conditions won't trigger a preflight :
 
-* No event listeners are registered on any _XMLHttpRequestUpload_ object used in the request. These are accessed using the `XMLHttpRequest.upload property`.
-* No `ReadableStream` object is used in the request.
-* Some additional restrictions by browsers.
-
-Méthodes acceptées :
-
-* GET
-* HEAD
-* POST
-
-Headers pouvant être spécifiés manuellement : 
-
-* Accept
-* Accept-Language
-* Content-Language
-* Content-Type
-* DPR
-* Downlink
-* Save-Data
-* Viewport-Width
-* Width
-
-Valeurs de Content-Type autorisées :
-
-* application/x-www-form-urlencoded
-* multipart/form-data
-* text/plain
+* No event listeners are registered on any _XMLHttpRequestUpload_ object used in the request
+  * These are accessed using the `XMLHttpRequest.upload property`
+* No `ReadableStream` object is used in the request
+* Some additional restrictions by browsers
+* Accepted methods :
+  * GET
+  * HEAD
+  * POST
+* Header that can be specified manually :
+  * Accept
+  * Accept-Language
+  * Content-Language
+  * Content-Type
+  * DPR
+  * Downlink
+  * Save-Data
+  * Viewport-Width
+  * Width
+* Accepted values of `Content-Type` :
+  * `application/x-www-form-urlencoded`
+  * `multipart/form-data`
+  * `text/plain`
 
 ### Preflight
 
-Les autres requêtes sont jugées risquées et donc trigger un “preflight”. Cela consiste à d’abord envoyer une requête `OPTION` au serveur décrivant la requête finale que l’on compte faire pour vérifier qu’il l’accepte et si c’est le cas, la faire réellement.
-
-header d’une requête `OPTION` :
-
-* `Origin`
-* `Access-Control-Request-Method` POST, GET, etc
-* `Access-Control-Request-Headers` Name of the used headers, custom or not
-
-header d’une réponse `OPTION` :
-
-* `Access-Control-Allow-Origin`
-* `Access-Control-Allow-Methods` POST, GET, etc
-* `Access-Control-Allow-Headers` Name of the headers, custom or not
-* `Access-Control-Max-Age` Lifetime of the option request, a preflight will need to be trigger again if it’s exceeded
-
-Ces headers sont présents dans la requête du client pour décrire sa futur requête et dans la réponse du serveur pour décrire ce qu’il accepte.
+* Other request are judged risky and will trigger a preflight
+* For that, an `OPTION` request is first made to the server describing the final one that we want to do
+  * The server send back a response with headers describing what it accepts
+* Header of an OPTION request : 
+  * `Origin`
+  * `Access-Control-Request-Method` POST, GET, etc
+  * `Access-Control-Request-Headers` Name of the used headers, custom or not
+* Header of a response to an OPTION :
+  * `Access-Control-Allow-Origin`
+  * `Access-Control-Allow-Methods` POST, GET, etc
+  * `Access-Control-Allow-Headers` Name of the headers, custom or not
+  * `Access-Control-Max-Age` Lifetime of the option request, a preflight will need to be trigger again if it’s exceeded
 
 ![](../../.gitbook/assets/headers.png)
 
 ## Sources
-
-En plus de celle données [ici](https://zcugni.gitbook.io/notes/networking-and-web/modele#sources) :
 
 * MDN Web Docs
   * [On SOP](%20https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript)

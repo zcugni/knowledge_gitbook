@@ -30,12 +30,12 @@
 
 ## Networking & Web
 
-* [Modèle & Protocoles](networking-and-web/modele/README.md)
+* [Models & Protocols](networking-and-web/modele/README.md)
   * [Layer 2 - Datalink](networking-and-web/modele/layer-2-datalink.md)
   * [Layer 3 - Network](networking-and-web/modele/layer-3-network.md)
   * [Layer 4 - Transport](networking-and-web/modele/layer-4-transport.md)
   * [Layer 5 - Application](networking-and-web/modele/layer-5-application.md)
-* [Machines](networking-and-web/machines.md)
+* [Security hardware](networking-and-web/machines.md)
 * [DNS](networking-and-web/dns.md)
 
 ## Linux

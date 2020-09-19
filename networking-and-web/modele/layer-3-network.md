@@ -95,3 +95,9 @@ An host can :
 * Both
 * Locally, they'll use the address corresponding to the subnet with which they communicate
 
+## Sources
+
+* _Networking for Systems Administrators_ by Michael W. Lucas
+* [openclassroom](https://openclassrooms.com/fr/courses/1561696-les-reseaux-de-zero/1562627-les-masques-de-sous-reseaux-a-la-decouverte-du-subnetting) \(in french\)
+* Misc Research
+

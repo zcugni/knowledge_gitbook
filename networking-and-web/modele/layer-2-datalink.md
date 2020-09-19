@@ -92,3 +92,8 @@
   * overruns
   * collisions
 
+## Sources
+
+* _Networking for Systems Administrators_ by Michael W. Lucas
+* Misc Research
+

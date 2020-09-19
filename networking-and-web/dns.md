@@ -24,7 +24,7 @@
 * Contains information for specific domains
 * A complete collection of data for a zone is called a _zone file_
 * Authoritative servers are duplicated 
-  * To copy all the entries from a zone to another server, we use _zone transfer_
+  * To copy all the entries from a zone to another server, we use _zone transfers_
     * Done via AXFR with `dig`
     * By default, anybody can ask for a zone transfer
 
@@ -32,7 +32,8 @@
 
 * Provides DNS lookups for clients
 * Cache collected answers until a per-DNS-record timer expires
-* When configuring an host, you need to give it the ip address of it's \(recursive\) DNS server \(if the host use DHCP, it can do that automatically\).
+* When configuring an host, you need to give it the ip address of it's recursive DNS server
+  * If the host use DHCP, it can do that automatically
 
 ### Request process
 
@@ -43,7 +44,7 @@
 
 ## Record types
 
-* DNS servers grew organically and now handle way too many things
+* DNS servers grew organically and now handle many things
 * Those are some of the records type :
 
 <table>
