@@ -1,73 +1,22 @@
----
-description: >-
-  This is a summary of the OWASP pen testing book and some information found
-  here and there. I haven't yet select the tools i prefer. I just explained some
-  of them
----
-
 # Tools
-
-## Disclaimer
-
-Je vais ici lister tous les outils par catégorie \(quand je l'a connais\). Au fur et à mesure je trierais mes préférés et expliquerais comment les utiliser.
-
-Il y a en a pour tout, donc ça vaut la peine d'arpenter github pour trouver des perles.
 
 ## Liste / CheatSheet
 
-* `rockyou.txt` -&gt; Une breach des mdp de 32 millions d'utilisateur \(dispo dans 
-* [gtfobin](https://gtfobins.github.io/) Liste d'utilisation des commandes linux permettant de sudo/shell & co \(aka vim, etc\)
+* `rockyou.txt` A breach of 32 millions user's password
+* [gtfobin](https://gtfobins.github.io/) List of linux command that may facilitate pric esc \(like vim through some parameters\)
 * [fuzzdb](https://github.com/fuzzdb-project/fuzzdb)
 * [SecList](https://github.com/danielmiessler/SecLists)
 * [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings)
 * [OWASP's CheatSheet](https://github.com/OWASP/CheatSheetSeries/tree/master/cheatsheets)
-* [https://www.owasp.org/index.php/XSS\_Filter\_Evasion\_Cheat\_Sheet](https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet)
 * [Google Hacking Database](https://www.exploit-db.com/google-hacking-database)
-* Keywords for credentials/etc : [random\_robbie](https://github.com/random-robbie/keywords/blob/master/keywords.txt)
-* [https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases](https://github.com/danielmiessler/SecLists/tree/master/Passwords/Leaked-Databases)\)
-* Password list : [skullssecurity](https://wiki.skullsecurity.org/Passwords)
-
-## Enumarate sub domain
-
-* [https://dnsdumpster.com/](https://dnsdumpster.com/)
-* [https://github.com/aboul3la/Sublist3r](https://github.com/aboul3la/Sublist3r)
+* [random\_robbie](https://github.com/random-robbie/keywords/blob/master/keywords.txt) Keywords for credentials, etc
+* [skullssecurity](https://wiki.skullsecurity.org/Passwords) Password list
 
 ## Proxy
 
 [Burp Proxy](https://zcugni.gitbook.io/notes/tools/burp-proxy)
 
-## Spider
-
-Not tested
-
-* Sam Spade
-* Spike Proxy
-* Xenu
-* Webscarab
-
-## Recon
-
-### Fingerprint website
-
-Not tested
-
-* OWASP's amass
-* whois \(command\)
-* httprint
-* httprecon
-* builtwith \(site\)
-* wappalyzer \(extension chrome\)
-* [whatweb](https://github.com/urbanadventurer/WhatWeb) \(site\)
-* blindElephant
-
-### Wayback machine
-
-Not tested
-
-* [waybackurls](https://github.com/tomnomnom/waybackurls)
-* [waybackunifier](https://github.com/mhmdiaa/waybackunifier)
-
-## gobuster
+## gobuster \(File Busting\)
 
 * Has 3 mode, to enumerates files/dir, dns or vhost
 * `apt-get install gobuster`
@@ -75,7 +24,8 @@ Not tested
   * `/usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt` is my default word list
   * `-x` To add extension, `-t` for threads number
 * Keep in mind that even if you can't access a dir \(/dev for example\), you might be able to access it's subdir/files \(/dev/backup for example\)
-* Sometimes, a dir won't show up if you don't explicitly use a `/` after it \(aka `/cgi-bin` don't exist, but `/cgi-bin/` does\). Use  `-f` to add the slash and test for it. \(The majority of the time, it seems to work without, i'm not sure what the diff is\)
+* Sometimes, a dir won't show up if you don't explicitly use a `/` after it \(aka `/cgi-bin` don't exist, but `/cgi-bin/` does\). Use  `-f` to add the slash and test for it
+  * The majority of the time, it seems to work without, i'm not sure what the diff is
 * You can put it in a bash loop if you need to do it recursively \(directly in the cmd\):
 
   ```bash
@@ -84,74 +34,16 @@ Not tested
     done
   ```
 
-## Github dork
-
-Not tested
-
-* [gitrob](https://github.com/michenriksen/gitrob)
-
-## Vulnérabilités
-
-### Exploit
+## Exploit database
 
 * `searchsploit` is the command-line utility giving easy access to the exploit db
   * Remember to use `-u` to update it's db
 * [https://exploits.shodan.io/](https://exploits.shodan.io/)
 * [metasploit](https://zcugni.gitbook.io/notes/tools/metasploit-framework)
-* Ces bdds ne sont pas toujours complètes, simplement faire une recherche google "nom exploit" peut s'avérer fructueuse
 * [hacktricks](https://book.hacktricks.xyz/)
+* Don't hesitate to simply search "exploit x" on google
 
-### XSS
-
-Not tested
-
-* bXSS \(github\)
-* ezXSS \(github\)
-* Jackmasa's XSS mindmap
-
-#### Blind XSS
-
-* XSS Hunter
-* Sleepy Puppy
-* KnoXSS
-
-### CSRF
-
-Not tested
-
-* CSRF tester
-* Cross Site Requester
-* Cross Frame Loader
-* Pinata-csrf-tool
-
-### Directory Traversal
-
-Not tested
-
-* DotDotPwn : [https://github.com/wireghoul/dotdotpwn/blob/master/dotdotpwn.pl](https://github.com/wireghoul/dotdotpwn/blob/master/dotdotpwn.pl)
-
-### Pad oracle
-
-Not tested
-
-* padbuster
-
-### SQL Injection
-
-Not tested
-
-* SQLmap
-
-### Vulnerability Scanner
-
-Not tested
-
-* OpenVAS
-* Nexpose
-* GFI Lan Guard
-* Nessus
-
-## CMS
+## CMS Mapping / scan
 
 * cmsmap
 * WPscan
@@ -168,7 +60,7 @@ Not tested
   * To download a file, use : `smbmap -H <ip> -R [share_name] -A <file_name> [-q]`
     * The `-q` is useful because it's quite verbose
 
-## Impacket
+## Impacket \(Network protocol scripts\)
 
 * A collection of python scripts for working with network protocols
 * There's a lot of example scripts that you can use as is, like :
@@ -177,57 +69,110 @@ Not tested
 
 ## Misc software scan
 
-* Magento : [https://github.com/steverobbins/magescan](magescan)
+* Magento : [magescan](https://github.com/steverobbins/magescan)
 * Joomla : [joomscan](https://www.securiteinfo.com/attaques/hacking/outils/joomscan.shtml)
 
 ## Password craking
 
-* Cwel
-  * Spider a website and generate a custom word list of words that could be used for password cracking by other tools such as John
+* Cwel : Spider a website and generate a custom word list
 * [JohnTheRipper](https://zcugni.gitbook.io/notes/tools/johntheripper)
 * Hashcat
   * `hashcat -a 0 -m 20 hash:salt path/to/rockyou.txt`
-    * `-a` Définit le type d'attaque \(0 pour une attaque dico je pense\)
-    * `-m` Le mode de hash, y'en a plein de différents, regarder les examples pour trouver le bon
-      *  20 Correspond à un md5 avec un salt append
-  * Assez optimisé \(mais ces améliorations ne marchent qu'avec certains hardware\)
-  * Les modes semblent plus simple d'utilisation qu'avec John
+    * `-a` Define the attack type \(0 for dictionary i think\)
+    * `-m` The hash mode, there's multiple available, check the example to find the right one
+      *  20 is for md5 with an appended salt
+  * Quite optimized \(but only for some hardware\)
+  * Easier to use than john
 
 ## Privilege escalation
 
 * [Peas suite](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite)
-  * Assez verbose, énonce tous les tests qu'il fait même quand ils ne sont pas fructueux
-  * Link vers ces explications, etc
-  * \(Mais efficace\)
+  * Quite verbose, shows even the non successful test
+  * Link to explanations
+  * I still like it quite a lot
 * [LinEnum](https://github.com/rebootuser/LinEnum)
-  * Lancer `./LinEnum.sh -t` pour avoir les tests complets
-  * To the point, il ne donne que les infos qu'il trouve
+  * Use`-t` for complete tests 
+  * To the point,gives only the info it finds
+  * However, list a lot of files so not always practical
 
-## Process Analysis
+## Pspy - Process Analysis
 
-* [pspy](https://github.com/DominicBreuker/pspy) Permet de voir les process appelés sans être root, peut être utile pour trouver des programmes appelés sans qu'un chemin soit utilisé par exemple.
-  * Penser à se reconnecter via ssh après l'avoir lancé \(dans une autre fenêtre\), pour voir ce qui est lancé à la co
-  * Pour l'installation, lancer `go build` après avoir installé golang `sudo apt-get install golang`
-    * S'il nous dit qu'il ne connait pas le paquet, d'abord lancé `go get github.com/dominicbreuker/pspy/cmd`
+* [pspy](https://github.com/DominicBreuker/pspy) Lets you see called process without being root
+* Don't forget to connect again via ssh after launching it to see what is run when somebody connects
+* To install run  `go build` 
+  * \(Golang needs to be installed `sudo apt-get install golang`\)
+  * If it says that it doesn't know a packet, first run `go get github.com/dominicbreuker/pspy/cmd`
 
 ## Fuzzing
 
 * wfuzz
-  * Not good with SSL or with website using CSRF tokens
   * Will fuzz places of the string where you wrote "FUZZ"
-  * `wfuzz -u url -d "username=asd&password=FUZZ" -w wordlist` \(d specifies post data\)
-  * On peut le faire passer par un proxy avec `-p 127.0.0.1:8080`
-  * On peut filtrer les résultats pour cacher les status code/nombre de lignes/nombre de mots/nombre de caractères spécifique avec `--hc/hl/hw/hh ..` \(content-length corresponds à hh\)
-  * Il mets des fois super longtemps à ce lancer, je sais pas pourquoi
-  * utiliser `''` au lieu de `""` autour des paramètres car certains char peuvent faire bugger le shell s'ils sont interprétés
+  * `wfuzz -u <url> -d "username=asd&password=FUZZ" -w <wordlist>`
+    * d specifies post data
+  * Not good with SSL or with website using CSRF tokens
+  * Use a proxy with  `-p 127.0.0.1:8080`
+  * You can filter result by status code or by :
+    * `--hc <code>` / `--sc <code>` Hide / Show result with this status code
+    * `--hc <nb>` / `--sc <nb>` Hide / Show result with this number of chars
+    * `--hl <nb>` / `--sc <nb>` Hide / Show result with this number of lines
+    * `--hw <nb>` / `--sw <nb>`Hide / Show result with this number of words
+    * `--hh <nb>` / `--sh <nb>` Hide / Show result with this content-length
+  * Sometimes it takes an eternity to launch, i don't know why
+  * Use `'` instead of `"` around parameters to not have problems with the shell
 * Hydra
 * [Patator](https://zcugni.gitbook.io/notes/tools/patator)
 * Seclist has good specific fuzzing lists
 
 ## Misc
 
-* [https://gchq.github.io/CyberChef/](CyberChef) Permet d’enchaîner pleins d'actions de cmd sur une string/un fichier, etc \(genre décompresser puis base64 puis hexdump, etc\)
+* [https://gchq.github.io/CyberChef/](CyberChef)  Let you chain commands on a string/file \(like decompress, then base64, then dexdump, etc\)
 * Stegonography : steghide
+
+## Not yet tested
+
+These are advised by OWASP or i stumble upon them but i haven't yet used them
+
+* CSRF :
+  * CSRF tester
+  * Cross Site Requester
+  * Cross Frame Loader
+  * Pinata-csrf-tool
+* Directory traversal : [DotDotPwn](https://github.com/wireghoul/dotdotpwn/blob/master/dotdotpwn.pl)
+* Enumerate subdomain :
+  * [https://dnsdumpster.com/](https://dnsdumpster.com/)
+  * [https://github.com/aboul3la/Sublist3r](https://github.com/aboul3la/Sublist3r)
+* Fingerprint website :
+  * OWASP's amass
+  * httprint
+  * httprecon
+  * builtwith
+  * wappalyzer \(chrome extension\)
+  * [whatweb](https://github.com/urbanadventurer/WhatWeb)
+  * blindElephant
+* Github dork : [gitrob](https://github.com/michenriksen/gitrob)
+* Pad Oracle : padbuster
+* Spider : 
+  * Sam Spade
+  * Spike Proxy
+  * Xenu
+  * Webscarab
+* SQL injection : SQLmap
+* Vulnerability scanner
+  * OpenVAS
+  * Nexpose
+  * GFI Lan Guard
+  * Nessus
+* Wayback machine
+  * [waybackurls](https://github.com/tomnomnom/waybackurls)
+  * [waybackunifier](https://github.com/mhmdiaa/waybackunifier)
+* XSS
+  * bXSS
+  * ezXSS
+  * Jackmasa's XSS mindmap
+* XSS \(blind\)
+  * XSS Hunter
+  * Sleepy Puppy
+  * KnoXSS
 
 ## Sources
 

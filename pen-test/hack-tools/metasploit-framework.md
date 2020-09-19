@@ -4,26 +4,30 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
 
 # Metasploit Framework
 
-## Généralités
+## Generalities
 
-* Suite d'outils permettant d'utiliser des exploits et de faciliter le pen test
-* La principae interface est la console : `msfconsole` fonctionnant avec une db : `msfdb`
-* En plus des exploits, on peut aussi enregistrer des informations sur un target \(comme les hosts, les résultats de nmap, etc\) dans la db.
-  * Ca permet de tout centraliser efficacement mais j'ai pas vraiment testé cette partie de l'outil
-* Ecrit en ruby
+* Suite of tools to use exploit
+* The principal interface is the console `msfconsole` linked to a database `msfdb`
+* In addition to the exploit, it can save information on the target \(like the hosts, result of nmap, etc\) in the db
+  * With that, you can efficiently centralise information
+* Written in ruby
 
-## Lancement
+## Launch
 
-* On lance la console simplement avec `sudo msfconsole` elle launch aussi la db \(je crois\)
-* On peut faire de même via  `sudo msfdb run`
-* La première fois sur kali il faut peut-être lancé ça avant :  `systemctl start postgresql` puis `sudo msfdb init`
-* Si j'ai cette erreur `cannot load such file — bundler/setup`, c'est probablement parce que j'ai pas le bon setup pour ruby. Simplement faire `sudo gem install bundler`
+* Run `sudo msfconsole`, it also launches the db
+  * You can also launch only the db with `sudo msfdb run`
+* The first time on kali run first :
+  * `systemctl start postgresql`
+  * `sudo msfdb init`
+* If you get this error`cannot load such file — bundler/setup`, its probably because you don't have the right set up for ruby, use `sudo gem install bundler`
 
-## Commandes
+## Commands
 
-Ces commandes peuvent être utilisées constamment :
+### General
 
-| Commande | Effet |
+You can use them everywhere
+
+| Command | Effet |
 | :--- | :--- |
 | `search ...` | Montre les modules correspondant aux termes cherchés |
 | `use <module_path | module_number>` | Select module \(exploit\) |

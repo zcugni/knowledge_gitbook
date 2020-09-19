@@ -1,83 +1,102 @@
+---
+description: Suite of tools facilitating pen test
+---
+
 # Burp Proxy
-
-## Intro
-
-* Suite d'outils permettant de simplifier plusieurs aspects du pen testing.
-* Les tabs du haut représentent les outils disponibles 
-* Les tabs inférieur représentent leurs options.
 
 ## Setup
 
-* Paramétré dans Burp dans `Proxy -> Options`
-* Il faut aussi récupérer le certificat [http://burp/](http://burp/).
+* In burp, go in  `Proxy -> Options`
+* Retrieve the certificate at [http://burp/](http://burp/)
 
-### Avec Firefox
+### With Firefox
 
-* Firefox permet de paramétrer un proxy uniquement pour lui et non tout le système, ce qui est pratique
-* Dans firefox, aller dans `Options -> Paramètres (tout en bas) -> "Configuration manuelle du proxy" -> localhost on port 8080 (si ça corresponds à nos params) -> Cocher "Utilise ce proxy pour tout les protocoles"`
-* Importer le certificat via `Options -> Vie privée et sécurité -> Certificats -> Afficher les certificats -> Importer -> Coher "Confirmer cet AC pour identifier les sites web"`
+* Firefox lets you set up a proxy only for itself and not the whole system, making it practical for that
+* In firefox go in :
+  * Options
+  * Parameters \(at the bottom\)
+  * "Manual configuration of the proxy"
+  * Set localhost on the port you set in burp \(probably 8080\)
+  * Check "Use this proxy for all the protocols"
+* Import the certificate by going in :
+  *  Options
+  * Privacy & Security
+  * Show certificates
+  * Import
+  * Check "Confirm this AC to identify websites"
 
-### Avec Google
+### With Google
 
-Utiliser l'extension _Fox Proxy_
+* Use the extension _Fox Proxy_
 
-## Utilisation
+## Usage
 
-By default it's in the **intercept** mode, ce qui va arrêter le traffic. Pour changer ça aller dans :`Proxy -> Intercept -> Intercept is on/off`
+* The superior tabs represent available tools
+* The inferior one their options
+* By default it's in the **intercept** mode, which stops traffic
+  * Change it in `Proxy -> Intercept -> Intercept is on/off`
 
 ### Filter tab
 
-The filter tab is present in nearly every part of the burp suite, and let's you filter the request/response you want to see on multiple options, including the scope \(explain in the target part\)
+Lets you filter request/response on different factors
 
 ### Target \(Ctrl + Shit + T\)
 
-Show a tree view of everything you browsed through the proxy.
-
-Specify scope in "Target -&gt; Scope", it can be a keyword, an ip range, an host, regex, etc. We can also add a browsed entry to the scope by right clicking it.
+* Show a tree view of everything you browsed through the proxy
+* Specify scope in `Target -> Scope`
+* It can be :
+  *  A keyword
+  * An ip range
+  * An host
+  * A regex
+  * etc
+* We can also add a browsed entry to the scope by right clicking it
 
 ### Proxy \(Ctrl + Shift + P\)
 
-The **Intercept** tab does exactly that to every request, it's on by default. You can modify request on the fly with it.
-
-The **HTTP History** tab shows the history of all requests made and responses received. You can highlight request in different color \(and filter by that as well as comment them.
-
-In the **Options** tab :
-
-* The **Match & Replace** section let's you  modify all traffic going through the proxy in one go.
-* In the **Response Modification** section you can, among other things, "Unhide hidden fields" and disable javascript validation \(to check if it's only a client side verification\)
+* The **Intercept** tab does exactly that to every request, it's on by default
+  * You can modify request on the fly with it.
+* The **HTTP History** tab shows the history of all requests made and responses received
+  * You can highlight request in different color, filter by that and comment them
+* In the **Options** tab :
+  * The **Match & Replace** section let's you  define rule to modify all traffic going through the proxy
+  * In the **Response Modification** section you can, among other things :
+    *  Unhide hidden fields
+    * Disable javascript validation \(to check if it's only a client side verification\)
 
 ### Intruder \(Ctrl + Shift + I\)
 
-Permet de brute force / fuzzer comme le ferait un script mais plus simplement.
-
-La tab **Position** permet de sélectionner toutes les parties de la requête que l'on veut tester ainsi que le type d'attaque.
-
-La tab **Payload** permet de définir pour chaque position \(qu'on sélectionne avec la "Payload Set"\) les payload que l'ont veut tester. Il y en a plusieurs type, de la simple liste \(burp en propose par défaut\), à l'incrémentation de nombre/date, fichier, etc.
-
-Dans la tab des **Options** **Grep Match** permet d'ajouter une check box à la liste des résultats indiquant si une string particulière se trouvait dans la réponse par exemple. **Grep Extract** peut être similairement utile.
-
-Une fois tout paramétré, on peut lancer l'attaque avec le bouton **Start Attack** dans la tab des **Payload**, cela va ouvrir une nouvelle fenêtre avec les résultats.
+* Let brute force / fuzz like a  script would do
+* In the **position** tab, you can select the part of the request you want to test and the type of attack
+* In the **payload** tab, you can select theI payload you want to use for each position \(chosen the **payload set**\)
+* In the **options grep match** tab, you can chose a string against which to match
+  * **Grep extract** is similarly useful
+* Launch the attack with **Start attack** in the **payload** tab
+  * It will open a window with the result
+* In the community edition, this feature is restricted
 
 ### Repeater \(Ctrl + Shift + R\)
 
-Permet de répéter une requête en l'a modifiant
+* Let you repeat a request and modify it
 
 ### Decoder
 
-Permet d'encoder/décoder du text en base64, hex, hash, etc.
+* Let you encode/decode text.
 
 ### Scanner
 
-Pro version only tool, finds vulnerabilities & information. Be cautious while using it, it can mess up an application if you just launch it on everything.
+* Find vulnerabilities & information
+* Be cautious while using it, it can mess up an application if you just launch it on everything
+* Pro version only tool
 
 ### Sequencer
 
-Si un cookie est set à une certaine valeur à chaque requête, le sequencer permet de générer des centaines de cette requête, de récupérer le cookie à chaque fois et d'analyser la façon dont il change.
+* If a cookie is set to specific value, the sequencer gene
+* The sequencer can generates hundreds of request to retrieve a cookie and analyse how it changes
 
 ## Pluggins
 
-De nombreux pluggins existent, notamment ces deux :
-
-* Havertor : Bien plus puissant que Docder
-* Logger++ : Bien utile \(doit être la dernière extension de la liste\)
+* Multiple plugins exist, like :
+* Havertor : Way more performant than the decoder
+* Logger++ : Quite useful, needs to be the last extension on the list
 
