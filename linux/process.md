@@ -6,7 +6,12 @@
 * Each process has an address space and an id \(_PID_\) 
 * Each process has a parent. If it dies, the previous one is attributed as parent
   * First process : before `init`, now [`systemd`](https://zcugni.gitbook.io/notes/theory/systemd)
-* _Uid_ : Who owns the process
+* Real UID \(**RUID**\) : Who owns the process, affects permission for sending signals
+* Effective \(**EUID**\) : In the name of whom the process runs \(may differ from the owner thanks to a suid bit set\)
+  * Use for most access check
+  * Determine the owner of a file created by a process
+* Save UID \(**SUID**\) ****: In this context, it serve to save the precedent euid when a process drop privileges for a moment.
+  * It's kind of linked to the concept of suid bit on files, but not exactly the same thing
 * _Euid_ : Allows you to give other permissions than the ones of the process's owner
 * _Niceness_ : Determines its priority in the cpu/resource usage \(the nicer it is, the less it's gonna use it\)
 

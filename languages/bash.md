@@ -183,7 +183,8 @@ On peut rediriger avec `>` et `<` :
 * `cmd1 > cmd2` ou `cmd1 1> cmd2` Output de cmd1 en input de cmd2
 * `cdm1 2> cmd2` STDERR de cmd1 en input de cmd2
 * `cmd1 < cmd2` Output de cmd2 en input de cmd1
-* `cmd1 >> file` Appends à la fin du fichier au lieu de le remplacer
+* `cmd1 >> file` Append to the file instead of replacing it
+  * You can also use it with  `2>>`
 * `cm1 &> file` Redirects both STDOUT & STDERR \(équivalent à `>&` et `2>&1`\)
 
 Et on peut chaîner avec `|` : `time cmd1 | cmd2 | ...`

@@ -13,6 +13,7 @@ description: 'Disclaimer : Je ne sais pas encore très bien l''utiliser'
   * `zip2john` Convert a zip file that needs a password to crack it
 * It auto detects cummon hash mode
 * Seems a bit complicated to use when dealing with salt and other modification
+* Results are in `<home>/.john/john.pot`
 
 ## Installation
 

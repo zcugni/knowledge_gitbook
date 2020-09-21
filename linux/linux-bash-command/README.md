@@ -32,7 +32,7 @@
 | Command | Definition |
 | :--- | :--- |
 | `touch <path>` | Create empty file |
-| `cp <src> <dest>` | Copy file |
+| `cp <src> <dest>` | Copy file \(Attention, it does not copy a SUID bit\) |
 | `mkdir <dir>` | Create dir |
 | `mv <old> <new>` | Move file \(can rename\) |
 | `rm <file>` | Remove file |
@@ -43,7 +43,7 @@
 
 ## View info / file
 
-| Commande | Définition |
+| Command | Definition |
 | :--- | :--- |
 | `cat <file>` | "Read" file |
 | `less` |  |
@@ -273,7 +273,7 @@ With this kind of json :
 
 | Commande | Définition |
 | :--- | :--- |
-| `ln -s <real_file> <link_file>` | Create symbolic link |
+| `ln -s <real_file> <link_file>` | Create symbolic link \(absolute path\) |
 | `clear` | Clear shell |
 | `man <cmd>` | Manuel de la cmd |
 | `sudo` | Super user do |

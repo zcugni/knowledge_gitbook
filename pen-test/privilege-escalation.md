@@ -194,7 +194,13 @@ Ajouter la partie de hack the box, ou un groupe à plus de droits que nous donc 
 
 ### Writable files
 
-* Linpeas also check for writable files by you, but then it's too long to read..
+* Linpeas :
+
+```bash
+find / '(' -type f -or -type d ')' '(' '(' -user $USER ')' -or '(' -perm -o=w ')' ')' 2>/dev/null | grep -v '/proc/' | grep -v $HOME | sort | uniq #Find files owned by the user or writable by anybody
+for g in `groups`; do find \( -type f -or -type d \) -group $g -perm -g=w 2>/dev/null | grep -v '/proc/' | grep -v $HOME; done #Find files writable by any group of the user
+```
+
 * Read [python library hijacking](https://book.hacktricks.xyz/linux-unix/privilege-escalation#python-library-hijacking)
 * Read [logrotate exploitation](https://book.hacktricks.xyz/linux-unix/privilege-escalation#logrotate-exploitation)
 

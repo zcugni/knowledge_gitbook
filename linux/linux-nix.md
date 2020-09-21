@@ -63,7 +63,8 @@ This is why you should always use the full path to the executable, because if so
 * Field separated by colons
 * 7 fields :
   * Username
-  * Password present : an x indicates that a password hash is written in /etc/shadow
+  * Password present : an x indicates that a password _hash_ is written in `/etc/shadow`
+    * Before, it was written as is here
   * UID \(User ID\)
   * GID \(Group ID\)
   * Comment field
