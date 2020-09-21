@@ -1,34 +1,9 @@
 # File system
 
-## Permission
-
-### chmod
-
-* Représente ainsi les permissions :
-  * Read : `r` / `4`
-  * Write : `w` / `2`
-  * Execute : `x` / `1`
-  * Rien :  `-` / `0`
-  * SUID avec exécution : `s` \(à la place du x\) / 4 \(avant le reste\)
-  * SGID avec exécution : `s` \(à la place du x\) ou 2 \(avant le reste\)
-  * SUID sans exécution : `S` \(à la place du x\) / 4 \(avant le reste\)
-  * SGID sans exécution : `S` \(à la place du x\) ou 2 \(avant le reste\)
-  * `u` : L'utilisateur auquel appartient le fichier
-  * `g` : Le groupe auquel appartient le fichier
-  * `o` : Les autres
-* Permet de set les permissions de différentes façons :
-  * `chmod u+w file`, `chmod u-x file`, `chmod u=wr file`, `chmod u+s file` Ajoute, supprime ou définit les droits de l'utilisateur \(remplacer par _g_ ou _o_ si nécessaire\)
-  * `chmod 754 file` Définit les droits pour chaque groupe en les additionnant
-  * `chmod 4755 file` Same mais en ajoutant le SUID
-
-### chown
-
-Change file owner
-
 ## Generalities
 
 * All files accessible in a Unix system are a part of one big tree rooted at `/`
-* These files can be spread out on different devices, so they need to be mounted to the main tree, that is a VFS \(virtual file system\)
+* These files can be spread out on different devices, so they need to be mounted to the main tree, that is a _Virtual File System_ \(VFS\)
 * In Linux, every thing is a file or represented by filesystems \(for example systemd or cgroups\)
 * File extensions don't matters but we use them because they're parsed by other programs and help human gain context.
 
@@ -96,7 +71,32 @@ Change file owner
   * Ils permettent d'exécuter un fichier avec les droits de son créateur au lieu de le faire avec les droits de l'utilisateur lançant la commande
   * Pour des raisons de sécurité, **cela ne fonctionnera que sur les exe, pas sur les scripts** \([ref](https://unix.stackexchange.com/questions/364/allow-setuid-on-shell-scripts)\)
   * SUID utilisera l'utilisateur, SGID le groupe
-  * `passwd` est un exemple type vu qu'il est lancé par les utilisateurs mais qu'il lui faut modifier `/etc/passwd` \(écrivable uniquement par root\).
+  * `passwd` est un exemple type vu qu'il est lancé par les utilisateurs mais qu'il lui faut modifier `/etc/passwd` \(écrivable uniquement par root\)
+
+## Permission
+
+### chmod
+
+* Représente ainsi les permissions :
+  * Read : `r` / `4`
+  * Write : `w` / `2`
+  * Execute : `x` / `1`
+  * Rien :  `-` / `0`
+  * SUID avec exécution : `s` \(à la place du x\) / 4 \(avant le reste\)
+  * SGID avec exécution : `s` \(à la place du x\) ou 2 \(avant le reste\)
+  * SUID sans exécution : `S` \(à la place du x\) / 4 \(avant le reste\)
+  * SGID sans exécution : `S` \(à la place du x\) ou 2 \(avant le reste\)
+  * `u` : L'utilisateur auquel appartient le fichier
+  * `g` : Le groupe auquel appartient le fichier
+  * `o` : Les autres
+* Permet de set les permissions de différentes façons :
+  * `chmod u+w file`, `chmod u-x file`, `chmod u=wr file`, `chmod u+s file` Ajoute, supprime ou définit les droits de l'utilisateur \(remplacer par _g_ ou _o_ si nécessaire\)
+  * `chmod 754 file` Définit les droits pour chaque groupe en les additionnant
+  * `chmod 4755 file` Same mais en ajoutant le SUID
+
+### chown
+
+Change file owner
 
 ## Sources
 
