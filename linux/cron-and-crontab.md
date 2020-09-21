@@ -52,7 +52,8 @@
 * `/etc/crontab` System crontab, can only be edited by root
   * In Debian, it's configured to run all exe owned \(and only writable by\) root in `/etc/cron.hourly/`, `/etc/cron.daily/`, `/etc/cron.weekly/` and `/etc/cron.monthly/`
 * `/etc/cron.d/` Program specific crontab
-* `/etc/cron.allow` Whitelist user who can use `crontab`, `/etc/cron.deny` blacklist them. If the 2 are present, `.allow` is used
+* `/etc/cron.allow` Whitelist user who can use `crontab`, `/etc/cron.deny` blacklist them
+  * If the 2 are present, `.allow` is used
 
 ## Sources
 

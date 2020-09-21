@@ -24,7 +24,7 @@
 | `/` | Root dir |
 | `~` | `home` dir |
 | `cd` | Change current dir to `home` |
-| `cd path` | Change current dir to path |
+| `cd <path>` | Change current dir to path |
 | `cd -` | Switch between last 2 dir |
 
 ## Files & Directory
