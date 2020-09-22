@@ -63,4 +63,5 @@ Si l'origine est mal vérifiée ou si les dev sont trop confiant de la sécurit�
 ## Misc
 
 * `.jar` are archives files of java classes
+* magic number : a predefined number near the beginning of the file's data, that describe it's type
 

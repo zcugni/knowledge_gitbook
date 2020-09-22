@@ -4,12 +4,10 @@
 
 | Shortcut | Result |
 | :--- | :--- |
-| `ctrl-a` | Go to start of the line |
-| `ctrl-e` | Go to end of the line |
-| `up arrow key` | Previous cmd |
-| `down arrow key` | Next cmd |
-| `ctrl-p` | Previous cmd |
-| `ctrl-n` | Next cdm |
+| `ctrl-a` | Go to the  start of the line |
+| `ctrl-e` | Go to the end of the line |
+| `up arrow key` / `ctrl-p` | Previous cmd |
+| `down arrow key` / `ctrl-n` | Next cmd |
 | `ctrl-r` | Bash cmd search \(use multiple time to go back in history\) |
 | `ctrl-c` | Interrupt |
 | `ctrl-l` | Clear |
@@ -29,29 +27,132 @@
 
 ## Files & Directory
 
+### Creation & removal
+
 | Command | Definition |
 | :--- | :--- |
 | `touch <path>` | Create empty file |
-| `cp <src> <dest>` | Copy file \(Attention, it does not copy a SUID bit\) |
+| `cp <src> <dest>` | Copy file \(warning : it does not copy a SUID bit\) |
+| `cp -r <src> <dest>` | Copy dir recursively |
 | `mkdir <dir>` | Create dir |
-| `mv <old> <new>` | Move file \(can rename\) |
+| `mv <old> <new>` | Move file/dir \(can rename\) |
 | `rm <file>` | Remove file |
-| `rm -r <path>` | Remove dir |
-| `head <file> [-n <nb>]` | First nb \(default 10\) lines of file |
-| `tail <file> [-n <nb>]` | Last nb \(default 10\) lines of file |
-| `tail -f <file>` | Last 10 lines and keep following \(showing new content\) |
+| `rm -r <path>` | Remove dir recursively |
 
-## View info / file
+### File content / analysis
 
 | Command | Definition |
 | :--- | :--- |
-| `cat <file>` | "Read" file |
-| `less` |  |
-| `more` |  |
+| `cat <file>` | Print file |
+| `less` | Print file, but wait after a page for your input to continue |
+| `more` | I don't know the diff with `less` |
 | `ls <dir>` | List dir content \(default `.`\) |
 | `ls -a` | List hidden files |
 | `ls -l` | List files with size & permissions |
 | `ls -lh` | Same but in human readable format |
+| `head <file> [-n <nb>]` | First nb \(default 10\) lines of file |
+| `tail <file> [-n <nb>]` | Last nb \(default 10\) lines of file |
+| `tail -f <file>` | Last 10 lines and keep following \(showing new content\) |
+| `exiftool` |  Read/Write metadata of files |
+| `strings` | Extract readable strings from the file |
+
+#### File
+
+* Classify a file
+* Perform 3 tests one after the other. Stop if the previous one succeeded :
+  * Filesystem : Use the return of `stat`, guess file type depending on your system \(sockets, symlink, etc\)
+  * Magic : Check the file's magic number. The db of corresponding entries comes form the compiled binary in `/usr/share/misc/magic.mgc` and user additions in `/etc/magic`
+  * Language : Checks the character set 
+* The return will either contain `text`, `executable` or `data` in the description, so you can base script on that
+
+### File transfer
+
+#### scp
+
+* Through ssh
+* Remote to local : `scp <username>@<ip>:<file> <local_dir>`
+* Local to remote : `scp <file> <username>@<ip>:<remote_dir>`
+* Absolute path
+
+#### wget & curl
+
+* `wget <ip>:<port>/<path>`
+  * Add `-O <dest>` if needed, default is current folder & original name 
+* `curl <ip>:<port>/<path>`
+  * `-s` To not have the banner
+
+{% hint style="info" %}
+There's a way to directly execute a file without writing it to a disk, check that
+{% endhint %}
+
+#### python
+
+* On the source machine : `python -m HttpSimpleServer` \(will create a server available at port 8000\)
+* Use wget/curl to retrieve the file
+*  The root of the server is the directory in which this command was executed
+
+#### Copy-paste encoded
+
+* Depending on the size of the file, it's might be easier to base64 encode it, copy the result then decode it in the destination terminal
+
+## Search
+
+* [Find](https://zcugni.gitbook.io/notes/tools/linux-bash-command/find)
+* [Grep](https://zcugni.gitbook.io/notes/tools/linux-bash-command/grep)
+
+| Command | Definition |
+| :--- | :--- |
+| `which <cmd>` | Show binary location of cmd |
+| `locate <pattern>` | Locate files with this pattern within the system |
+
+## Compression & Decompression
+
+#### Compress
+
+* `tar -zcvf <archive.tar.gz> [dir/]`
+  * `-z` Z-zipping \(compress\)
+  * `-c` Create archive
+  * `-v` Verbose mode
+  * `-f <name>` Create archive of specific name, if you used -z, add `.gz` at the end
+  * Give a dir name to compress all it's content without creating a tar bomb
+* `gzip file.gz`
+* `bzip2 file.bz2`
+
+#### Decompress
+
+* `tar -zxf archive.tar.gz`
+  * `-x` Extract
+  * `-z` For zip file
+  * `-f <name>` Select which file
+* `gzip -d file.gz`
+* `gunzip file.gz`
+* `bzip2 -d file.bz2`
+
+#### tarbomb
+
+* A compressed file that when uncompressed will generate a lot of files/directory
+* Good practice is to do that`tar -zcvf archive.tar.gz Documents/`
+  * Bad practice is to be _in_ Documents/ and do that `tar -zcvf archive.tar.gz`
+  * The first one will generate only 1 uncompressed directory, the second one will generate multiples
+
+## Users & password
+
+| Command | Definition |
+| :--- | :--- |
+| `useradd` |  |
+| `passwd <username>` |  |
+| `usermod` |  |
+| `userdel` |  |
+| `newusers` |  |
+| `whoami` | Current user name |
+| `id` | See all groups i'm part of |
+| `who` | Who's logged in, from where, when and what they are currently running |
+| `w` | Same as who but more complete |
+
+## Disk info
+
+* `df` Report disk space usage, also explicit where things were mounted \(use with  `-lh`\)
+* `mount` Show where things were mounted
 
 ## String manipulation
 
@@ -62,128 +163,36 @@
 | `uniq` | Returns only unique result |
 | `wc` | Word count |
 
-## Compression & Decompression
+## Screen Multi-plexer
 
-### Compress
+* [Tmux](https://zcugni.gitbook.io/notes/tools/tmux)
+* Screen
+  * `screen -ls` To list sessions
+  * `screen -r <session_name>` To attach to the session
+  * `screen -dr <session_name>` To detach others and then attach to the session
 
-* `tar -zcvf archive.tar.gz Documents/`
-  * z : z-zipping \(compress\)
-  * c : create archive
-  * v : verbose mode
-  * f : create archive of name "archive.tar.gz" \(adding gz is good practice when you zipped\)
-  * Documents/ : archiving all the content of this directory
-* `gzip file.gz`
-* `bzip2 file.bz2`
+## Hacking cmd
 
-### Decompress
-
-* `tar -zxf archive.tar.gz`
-  * x : extract
-  * z : for zip file
-* `gzip -d file.gz`
-* `gunzip file.gz`
-* `bzip2 -d file.bz2`
-
-### tarbomb
-
-* A compressed file that when uncompressed will generate a lot of files/directory
-* Good practice is to do that`tar -zcvf archive.tar.gz Documents/`
-  * Bad practice is to be _in_ Documents/ and do that `tar -zcvf archive.tar.gz`
-  * The first one will generate only 1 uncompressed directory, the second one will generate multiples
-
-## File transfer
-
-### scp
-
-* Through ssh
-* Remote to local : `scp username@ip:file local_dir`
-* Local to remote : `scp file user@ip:remote_dir`
-* Be mindful of the `:` ! 
-* \(Absolute path, so /home/user/etc\)
-
-### wget & curl
-
-* `wget ip:port/path`
-  * add `-O destination` if needed, default is current folder & original name 
-* `curl ip:port/path`
-  * `-s` To not have the banner
-
-{% hint style="info" %}
-There's a way to directly execute a file without writing it to a disk, check that
-{% endhint %}
-
-### python
-
-* On the attacker machine : `python -m HttpSimpleServer` \(will create a server available at port 8000\)
-* Use wget/curl to retrieve the file
-*  The root of the server is the directory in which this command was executed
-
-### Copy-paste encoded
-
-* Depending on the size of the file, it's might be easier to base64 encode it, copy the result then decode it in the destination terminal
-
-## Hex dump
+### Hex dump
 
 * There's multiple tools to see the hex dump of a file
 * `xxd` My preferred one
   * `xxd <in_file> [out_file]` Dump it's hexa, with it's ascii equivalent
-  * `xxd -r -p <in_file> <out_file>`
+  * `xxd -r -p <in_file> <out_file>` Create the bytestream corresponding to an hex dump
+    * `-r` Reverse
     * The `-p` is necessary to write the hex in a friendly manner \(without offset, etc\)
     * `<in_file>` can be set as the standard input with `-`
-    * If you want to add content to that file after the new hex, just do `cat other_file >> new_file`
+    * If you want to add content to that file after the new hex, just do `cat <other_file> >> <new_file>`
   * `-e` Switch to little-endian
   * `-b` Switch to binary representation \(`-r` doesn't work with it\)
 * `hexdump <file>` Dump it's hexa, but i find the format less friendly \(it doesn't show the ascii equivalent and the endianness is inversed from xxd\)
 
-## Encoding
-
-### Base64
+### Base64 Encoding
 
 * `base64 -d <file>` Decode
   * To do it from a file use `echo <file_name> | base64 -d`
 
-## Recherche
-
-* [Find](https://zcugni.gitbook.io/notes/tools/linux-bash-command/find)
-* [Grep](https://zcugni.gitbook.io/notes/tools/linux-bash-command/grep)
-
-## File analysis
-
-* `exiftool` Read/Write metadata of files
-* `strings` Print the strings of printable characters of a file, useful for determining content of non-text file. Can also be used on block device to analyze their content.
-
-### File
-
-* Classify a file, perform 3 tests : Filesystem, Magic & Language \(one after the other, stop if the previous one succeeded\). 
-  * Filesystem test use the return of `stat`, file type depending on your system \(sockets, symlink, etc\), are intuited here.
-  * Magic test check for the magic number of the file \(a predefined number near the beginning of the file's data, that describe it's type\). The db of corresponding entries comes form the compiled binary in `/usr/share/misc/magic.mgc` and user additions in `/etc/magic`
-  * Language test checks for character set 
-* The return will either contain `text`, `executable` or `data` in the description, so you can base script on that
-
-## Users & password
-
-| Commande | Définition |
-| :--- | :--- |
-| `useradd` |  |
-| `passwd <username>` |  |
-| `usermod` |  |
-| `userdel` |  |
-| `newusers` |  |
-| `whoami` | Current user name |
-| `id` | See all groups i'm part of |
-| `who` | Gives multiple info \*\(1\) |
-| `w` | Same as who but more complete |
-
-\*\(1\) : who's logged in, from where, when and what they are currently running
-
-## Alias
-
-* `alias name="cmd -param"`
-* Does not persist outside the shell. To make it definitive, add it to the .rc file \(example : `/home/user/.bashrc`\)
-* `alias` List all aliases
-* `unalias alias_name`
-
-## GPG
+### GPG
 
 * pgp encoding
 * `gpg --gen-key` Generate a key pair with default setting
@@ -196,14 +205,21 @@ There's a way to directly execute a file without writing it to a disk, check tha
 * `gpg --list-keys` To see all the imported keys
 * `gpg --fingerprint <username>` To get the fingerprint of the user's public key
 
-## Tracing
+### Tracing
 
-* `strace` Intercepts system calls made libs to the Linux Kernel
+* `strace` Intercepts system calls made by libs to the kernel
 * `ltrace` Intercepts library & system calls made by your application to libs
 
-## Traitement json
+## Misc
 
-* `jq`
+### Alias
+
+* `alias <name>="[cmd] [-param]"`
+* `alias` List all aliases
+* `unalias alias_name`
+* Does not persist outside the shell. To make it definitive, add it to `.rc` file \(example : `/home/user/.bashrc`\)
+
+### JQ - Traitement json
 
 With this kind of json :
 
@@ -239,27 +255,76 @@ With this kind of json :
   * `.. | jq ".level1 .array[]"`
   * `.. | jq ".level1 .array[0] .array_inner1_3"`
 
-## Disk info
-
-* `df` Report disk space usage, also explicit where things were mounted \(use with  `-lh`\)
-* `mount` Show where things were mounted
-
-## Screen Multi-plexer
-
-* [Tmux](https://zcugni.gitbook.io/notes/tools/tmux)
-* Screen
-  * `screen -ls` To list sessions
-  * `screen -r <session_name>` To attach to the session
-  * `screen -dr <session_name>` To detach others and then attach to the session
-
-## Script cmd
+### Script cmd
 
 * Record what you do in your shell
 * `script <file>` Record and write output to a file \(default typescript.txt\)
-  * These can only bat shown \(via cat for example\)
+  * These can only be shown \(via cat for example\)
 * `script myscript.log --timing=time.log` \(-t probably sufficient\) Records with timestamp
   * Will replay recording in the shell with `scriptreplay -s myscript.log -t time.log`
 * `ctrl-d` or exit to stop recording
+
+### Other small things
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Command</th>
+      <th style="text-align:left">Definition</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>ln -s &lt;real_file&gt; &lt;link_file&gt;</code>
+      </td>
+      <td style="text-align:left">Create symbolic link (absolute path)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>clear</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>man &lt;cmd&gt;</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>tree</code>
+      </td>
+      <td style="text-align:left">Tree view of directory/files</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>set</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>List shell var &amp; func</li>
+          <li>Set/unset predefined shell options</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>watch -n &lt;sec_interval&gt; &lt;cmd&gt;</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>htop</code>
+      </td>
+      <td style="text-align:left">Mix between <code>w</code> &amp; <code>top</code> with an ncurse interface</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>uname</code>
+      </td>
+      <td style="text-align:left">Gives info on kernel version (use <code>-a</code> for everything)</td>
+    </tr>
+  </tbody>
+</table>
+
+* `history` Shows history of cmd
+  * For bash, there's a more detailed history in`/home/<user>/.bash_history`  only readable by the user
+  * The cmd is more permissive but less complete
 
 ## Bash tips
 
@@ -269,31 +334,10 @@ With this kind of json :
   * Si on veut piper des commandes qui ont des paramètres, faut les mettre par tas : `bash -c "{echo,string}|{base64,-d}"`
 * `bash -i` Si l'option -i est présente, l'interpréteur est interactif \(utilisé dans des payloads mais je comprends pas entièrement pourquoi\)
 
-## Misc
-
-| Commande | Définition |
-| :--- | :--- |
-| `ln -s <real_file> <link_file>` | Create symbolic link \(absolute path\) |
-| `clear` | Clear shell |
-| `man <cmd>` | Manuel de la cmd |
-| `sudo` | Super user do |
-| `sudo !!` | Run last cmd as root |
-| `tree` | Tree view of directory/files |
-| `which <cmd>` | Show binary location of cmd |
-| `set` | List shell var & func \*\(1\) |
-| `history` | Shows history of cmd |
-| `watch -n <sec_interval> <cmd>` | Execute une cmd à une intervalle donnée |
-| `htop` | Mix entre `w` & `top` avec une interface ncurse |
-| `uname` | Gives info on kernel version \(use `-a` for everything\) |
-
-* \*\(1\) With parameters, `set` can also set our unset predefined shell options.
-* \*\(2\) Une version plus détaillée d'`history` est dispo dans `/home/user/.bash_history` mais n'est lisible que par cet utilisateur. La commande semble plus laxiste dans les droits même si elle est moins précise dans le résultat.
-
 ## Sources
 
 * Multiple pages of man
-* _Networking for Systems Administrators_ by Michael W. Lucas
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
 * Misc research
-* [https://linux.101hacks.com/unix/gpg-command-examples/](https://linux.101hacks.com/unix/gpg-command-examples/)
+* [linux.101hacks.com](https://linux.101hacks.com/unix/gpg-command-examples/) for GPG 
 

@@ -141,6 +141,10 @@ harry harrys-machine = NOPASSWD: SHUTDOWN_CMDS
 ALL ALL = (ALL) NOPASSWD: PRINTING_CMDS
 ```
 
+## Misc
+
+* `sudo !!` : Run last cmd as root
+
 ## Sources
 
 * man pages
