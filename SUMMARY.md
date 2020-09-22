@@ -27,6 +27,7 @@
 * [String format vulnerabilities](binary-exploitation/string-format-vulnerabilities.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
 * [Memory Allocation \(linux, glibc\)](binary-exploitation/memory-allocation-linux-glibc.md)
+* [Tools](binary-exploitation/tools.md)
 
 ## Networking & Web
 
