@@ -2,20 +2,22 @@
 
 ## Intro
 
-* nmap fut initialement créé pour du port scanning mais il a été beaucoup étendu au fil des années
-* C'est LA commande de prédilection pour ce genre de chose
-* J'ai détaillé les options qui me paraissent les plus utiles, mais il y en a plus dans le man
-* Pour certaines qui me semblent trop pointues actuellement mais qui seront sûrement utile, je les ai uniquement mentionnées
-* My default command : `sudo nmap -v [-p-] [-Pn] -sC -sV -oN nmap_res.nmap <ip>`
+* Initially created for port scanning but added a lot of functionalities with time
+* It's THE cmd to use for those type of things
+* I detailed the main options, but there's more
+* My default command : `sudo nmap -v [-p-] [-Pn] -sC -sV -oN <result_file> <ip>`
 
-## Définir les targets
+## Define target
 
-* Tout ce qui n'est pas une option est traitée comme étant le\(s\) target\(s\), ça peut être :
-  * ip \(v4 & v6\)
-  * hostname \(if it resolve to more than one ip, only the first one is used. Use `--resolve-all` to scan all\)
+* A target can be :
+  * IP addresses \(v4 & v6\)
+  * hostname
+    * If it resolve to more than one ip, only the first one is used. Use `--resolve-all` to scan all
   * CIDR-like format for network \(v4 & v6\)
-  * Octet-range to be more specific than a CIDR scope \(check man to see how\) \(Only on IPv4\)
-* `-iL <file>` Reads target from file \(must be separated by spaces, tabs or newlines. Can have comment starting with "\#"\)
+  * Octet-range \(Only on IPv4\)
+* `-iL <file>` Reads target from file
+  * Must be separated by spaces, tabs or newlines
+  * Can have comment starting with "\#"
 * `-iL -` Reads target from standard input
 * `--exclude host1[, host2, ..]`
 * `--excludefile <file>` Same restriction as -iL

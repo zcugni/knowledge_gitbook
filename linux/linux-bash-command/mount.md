@@ -109,7 +109,7 @@ By default, only a privileged user can mount a filesystem, but these options can
 ### Options
 
 * `-o <option1,option2>`  Specify options to use
-* `--options-mode <mode>` Specify how to combine options form `/etc/fstab/` and the command line. These are available :
+* `--options-mode <mode>` Specify how to combine options from `/etc/fstab/` and the command line. These are available :
   * `prepend` \(Default\) fstab options are evaluated first
   * `append` fstab options are evaluated after
   * `ignore` fstab options are ignored
