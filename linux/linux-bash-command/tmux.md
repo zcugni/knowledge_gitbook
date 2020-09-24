@@ -4,7 +4,7 @@ description: A Terminal Multi-Plexer
 
 # Tmux
 
-## Généralités
+## Generalities
 
 * Lets you :
   * Cut your term's windows into panes
@@ -15,7 +15,7 @@ description: A Terminal Multi-Plexer
 * Launched with `tmux`, while in it, prefix commands with `ctrl-b`
 * The \* at the bottom shows in which window you are
 * To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` 
-  * Add this to the `.tmux.conf` file
+  * Add this to the `~/.tmux.conf` file \(without the `:)`
 
 ## Window
 
@@ -75,10 +75,11 @@ In this mode you can go up the terminal & search/copy, etc.
 | :--- | :--- |
 | `ctrl-b [` | Enter view mode |
 | `q` | quit |
-| `space` | Highlight mode |
-| `alt-w` | Copy |
-| `/` | Search \(if we use vi key bindings\) |
-| \(in search mode\) `n` | Next result \(if we use vi key bindings\) |
+| `space` | Highlight mode \(with vi key bindings\) |
+| `enter` | Copy \(with vi key bindings\) |
+| `ctrl-b ]` | Paste in another tmux pane/window |
+| `/` | Search \(with vi key bindings\) |
+| \(in search mode\) `n` | Next result \(with vi key bindings\) |
 | \(in search mode\) `shift-n` | Previous result |
 
 ## Sources

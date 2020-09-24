@@ -22,7 +22,7 @@ I might not always use the right terms.
   * R0 for `pc`
   * R1 for `sp`
   * R2 for `sr` \(Status Register\) - Flags used by conditional jumps
-    * Z \(zero\) \(It's set when it's value is 0003\)
+    * Z \(zero\) \(It's set when it's value is 0003\) \(also known as the equal flag\)
     * N \(negative\)
     * C \(carry\)
   * R3 for `cg` \(Constant generation\)
