@@ -64,6 +64,7 @@
   * Magic : Check the file's magic number. The db of corresponding entries comes form the compiled binary in `/usr/share/misc/magic.mgc` and user additions in `/etc/magic`
   * Language : Checks the character set 
 * The return will either contain `text`, `executable` or `data` in the description, so you can base script on that
+* For executable `LSB` means it's little-endian
 
 ### File transfer
 

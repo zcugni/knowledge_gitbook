@@ -23,6 +23,8 @@
 
 ## Binary Exploitation / Low-level <a id="binary-exploitation"></a>
 
+* [Microcorruption.com](binary-exploitation/microcorruption-notes.md)
+* [Assembly](binary-exploitation/assembly.md)
 * [Buffer Overflow & Shellcode](binary-exploitation/buffer-overflow.md)
 * [String format vulnerabilities](binary-exploitation/string-format-vulnerabilities.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
@@ -63,7 +65,6 @@
 
 ## Languages
 
-* [Assembly](languages/microcorruption-notes.md)
 * [Bash](languages/bash.md)
 * [C](languages/c.md)
 * [Haskell](languages/haskell.md)
