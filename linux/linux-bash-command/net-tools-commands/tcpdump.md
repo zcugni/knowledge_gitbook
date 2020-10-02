@@ -48,7 +48,7 @@
 
 * The rest are packet sequence numbers, window size and options but he didn't explain what those are.
 
-## Example of ARP packet
+## Example of an ARP packet
 
 Question : 
 

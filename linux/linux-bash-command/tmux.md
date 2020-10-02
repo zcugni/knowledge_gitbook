@@ -16,10 +16,11 @@ description: A Terminal Multi-Plexer
 * The \* at the bottom shows in which window you are
 * To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` 
   * Add this to the `~/.tmux.conf` file \(without the `:)`
+* `ctrl-b ?` List all key bindings
 
-## Window
+## Windows shortcuts
 
-These shortcut also exist in written cmd, but that's less practical.
+These also exist in written cmd, but that's less practical.
 
 | Command | Effect |
 | :--- | :--- |
@@ -30,9 +31,9 @@ These shortcut also exist in written cmd, but that's less practical.
 | `ctrl-b w` | List windows |
 | `ctrl-b &` | Kill current window |
 
-## Pane
+## Panes shortcuts 
 
-These shortcut also exist in written cmd, but that's less practical.
+These also exist in written cmd, but that's less practical.
 
 | Command | Effect |
 | :--- | :--- |
@@ -45,7 +46,7 @@ These shortcut also exist in written cmd, but that's less practical.
 | `ctrl-b arrow keys` | Resize panes |
 | `ctrl-b space` | Cycle layout |
 
-## Session
+## Session commands
 
 | Command | Effect |
 | :--- | :--- |
@@ -60,16 +61,9 @@ These shortcut also exist in written cmd, but that's less practical.
 | `tmux kill-session [-t <session_name>]` | Destroy the session, closing all windows linked only to it & detach all client from it. |
 | `tmux rename [-t <session_name>] <new_name>` | Rename a session |
 
-## Misc
-
-| Command | Effect |
-| :--- | :--- |
-| `ctrl-b ]` | Paste |
-| `ctrl-b ?` | **List all key bindings** |
-
 ## Copy Mode
 
-In this mode you can go up the terminal & search/copy, etc.
+This mode allows you to navigate the screen and search & copy information
 
 | Command | Effect |
 | :--- | :--- |

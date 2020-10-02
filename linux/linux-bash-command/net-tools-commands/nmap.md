@@ -1,6 +1,6 @@
 # Nmap
 
-## Intro
+## Generalities
 
 * Initially created for port scanning but added a lot of functionalities with time
 * It's THE cmd to use for those type of things
@@ -22,7 +22,7 @@
 * `--exclude host1[, host2, ..]`
 * `--excludefile <file>` Same restriction as -iL
 
-## Définir les ports
+## Define ports
 
 In both host discovery & port scanning you can specify the port you target :
 
@@ -37,7 +37,7 @@ By default, nmap does a host discovery and then a port scan on live host
 
 * `-sn` No port scan \(so only host discovery\)
 * `-Pn` No host discovery \(so only port scan\)
-* Théoriquement on peut modifier le contenu des packets avec `--data`, `--data-string` mais ils ne sont pas détaillés et mêmes pas mentionnés dans certaines versions du man
+* Theoretically you can modify the packet's content with  `--data` & `--data-string` but they aren't mentionned/detailled in some version of the man
 * `--resume <file>` Resume a scan from a normal/grepable output file
 * `-6` Enable IPv6 scanning
   * If you use IP address, they obviously must be IPv6 ones

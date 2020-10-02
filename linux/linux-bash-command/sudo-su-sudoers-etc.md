@@ -2,7 +2,7 @@
 
 ## Su
 
-* Lets you get an interactive shell or run a cmd as another user, given that you know it's password
+* Allow you to get an interactive shell or run a cmd as another user, given that you know it's password
 * Won't change the current directory, but will update `$HOME` & `$SHELL` to that of the user
 * If no user is specified, _root_ is assumed
 * Without options : returns a _root interactive shell_
@@ -10,7 +10,7 @@
   * `su [-l | --pty] [-c <cmd> |& -s <shell> |& -g <group>] [user]`
   * `su [--pty |& -c <cmd> |& -s <shell> |& -g <group> |& -p] [user]`
 
-| Commandes | Descriptions |
+| Commands | Description |
 | :--- | :--- |
 | `-l` | Return a login shell |
 | `-c <cmd>` | Pass the cmd to the shell |
@@ -21,22 +21,24 @@
 
 ## Sudo
 
-* Permet d'exécuter une commande en tant qu'un autre utilisateur \(par défaut root\) sans connaitre son mdp \(si cela a été préalablement configuré et qu'on a l'autorisation de le faire\)
-* Par défaut, les groupes de l'utilisateur cible sont aussi copiés
-* Le fichier de config : `/etc/sudo.conf`
-* Les règles d'utilisation sont configurés via _sudoers_, voir plus bas
+* Allows you to execute a command as another user \(by default root\) without knowing it's password \(if it's been previously configured and if you got the authorization to do so\).
+* By default, groups of the target user are also copied
+* Congif file : `/etc/sudo.conf`
+* Usage rules are configured with `sudoers`, see below
 * When using sudo, you're usually ask for your password \(not the one of the user you'll run the cmd as\)
   * Credentials are cached by terminal for 15min
   * If a user not authorized in the policy tries to use sudo, a mail is sent \(except for `-l`\)
   * Successful & unsuccessful attempts are logged
   * It can also be configured to log all I/O of the cmds used through it, but it's not a default
-* There's two methods to choose which env var can be taken along, one whitelists and the other blacklists. The first one is preferred. I won't go into details, check the man
-* Utilisation :
+* There's 2 methods to choose which env vars can be taken along : whitelists & blacklists
+  * Whitelist is preferred, check the man
+* Usage:
   * `sudo [-u <user> |& -g <group> |& -EPH] <cmd>`
   * `sudo <-i | -s> [-u <user> |& -g <group> |& -EPH] [cmd]`
   * `sudo -l [-U <user>]`
   * `sudo -e <file> [-u <user> |& -g <group>]`
   * `sudoedit <file> [-u <user> |& -g <group>]`
+  * `sudo !!` : Run last cmd as root
 
 | Options | Description |
 | :--- | :--- |
@@ -60,30 +62,27 @@
 
 ## Sudoers
 
-* Le _policy plugin_ par défaut permettant de définir les règles d'utilisation de sudo
-* Il est composé d'une liste d'alias puis des _user specification_
-* File : `/etc/sudoers`
-  * `/etc/sudo.conf` Specify which policy plugin to use \(by default this one\)
-* I won't describe the whole man page, there's lot of options so i'll just focus and the basic use
-* Le fichier contient d'abord une liste d'alias puis une liste de règles les utilisant.
+* The default _policy plugin_ defining sudo's rules of usage
+* Written in `/etc/sudoers`
+  * `/etc/sudo.conf` Specify which policy plugin to use
+* Composed of _aliases_ & _user specifications_
 
 ### Alias
 
-* Format de base `<Alias_Type> <NAME> = <value1, value2, ...>`
-* On peut déclarer plusieurs alias du même type sur une seule ligne en les séparant par des `:` `<Alias_Type> <NAME1> = <value1, value2, ..> : <NAME2> = <value>`
-* Ces différents types existent :
+* `<Alias_Type> <NAME> = <value1, value2, ...>`
+* You can declare multiple aliases with the same type in 1 line by separating them with `:` `<Alias_Type> <NAME1> = <value1, value2, ..> : <NAME2> = <value>`
+* Available types :
   * _User\_Alias_ - List of users, given by :
     * Username
-    * System groups \(prefixed by %\)
-    * Netgroups \(prefixed by +\)
-  * _Runas\_Alias_ - List of users \(given by UID, prefixed by \#\)
-  * _Host\_Alias_ - List of hostname, ip addresses, networks and netgroups \(prefixed by +\)
+    * System groups \(prefixed by `%`\)
+    * Netgroups \(prefixed by `+`\)
+  * _Runas\_Alias_ - List of users \(given by UID, prefixed by `#`\)
+  * _Host\_Alias_ - List of hostname, ip addresses, networks and netgroups \(prefixed by `+`\)
     * If no netmask is specified, the netmask of the hosts ethernet interface\(s\) will be used
   * _Cmd\_Alias / Cmnd\_Alias_ - List of cmds & dir \(will include all it's file but no sub dir\)
 * Prefix an element with `!` to exclude it
 * The alias `ALL` is built-in and can be used for each type
-
-Exemple :
+* Example :
 
 ```bash
 User_Alias ADMINS = %admin
@@ -107,10 +106,10 @@ Cmd_Alias ADMIN_CMDS = /usr/sbin/passwd, /usr/sbin/useradd, /usr/sbin/userdel, /
 
 `<user_list> <host_list> = [(operator_list)] [tag_list] <cmd_list>`
 
-* The user list describe who this rule applies to
+* The user list describe to whom this rule applies
 * The host list describe on which host it is applied
-* The operator list describe who the user must run as to use the cmd \(by using `-u` or `-g`\).
-  * Format `(user : group)` \(those can be a list\)
+* The operator list describe who the user must run as to use the cmd \(by using `-u` or `-g`\)
+  * Format :  `(user : group)` \(those can be lists\)
   * Optional, by default must be run by root
   * If group is empty, no group can be specified
   * If user is empty, it must be run by the invoking user and any of the given groups
@@ -119,8 +118,7 @@ Cmd_Alias ADMIN_CMDS = /usr/sbin/passwd, /usr/sbin/useradd, /usr/sbin/userdel, /
 * The tag list are options, the most useful are  :
   * `EXEC` / `NOEXEC` Authorize or prevent the user from launching a shell from another cmd \(like in vim, aka shell escape\)
   * `PASSWD` / `NOPASSWD` Will need to authenticate or not
-
-Exemple :
+* Example :
 
 ```bash
 # This lets the webmasters run all the web commands on the machine 
@@ -140,10 +138,6 @@ harry harrys-machine = NOPASSWD: SHUTDOWN_CMDS
 # And this lets everybody print without requiring a password
 ALL ALL = (ALL) NOPASSWD: PRINTING_CMDS
 ```
-
-## Misc
-
-* `sudo !!` : Run last cmd as root
 
 ## Sources
 

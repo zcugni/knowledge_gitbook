@@ -134,8 +134,6 @@ The next 3 steps can be done through [`nmap`](https://zcugni.gitbook.io/notes/to
   * Try accessing page out of orders \(for example directly an /edit/\)
   * Changing GET request for POST and vice-versa
 
-
-
 ## Network Architecture
 
 * Try to understand the network architecture through :
