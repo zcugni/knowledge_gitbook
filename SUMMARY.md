@@ -26,7 +26,7 @@
 * [Microcorruption.com](binary-exploitation/microcorruption-notes.md)
 * [Assembly](binary-exploitation/assembly.md)
 * [Buffer Overflow & Shellcode](binary-exploitation/buffer-overflow.md)
-* [String format vulnerabilities](binary-exploitation/string-format-vulnerabilities.md)
+* [Format string vulnerabilities](binary-exploitation/string-format-vulnerabilities.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
 * [Memory Allocation \(linux, glibc\)](binary-exploitation/memory-allocation-linux-glibc.md)
 * [Terminology](binary-exploitation/terminology.md)
