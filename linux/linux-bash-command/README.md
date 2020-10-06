@@ -55,6 +55,7 @@
 | `tail -f <file>` | Last 10 lines and keep following \(showing new content\) |
 | `exiftool` |  Read/Write metadata of files |
 | `strings` | Extract readable strings from the file |
+| `strings -t x <file>` | Gives the offset of each strings within the file |
 
 #### File
 
