@@ -28,3 +28,11 @@ new_add2 = (void *)nb_ptr + 2; // Offset de 2
 
 De la même façon, si on a un `void *`, ce en quoi on va le caster définira le nombre de byte récupéré \(1 pour un char, 4 pour un int, etc\).
 
+## GCC
+
+* Lets you compile c file
+* `gcc <file_name> [-o <output_name]`
+  * The default output name is `a.out`
+* To compile in 32 bits, use this option : `-m32`
+  * You might need to install this first : `libc6-dev-i386`
+
