@@ -36,3 +36,7 @@ De la même façon, si on a un `void *`, ce en quoi on va le caster définira le
 * To compile in 32 bits, use this option : `-m32`
   * You might need to install this first : `libc6-dev-i386`
 
+## Article
+
+Check [this article](https://matt.sh/howto-c), but it differs a lot from what we did in school without always really explaining why, so do as you wish.
+
