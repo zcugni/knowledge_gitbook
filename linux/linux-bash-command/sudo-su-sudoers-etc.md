@@ -15,15 +15,15 @@
 | `-l` | Return a login shell |
 | `-c <cmd>` | Pass the cmd to the shell |
 | `--pty`  | Return a pseudo-terminal |
-| `-s <shell>` | Use the specified shell instead of the target user's one |
-| `-g <group>` | Specify the primary group, only for root |
-| `-p` | Preserve env var \(ignore if `-l` is used\) |
+| `-s <shell>` | Use the specified shell instead of the target user one |
+| `-g <group>` | \(only for root\) Specify the primary group |
+| `-p` | Preserve env var \(ignored if `-l` is used\) |
 
 ## Sudo
 
-* Allows you to execute a command as another user \(by default root\) without knowing it's password \(if it's been previously configured and if you got the authorization to do so\).
+* Allows you to execute a command as another user \(by default root\) without knowing it's password \(if it's been previously configured and if you got the authorization to do so\)
 * By default, groups of the target user are also copied
-* Congif file : `/etc/sudo.conf`
+* Config file : `/etc/sudo.conf`
 * Usage rules are configured with `sudoers`, see below
 * When using sudo, you're usually ask for your password \(not the one of the user you'll run the cmd as\)
   * Credentials are cached by terminal for 15min

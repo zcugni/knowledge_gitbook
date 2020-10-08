@@ -9,12 +9,12 @@ description: A Terminal Multi-Plexer
 * Lets you :
   * Cut your term's windows into panes
   * Attach/Detach a shell \(client\) to a session
-    * This lets you keep a session running on a remote machine even if your ssh connection closed \(for example\)
+    * This lets you keep a session running on a remote machine even if your ssh connection closes \(for example\)
     * You can share sessions with others
-    * A session is displayed on screen by a client and all sessions are managed by a single server. The server and each client are separate processes which communicate through a socket in /tmp.
+    * A session is displayed on screen by a client and all sessions are managed by a single server. The server and each client are separate processes which communicate through a socket in `/tmp`
 * Launched with `tmux`, while in it, prefix commands with `ctrl-b`
-* The \* at the bottom shows in which window you are
-* To get into Vi key bindings \(default is emac\), after a ctrl-b type `:set-window-option -g mode-keys vi` 
+* The `*` at the bottom shows in which window you are
+* To use Vi key bindings \(default is emac\) after a ctrl-b type `:set-window-option -g mode-keys vi` 
   * Add this to the `~/.tmux.conf` file \(without the `:)`
 * `ctrl-b ?` List all key bindings
 
@@ -68,7 +68,7 @@ This mode allows you to navigate the screen and search & copy information
 | Command | Effect |
 | :--- | :--- |
 | `ctrl-b [` | Enter view mode |
-| `q` | quit |
+| `q` | Quit |
 | `space` | Highlight mode \(with vi key bindings\) |
 | `enter` | Copy \(with vi key bindings\) |
 | `ctrl-b ]` | Paste in another tmux pane/window |

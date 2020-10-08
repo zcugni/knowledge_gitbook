@@ -100,12 +100,31 @@ There's a way to directly execute a file without writing it to a disk, check tha
 ## Search
 
 * [Find](https://zcugni.gitbook.io/notes/tools/linux-bash-command/find)
-* [Grep](https://zcugni.gitbook.io/notes/tools/linux-bash-command/grep)
+* Others :
 
 | Command | Definition |
 | :--- | :--- |
 | `which <cmd>` | Show binary location of cmd |
 | `locate <pattern>` | Locate files with this pattern within the system |
+
+### Grep
+
+* Finds strings within an input
+* `grep <pattern> <file> <file>`
+* There's multiple modes for regex
+* Options :
+  * `-f <file>`
+  * `-e <pattern>` Specify a pattern, if there's only one, you can omit the `-e`
+  * `-i` Case-insensitive
+  * `-v` Invert match \(shows lines that are not matching\)
+  * `-w` / `-x` Only match whole words / lines
+  * `-c` Replace output with a count of matches
+  * `-m nb` Stop after nb matches
+  * `-n` Prefix each lines in result with a number
+    * `-T` Align result \(useful when used with `-n` or other prefixing options\)
+  * `-Z` Replace newline character by null byte \(useful when dealing with filenames containing new lines\)
+  * `-A <nb>` / `-B <nb>` / `-C <nb>` Print nb lines of context after / before / around the match
+  * `-r` Recursive
 
 ## Compression & Decompression
 

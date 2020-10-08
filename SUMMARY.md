@@ -54,7 +54,6 @@
   * [Sudo, su, sudoers, etc](linux/linux-bash-command/sudo-su-sudoers-etc.md)
   * [Tmux](linux/linux-bash-command/tmux.md)
   * [Find](linux/linux-bash-command/find.md)
-  * [Grep](linux/linux-bash-command/grep.md)
   * [SSH](linux/linux-bash-command/ssh.md)
   * [Git Commands](linux/linux-bash-command/git-commands.md)
 * [Cgroups](linux/cgroups.md)
