@@ -15,24 +15,7 @@
 
 * For every option with `nb`, we can also use `-nb` \(less than nb\) & `+n` \(more than nb\)
 * For every option with `pattern`, those should be in `''` \(so the shell won't expand it\) and you can use `*` as wildcard
-
-| Commande | Effect |
-| :--- | :--- |
-| `-amin <nb>` / `-mmin <nb>` / `-cmin <nb>` | File last accessed / modified / permission changed nb min ago |
-| `-atime <nb>` / `-mtime <nb>` / `-ctime <nb>` | File last accessed / modified / permission changed nb\*24h ago \(1\) |
-| `-anewer <other_file>` / `-newer <other_file>` / `-cnewer <other_file>` | Last accessed / modified / permission changed more recent than the other file |
-| `-empty` | File or directory is empty |
-| `-executable` / `-readable` / `-writable` | Files with these permissions for the current user |
-| `-group <name>` / `-user <name>` |  |
-| `-name <"pattern">` / `-iname <"pattern">` | Files which name matches the pattern, iname is case-insensitive |
-| `-path <pattern>` / `-ipath <pattern>` | Files which path matches the pattern, ipath is case-insensitive \(2\) |
-| `-regex <regex_pattern>` |  |
-
-* \(1\) Fraction part are ignored, so -mtime +1 would only show files accessed two or more days earlier
-* \(2\) The path is relative to the starting point of find
-
-
-
+* Use `-not ...` for negation
 * `-perm ...`
   * `-perm 644` Files with these exact permissions bits set
   * `-perm -220` / `-perm -u+w,g+w` Files with _at least_ these permissions bits set \(a 777 would match for example\)
@@ -50,6 +33,71 @@
   * f : Regular File
   * l : symbolic link
   * s : socket
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Command</th>
+      <th style="text-align:left">Effect</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>-user &lt;name&gt;</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>-group &lt;name&gt;</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>-name &lt;&quot;pattern&quot;&gt;</code> / <code>-iname &lt;&quot;pattern&quot;&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Files which name matches the pattern,</li>
+          <li>Iname is case-insensitive</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>-path &lt;pattern&gt;</code> / <code>-ipath &lt;pattern&gt;</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Files which path matches the pattern</li>
+          <li>Ipath is case-insensitive</li>
+          <li>The path is relative to the starting point of find</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>-executable</code> / <code>-readable</code> / <code>-writable</code>
+      </td>
+      <td style="text-align:left">Files with these permissions for the current user</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>-empty</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>-anewer &lt;other_file&gt;</code> / <code>-newer &lt;other_file&gt;</code> / <code>-cnewer &lt;other_file&gt;</code>
+      </td>
+      <td style="text-align:left">Last accessed / modified / permission changed more recent than the other
+        file</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>-regex &lt;regex_pattern&gt;</code>
+      </td>
+      <td style="text-align:left"></td>
+    </tr>
+  </tbody>
+</table>
+
+* \(1\) Fraction part are ignored, so `-mtime +1` would only show files accessed two or more days earlier
 
 ## Actions
 

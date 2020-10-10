@@ -100,6 +100,12 @@ Change file owner
   * **Character special files** \(or character device files\) : each character is handled one by one \(usually stuff like keyboard or mouse\)
   * **Block special files** \(or block device files\) : calls can be buffered, characters are handled block by block \(usually stuff that can store\)
 
+## Weird file name
+
+* To interact with a file with a strange or composed name, you can use :
+  * Quotes :`"file name with space"`
+  * `./` : `./-`
+
 ## Sources
 
 * man pages

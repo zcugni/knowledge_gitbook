@@ -3,15 +3,7 @@
 ## Introduction
 
 * An OpenSSH client lets you connect to remote machine securely via the SSH protocol
-* The cmd is called `ssh`
-
-## Port Forward
-
-* To redirect traffic arriving at a local port to a remote port,  use :  `ssh -L <local_port>:<remote_ip>:<remote_port> <user>@<ip>`
-* To redirect traffic arriving at a remote port to a local one, use : `ssh -R <local_port>:<remote_ip>:<remote_port> <user>@<ip>`
-* Sockets can also be used
-* `-N` Should be used in conjunction with these commands, it prevents from executing a remote command
-  * I'm not sure if it's useful in both case or not
+* The cmd is called `ssh [user]@<hostname | ip> [-p <port>] [-i private_key_file]`
 
 ## Authentication
 
@@ -44,6 +36,14 @@
 
 * A trace of every host you connected to is kept inside `~/.ssh/knownn_hosts` and `/etc/ssh/ssh_known_hosts`
 * If an host identification change, a warning is shown and password authentication disabled to avoid spoofing
+
+## Port Forward
+
+* To redirect traffic arriving at a local port to a remote port,  use :  `ssh -L <local_port>:<remote_ip>:<remote_port> <user>@<ip>`
+* To redirect traffic arriving at a remote port to a local one, use : `ssh -R <local_port>:<remote_ip>:<remote_port> <user>@<ip>`
+* Sockets can also be used
+* `-N` Should be used in conjunction with these commands, it prevents from executing a remote command
+  * I'm not sure if it's useful in both case or not
 
 ## Config options
 

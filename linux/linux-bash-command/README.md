@@ -43,7 +43,7 @@
 
 | Command | Definition |
 | :--- | :--- |
-| `cat <file>` | Print file |
+| `cat [file] [file]` | Print one or multiple file, if none are specified, return stdin to stdout. You can use \* in names to read multiple files |
 | `less` | Print file, but wait after a page for your input to continue |
 | `more` | I don't know the diff with `less` |
 | `ls <dir>` | List dir content \(default `.`\) |
@@ -56,6 +56,13 @@
 | `exiftool` |  Read/Write metadata of files |
 | `strings` | Extract readable strings from the file |
 | `strings -t x <file>` | Gives the offset of each strings within the file |
+| `sort` |  |
+
+#### Uniq
+
+* Filter **adjacent** duplicate \(use with sort because of the adjacent rule\)
+* `-u` Get only unique entries
+* `-c` Get count of occurrences
 
 #### File
 
@@ -130,24 +137,25 @@ There's a way to directly execute a file without writing it to a disk, check tha
 
 #### Compress
 
-* `tar -zcvf <archive.tar.gz> [dir/]`
+* `tar -zcvf <file.tar.gz> [dir/]`
   * `-z` Z-zipping \(compress\)
   * `-c` Create archive
   * `-v` Verbose mode
   * `-f <name>` Create archive of specific name, if you used -z, add `.gz` at the end
   * Give a dir name to compress all it's content without creating a tar bomb
-* `gzip file.gz`
-* `bzip2 file.bz2`
+* `gzip <file>`
+* `bzip2 <file>`
 
 #### Decompress
 
-* `tar -zxf archive.tar.gz`
+* `tar -zxf <file.tar.gz>`
   * `-x` Extract
   * `-z` For zip file
   * `-f <name>` Select which file
-* `gzip -d file.gz`
-* `gunzip file.gz`
-* `bzip2 -d file.bz2`
+* `gzip -d <file.gz> [-k]`
+* `gunzip <file.gz> [-k]`
+* `bzip2 -d <file.bz2> [-k]`
+* `-k` To keep the original file
 
 #### tarbomb
 
@@ -199,7 +207,7 @@ There's a way to directly execute a file without writing it to a disk, check tha
 * There's multiple tools to see the hex dump of a file
 * `xxd` My preferred one
   * `xxd <in_file> [out_file]` Dump it's hexa, with it's ascii equivalent
-  * `xxd -r -p <in_file> <out_file>` Create the bytestream corresponding to an hex dump
+  * `xxd -r [-p] <in_file> <out_file>` Create the bytestream corresponding to an hex dump
     * `-r` Reverse
     * The `-p` is necessary to write the hex in a friendly manner \(without offset, etc\)
     * `<in_file>` can be set as the standard input with `-`
@@ -339,6 +347,11 @@ With this kind of json :
       <td style="text-align:left"><code>uname</code>
       </td>
       <td style="text-align:left">Gives info on kernel version (use <code>-a</code> for everything)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>tr</code>
+      </td>
+      <td style="text-align:left">Translate, squeeze, and/or delete characters from strings</td>
     </tr>
   </tbody>
 </table>
