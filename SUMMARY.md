@@ -23,10 +23,11 @@
 
 ## Binary Exploitation / Low-level <a id="binary-exploitation"></a>
 
+* [Memory](binary-exploitation/memory/README.md)
+  * [Registers](binary-exploitation/memory/registers.md)
+  * [Heap allocation \(malloc\)](binary-exploitation/memory/memory-allocation-linux-glibc.md)
 * [Assembly](binary-exploitation/assembly.md)
-* [Stack layout in function](binary-exploitation/buffer-overflow.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
-* [Memory Allocation \(linux, glibc\)](binary-exploitation/memory-allocation-linux-glibc.md)
 * [Microcorruption.com](binary-exploitation/microcorruption-notes.md)
 * [Terminology](binary-exploitation/terminology.md)
 * [Tools](binary-exploitation/tools/README.md)
@@ -65,6 +66,7 @@
 
 ## Languages
 
+* [General Concepts](languages/general-concepts.md)
 * [Bash](languages/bash.md)
 * [C](languages/c.md)
 * [Haskell](languages/haskell.md)

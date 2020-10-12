@@ -4,40 +4,6 @@ description: To polish
 
 # Terminology
 
-## List vs Array
-
-* Since array get a pre-allocated space of a defined size, each data of the array is next to each other in memory
-  * This is why we can use the base address + index \(aka array\[x\]\) to get to the desired part
-    * The index is multiplied by the size of the data's type
-  * This is also why you can't just extend them
-* List don't get pre-allocated, so the different data can be at different places in memory
-  * Which is way we need a pointer to the next one, and why we need to run through each node
-  * This is also why we can remove or add node whenever we want
-
-## Heap vs stack
-
-* Heap & stack are data structures, the first one is a tree and the other a LIFO list
-* These names also reference 2 areas of the memory \(RAM\)
-* Stack
-  * Faster
-  * Smaller
-  * We push function, parameters & local variable to it
-* Heap
-  * Slower
-  * Bigger
-  * Used for dynamic allocation \(with for example `malloc`\)
-* Return address, parameters and local variables are stored in the stack
-
-## RAM vs Hard Drive
-
-* The RAM \(Random Access Memory\) is used by programs &  co
-  * It's fast
-  * It's volatile \(meaning its content disappear on power off\)
-  * It's called "Random" because any part of the memory can be accessed regardless of where it's written
-* Hard drive & co are the storage unit \(also called "mémoire de masse" in french\)
-  * It's slower
-  * It's persistent \(doesn't disappear on power off\)
-
 ## Race Condition & Mutex
 
 > “A race condition occurs when two or more threads can access shared data and they try to change it at the same time. Because the thread scheduling algorithm can swap between threads at any time, you don't know the order in which the threads will attempt to access the shared data. Therefore, the result of the change in data is dependent on the thread scheduling algorithm, i.e. both threads are "racing" to access/change the data.
@@ -122,6 +88,5 @@ They're usually part of another malware and they offer an entry point into the t
 ## Sources
 
 * Misc Research
-* [blackblaze.com](https://www.backblaze.com/blog/whats-diff-ram-vs-storage/)
 * [Pentesterlab](https://pentesterlab.com/)
 
