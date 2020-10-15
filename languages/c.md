@@ -5,7 +5,7 @@
 I started writing the notes way after i learned C, and i didn't have the courage to fill this page. Also, i kind of forget stuff since then. I just add stuff on this page as I stumble again on it, but it's by no mean complete.
 
 {% hint style="info" %}
-To do : Add all the syntax exemples
+To do : Add all the syntax examples
 {% endhint %}
 
 ## Include
@@ -46,6 +46,15 @@ Fill with syntax
 * You can also create a pointer to a function : `<return_type> (*<ptr_name>)(<param_type>, ...) = &<func>`
   * Example : `int (*func_ptr)(int, int) = &add;`
   * Use it like this : `(*fun_ptr)(10, 13);`
+
+## Function attributes
+
+* A function can be declared as a destructor by defining the destructor attribute
+  * `static void cleanup(void) __attribute__ ((destructor));`
+
+{% hint style="info" %}
+Add others, cleans example with correct syntax
+{% endhint %}
 
 ## Main function
 
@@ -120,10 +129,9 @@ Complete it by reading the man
   * Similar to the other function, with an additional parameters to describe the environment variables to use
   * The environment is describe as an array of strings, terminated by a `NULL`
 
-## Misc
+### Misc
 
-* String are `const`, so you can't change their content
-* Check [this article](https://matt.sh/howto-c), but it differs a lot from what we did in school without always really explaining why, so do as you wish.
+* `getenv()` Takes the name of an env var and returns its memory address
 
 ## GCC
 
@@ -132,8 +140,21 @@ Complete it by reading the man
   * The default output name is `a.out`
 * To compile in 32 bits, use this option : `-m32`
   * You might need to install this first : `libc6-dev-i386`
+* Binaries compiled with gcc have special table sections for **constructors** & **destructors** called `.ctors` &  `.dtors`
+  * Constructor functions are executed before `main()` 
+  * Destructor functions are executed just before `main()` exits with an exit syscall
+  * These sections are arrays of 32-bit addresses
+    * They start with `0xffffffff` and end with `0x00000000`
+    * All addresses between those two have been respectively declared with either the constructor or destructor attribute
+    * They're writable and included even if no constructor or destructor have been declared
 
-{% hint style="info" %}
-Detail more
-{% endhint %}
+## Misc
+
+* String are `const`, so you can't change their content
+* Check [this article](https://matt.sh/howto-c), but it differs a lot from what we did in school without always really explaining why, so do as you wish
+
+## Sources
+
+* Hacking : The Art of Exploitation by John Erickson
+* School course
 

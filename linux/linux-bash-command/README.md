@@ -25,6 +25,8 @@
 | `cd <path>` | Change current dir to path |
 | `cd -` | Switch between last 2 dir |
 
+* `cd` is a shell buitin command, which is why you can't use it with sudo
+
 ## Files & Directory
 
 ### Creation & removal
@@ -43,7 +45,8 @@
 
 | Command | Definition |
 | :--- | :--- |
-| `cat [file] [file]` | Print one or multiple file, if none are specified, return stdin to stdout. You can use \* in names to read multiple files |
+| `cat [-]` | With no files or with `-` cat reads `stdin`  |
+| `cat <file> [file]` | Print one or multiple file, you can use \* in names to read multiple files |
 | `less` | Print file, but wait after a page for your input to continue |
 | `more` | I don't know the diff with `less` |
 | `ls <dir>` | List dir content \(default `.`\) |
@@ -359,6 +362,11 @@ With this kind of json :
 * `history` Shows history of cmd
   * For bash, there's a more detailed history in`/home/<user>/.bash_history`  only readable by the user
   * The cmd is more permissive but less complete
+* `echo <string>` Print the string to the `stdout`
+  * Its a builtin command and each shell can change it so it won't necessarily act like the man describe
+  * `-n` Remove the last `\n`
+  * `-e` Interpret backslash escape, will interpret sequence like `\n` or `\x41`
+    * In `/bin/bash`, `-e` doesn't do anything, instead it interpret these sequences if the string is between `'` or `"` 
 
 ## Bash tips
 
