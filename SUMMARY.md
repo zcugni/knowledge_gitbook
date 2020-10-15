@@ -33,6 +33,7 @@
 * [Tools](binary-exploitation/tools/README.md)
   * [GDB - GNU Debugger](binary-exploitation/tools/gdb-gnu-debugger.md)
 * [Vulnerabilities](binary-exploitation/vulnerabilities.md)
+* [Format String Vulnerabilities](binary-exploitation/format-string-vulnerabilities.md)
 * [Hacking : The Art of Exploitation Notes](binary-exploitation/hacking-the-art-of-exploitation-notes.md)
 
 ## Networking & Web

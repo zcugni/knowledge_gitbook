@@ -56,10 +56,12 @@ Fill with syntax
     * `arg_list` List of the arguments  as strings \(also called an **argument vector**\)
     * The 0th argument is the executable name
 
-## Printf
+## Useful functions
 
-* Base format string function in c
-* Commun format specifiers :
+### Printf
+
+* Base format string function in C
+* Common format specifiers :
   * `%s` Strings
   * `%d` Decimal number
   * `%x` Hexadecimal number
@@ -70,12 +72,17 @@ Fill with syntax
   * To pad it with 0, use `%0<nb><format_specifier>`
   * Example : `%8d`
   * This is called a **field width parameter**
+* **Direct parameter access** let you access any of the printf arguments
+  * Syntax : `%<nb_arg>$<specifier>`
+  * Example : `printf("This is the 7th arg : %7$d", 1, 2, 3, 4, 5, 6, 7, 8, 9")`
+  * Combination with field with parameters :  `%<nb_args>$[0]<min_width><format_specifier>`
+    * Example : `%4$05d`
 
 {% hint style="info" %}
 Check [this website](https://www.lix.polytechnique.fr/~liberti/public/computing/prog/c/C/FUNCTIONS/format.html#width) for a more complete breakdown of options
 {% endhint %}
 
-## Open
+### Open
 
 * Open a file
 * Access flags :
@@ -96,6 +103,22 @@ Check [this website](https://www.lix.polytechnique.fr/~liberti/public/computing/
     * `S_IWOTH` Gives everyone else write permission
     * `S_IXOTH` Gives everyone else execute permission
 * These flags can be combined with the bitwise OR operator
+
+{% hint style="info" %}
+Complete it by reading the man
+{% endhint %}
+
+### Execl / Execle
+
+* Family of functions that execute  \(shell\) commands by replacing the current process with a new one
+* `execl(<path_to_cmd_bin>, <bin_name>, <cmd_arg>, ..., NULL)`
+  * The 1st arg is the path to the target cmd binary
+  * Then comes the list of the command-line arguments, the first one being the name of the executable
+  * A `NULL` terminates the arguments list
+  * Uses the current environment variables
+*  `execle(<path_to_cmd_bin>, <bin_name>, <cmd_arg>, ..., NULL, <env_array>)`
+  * Similar to the other function, with an additional parameters to describe the environment variables to use
+  * The environment is describe as an array of strings, terminated by a `NULL`
 
 ## Misc
 
