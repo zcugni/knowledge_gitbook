@@ -20,6 +20,14 @@
 * Ethernet cables are ranked by category numbers, higher ones being better
   * cat5 is the current standard, at 100 megabits
 
+{% hint style="info" %}
+Describe ethernet headers
+
+"An Ethernet header is 14 bytes in size and contains the source and destination MAC addresses for this Ethernet packet."
+
+"Any packet’s Ethernet header includes a type value that describes the packet. This type is used to specify whether the packet is an ARP-type message or an IP packet."
+{% endhint %}
+
 ## Switch
 
 * Each host is wired to a port on an Ethernet switch
@@ -53,10 +61,11 @@
 ## _ARP - Address Resolution Protocol_
 
 * The glue \(for IPv4\) that attach the network & datalink layers by translating MAC addresses to IPv4 addresses
-* If the ip isn't in the **ARP table**, the host does a broadcast request asking to who it corresponds
-  * This is a request that is sent to the whole broadcast domain
-* The cache expires after some time
-  * If an host changed it's mac address but the old one is still in the ARP table, connection will fail
+* The **ARP table** contains the correspondences
+  * If an IP isn't in it, an **ARP request** is sent on the broadcast \(meaning that it will reach every host of the broadcast domain\), asking to which MAC address it corresponds
+  * The machine with the desired ip will send an **ARP reply**
+* A cache keeps old entries but expires after some time
+  * If an host changed it's mac address but the old one is still in the ARP table, the connection will fail
 
 ## _ND - Neighbor Discovery_ 
 

@@ -2,9 +2,9 @@
 
 ## Generalities
 
-* Maps connectivity between hosts \("How do i get to this host ?"\)
-* "A single chunk of network data is called a _**packet**_"
-* Internet uses the _Internet Protocol_ \(IP\) which comes in 2 versions : **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
+* Maps connectivity between hosts
+* "A single chunk of network data is called a **packet**"
+* Internet uses the **Internet Protocol** \(IP\) which comes in 2 versions : **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
   * Some host are only capable of using one of the 2 protocols
   * Others can do both and will responds by using the same one as the request when responding and their default configuration when requesting
 
@@ -94,6 +94,20 @@ An host can :
   * To speak with the outside, it will use it's primary address 
 * Both
 * Locally, they'll use the address corresponding to the subnet with which they communicate
+
+## Packets
+
+{% hint style="info" %}
+Add IP headers
+
+"The IP header for packets in this layer is 20 bytes in size and consists of various fields and bitflags as defined in RFC 791."
+
+"the IP header has a protocol field to describe the type of data in the packet and the source and destination addresses for routing. In addition, the header carries a checksum, to help detect transmission errors, and fields to deal with packet fragmentation
+{% endhint %}
+
+* **Fragmentation** : the data can be too big to fit into one packet, in which case it's fragmented and divided between multiples packets, each with their own headers
+  * The packets are numbered via a **fragment offset** written in the header
+  * The fragment are re-assemble on arrival
 
 ## Sources
 

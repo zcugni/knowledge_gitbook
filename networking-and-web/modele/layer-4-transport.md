@@ -9,12 +9,12 @@
 
 ## _ICMP - Internet Control Message Protocol_
 
-* Low-level connectivity message between hosts \(availability, routing, status messages, etc\)
-* Every host implementing IP needs ICMP, it runs silently in the backgroud
+* Low-level connectivity message between hosts \(availability, routing, status, errors, etc\)
+* Every host implementing IP needs ICMP, it runs silently in the background
 * It's often block for security reasons but that isn't useful because attackers can gain info in other ways and it might cause problems for you
 * Transmit similar kind of message over IPv4 & IPv6 but internally very different
 * Usage example :
-  * Ping
+  * **Ping** \(use **ICM Echo Request** & **Reply**\)
   * Datalink error message \(for example frame is too large\)
   * Tell traffic to go another way
 
@@ -23,6 +23,10 @@
 * Most minimal transport protocol \(0 verification/feedback\)
 * UDP is used for applications that do their own data flow error management
 * VPNs use it when they don't use VPN specific protocols like IPSec
+
+{% hint style="info" %}
+headers : The UDP header, defined in RFC 768, is relatively tiny. It only contains four 16-bit values in this order: source port, destination port, length, and checksum.
+{% endhint %}
 
 ### Flaws
 
@@ -48,18 +52,31 @@
   * Packets have a specific order
     * Switches and routers might send them out of order but the receiver will re-arrange them back before transmitting to the application
 
+{% hint style="info" %}
+header & flags : RFC 793
+
+"The sequence number and acknowledgment number are used to maintain state. "
+
+ "After the handshake, every packet in the connection will have the ACK flag turned on and the SYN flag turned off."
+
+"Sequence numbers allow TCP to put unordered packets back into order, to determine whether packets are missing, and to prevent mixing up packets from other connections. When a connection is initiated, each side generates an initial sequence number. This number is communicated to the other side in the first two SYN packets of the connection handshake. Then, with each packet that is sent, the sequence number is incremented by the number of bytes found in the data portion of the packet. This sequence number is included in the TCP packet header. In addition, each TCP header has an acknowledgment number, which is simply the other side’s sequence number plus one."
+{% endhint %}
+
 ### Handshakes
 
 The _three-way handshake_ establish a connection between 2 hosts :
 
 * `SYN-SENT` __: A _synchronization request_ \(SYN request\) is sent by the client
   * It comes from a random high-numbered port on the client to a specific port on the server
-  * A random _seq_ number is chosen
+  * SYN flag turn on in the header
+  * A random `seq` number is chosen
 * `SYN-ACK`The server acknowledge the request __and respond with it's own SYN request
-  * The _ack_ number is the initial syn seq one + 1
+  * The `ack` number is the initial SYN `seq`  + 1
   * The request comes from the requested port on the server to the client source port
+  * SYN and ACK flags turn on in the header
 * `ACK` The client acknowledge the server SYN request, the connection is established
   * It also up the server request seq number by 1
+  * ACK flag turn on in the header
 
 ![](../../.gitbook/assets/ack.png)
 
@@ -88,7 +105,7 @@ The _three-way handshake_ establish a connection between 2 hosts :
   * In IPv4 it's written `ip:port`
   * In IPv6 `[ip]:port`
 
-## Services File
+### Services File
 
 * `/etc/services/` On Unix
 * `C:\\Windows\System32\drivers\etc\services` On windows
@@ -109,7 +126,7 @@ The _three-way handshake_ establish a connection between 2 hosts :
 * Communication endpoint for processes
   * Abstraction that takes care of the detail of the transport layer
 * 4 types, 2 most common :
-  * Stream socket for TCP
+  * Stream socket for TCP/IP
   * Datagram socket for UDP
 * Sockets are identified via file descriptor
 * Both Windows & Linux have _local sockets_ : system entities on the filesystem or memory that accept connections from other programs
