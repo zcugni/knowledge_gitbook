@@ -104,9 +104,14 @@ The _three-way handshake_ establish a connection between 2 hosts :
 * You're not obligated to follow it and not doing it might be a bypass for badly configured firewalls
 * However some programs/host won't accept certain port and you might get strange result by using non standard port
 
-## Socket
+## Sockets
 
-* Communication endpoint for a process
+* Communication endpoint for processes
+  * Abstraction that takes care of the detail of the transport layer
+* 4 types, 2 most common :
+  * Stream socket for TCP
+  * Datagram socket for UDP
+* Sockets are identified via file descriptor
 * Both Windows & Linux have _local sockets_ : system entities on the filesystem or memory that accept connections from other programs
 * _Inter-Process Communication_ \(IPC\) is one socket protocol, contained entirely in memory
 * In TCP/IP, sockets listen for a network connection

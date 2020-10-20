@@ -129,6 +129,40 @@ Complete it by reading the man
   * Similar to the other function, with an additional parameters to describe the environment variables to use
   * The environment is describe as an array of strings, terminated by a `NULL`
 
+### Socket related functions
+
+* Available in `/usr/include/sys/sockets.h`
+* `socket(int domain, int type, int protocol)` Creates a socket, returns a file descriptor
+  * The `domain` is the protocol family
+  * The `protocol` is the number of the desired protocol within it's protocol family \(it's usually `0` because there's often only 1\)
+* `connect(int fd, struct sockaddr remote_host, socklen_t addr_length)`
+* `bind(int fd, struct sockaddr local_addr, socklen_t addr_length)` Binds a socket to a local address so it can listen for incoming connections
+* `listen(int fd, int backlog_queue_size)` Listens for incoming connections and queues connection requests up to backlog\_queue\_size
+* `accept(int fd, sockaddr remote_host, socklen_t addr_length)` Accepts an incoming connection on a bound socket
+  *  The address data is written in the `remote_host` struct
+  * The address structure size is written into `addr_length`
+  * Returns an fd to identify the new connected socket
+* `send(int fd, void buffer, size_t n, int flags)` Sends n bytes from a buffer to a socket_,_ returns the number of bytes sent
+* `recv(int fd, void buffer, size_t n, int flags)` Receives n bytes from socket into buffer,  returns the number of bytes received
+* They all return `-1`on error
+* **Parameters explanation** :
+  * Sockets are identified with a file descriptor, so the argument `fd` reference a socket
+  * `socketaddr` is a structure that contains an int identifying the socket address family and a generic buffer for data
+    * Each protocol family as a corresponding socket address family
+    * An address family describe what type of data will be needed to define an address
+    * Address family structures all have the same size \(some need to pad for it\)
+
+### Network conversion
+
+* Convert data from big-endian to little-endian and vice-versa :
+  * `htonl(long value)` Host-to-Network Long, converts a 32-bit integer from the host’s byte order to network byte order
+  * `htons(short value)` Host-to-Network Short, converts a 16-bit integer from the host’s byte order to network byte order
+  * `ntohl(long value)` Network-to-Host Long, converts a 32-bit integer from network byte order to the host’s byte order 
+  * `ntohs(long value)` Network-to-Host Short, converts a 16-bit integer from network byte order to the host’s byte order
+* Convert ip addresses \(`in_addr` structure\) to ascii string and vice-versa :
+  * `inet_aton(char ascii_addr, struct in_addr network_addr)` ASCII to IP
+  * `inet_ntoa(struct in_addr *network_addr)` IP to ASCII
+
 ### Misc
 
 * `getenv()` Takes the name of an env var and returns its memory address
