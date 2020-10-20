@@ -15,10 +15,14 @@
   * [Broken Access Control & File Inclusion](pen-test/vulnerabilities/broken-access-control-and-file-inclusion.md)
   * [Misc Attack](pen-test/vulnerabilities/misc-attack.md)
 * [Tools](pen-test/hack-tools/README.md)
-  * [Burp Proxy](pen-test/hack-tools/burp-proxy.md)
   * [JohnTheRipper](pen-test/hack-tools/johntheripper.md)
   * [Metasploit Framework](pen-test/hack-tools/metasploit-framework.md)
   * [Patator](pen-test/hack-tools/patator.md)
+* [Network tools](pen-test/network-tools/README.md)
+  * [Burp Proxy](pen-test/network-tools/burp-proxy.md)
+  * [Nmap](pen-test/network-tools/nmap.md)
+  * [tcpdump](pen-test/network-tools/tcpdump.md)
+  * [Packet Sniffer](pen-test/network-tools/packet-sniffer.md)
 * [Good Practices](pen-test/good-practices.md)
 
 ## Binary Exploitation / Low-level <a id="binary-exploitation"></a>
@@ -45,15 +49,14 @@
   * [Layer 5 - Application](networking-and-web/modele/layer-5-application.md)
 * [Security hardware](networking-and-web/machines.md)
 * [DNS](networking-and-web/dns.md)
+* [Vulnerabilities](networking-and-web/vulnerabilities.md)
 
 ## Linux
 
 * [Theory](linux/linux-nix.md)
 * [Command](linux/linux-bash-command/README.md)
   * [Mount](linux/linux-bash-command/mount.md)
-  * [Net tools / commands](linux/linux-bash-command/net-tools-commands/README.md)
-    * [Nmap](linux/linux-bash-command/net-tools-commands/nmap.md)
-    * [tcpdump](linux/linux-bash-command/net-tools-commands/tcpdump.md)
+  * [Net tools / commands](linux/linux-bash-command/net-tools-commands.md)
   * [Sudo, su, sudoers, etc](linux/linux-bash-command/sudo-su-sudoers-etc.md)
   * [Tmux](linux/linux-bash-command/tmux.md)
   * [Find](linux/linux-bash-command/find.md)

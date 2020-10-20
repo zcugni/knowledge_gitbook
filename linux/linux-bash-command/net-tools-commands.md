@@ -11,17 +11,7 @@
 
 ## Nmap
 
-* Map the network
-* Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
-
-## Packet sniffing
-
-* [tcpdump](https://zcugni.gitbook.io/notes/tools/linux-bash-command/tcpdump)
-  * Dump certain part or the entirety of the traffic
-* Wireshark
-  * Traffic analysis tool
-  * Graphic interface
-  * Always install Wireshark in a **disposable virtual machine** for security reasons
+Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
 
 ## Netcat
 

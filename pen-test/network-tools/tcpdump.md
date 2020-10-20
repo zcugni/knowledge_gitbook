@@ -12,6 +12,8 @@
 * `tcpdump -n` Hide DNS request traffic
 * To check if you received a ping, use `tcpdump -n -i <interface> icmp`
   * Use the interface linked to the ip you pinged
+* Uses **libpcap** underhood \(C lib\)
+* Put the machine in **promiscuous** mode
 
 ## Example of an UDP packet
 

@@ -125,27 +125,18 @@ The _three-way handshake_ establish a connection between 2 hosts :
 
 * Communication endpoint for processes
   * Abstraction that takes care of the detail of the transport layer
+    * **Raw sockets** let you deal with it yourself, but they demand root access and are inconsistent across systems
+  * They're kind of like pipes, but more complex
+  * Processes \(for example a web server\)  open a socket on the port they listen to
+    * One process can open any number of sockets as long as the OS doesn't object
+    * An _open_ or _listening_ socket is waiting for a connection
+    * It can accept any numbers of connections so long as all the clients have unique source IP addresses & ports
 * 4 types, 2 most common :
-  * Stream socket for TCP/IP
-  * Datagram socket for UDP
-* Sockets are identified via file descriptor
-* Both Windows & Linux have _local sockets_ : system entities on the filesystem or memory that accept connections from other programs
-* _Inter-Process Communication_ \(IPC\) is one socket protocol, contained entirely in memory
-* In TCP/IP, sockets listen for a network connection
-* A process \(for example a web server\) open a socket on the port they listen to
-* One process can open any number of sockets as long as the OS doesn't object
-* _network socket_ is synonym to "open TCP/IP port"
-* A socket waiting for a connection is said to be _open_ or _listening_
-* Unlike a physical socket, a network one can accept any numbers of connections so long as all the clients have unique source IP addresses & ports
-
-
-
-
-
-* Sockets are an interface through which processes communicate, either locally or remotely
-* They're kind of like pipes, but more complex
-* They're identified through socket descriptor \(which are actually file descriptor\)
-* They're different types of socket that enable communicating through udp, tcp, internally, etc..
+  * **Stream** socket for TCP/IP
+  * **Datagram** socket for UDP
+* Sockets are identified via socket descriptors \(which are actually **file descriptor**\)
+* Both Windows & Linux have **local sockets** : system entities on the filesystem or memory that accept connections from other programs
+* One of the socket protocol is _Inter-Process Communication_ \(IPC\) which is contained entirely in memory
 
 ## Root User
 

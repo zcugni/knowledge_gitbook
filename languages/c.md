@@ -151,6 +151,9 @@ Complete it by reading the man
     * Each protocol family as a corresponding socket address family
     * An address family describe what type of data will be needed to define an address
     * Address family structures all have the same size \(some need to pad for it\)
+* **Raw socket** :
+  * Created by using `SOCK_RAW` as the type
+  * **libpcap** is a library that facilitates their use
 
 ### Network conversion
 
@@ -170,8 +173,9 @@ Complete it by reading the man
 ## GCC
 
 * Lets you compile C files
-* `gcc <file_name> [-o <output_name]`
+* `gcc <file_name> [-o <output_name] [-l<libname>]`
   * The default output name is `a.out`
+  * Write the lib name without extensions
 * To compile in 32 bits, use this option : `-m32`
   * You might need to install this first : `libc6-dev-i386`
 * Binaries compiled with gcc have special table sections for **constructors** & **destructors** called `.ctors` &  `.dtors`
@@ -185,6 +189,7 @@ Complete it by reading the man
 ## Misc
 
 * String are `const`, so you can't change their content
+* `typedef` for aliases
 * Check [this article](https://matt.sh/howto-c), but it differs a lot from what we did in school without always really explaining why, so do as you wish
 
 ## Sources

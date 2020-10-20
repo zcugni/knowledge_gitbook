@@ -31,11 +31,12 @@ Describe ethernet headers
 ## Switch
 
 * Each host is wired to a port on an Ethernet switch
-* Switch separate **collision domain** to prevent them
-* Compared to a **Hub**, a switch pass on the packets only to its recipient
-  * Before, everybody received them but they ignore it if it wasn't for them
-* Compared to a **Shared Bus**, the machines each has their own cable connected to the switch
-  * Before, they shared it so they needed to use the CSMA/CD protocol to prevent collision
+  * Since each host has its own cable, **collision domain** are isolated
+  * In a switched network, packets are only sent to their recipient
+    * In a unswitched one, they were sent to every one, expecting the device not to look at the contents of others
+    * A device can be made to look into packet by setting the **promiscuous** mode with `ifconfig`
+* The **hub** and the **shared bus** are unswitched netwok
+  * The shared bus also had only one cable for every device, and needed to use CSMA/CD for collision
   * When a collision occurred, all machines shut up and waited a random period of time before starting communication again
 
 ## MAC Address
