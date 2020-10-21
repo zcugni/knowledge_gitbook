@@ -106,5 +106,6 @@ Describe ethernet headers
 ## Sources
 
 * _Networking for Systems Administrators_ by Michael W. Lucas
+* _Hacking : The Art of Exploitation_ by John Erickson
 * Misc Research
 

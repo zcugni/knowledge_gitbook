@@ -113,5 +113,6 @@ Add IP headers
 
 * _Networking for Systems Administrators_ by Michael W. Lucas
 * [openclassroom](https://openclassrooms.com/fr/courses/1561696-les-reseaux-de-zero/1562627-les-masques-de-sous-reseaux-a-la-decouverte-du-subnetting) \(in french\)
+* _Hacking : The Art of Exploitation_ by John Erickson
 * Misc Research
 

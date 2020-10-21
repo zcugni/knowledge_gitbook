@@ -83,8 +83,14 @@ The _three-way handshake_ establish a connection between 2 hosts :
 * The OS forward the data stream to a program only after the three-way handshake is done
   * If the connection stops after it, the problem lies in the server program
   * If it fails before, the OS didn't complete the connection
-* A **SYN flood attack** consist of sending lots of SYN request that never goes past the SYN-ACK stage
+* **SYN cookies** are used against **SYN flood**
+  * Connections aren't tracked and stored until the final ACK arrives
+  * Data is added to the SYN/ACK reply to be able to reconstruct the initial SYN request from the ACK reply
 * When the server and client finished exchanging data, they use the **four-way handshake** to close the connection
+
+{% hint style="info" %}
+Explain SYN cookies in more details
+{% endhint %}
 
 ### Failures
 
@@ -157,6 +163,7 @@ The _three-way handshake_ establish a connection between 2 hosts :
 ## Sources
 
 * _Networking for Systems Administrators_ by Michael W. Lucas
+* _Hacking : The Art of Exploitation_ by John Erickson
 * Pentesterlab
 * Misc Research
 
