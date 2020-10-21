@@ -153,7 +153,7 @@ Complete it by reading the man
     * Address family structures all have the same size \(some need to pad for it\)
 * **Raw socket** :
   * Created by using `SOCK_RAW` as the type
-  * **libpcap** is a library that facilitates their use
+  * **libpcap** & **libnet** are libraries that facilitates their use
 
 ### Network conversion
 

@@ -2,7 +2,7 @@
 
 ## Generalities
 
-* Initially created for port scanning but added a lot of functionalities with time
+* Initially created for **port scanning** but added a lot of functionalities with time
 * It's THE cmd to use for those type of things
 * I detailed the main options, but there's more
 * My default command : `sudo nmap -v [-p-] [-Pn] -sC -sV -oN <result_file> <ip>`

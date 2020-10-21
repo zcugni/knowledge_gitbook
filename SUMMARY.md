@@ -22,7 +22,6 @@
   * [Burp Proxy](pen-test/network-tools/burp-proxy.md)
   * [Nmap](pen-test/network-tools/nmap.md)
   * [tcpdump](pen-test/network-tools/tcpdump.md)
-  * [Packet Sniffer](pen-test/network-tools/packet-sniffer.md)
 * [Good Practices](pen-test/good-practices.md)
 
 ## Binary Exploitation / Low-level <a id="binary-exploitation"></a>

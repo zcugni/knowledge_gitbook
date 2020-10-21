@@ -65,6 +65,7 @@ Describe ethernet headers
 * The **ARP table** contains the correspondences
   * If an IP isn't in it, an **ARP request** is sent on the broadcast \(meaning that it will reach every host of the broadcast domain\), asking to which MAC address it corresponds
   * The machine with the desired ip will send an **ARP reply**
+  * An host that receives a reply \(even without having send a request\) will change the content of it's table \(except if it was explicitly marked as permanent\)
 * A cache keeps old entries but expires after some time
   * If an host changed it's mac address but the old one is still in the ARP table, the connection will fail
 
