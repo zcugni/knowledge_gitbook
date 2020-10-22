@@ -9,28 +9,15 @@
   * IP packets sent to the same host won't necessarily go through the same route
 * There's no reliability built into the protocol, meaning there is no acknowledgement of arrival, control of data \(except for the header checksum\) or re-transmission
   * This should be dealt by protocols in the transport layer, particularly TCP
-* Errors are reported via the Internet Control Message Protocol \(ICMP\)
-
-
-
-
-
-* The internet protocol does not provide a reliable communication
-
-    facility.  There are no acknowledgments either end-to-end or
-
-    hop-by-hop.  There is no error control for data, only a header
-
-    checksum.  There are no retransmissions.  There is no flow control.
-
+* **Errors** are reported via the Internet Control Message Protocol \(**ICMP**\)
 * It's comes in 2 versions :   **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
   * Some host are only capable of using one of the 2 protocols
   * Others can do both and will responds by using the same one as the request when responding and their default configuration when requesting
 
 ## IP addresses & Netmask
 
-* IP addresses are grouped into **networks** or **subnets**
-* An host is identified by it's IP address, which is composed of :
+* The Internet Protocol identifies host via addresses and they're grouped into **networks** or **subnets**
+* The address is composed of : 
   * A static part for the network
   * A variable part that changes for each host
 * The mask tells you which part is what
@@ -41,7 +28,7 @@
   * The last for the **broadcast address**
 * Host can only communicate directly with hosts in the same subnet
   * To reach the outside, they send their packets to their **default gateway**, which is usually the **router**
-* _Internet Service Provider_ \(ISP\) allocates subnets to organizations and network administrators can further divide it
+* _Internet Service Provider_ \(ISP\) allocates subnets to organizations and network administrators can further divide them
 * Persistence :
   * Root DNS server addresses are almost permanent
   * Servers addresses can change but that needs to be coordinated
@@ -51,12 +38,12 @@
 
 * 32-bit number, generally expressed in this format `203.0.113.1`
 * Each subnet contains a number of addresses equal to a power of 2
-* The netmask also is a 32-bit number, generally expressed in this format `255.255.255.0` or `/24` \(in this case\).
+* The netmask also is a 32-bit number, generally expressed in this format `255.255.255.0` or `/24` \(in this case\)
 * They were divided in classes but not anymore because it was too restrictive
 
 ### Private addresses & NAT
 
-* IPv4 only has so many adresses available and not all hosts need to access the public Internet which is why we reserved some subnets for private use :
+* IPv4 only has so many addresses available and not all hosts need to access the public Internet which is why we reserved some subnets for private use :
   * 10.0.0.0/8
   * 172.16.0.0/12
   * 192.168.0.0/16
@@ -64,8 +51,7 @@
   * It rewrites packets in flight
   * Maintains a table of connections and track their state to properly open & close them
   * Most home routers are NAT device
-  * It's efficient, but it implies lying to all side of the network connection, which not all protocols handle
-    * FTP and VoIP needs special handling
+  * It's efficient, but it implies lying to all side of the network connection, which not all protocols handle \(FTP and VoIP needs special handling\)
   * You can apply filters to block some traffic
   * Not really secure
 
@@ -95,12 +81,60 @@
   * So IPv6 hosts on an Ethernet network can find each other and communicate via the link-local address. 
   * The OS attach the interface name to the link-local address, it's often written as `%interface_nb` at the end of the address
 
+## Packet
+
+### Fragmentation
+
+* Before describing the headers, I must explain fragmentation
+* When the data needed to be sent is bigger than the MTU of the datalink layer, it's fragmented in multiple packets and re-assembled on arrival
+* Part of the headers is used for that
+* Packets can be mark as "Don't fragment", in which case they'll be discarded if they're too big
+
+
+
+### Headers
+
+* An ip packet is comprised of an header and it's data
+* This is the structure of the header for **IPv4** packets :
+
+![](../../.gitbook/assets/ip-headers.png)
+
+* Version : 4 bits, indicates if it's IPv4 or IPv6
+* Internet Header Length \(IHL\) : 4 bits,  the length of the header in 32-bits word
+  * The length of the header can vary, so it indicates where the data section starts
+  * The minimum value is 5
+* The maximum length of an header is 60 bytes, and the typical one is 20 bytes
+* Type of services ...
+* Total length :  16 bits, gives the total length of the packets in bytes, headers included
+  * The maximum possible length is 65,535 bytes, but it's advised against
+  * Systems should be capable of sending and receiving packets up to 576 bytes \(after re-assembly if fragmentation was needed\)
+* Identification : 16 bits
+  * **WARNING** An identifying value assigned by the sender to aid in assembling the     fragments of a datagram
+* Flags :  3 bits, used for fragmentation
+  * Bit 0 : Reserved, must be zero
+  * Bit 1 : 0 = May Fragment,  1 = Don't Fragment
+  * Bit 2 :  0 = Last Fragment, 1 = More Fragments
+* Fragment Offset :  13 bits
+  * **WARNING** This field indicates where in the datagram this fragment belongs.The fragment offset is measured in units of 8 octets \(64 bits\).  The     first fragment has offset zero.
+* Time to Live \(TTL\) :  8 bits  , the maximum time a packet can exist before it is discarded
+  * Measured in seconds, but must be decremented by one on each hop even if a second hasn't passed
+* Protocol :  8 bits
+  * **WARNING** This field indicates the next level protocol used in the data     portion of the internet datagram
+* Header Checksum :  16 bits  , a checksum on the header only
+  * Since some header fields change    , it's recomputed and verified at time
+  * While computing the checksum, the value of it's field is 0
+* Source Address:  32 bits
+* Destination Address:  32 bits
+* **WARNING** Add options details
+* Padding:  Added to ends the header on a 32 bit boundary
+
 ## Loopback and localhost
 
 * All host have a _Loopback interface_ that is only logical, without hardware representation and an underlying layer 2
 * In IPv4 the whole 127.0.0.1/8 is _localhost_ 
 * In IPv6 it's the `::1` address
-* This address let the machine connect to itself. An host can only connect to it's own loopback interface, not others
+* This address let the machine **connect to itself**
+  * An host can only connect to it's own loopback interface, not others
 
 ## Multihoming and aliases
 
