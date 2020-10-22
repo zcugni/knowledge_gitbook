@@ -2,9 +2,28 @@
 
 ## Generalities
 
-* Maps connectivity between hosts
+* The Internet Protocol \(IP\) deals with choosing a path \(**routing**\) between two hosts, enabling them to transfer data to each other
 * "A single chunk of network data is called a **packet**"
-* Internet uses the **Internet Protocol** \(IP\) which comes in 2 versions : **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
+* It's a **connectionless** protocol, meaning among other things that : 
+  * A connection is not established beforehand between the hosts
+  * IP packets sent to the same host won't necessarily go through the same route
+* There's no reliability built into the protocol, meaning there is no acknowledgement of arrival, control of data \(except for the header checksum\) or re-transmission
+  * This should be dealt by protocols in the transport layer, particularly TCP
+* Errors are reported via the Internet Control Message Protocol \(ICMP\)
+
+
+
+
+
+* The internet protocol does not provide a reliable communication
+
+    facility.  There are no acknowledgments either end-to-end or
+
+    hop-by-hop.  There is no error control for data, only a header
+
+    checksum.  There are no retransmissions.  There is no flow control.
+
+* It's comes in 2 versions :   **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
   * Some host are only capable of using one of the 2 protocols
   * Others can do both and will responds by using the same one as the request when responding and their default configuration when requesting
 
