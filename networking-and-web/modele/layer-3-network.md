@@ -2,14 +2,14 @@
 
 ## Generalities
 
-* The Internet Protocol \(IP\) deals with choosing a path \(**routing**\) between two hosts, enabling them to transfer data to each other
+* The Internet Protocol \(IP\) deals with choosing a path between two hosts \(**routing** them\), enabling them to transfer data to each other
 * "A single chunk of network data is called a **packet**"
 * It's a **connectionless** protocol, meaning among other things that : 
   * A connection is not established beforehand between the hosts
   * IP packets sent to the same host won't necessarily go through the same route
 * There's no reliability built into the protocol, meaning there is no acknowledgement of arrival, control of data \(except for the header checksum\) or re-transmission
   * This should be dealt by protocols in the transport layer, particularly TCP
-* **Errors** are reported via the Internet Control Message Protocol \(**ICMP**\)
+  * **Errors** are reported via the Internet Control Message Protocol \(**ICMP**\)
 * It's comes in 2 versions :   **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
   * Some host are only capable of using one of the 2 protocols
   * Others can do both and will responds by using the same one as the request when responding and their default configuration when requesting
@@ -85,12 +85,12 @@
 
 ### Fragmentation
 
-* Before describing the headers, I must explain fragmentation
 * When the data needed to be sent is bigger than the MTU of the datalink layer, it's fragmented in multiple packets and re-assembled on arrival
-* Part of the headers is used for that
+  * The data must be fragmented on an 8-bits boundary
+  * There can be at most 8192 fragments of 8 bytes each
 * Packets can be mark as "Don't fragment", in which case they'll be discarded if they're too big
-
-
+* The header is copied on the fragmented packets, and some fields used for fragmentation are set
+  * Some options are also copied
 
 ### Headers
 
@@ -103,23 +103,29 @@
 * Internet Header Length \(IHL\) : 4 bits,  the length of the header in 32-bits word
   * The length of the header can vary, so it indicates where the data section starts
   * The minimum value is 5
-* The maximum length of an header is 60 bytes, and the typical one is 20 bytes
-* Type of services ...
-* Total length :  16 bits, gives the total length of the packets in bytes, headers included
-  * The maximum possible length is 65,535 bytes, but it's advised against
+  * It can be at most 60 bytes, and they're generally 20 bytes
+* Type of service : 8 bits, this describe what kind of transmission should be use
+  * Bits 0-2 :  Precedence \(importance\)
+    * There's a list of predefined values like `010` for "immediate" or `001` for "priority", but i won't detail them
+  * Bit 3 :  0 = Normal Delay,  1 = Low Delay
+  * Bits 4 :  0 = Normal Throughput, 1 = High Throughput
+  * Bits 5 :  0 = Normal Reliability, 1 = High Reliability
+  * Bits  6-7 :  Reserved for Future Use
+* Total length :  16 bits, gives the total length of the packet in bytes, headers included
+  * Minimum size : 68 bytes
+  * Maximum size : 65,535 bytes, but it's advised against
   * Systems should be capable of sending and receiving packets up to 576 bytes \(after re-assembly if fragmentation was needed\)
-* Identification : 16 bits
-  * **WARNING** An identifying value assigned by the sender to aid in assembling the     fragments of a datagram
+* Identification : 16 bits, combined with the source, destination & protocol, it uniquely identifies a fragment
 * Flags :  3 bits, used for fragmentation
   * Bit 0 : Reserved, must be zero
   * Bit 1 : 0 = May Fragment,  1 = Don't Fragment
   * Bit 2 :  0 = Last Fragment, 1 = More Fragments
-* Fragment Offset :  13 bits
-  * **WARNING** This field indicates where in the datagram this fragment belongs.The fragment offset is measured in units of 8 octets \(64 bits\).  The     first fragment has offset zero.
+* Fragment Offset :  13 bits  , indicates the offset of the current fragment in the original data
+  * Measured in units of 8 bytes \(64 bits\)
 * Time to Live \(TTL\) :  8 bits  , the maximum time a packet can exist before it is discarded
   * Measured in seconds, but must be decremented by one on each hop even if a second hasn't passed
-* Protocol :  8 bits
-  * **WARNING** This field indicates the next level protocol used in the data     portion of the internet datagram
+* Protocol :  8 bits  , this field indicates the next level protocol used in the data   portion
+  * It will for example be 1 for ICMP, available protocols are described in RFC 790
 * Header Checksum :  16 bits  , a checksum on the header only
   * Since some header fields change    , it's recomputed and verified at time
   * While computing the checksum, the value of it's field is 0
