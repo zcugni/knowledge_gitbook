@@ -20,6 +20,9 @@
 ### Routers & Ethernet switches
 
 * Can perform packet filtering or use A_ccess Control List_ \(ACL\)
+* Switches routes packets through the local network using mac addresses
+* Router routes the packets through the whole network using ip addresses
+  * And locally i guess
 
 ### Proxy server
 

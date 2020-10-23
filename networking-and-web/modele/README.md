@@ -4,7 +4,7 @@
 
 * Tech, protocols, etc are divided by layer
 * If an inferior layer doesn't work, the ones above won't either
-* Each layer communicates only with the 2 adjacents one
+* Each layer communicates only with the 2 adjacent ones
 * There's 2 models :
   * Open System Interconnect \(OSI\) : 7 layers, detailed but not representative
   * TCP/IP : 5 layers, more representative, I detailed it here
@@ -13,7 +13,7 @@
 
 * Data is transmitted by creating a pack of the payload and the header of the protocol and giving it to the next layer
 * The header + payload combo becomes the payload of the next layer, which then adds it's header to it
-* This process is called _encapsulation_
+* This process is called **encapsulation**
 
 ![](../../.gitbook/assets/encapsulation.png)
 

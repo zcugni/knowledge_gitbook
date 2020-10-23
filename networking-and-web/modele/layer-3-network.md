@@ -3,6 +3,8 @@
 ## Generalities
 
 * The Internet Protocol \(IP\) deals with choosing a path between two hosts \(**routing** them\), enabling them to transfer data to each other
+  * I think that based on the destination, it decide which is the next hop and gives it's IP address to the underlying layer, which will convert it to a MAC address
+  * So on each hop, this underlying layer and this one are deconstructed and reconstructed
 * "A single chunk of network data is called a **packet**"
 * It's a **connectionless** protocol, meaning among other things that : 
   * A connection is not established beforehand between the hosts
@@ -129,10 +131,42 @@
 * Header Checksum :  16 bits  , a checksum on the header only
   * Since some header fields change    , it's recomputed and verified at time
   * While computing the checksum, the value of it's field is 0
+  * If the verification fails, the packet is discarded
 * Source Address:  32 bits
 * Destination Address:  32 bits
-* **WARNING** Add options details
+* Options : variable length, detailed below
 * Padding:  Added to ends the header on a 32 bit boundary
+
+#### Options
+
+* May or may not be present, but must be understood by all implementations
+* There's either only the 1-byte option type or :
+  * The 1-byte option type
+  * Plus the 1-byte option length \(which takes the 2 bytes of type + length and the length of the data\)
+  * Plus the option data
+* The option type byte is divided as follows :
+  * Bit 0 :  Copy flag \(1 if the option must be copied during fragmentation\)
+  * Bits 1-2 : Option class
+    * 0 : Control
+    * 1 &  3 :  Reserved for future use
+    * 2 : Debugging and measurement
+  * Bits 3 - 7 : Option number
+* These are the possible options :
+
+| Class | Number | Length of option data \(bytes\) | Description |
+| :--- | :--- | :--- | :--- |
+| 0 | 0 |  | End of option list |
+| 0 | 1 |  | No operation \(used as padding\) |
+| 0 | 2 | 11 | Security |
+| 0 | 3 | Variable | Loose source routing |
+| 0 | 7 | Variable | Record route |
+| 0 | 8 | 4 | Stream ID |
+| 0 | 9 | Variable | Strict source routing |
+| 2 | 4 | Variable | Timestamp |
+
+* The 0-0 option needn't be used if the end of the options list coincide with the end of the header
+* Option 0-1 is used between option to align the next one on a 32-bits boundary
+* I won't detail more the other ones
 
 ## Loopback and localhost
 
@@ -154,24 +188,11 @@ An host can :
 * Both
 * Locally, they'll use the address corresponding to the subnet with which they communicate
 
-## Packets
-
-{% hint style="info" %}
-Add IP headers
-
-"The IP header for packets in this layer is 20 bytes in size and consists of various fields and bitflags as defined in RFC 791."
-
-"the IP header has a protocol field to describe the type of data in the packet and the source and destination addresses for routing. In addition, the header carries a checksum, to help detect transmission errors, and fields to deal with packet fragmentation
-{% endhint %}
-
-* **Fragmentation** : the data can be too big to fit into one packet, in which case it's fragmented and divided between multiples packets, each with their own headers
-  * The packets are numbered via a **fragment offset** written in the header
-  * The fragment are re-assemble on arrival
-
 ## Sources
 
 * _Networking for Systems Administrators_ by Michael W. Lucas
 * [openclassroom](https://openclassrooms.com/fr/courses/1561696-les-reseaux-de-zero/1562627-les-masques-de-sous-reseaux-a-la-decouverte-du-subnetting) \(in french\)
 * _Hacking : The Art of Exploitation_ by John Erickson
+* [RFC 791](https://tools.ietf.org/html/rfc791)
 * Misc Research
 
