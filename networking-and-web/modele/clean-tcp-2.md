@@ -105,8 +105,16 @@
 
 ### Three-way handshake
 
-* To communicate, systems must first established a connection via the **Three-Way Handshake**
-  * They likewise need to close them afterwards to free the resources used to keep its information
+* To communicate, systems must establish a connection that can then be used
+* To establish one, they need to synchronize their sequence number, this is done via a procedure called the **Three-Way Handshake**
+  * It still works if the two system simultaneously attempt it
+* The synchronization segment can already carry data, the receiving end will just put them into a buffer until the connection is established
+
+### Reset
+
+
+
+
 
 ## Misc
 
@@ -134,7 +142,22 @@
   * The segment length \(SEG.LEN\) includes both data and sequence     space occupying controls
   * When a SYN is present then SEG.SEQ is the     sequence number of the SYN.
 
-* There's also a flag that says that urgent data is coming down the stream. What the receiving end is supposed to do with this information is not specified, but it should try to prioritize this dat
+* There's also a flag that says that urgent data is coming down the stream. What the receiving end is supposed to do with this information is not specified, but it should try to prioritize this data
+* they likewise need to close it afterwards to free the resources used to keep its information
+* The acknowledgement does not consume a sequence number : 
+  * ```text
+     1.  CLOSED                                               LISTEN
+
+      2.  SYN-SENT    --> <SEQ=100><CTL=SYN>               --> SYN-RECEIVED
+
+      3.  ESTABLISHED <-- <SEQ=300><ACK=101><CTL=SYN,ACK>  <-- SYN-RECEIVED
+
+      4.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK>       --> ESTABLISHED
+
+      5.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK><DATA> --> ESTABLISHED
+    ```
+
+ 
 
 ## Calls
 
