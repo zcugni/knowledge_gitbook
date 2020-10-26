@@ -28,6 +28,44 @@
 headers : The UDP header, defined in RFC 768, is relatively tiny. It only contains four 16-bit values in this order: source port, destination port, length, and checksum.
 {% endhint %}
 
+* This   protocol  assumes  that the Internet  Protocol  \(IP\)  \[1\] is used as the
+
+  underlying protocol.
+
+* Source Port is an optional field, when meaningful, it indicates the port
+
+  of the sending  process,  and may be assumed  to be the port  to which a
+
+  reply should  be addressed  in the absence of any other information.  If
+
+  not used, a value of zero is inserted.
+
+* Length  is the length  in octets  of this user datagram  including  this
+
+  header  and the data.   \(This  means  the minimum value of the length is
+
+  eight.\)
+
+* Checksum is the 16-bit one's complement of the one's complement sum of a
+
+  pseudo header of information from the IP header, the UDP header, and the
+
+  data,  padded  with zero octets  at the end \(if  necessary\)  to  make  a
+
+  multiple of two octets.
+
+  * The pseudo  header  conceptually prefixed to the UDP header contains the
+
+    source  address,  the destination  address,  the protocol,  and the  UDP
+
+    length.   This information gives protection against misrouted datagrams.
+
+    This checksum procedure is the same as is used in TCP.
+
+* he UDP module  must be able to determine  the  source  and  destination
+
+  internet addresses and the protocol field from the internet header.
+
 ### Flaws
 
 * Called _connectionless_ because it considers each packet has being independent from the others, there's no notion of "data stream"
