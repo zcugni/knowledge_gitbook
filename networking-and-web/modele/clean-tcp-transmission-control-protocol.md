@@ -2,59 +2,6 @@
 
 ## Generalities
 
-* TCP can work over a wide variety of protocols for the underlying layer, and i'll explain some general concepts, but this summary is primarily focused on TCP over IP
-* TCP speaks on one hand to applications, and on the over to protocols of the underlying layer
-  * Some minimum functionalities are expected for the TCP/Application interface
-  * There's no other expectation for the TCP/Protocols interface, except that asynchronous dialogue must be possible
-* TCP implementations will follow a general principle of robustness:  be
-
-    conservative in what you do, be liberal in what you accept from
-
-    others.
-
-
-
-* Those are the base functionalities :
-  * Basic Data Transfer : transfer a continuous stream of bytes in each
-
-        direction between its users
-
-  * Reliability : Recovery from damaged, lost, duplicated, or
-
-        delivered out of order data
-
-    * This is achieved by assigning a sequence number to each byte transmitted, and requiring a positive acknowledgment \(ACK\)
-    * If the ACK is not received within a timeout interval, the data is retransmitted
-    * At the receiver, the sequence       numbers are used to correctly order segments that may be received       out of order and to eliminate duplicates.
-    * Damage is handled by       adding a checksum to each segment transmitted, checking it at the       receiver, and discarding damaged segments
-
-  * Flow Control     :  Provides a means for the receiver to govern the amount of data     sent by the sender.
-    * This is done through a  "window" given with       every ACK indicating a range of acceptable sequence numbers beyond       the last segment successfully received.  The window indicates an       allowed number of octets that the sender may transmit before       receiving further permission.
-  * Multiplexing : To allow for many processes within a single Host to use TCP     simultaneously, it provides a set of     ports within each host.
-    * Concatenated with the network       and host addresses from the internet communication layer, this forms       a socket.
-    * A pair of sockets uniquely identifies each connection. 
-    * That is, a socket may be simultaneously used in multiple       connections.
-  * Connections : see below
-  * Precedence and Security : 
-
-    * The users of TCP may indicate the security and precedence of their
-
-        communication.  Provision is made for default values to be used when
-
-        these features are not needed.
-
-
-
-* Basic call to implement for the TCP/Application interface :
-  * OPEN
-  * CLOSE
-  * \(PUSH\)
-  * SEND
-  * RECEIVE
-  * STATUS
-
-
-
 * Transmission is made reliable via the use of sequence numbers and
 
     acknowledgments. 
