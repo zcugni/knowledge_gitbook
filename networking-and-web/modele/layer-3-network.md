@@ -2,9 +2,10 @@
 
 ## Generalities
 
-* The Internet Protocol \(IP\) deals with choosing a path between two hosts \(**routing** them\), enabling them to transfer data to each other
-  * I think that based on the destination, it decide which is the next hop and gives it's IP address to the underlying layer, which will convert it to a MAC address
-  * So on each hop, this underlying layer and this one are deconstructed and reconstructed
+* The network layer deals with choosing a path between two hosts \(**routing** them\), enabling them to transfer data to each other
+* I'll only detail the **Internet Protocol** \(IP\) here
+  * I think that based on the destination, it decides which is the next hop and gives it's IP address to the underlying layer, which will "translate" it to a MAC address
+  * So on each hop, the underlying layer is deconstructed to access this layer, and then constructed again
 * "A single chunk of network data is called a **packet**"
 * It's a **connectionless** protocol, meaning among other things that : 
   * A connection is not established beforehand between the hosts
@@ -12,7 +13,7 @@
 * There's no reliability built into the protocol, meaning there is no acknowledgement of arrival, control of data \(except for the header checksum\) or re-transmission
   * This should be dealt by protocols in the transport layer, particularly TCP
   * **Errors** are reported via the Internet Control Message Protocol \(**ICMP**\)
-* It's comes in 2 versions :   **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
+* It's comes in 2 versions :  **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
   * Some host are only capable of using one of the 2 protocols
   * Others can do both and will responds by using the same one as the request when responding and their default configuration when requesting
 
@@ -107,6 +108,7 @@
   * The minimum value is 5
   * It can be at most 60 bytes, and they're generally 20 bytes
 * Type of service : 8 bits, this describe what kind of transmission should be use
+  * From left to right :
   * Bits 0-2 :  Precedence \(importance\)
     * There's a list of predefined values like `010` for "immediate" or `001` for "priority", but i won't detail them
   * Bit 3 :  0 = Normal Delay,  1 = Low Delay
@@ -118,7 +120,7 @@
   * Maximum size : 65,535 bytes, but it's advised against
   * Systems should be capable of sending and receiving packets up to 576 bytes \(after re-assembly if fragmentation was needed\)
 * Identification : 16 bits, combined with the source, destination & protocol, it uniquely identifies a fragment
-* Flags :  3 bits, used for fragmentation
+* Flags :  3 bits, used for fragmentation, from left to right :
   * Bit 0 : Reserved, must be zero
   * Bit 1 : 0 = May Fragment,  1 = Don't Fragment
   * Bit 2 :  0 = Last Fragment, 1 = More Fragments
@@ -129,6 +131,7 @@
 * Protocol :  8 bits  , this field indicates the next level protocol used in the data   portion
   * It will for example be 1 for ICMP, available protocols are described in RFC 790
 * Header Checksum :  16 bits  , a checksum on the header only
+  * IT's the 16-bits 1's complement of the 1's complement sum of all 16-bits words in the header
   * Since some header fields change    , it's recomputed and verified at time
   * While computing the checksum, the value of it's field is 0
   * If the verification fails, the packet is discarded
@@ -144,7 +147,7 @@
   * The 1-byte option type
   * Plus the 1-byte option length \(which takes the 2 bytes of type + length and the length of the data\)
   * Plus the option data
-* The option type byte is divided as follows :
+* The option type byte is divided as follows \(from left to right\) :
   * Bit 0 :  Copy flag \(1 if the option must be copied during fragmentation\)
   * Bits 1-2 : Option class
     * 0 : Control

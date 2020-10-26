@@ -2,7 +2,7 @@
 
 ## Generalities
 
-* Transform the data in signals to send to the cable
+* Deals with transferring data between 2 network entities
 * **Ethernet** is the standard protocol
 * "A single lump of datalink data is called a _**frame**_"
 * It has a _Maximum Transmission Unit_ \(MTU\) defining it's size

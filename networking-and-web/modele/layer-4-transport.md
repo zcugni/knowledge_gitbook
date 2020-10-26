@@ -2,10 +2,8 @@
 
 ## Generalities
 
-* Transfer of data is handled here 
+* Provides host-to-host communication services for the upper layer
 * "A piece of transport layer data is called a _**segment**_"
-* _Transport Control Protocol_ runs over IP but the name TCP/IP refers to the whole family of protocols related to these two : ICMP, UDP and even SCTP, ESP, AH, etc.
-* Transport protocols run over both IPv4 & IPv6. The headers change but the concept remains the same.
 
 ## _ICMP - Internet Control Message Protocol_
 
