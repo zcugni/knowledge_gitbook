@@ -263,3 +263,96 @@ I don't know if i want to detail it like that or not
 
 
 
+## Acknowledgment
+
+
+
+* Every byte of data sent   has a sequence number, so each can be acknowledged
+* The acknowledgment   mechanism is cumulative so that an acknowledgment of sequence
+
+    number X indicates that all octets up to but not including X have been
+
+    received
+
+  * This mechanism allows for straight-forward duplicate
+
+      detection in the presence of retransmission
+
+  * The first data byte immediately following     the header is the lowest numbered, and the following byte are     numbered consecutively
+
+* A segment on the retransmission queue is fully acknowledged if the sum   of its sequence number and length is less or equal than the   acknowledgment value in the incoming segment
+*  Note that when the receive window is zero no segments should be
+
+    acceptable except for ACK
+
+  *  Thus, it's  possible to     maintain a zero receive window while transmitting data and receiving
+
+      ACKs
+
+    * However, even when the receive window is zero, a TCP must
+
+        process the RST and URG fields of all incoming segments
+
+* For sequence number   purposes, the SYN is considered to occur before the first actual data
+
+    byte of the segment in which it occurs
+
+  * While the FIN is considered to occur after the last actual byte octet in a segment in which it
+
+      occurs
+
+  * The segment length \(SEG.LEN\) includes both data and sequence     space occupying controls
+  * When a SYN is present then SEG.SEQ is the     sequence number of the SYN.
+
+* The protocol places no restriction on a particular connection being
+
+    used over and over again
+
+  * A connection is defined by a pair of     sockets
+  * New instances of a connection will be referred to as incarnations of the connection
+  * The problem that arises from this is     "how does the TCP identify duplicate segments from previous incarnations of the connection?"
+
+    * To avoid confusion we must prevent segments from one incarnation of a
+
+        connection from being used while the same sequence numbers may still
+
+        be present in the network from an earlier incarnation
+
+    * We want to       assure this, even if a TCP crashes and loses all knowledge of the
+
+      sequence numbers it has been using
+
+    * When new connections are created,       an initial sequence number \(ISN\) generator is employed which selects a       new 32 bit ISN
+    * The generator is bound to a \(possibly fictitious\) 32       bit clock whose low order bit is incremented roughly every 4       microseconds
+    * Thus, the ISN cycles approximately every 4.55 hours
+    * Since we assume that segments will stay in the network no more than       the Maximum Segment Lifetime \(MSL\) and that the MSL is less than 4.55       hours we can reasonably assume that ISN's will be unique.
+
+* For each connection there is a send sequence number and a receive
+
+    sequence number
+
+  * The initial send sequence number \(ISS\) is chosen by
+
+      the data sending TCP, and the initial receive sequence number \(IRS\) is
+
+      learned during the connection establishing procedure.
+
+  * For a connection to be established or initialized, the two TCPs must
+
+      synchronize on each other's initial sequence numbers
+
+  * This is done in     an exchange of connection establishing segments carrying a control bit
+
+      called "SYN" \(for synchronize\) and the initial sequence number
+
+  * The synchronization requires each side to send it's own initial     sequence number and to receive a confirmation of it in acknowledgment     from the other side.  Each side must also receive the other side's     initial sequence number and send a confirming acknowledgment
+
+* To be sure that a TCP does not create a segment that carries a   sequence number which may be duplicated by an old segment remaining in   the network, the TCP must keep quiet for a maximum segment lifetime   \(MSL\) before assigning any sequence numbers upon starting up or   recovering from a crash in which memory of sequence numbers in use was   lost.
+  * The MSL is 2 min
+  * Note that if a TCP is reinitialized in some     sense, yet retains its memory of sequence numbers in use, then it need     not wait at all; it must only be sure to use sequence numbers larger
+
+      than those recently used
+* large range of sequence numbers
+* 
+
+
