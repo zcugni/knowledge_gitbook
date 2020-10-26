@@ -150,3 +150,95 @@
   * The receiving end can decide when to give the data to the application waiting for it
   * Except if the PUSH flag is set, telling the receiving end to immediately push \(give\) the data to the application
 
+
+
+## Headers
+
+![](../../.gitbook/assets/tcp-headers.png)
+
+* Source Port : 16 bits
+* Destination Port : 16 bits
+* Sequence Number :  32 bits
+  * The sequence number of the first data octet in this segment \(except
+
+        when SYN is present\). If SYN is present the sequence number is the
+
+        initial sequence number \(ISN\) and the first data octet is ISN+1.
+* Acknowledgment Number:  32 bits
+  * If the ACK control bit is set this field contains the value of the
+
+        next sequence number the sender of the segment is expecting to
+
+        receive.  Once a connection is established this is always sent.
+* Data Offset:  4 bits
+  * The number of 32 bit words in the TCP Header.  This indicates where
+
+        the data begins.  The TCP header \(even one including options\) is an
+
+        integral number of 32 bits long.
+* Reserved:  6 bits,   reserved for future use, must be zero
+* Control Bits:  6 bits \(from left to right\):
+  * Bit 0 - URG :  Urgent Pointer field significant
+  * Bit 1 - ACK :  Acknowledgment field significant
+  * Bit 2 - PSH :  Push Function
+  * Bit 3 - RST :  Reset the connection
+  * Bit 4 - SYN :  Synchronize sequence numbers
+  * Bit 5 - FIN :  No more data from sender
+* Window : 16 bits
+  * The number of data octets beginning with the one indicated in the
+
+        acknowledgment field which the sender of this segment is willing to
+
+        accept.
+* Checksum : 16 bits
+  * It's value is the 16-bits 1's complement of the 1's     complement sum of all 16-bits words in the header & text
+  * During computation of the checksum :
+    * It's value is 0
+    * Padding that won't be sent may be added 
+  * A 96-bits pseudo header is also virtually prefixed \(it won't be sent along\) to the real header
+    * It contains the source address, destination address, protocol information and the TCP length \(without this pseudo headers\)
+    * This protects against misrouted segments
+* Urgent Pointer : 16 bits
+  * This field communicates the current value of the urgent pointer as a
+
+        positive offset from the sequence number in this segment.  The
+
+        urgent pointer points to the sequence number of the octet following
+
+        the urgent data.  This field is only be interpreted in segments with
+
+        the URG control bit set.
+* Options : Variable   & Optional
+  * May or may not be present, but must be understood by all implementations
+  * Their length is a multiple of 8 bits
+  * There's either only the 1-byte option type or :
+    * The 1-byte option type
+    * Plus the 1-byte option length \(which takes the 2 bytes of type + length and the length of the data\)
+    * Plus the option data
+  * There's 3 possible options :
+    * 0 : End of option list
+      * Terminate the list in case it doesn't fall on the end of the header
+    * 1 : No operation \(filler to align on a boundary for example\)
+    * 2 : Maximum segment size
+      * Only set with SYN segment
+      * Optional, if it's not present any size is allowed
+      * This option has a length of 4 \(bytes ?\)
+* Padding : Variable & Optional
+
+## States
+
+* LISTEN : Represents waiting for a connection request
+* SYN-SENT : Represents waiting for a matching connection request   after having sent a connection request
+* SYN-RECEIVED : Represents waiting for a confirming connection request acknowledgment after having both received and sent a connection request
+* ESTABLISHED : Represents an open connection, data received can be   delivered to the user
+* FIN-WAIT-1 : Represents waiting for a connection termination request   from the remote or an acknowledgment of the connection   termination request previously sent.
+* FIN-WAIT-2 : Represents waiting for a connection termination request   from the remote TCP.
+* CLOSE-WAIT : Represents waiting for a connection termination request   from the local user
+* CLOSING : Represents waiting for a connection termination request   acknowledgment from the remote TCP
+* LAST-ACK : Represents waiting for an acknowledgment of the   connection termination request previously sent to the remote TCP   \(which includes an acknowledgment of its connection termination
+
+      request\)
+
+* TIME-WAIT : Represents waiting for enough time to pass to be sure   the remote TCP received the acknowledgment of its connection   termination request
+* CLOSED : Represents no connection state at all
+

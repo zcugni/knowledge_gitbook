@@ -63,7 +63,6 @@
   * [Layer 3 - Network](networking-and-web/modele/layer-3-network.md)
   * [Layer 4 - Transport](networking-and-web/modele/layer-4-transport.md)
   * [Clean TCP 2](networking-and-web/modele/clean-tcp-2.md)
-  * [Clean TCP - Transmission Control Protocol](networking-and-web/modele/clean-tcp-transmission-control-protocol.md)
   * [Layer 5 - Application](networking-and-web/modele/layer-5-application.md)
 * [Security hardware](networking-and-web/machines.md)
 * [DNS](networking-and-web/dns.md)
