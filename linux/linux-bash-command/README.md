@@ -1,5 +1,18 @@
 # Command
 
+## Man
+
+* Man shows the manual page of a function, file, syscall, etc
+* `man [section] <thing>` 
+* There's 9 sections, but the first 5 are the most important :
+  * 1 : User commands
+  * 2 : Sys call
+  * 3 : Library call
+  * 4 : Special files
+  * 5 : File format & convention
+* If no section is given, man will search them in this order by default : 1 .. 3 2 ... 5 4 ...
+  * .. is a placeholder for the other sections i haven't spoken of
+
 ## Command line shortcut
 
 | Shortcut | Result |
@@ -313,11 +326,6 @@ With this kind of json :
     </tr>
     <tr>
       <td style="text-align:left"><code>clear</code>
-      </td>
-      <td style="text-align:left"></td>
-    </tr>
-    <tr>
-      <td style="text-align:left"><code>man &lt;cmd&gt;</code>
       </td>
       <td style="text-align:left"></td>
     </tr>

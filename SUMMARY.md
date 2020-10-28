@@ -29,7 +29,6 @@
 * [Memory](binary-exploitation/memory/README.md)
   * [Registers](binary-exploitation/memory/registers.md)
   * [Heap allocation \(malloc\)](binary-exploitation/memory/memory-allocation-linux-glibc.md)
-* [Assembly](binary-exploitation/assembly.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
 * [Microcorruption.com](binary-exploitation/microcorruption-notes.md)
 * [Terminology](binary-exploitation/terminology.md)
@@ -70,7 +69,9 @@
 
 ## Languages
 
+* [Things](languages/things.md)
 * [General Concepts](languages/general-concepts.md)
+* [Assembly](languages/assembly.md)
 * [Bash](languages/bash.md)
 * [C](languages/c.md)
 * [Haskell](languages/haskell.md)

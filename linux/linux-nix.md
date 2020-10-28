@@ -94,6 +94,16 @@ This is why you should always use the full path to the executable, because if so
   * Date of expiration \(number of days since Jan 1, 1970\)
 * Accounts that don't have a password can't log in, and there's an `*` or a `!` in their hash field.
 
+## System call
+
+* Linux function in 2 mode : kernel & user
+  * It boots in kernel mode then switch
+  * Access to the kernel is reserved for kernel mode
+  * It changes mode when the user uses a syscall or an interrupt
+    * It then returns to the user mode when it's finished
+* Every syscall is numerated so that it can be reference in assembly
+* They're written in `/usr/include/asm-i386/unistd.h`
+
 ## Sources
 
 * Man pages
