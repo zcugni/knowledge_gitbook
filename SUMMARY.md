@@ -69,7 +69,8 @@
 
 ## Languages
 
-* [Things](languages/things.md)
+* [Compiler, Linker, etc](languages/things.md)
+* [Compilers](languages/compilers.md)
 * [General Concepts](languages/general-concepts.md)
 * [Assembly](languages/assembly.md)
 * [Bash](languages/bash.md)
