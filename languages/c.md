@@ -8,6 +8,12 @@ I started writing the notes way after i learned C, and i didn't have the courage
 To do : Add all the syntax examples
 {% endhint %}
 
+## Files
+
+* Source files are `.c`
+* Headers files are `.h`
+  * They contain functions prototypes & preprocessor instructions
+
 ## Include
 
 * Files can be included with : 
@@ -170,37 +176,26 @@ Complete it by reading the man
 
 * `getenv()` Takes the name of an env var and returns its memory address
 
-## Compilation Process
+## Compilation
 
-* 4 steps/tools :
+* In C, compilation is done in 4 steps :
   * Preprocessor
-  * Compiler
+  * Compiler \(to assembly\)
+    * Some compilers do it directly to machine code
   * Assembler
   * Linker
-* The preprocessor :
-  * Removes all comments
-  * Interpret preprocessor instructions such as includes & defines
-    * By replacing the include with the actual content
-    * And replacing used macros with their value
-  * Join combined lines \(lines ending with `/`\)
-* The compiler transform the preprocessed source code into assembly code \(corresponding to the target CPU\)
-  * This can be done internally, without producing the file to the user
-  * Some compilers entirely skip this step and directly produces object files from the source code
-* The assembler produce object file from the assembly code
-* The linker combines the different object and library files into one executable
-
-## Compilation Tool - GCC
-
-* Lets you compile C files
-* `gcc <file_name> [-o <output_name] [-l<libname>]`
+  * For more details on this, see this [page](https://zcugni.gitbook.io/notes/languages/things)
+* The tool used is **GCC**, which will do all 4 steps
+* `gcc <file_name> [-o <output_name] [-l<libname>] [-Wall -Wextra]`
   * The default output name is `a.out`
   * Write the lib name without extensions
-* To compile in 32 bits, use this option : `-m32`
+  * The `-W..` adds warnings
+* To compile in **32 bits**, use this option : `-m32`
   * You might need to install this first : `libc6-dev-i386`
 * To access the different stage of compilation, use :
-  * `-E` To see the result of the preprocessing
-  * `-S` To create an `.s` assembly file
-  * `-c` To create an `.o` object file
+  * `-E` To see the result of the **preprocessing**
+  * `-S` To create an `.s` **assembly** file
+  * `-c` To create an `.o` **object** file
 * Binaries compiled with gcc have special table sections for **constructors** & **destructors** called `.ctors` &  `.dtors`
   * Constructor functions are executed before `main()` 
   * Destructor functions are executed just before `main()` exits with an exit syscall

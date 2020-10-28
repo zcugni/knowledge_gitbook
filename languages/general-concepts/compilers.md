@@ -25,7 +25,24 @@
 
 ### Libraries
 
-
+* A library is a compiled binary \(but is not in itself an an executable as there's `main()`\)
+* It contains functions that may be used by multiple programs
+* It should ship with it's header files which contain all functions prototypes
+* The linker then needs to be referred to the library
+* There's 2 types of libraries
+  * **Static** : A static library is statically built into the program
+    * The program knows exactly which version of a library is used
+    * But the sizes of executables are bigger
+    * Extensions :
+      * `.a` for POSIX
+      * `.lib` for windows \(don't confuse it with DLL import library files\)
+  * **Dynamic** / **Shared** : A dynamic library is dynamically linked at runtime by the program
+    * Takes up less disk space if more than one application is using the library
+    * Allows updates without having to rebuild executables
+    * Extensions :
+      * `.so` for POSIX
+      * `.dylib` forOSX
+      * `.dll` for Windows
 
 ## Source code to language
 
@@ -116,4 +133,5 @@ To be honest i find different explanations of this and i'm not sure, read the Pu
 
 * Compilers : [tutorialspoint](https://www.tutorialspoint.com/compiler_design/index.htm)
 * Lexemes & Tokens : [stackoverflow](https://stackoverflow.com/questions/14954721/what-is-the-difference-between-a-token-and-a-lexeme)
+* Libraries : [riptutorial.com](https://riptutorial.com/c/example/4361/file-types)
 

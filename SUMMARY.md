@@ -69,9 +69,9 @@
 
 ## Languages
 
-* [Compiler, Linker, etc](languages/things.md)
-* [Compilers](languages/compilers.md)
-* [General Concepts](languages/general-concepts.md)
+* [General Concepts](languages/general-concepts/README.md)
+  * [Compilers](languages/general-concepts/compilers.md)
+  * [Linker, Interpreter, etc](languages/general-concepts/things.md)
 * [Assembly](languages/assembly.md)
 * [Bash](languages/bash.md)
 * [C](languages/c.md)
