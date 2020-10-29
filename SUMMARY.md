@@ -70,6 +70,7 @@
 ## Languages
 
 * [General Concepts](languages/general-concepts/README.md)
+  * [ELF Files](languages/general-concepts/elf-files.md)
   * [Compilers](languages/general-concepts/compilers.md)
   * [Linker, Interpreter, etc](languages/general-concepts/things.md)
 * [Assembly](languages/assembly.md)

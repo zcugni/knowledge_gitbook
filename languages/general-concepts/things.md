@@ -199,21 +199,22 @@ typedef struct {
   * `SHT_SHLIB` Reserved but unspecified semantics
   * `SHT_DYNSYM` A minimal set of **dynamic linking symbol**
 * `sh_flags` A bit mask of flags
-  * `SHF_WRITE` This section contains data that should be writable during process execution.
-  * `SHF_ALLOC` This section occupies memory during process execution
+  * `SHF_WRITE` This section contains data that should be **writable** during process execution
+  * `SHF_ALLOC` This section **occupies memory** during process execution
     * Some  sections do not reside in the memory image of an object file
-  * `SHF_EXECINSTR` This section contains executable machine instructions
-  * `SHF_MASKPROC` All bits included in this mask are reserved for processor-specific semantics
-* `sh_addr` If this section appears in the memory image of a process, this var holds its address
-* `sh_offset` The byte offset of the section
-* `sh_size` The section's size in bytes
-* `sh_link` A section header table index link, whose interpretation depends on the section type
+  * `SHF_EXECINSTR` This section contains **executable** machine instructions
+  * `SHF_MASKPROC` All bits included in this mask are reserved for **processor-specific** semantics
+* `sh_addr` If this section appears in the memory image of a process, this var holds its **address**
+* `sh_offset` The **byte offset** of the section
+* `sh_size` The section's size in **bytes**
+* `sh_link` A section header table **index** link, whose interpretation depends on the section type
 * `sh_info` Extra information, whose interpretation depends on the section type
-* `sh_addralign` Some sections have address alignment constraints
+* `sh_addralign` Some sections have **address alignment** constraints
   * The value of `sh_addr` must be congruent to zero,  modulo the value of `sh_addralign`.  Only zero and positive integral powers of two are allowed.  The value 0 or 1 means that the section has no alignment constraints.
   * Only 0 and powers of 2 are allowed
   * 0 & 1 means no alignment is required
-* `sh_entsize` Some sections hold a table of fixed-sized entries, this gives their size in bytes
+* `sh_entsize` Some sections hold a table of **fixed-sized entries**, this gives their size in bytes
+* There's multiple possible sections :
 
 <table>
   <thead>
@@ -226,7 +227,7 @@ typedef struct {
   </thead>
   <tbody>
     <tr>
-      <td style="text-align:left"><code>.bss</code>
+      <td style="text-align:left"><b><code>.bss</code></b>
       </td>
       <td style="text-align:left"><code>SHT_NOBITS</code>
       </td>
@@ -252,7 +253,7 @@ typedef struct {
       <td style="text-align:left">Initialized pointers to the C++ constructor functions</td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>.data</code>
+      <td style="text-align:left"><b><code>.data</code></b>
       </td>
       <td style="text-align:left"><code>SHT_PROGBITS</code>
       </td>
@@ -263,11 +264,11 @@ typedef struct {
     <tr>
       <td style="text-align:left"><code>.data1</code>
       </td>
-      <td style="text-align:left"><code>SHT_PROGBITS</code>
+      <td style="text-align:left"><code>Same</code>
       </td>
-      <td style="text-align:left"><code>SHF_ALLOC</code> &amp; <code>SHF_WRITE</code>
+      <td style="text-align:left"><code>Same</code>
       </td>
-      <td style="text-align:left">Initialized data</td>
+      <td style="text-align:left">Same</td>
     </tr>
     <tr>
       <td style="text-align:left"><code>.debug</code>
@@ -329,7 +330,8 @@ typedef struct {
       <td style="text-align:left">Executable instructions for process termination</td>
     </tr>
     <tr>
-      <td style="text-align:left">.gnu.version</td>
+      <td style="text-align:left"><code>.gnu.version</code>
+      </td>
       <td style="text-align:left"><code>SHT_GNU_versym</code>
       </td>
       <td style="text-align:left"><code>SHF_ALLOC</code>
@@ -337,7 +339,8 @@ typedef struct {
       <td style="text-align:left">Version symbol table</td>
     </tr>
     <tr>
-      <td style="text-align:left">.gnu.version_r</td>
+      <td style="text-align:left"><code>.gnu.version_r</code>
+      </td>
       <td style="text-align:left"><code>SHT_GNU_versym</code>
       </td>
       <td style="text-align:left"><code>SHF_ALLOC</code>
@@ -345,7 +348,7 @@ typedef struct {
       <td style="text-align:left">Version symbol needed elements</td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>.got</code>
+      <td style="text-align:left"><b><code>.got</code></b>
       </td>
       <td style="text-align:left"><code>SHT_PROGBITS</code>
       </td>
@@ -362,7 +365,7 @@ typedef struct {
       <td style="text-align:left">Symbol hash table</td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>.init</code>
+      <td style="text-align:left"><b><code>.init</code></b>
       </td>
       <td style="text-align:left"><code>SHT_PROGBITS</code>
       </td>
@@ -372,7 +375,8 @@ typedef struct {
       </td>
     </tr>
     <tr>
-      <td style="text-align:left">.interp</td>
+      <td style="text-align:left"><code>.interp</code>
+      </td>
       <td style="text-align:left"><code>SHT_PROGBITS</code>
       </td>
       <td style="text-align:left">If there&apos;s a loadable segment, <code>SHF_ALLOC</code>
@@ -401,12 +405,319 @@ typedef struct {
       <td style="text-align:left"></td>
       <td style="text-align:left">Various notes</td>
     </tr>
+    <tr>
+      <td style="text-align:left"><code>.note.ABI-tag</code>
+      </td>
+      <td style="text-align:left"><code>SHT_NOTE</code>
+      </td>
+      <td style="text-align:left"><code>SHF_ALLOC</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Declare the expected run-time ABI of the ELF image</li>
+          <li>May include the os name and its run-time versions</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.note.gnu.build-id</code>
+      </td>
+      <td style="text-align:left"><code>SHT_NOTE</code>
+      </td>
+      <td style="text-align:left"><code>SHF_ALLOC</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Holds an ID uniquely identifying the contents of the ELF image</li>
+          <li>Different files with the same build ID should contain the same executable
+            content</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.note.GNU-stack</code>
+      </td>
+      <td style="text-align:left"><code>SHT_PROGBITS</code>
+      </td>
+      <td style="text-align:left"><code>SHF_EXECINSTR</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Declare stack attributes, used by Linux object files</li>
+          <li>Indicate to the GNU linker that the object file requires an executable
+            stack</li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.note.openbsd.ident</code>
+      </td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">OpenBSD native executables usually contain this section to identify themselves
+        so the kernel can bypass any compatibility ELF binary emulation tests when
+        loading the file</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>.plt</code></b>
+      </td>
+      <td style="text-align:left"><code>SHT_PROGBITS</code>
+      </td>
+      <td style="text-align:left">Processor-specific</td>
+      <td style="text-align:left">Procedure linkage table</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.rel&lt;name&gt;</code>
+      </td>
+      <td style="text-align:left"><code>SHT_REL</code>
+      </td>
+      <td style="text-align:left">If there&apos;s a loadable segment with relocation, <code>SHF_ALLOC</code>
+      </td>
+      <td style="text-align:left">
+        <ul>
+          <li>Relocation information</li>
+          <li>The name corresponds to the one of the section the relocations applies
+            to, e.g the relocation section for <code>.text</code> will be <code>.rel.text</code>
+          </li>
+        </ul>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.rela&lt;name&gt;</code>
+      </td>
+      <td style="text-align:left"><code>SHT_RELA</code>
+      </td>
+      <td style="text-align:left">Same</td>
+      <td style="text-align:left">Same</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.rodata</code>
+      </td>
+      <td style="text-align:left"><code>SHT_PROGBITS</code>
+      </td>
+      <td style="text-align:left"><code>SHF_ALLOC</code>
+      </td>
+      <td style="text-align:left">Read-only data that typically contributes to a nonwritable segment in
+        the process image</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>rodata1</code>
+      </td>
+      <td style="text-align:left">Same</td>
+      <td style="text-align:left">Same</td>
+      <td style="text-align:left">Same</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.shstrtab</code>
+      </td>
+      <td style="text-align:left"><code>SHT_STRTAB</code>
+      </td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">Section names</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.strtab</code>
+      </td>
+      <td style="text-align:left"><code>SHT_STRTAB</code>
+      </td>
+      <td style="text-align:left">If there&apos;s a loadable segment that includes the symbol string table, <code>SHF_ALLOC</code>
+      </td>
+      <td style="text-align:left">Strings, most commonly the strings that represent the names associated
+        with symbol table entries</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>.symtab</code>
+      </td>
+      <td style="text-align:left"><code>SHT_SYMTAB</code>
+      </td>
+      <td style="text-align:left">
+        <p>If there&apos;s a loadable segment that includes the symbol table,</p>
+        <p><code>SHF_ALLOC</code>
+        </p>
+      </td>
+      <td style="text-align:left">Symbol table</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><b><code>.text</code></b>
+      </td>
+      <td style="text-align:left"><code>SHT_PROGBITS</code>
+      </td>
+      <td style="text-align:left"><code>SHF_ALLOC</code> &amp; <code>SHF_EXECINSTR</code>
+      </td>
+      <td style="text-align:left">The &quot;text&quot;, or executable instructions, of a program</td>
+    </tr>
   </tbody>
 </table>
 
+### String & Symbol table
 
+* The object file uses strings to represent symbol and section names
+  * These string are indexes in the string table
+  * The first & last bytes of the string table are `\0`
+* An object file's symbol table holds information needed to locate and relocate a program's symbolic definitions and references
+* They're 2 versions of the structures, each for an architecture
+  * The variables are the same, they're just in a different order
 
+```c
+ typedef struct {
+   uint32_t      st_name;
+   Elf32_Addr    st_value;
+   uint32_t      st_size;
+   unsigned char st_info;
+   unsigned char st_other;
+   uint16_t      st_shndx;
+} Elf32_Sym;
 
+typedef struct {
+   uint32_t      st_name;
+   unsigned char st_info;
+   unsigned char st_other;
+   uint16_t      st_shndx;
+   Elf64_Addr    st_value;
+   uint64_t      st_size;
+} Elf64_Sym;
+```
+
+* `st_name` An index in the  string table representing the name of the symbol
+  * If it's 0, it doesn't have one
+* `st_value` The symbol's value
+* `st_size` The symbol's size, 0 for no or unknown
+* `st_info` The symbol's type & binding attributes :
+
+  * Those keywords have associated numbers
+  * Some range of numbers are reserved for processor specific stuff
+  * `STT_NOTYPE` The type is not defined
+  * `STT_OBJECT` Associated with a data object
+  * `STT_FUNC` Associated with a function or other executable code
+  * `STT_SECTION` Associated with a section
+    * They exist for relocation
+    * Binding : `STB_LOCAL`
+  * `STT_FILE` The symbol's name gives the name of the source file associated with the object file
+    * Binding : `STB_LOCAL` 
+    * Section index : `SHN_ABS`
+    * It  precedes the other  `STB_LOCAL` symbols of the file
+  * `STB_LOCAL` Local symbols are not visible outside the object file containing their definition, there can be multiple of the same name among different files without problems
+  * `STB_GLOBAL` Global symbols are visible to all object files being combined
+  * `STB_WEAK` Weak symbols resemble global symbols, but their definitions have lower precedence
+  * There are macros for packing and unpacking the binding and type fields:
+    * `ELF32_ST_BIND(info), ELF64_ST_BIND(info)`  Extract a binding from an st\_info value
+    * `ELF32_ST_TYPE(info), ELF64_ST_TYPE(info)` Extract a type from an st\_info value
+    * `ELF32_ST_INFO(bind, type), ELF64_ST_INFO(bind, type)` Convert a binding and a type into an st\_info value
+  * `st_other` Symbol visibility
+    * `STV_DEFAULT` Default visibility rules
+      * Global & weak symbols are available to other modules
+      * References in the local module can be interposed by definitions in other modules
+    * `STV_INTERNAL` Processor-specific hidden class
+    * `STV_HIDDEN` Symbol is unavailable to other modules
+      * References in the local module always resolve to the local symbol
+    * `STV_PROTECTED` Symbol is available to other modules, but references in the local module always resolve to the local symbol
+    * There are macros for extracting the visibility type : 
+      * `ELF32_ST_VISIBILITY(other)`
+      * `ELF64_ST_VISIBILITY(other)`
+  * `st_shndx` The index of the symbol section in the section header table
+
+### Relocation
+
+* Relocation is the process of connecting a symbol's reference to a definition
+* They describe how to modify their section content
+* There's 4 structure : 32/64-bits with/without addend
+
+```c
+// Without addend
+
+typedef struct {
+   Elf32_Addr r_offset;
+   uint32_t   r_info;
+} Elf32_Rel;
+
+typedef struct {
+   Elf64_Addr r_offset;
+   uint64_t   r_info;
+} Elf64_Rel;
+
+// With addend :
+
+typedef struct {
+   Elf32_Addr r_offset;
+   uint32_t   r_info;
+   int32_t    r_addend;
+} Elf32_Rela;
+
+typedef struct {
+   Elf64_Addr r_offset;
+   uint64_t   r_info;
+   int64_t    r_addend;
+} Elf64_Rela;
+```
+
+* `r_offset` The location at which to apply the relocation
+  * For a relocatable file, the value is the byte offset from the start of the section to the storage unit affected by the relocation
+  * For an executable file or shared object, the value is the virtual address of the storage unit affected by the relocation
+* `r_info` The symbol table index and the type of relocation
+  * Relocation types are processor-specific
+* `r_addend` A constant addend used to compute the value to be stored into the relocatable field
+
+### Dynamic type
+
+* Structures relevant for dynamic linking
+
+```c
+typedef struct {
+   Elf32_Sword    d_tag;
+   union {
+       Elf32_Word d_val;
+       Elf32_Addr d_ptr;
+   } d_un;
+} Elf32_Dyn;
+extern Elf32_Dyn _DYNAMIC[];
+
+typedef struct {
+   Elf64_Sxword    d_tag;
+   union {
+       Elf64_Xword d_val;
+       Elf64_Addr  d_ptr;
+   } d_un;
+} Elf64_Dyn;
+extern Elf64_Dyn _DYNAMIC[];
+```
+
+* `d_tag` controls the interpretation of `d_un`
+  * There's a looot of d\_tag, so i won't list them
+* `d_val` Various interpretations
+* `d_ptr`  Program virtual addresses
+  * When interpreting these addresses, the actual address should be computed based on the original file value and memory base address
+* `_DYNAMIC` Array of all the structures in the `.dynamic` section
+  * Automatically populated by the linker
+
+### Notes
+
+* The `.notes` section contains a series of structure, each followed by a name field and a descriptor field
+* They're largely used by core files, but many projects also define their own set of extensions
+* There's 2 structure, one for each architecture
+
+```c
+typedef struct {
+   Elf32_Word n_namesz;
+   Elf32_Word n_descsz;
+   Elf32_Word n_type;
+} Elf32_Nhdr;
+
+typedef struct {
+   Elf64_Word n_namesz;
+   Elf64_Word n_descsz;
+   Elf64_Word n_type;
+} Elf64_Nhdr;
+```
+
+*  `n_namesz`The length \(with `\0`\) of the name field in bytes
+
+  * The contents will immediately follow this note in memory
+
+  `n_descsz` The length of the descriptor field in bytes
+
+  * The contents will immediately follow the name field in memory
+
+*  `n_type` Depending on the value of the name field, this will change. There's a lot of possible values, i won't list them
 
 ## Assembler
 
