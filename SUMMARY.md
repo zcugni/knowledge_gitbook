@@ -29,6 +29,9 @@
 * [Memory](binary-exploitation/memory/README.md)
   * [Registers](binary-exploitation/memory/registers.md)
   * [Heap allocation \(malloc\)](binary-exploitation/memory/memory-allocation-linux-glibc.md)
+* [Executable creation](binary-exploitation/executable-creation/README.md)
+  * [ELF Files](binary-exploitation/executable-creation/elf-files.md)
+  * [Compilers](binary-exploitation/executable-creation/compilers.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
 * [Microcorruption.com](binary-exploitation/microcorruption-notes.md)
 * [Terminology](binary-exploitation/terminology.md)
@@ -69,10 +72,7 @@
 
 ## Languages
 
-* [General Concepts](languages/general-concepts/README.md)
-  * [ELF Files](languages/general-concepts/elf-files.md)
-  * [Compilers](languages/general-concepts/compilers.md)
-  * [Linker, Interpreter, etc](languages/general-concepts/things.md)
+* [General Concepts](languages/general-concepts.md)
 * [Assembly](languages/assembly.md)
 * [Bash](languages/bash.md)
 * [C](languages/c.md)
