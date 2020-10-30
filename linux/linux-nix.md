@@ -104,6 +104,11 @@ This is why you should always use the full path to the executable, because if so
 * Every syscall is numerated so that it can be reference in assembly
 * They're written in `/usr/include/asm-i386/unistd.h`
 
+## Daemon
+
+* A daemon is a program that runs in the background and detaches from the controlling terminal
+* They typically end with a `d` to signify they are daemons, like `sshd` or `syslogd`
+
 ## Sources
 
 * Man pages

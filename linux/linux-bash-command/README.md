@@ -24,6 +24,7 @@
 | `ctrl-r` | Bash cmd search \(use multiple time to go back in history\) |
 | `ctrl-c` | Interrupt |
 | `ctrl-l` | Clear |
+| `ctrl-z` | Stop a job and put it in the background |
 
 ## Location
 
@@ -193,6 +194,20 @@ There's a way to directly execute a file without writing it to a disk, check tha
 | `id` | See all groups i'm part of |
 | `who` | Who's logged in, from where, when and what they are currently running |
 | `w` | Same as who but more complete |
+
+## Jobs
+
+* Jobs are processes run in the background
+* They run asynchronously from their origin and are in a subshell
+* Jobs have a job id
+
+| Command | Description |
+| :--- | :--- |
+| `jobs` | List all jobs with their ids & status \(stopped or not\) |
+| `<cmd> &` | Put a command in the background |
+| `fg [%<job_id>]` | Put the job in the foreground |
+| `bg [%<job_id>]` | Put the job in the background |
+| `ctrl-z` | Stop the job and puts it in the background |
 
 ## Disk info
 
@@ -395,4 +410,5 @@ With this kind of json :
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
 * Misc research
 * [linux.101hacks.com](https://linux.101hacks.com/unix/gpg-command-examples/) for GPG 
+* [thegeekdiary.com](https://www.thegeekdiary.com/understanding-the-job-control-commands-in-linux-bg-fg-and-ctrlz/) for jobs
 

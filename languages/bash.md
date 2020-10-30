@@ -204,8 +204,9 @@ Et on peut chaîner avec `|` : `time cmd1 | cmd2 | ...`
 
 * `cmd1 && cmd2` cmd2 is executed only if cmd1 succeded 
 * `cmd1 || cmd2` cmd2 is executed only if cmd1 failed 
-* `cmd &` cmd1 is executed in the background \(asynchronously in a subshell, returns status is 0 \(success\) 
 * `cm1; cmd2;` cmds are executed sequentially
+
+
 
 ## Script
 

@@ -18,8 +18,12 @@
 ## Signals
 
 * Signals can be sent to processes by the kernel or other processes
+* When a process receives a signal, its flow of execution is interrupted by the os to call a signal handler
+  * For exemple, 
+* Signals are identified by a number, and each one has a default signal handler
 * "Terminate" ask the process to terminate itself, "kill" just does it directly.
 * Processes can decide to block and ignore signals, except for `SIGKILL` & `SIGSTOP`
+* Interrupts are a type of signals
 
 ## **State**
 
@@ -32,10 +36,6 @@
 
 | Command | Definition |
 | :--- | :--- |
-| `kill -l` | List signal |
-| `kill <signal_nb> <pid>` | Send signals \(default `SIGTERM`\) |
-| `killall <name>` | Sends to all processes starting by name |
-| `pkill -u <username>` | Kill all username's processes |
 | `nice` | Set niceness of process |
 | `renice` | Change niceness of process |
 | `ps` | List running processes |
@@ -43,6 +43,23 @@
 | `top` | List running processes \*\(1\) |
 
 * \*\(1\) By default the ones using the most power in first
+
+### Kill & co
+
+* General syntax : `kill [options] <pid>`
+* Sends `SIGTERM` by default
+* Shell might have a built-in kill, theses options works for the original `/bin/kill`
+
+| Option | Description |
+| :--- | :--- |
+| `-<signal_nb>` | Use this signal |
+| `-s <signal_nb>` | Same |
+| `-l` | List signal |
+| `-l <signal_nb | signal_name>` | Give the corresponding name to a signal number and vice-versa |
+
+* Other kill cmd :
+  * `killall <signal>` Sends signal to all processes starting by name
+  * `pkill -u <uid>` Kill all the process of this user
 
 ### PS
 
