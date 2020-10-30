@@ -52,13 +52,14 @@ I'm still knew to this field, so i might not always use the rights terms. It's a
 | `call <arg1>` | Calls a function, for that it pushes the current value of `ip` to the stack and then changes `ip` to arg1 |
 | `ret` | Return \(aka exit\) a function, so pops the stack to `ip` |
 
-### Misc
+### Misc important
 
 | Instruction | Explanation |
 | :--- | :--- |
 | `mov <arg1>,<arg2>` |  Copy the value |
-| `lea <arg1>, <arg2>` | Copy the address \(like the address-of operator\) |
+| `lea <arg1>,<arg2>` | Copy the address \(like the address-of operator\) |
 | `int <value>` | Trigger the specified interrupt |
+| `xchg <arg1>,<arg2>` | Swap the 2 values |
 
 ### Operation
 

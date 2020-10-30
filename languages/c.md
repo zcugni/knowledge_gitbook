@@ -172,7 +172,14 @@ Complete it by reading the man
   * `inet_aton(char ascii_addr, struct in_addr network_addr)` ASCII to IP
   * `inet_ntoa(struct in_addr *network_addr)` IP to ASCII
 
+### System calls
 
+*  `int execve(const char pathname, char const argv[], char *const envp[])` Similar to `execute()`
+* `int socketcall(int call, unsigned long *args);`Call socket functions
+* Duplicate socket fd :
+  * `int dup(int oldfd);`
+  * `int dup2(int oldfd, int newfd);`
+  * `int dup3(int oldfd, int newfd, int flags);`
 
 ### Misc
 
