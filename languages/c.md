@@ -172,6 +172,8 @@ Complete it by reading the man
   * `inet_aton(char ascii_addr, struct in_addr network_addr)` ASCII to IP
   * `inet_ntoa(struct in_addr *network_addr)` IP to ASCII
 
+
+
 ### Misc
 
 * `getenv()` Takes the name of an env var and returns its memory address
@@ -203,6 +205,10 @@ Complete it by reading the man
     * They start with `0xffffffff` and end with `0x00000000`
     * All addresses between those two have been respectively declared with either the constructor or destructor attribute
     * They're writable and included even if no constructor or destructor have been declared
+* UID-related functions :
+  * `int setuid(uid_t uid);` Set the effective user id
+  * `int setreuid(uid_t ruid, uid_t euid);` Set the real & effective user id
+  * `int setregid(gid_t rgid, gid_t egid);` Set the real & effective group id
 
 ## Misc
 

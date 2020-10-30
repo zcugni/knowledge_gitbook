@@ -41,27 +41,47 @@ I'm still knew to this field, so i might not always use the rights terms. It's a
 * I'll detail them here, however, **the orders of parameters might change** from one syntax to another, so check that. I'll just explain the general idea
 * The args can be addresses, registers, function name, values, etc. Use what makes sense
 
+### Stack-related
+
+
+
 | Instruction | Explanation |
 | :--- | :--- |
 | `push <arg1>` | Pushes arg1 to the stack, so decrement `sp` and writes arg1 at `sp` |
 | `pop <arg1>` | Pops the stack to arg1, so set arg1 to `sp`and increment `sp` |
 | `call <arg1>` | Calls a function, for that it pushes the current value of `ip` to the stack and then changes `ip` to arg1 |
 | `ret` | Return \(aka exit\) a function, so pops the stack to `ip` |
+
+### Misc
+
+| Instruction | Explanation |
+| :--- | :--- |
 | `mov <arg1>,<arg2>` |  Copy the value |
-| `lea <arg1>, <arg2>` | Copy the address |
+| `lea <arg1>, <arg2>` | Copy the address \(like the address-of operator\) |
+| `int <value>` | Trigger the specified interrupt |
+
+### Operation
+
+| Instruction | Explanation |
+| :--- | :--- |
 | `add <arg1>,<arg2>` | Performs addition between arg1 & arg2 |
 | `sub <arg1>,<arg2>` | Performs subtraction between arg1 & arg2 |
+| `inc <arg1>` | Increment arg1 |
+| `dec <agr1>` | Decrement arg1 |
+
+### Condition
+
+| Instruction | Explanation |
+| :--- | :--- |
 | `cmp <arg1>,<arg2>` | Compares the arguments by subtracting arg2 from arg1 and set the flags \(for example the Zero Flag\) in consequence |
 | `and <arg1>,<arg2>` | Performs bitwise and between arg1 & arg2 |
 | `or <arg1>,<arg2>` | Performs bitwise or between arg1 & arg2 |
-| `int <value>` | Trigger this interrupt |
-
-### Jump
+| `xor <arg>,<arg2>` | Performs bitwise xor between arg1 & arg2 |
 
 * There's also a lot of jumps available
 * They look at flags to decide what to do
 * The syntax is `jmp <address | func_name>`
-  * It will change `ip` to the given address
+  * It will change `eip` to the given address
 * Some of them are :
   * `jmp` Unconditional jump
   * `jz / je` Zero \(aka equal\)
@@ -112,6 +132,12 @@ _start:
   * `0x80` System calls, it uses some registers :
     * EAX : which syscall
     * EBX, ECX & EDX : 1st, 2nd, 3rd arguments of the syscall
+
+## Tools
+
+* `nasm -f elf <file.asm>` Create an ELF object file
+  * By default, it will be named `<source_file_name>.o`
+* `ndisasm` Disassembler
 
 ## Sources
 

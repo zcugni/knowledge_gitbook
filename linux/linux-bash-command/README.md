@@ -255,6 +255,10 @@ There's a way to directly execute a file without writing it to a disk, check tha
 * `strace` Intercepts system calls made by libs to the kernel
 * `ltrace` Intercepts library & system calls made by your application to libs
 
+### Debugging
+
+* `ulimit -c unlimited` The the OS to dump the memory whenever a crash occurs \(must be root\) 
+
 ## Misc
 
 ### Alias
@@ -263,6 +267,7 @@ There's a way to directly execute a file without writing it to a disk, check tha
 * `alias` List all aliases
 * `unalias alias_name`
 * Does not persist outside the shell. To make it definitive, add it to `.rc` file \(example : `/home/user/.bashrc`\)
+* `ld` Linker
 
 ### JQ - Traitement json
 
