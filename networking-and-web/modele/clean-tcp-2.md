@@ -35,19 +35,20 @@
   * The ISN is chosen from a 32-bits clock incremented every ~4 microseconds
   * As such, it''ll cycle after 4.55 hours
   * Since the Maximum Segment Lifetime \(MSL\) is 2 min, the ISN should be unique 
-* The sequence number of a **segment** is the one of its first byte of data
-  * Since the **SYN** request consume a number, the first byte of data of a connection has a sequence number of ISN+1
-* An ACK segment does not consume a sequence number
-* Since a connection can be used multiple times, we mustn't use sequence number that may be in segments still in transit
+* The seq number of a **segment** is the one of its first byte of data
+  * Since the **SYN** request consume a number, the first byte of data of a connection has a seq number of ISN+1
+* An ACK segment does not consume a seq number
+* Since a connection can be used multiple times, we mustn't use seq numbers that may be in segments still in transit
   * Generally, the previously used number is stored so it's not a problem
   * But after recovering from a **crash** without knowledge of the previously used number, the system must keep quiet for the MSL duration to assure that sequence number will be unique
 
 ### Acknowledgement number
 
-* The **acknowledgment** number is used to confirm the reception of data, it's value is the next sequence number that the receiver will use
-  * An acknowledgment of X means that all bytes up to but not including X have been received
+* The **acknowledgment** number is used to confirm the reception of data
+* It's value is the next **sequence** number that the receiver will use
+  * An ack of X means that all bytes up to but not including X have been received
 * It is sent along every segment except for the inital SYN
-* An acknowledgment does not guarantee that the data has been   delivered to the end user, but only that the receiving TCP has taken   the responsibility to do so
+* An ack does not guarantee that the data has been   delivered to the end user, but only that the receiving TCP has taken   the responsibility to do so
 * When a   segment is sent, a copy of it is put on a **retransmission queue** with a timer
   * When acknowledgment for that data is received, the     segment is deleted from the queue  
   * If the acknowledgment is not     received before the timer runs out, the segment is retransmitted
@@ -58,6 +59,14 @@
   * This is done with a process called the **Three-Way Handshake**
   * It still works if the two system simultaneously attempt it
   * The synchronization segment can already carry data, the receiving end will just put them into a buffer until the connection is established
+
+
+
+
+
+* The principle reason for the three-way handshake is to prevent old
+
+    duplicate connection initiations from causing confusion. 
 
 
 
@@ -136,7 +145,23 @@
 
         process the RST and URG fields of all incoming segments
 
-### Reset
+### Reset & Error handling
+
+* Reset \(RST\) close a connection, the receiver state influence the response :
+  * If it's in the LISTEN state, it ignores it
+  * If it was in LISTEN and now is in SYN-SENT, it goes back to listen
+  * Any other state : it goes to CLOSED
+* An RST uses the ack number of the segment it responds to as it's seq number, not the one it should be using \(in case the two ends are de-synchronized\)
+  * If the received segment ACK field is not set, it will : 
+    * Use 0 as it's seq number
+    * Set its ack number to the received segment seq number + length
+* RST are sends when :
+  * Any segment other than RST is received on a CLOSE connection
+  * Any segment with non-matching security settings is received
+    * Except if our SYN hasn't yet been acknowledged, then we must try to match the setting or send an RST
+  * The connection is in a non-synchronized state and the ack number of the received segment is wrong
+* When a connection in a synchronized state receive a segment with an unacceptable ack number, it must return an empty ACK segment with the correct seq and ack fields
+  * The connection remains in the same state
 
 ## Calls
 
@@ -149,6 +174,18 @@
   * Instead, it is placed into a buffer
   * The receiving end can decide when to give the data to the application waiting for it
   * Except if the **PUSH** flag is set, telling the receiving end to immediately push \(give\) the data to the application
+* The CLOSE call signifies that there isn't any more data to send
+  * A user who does a CLOSE call can continue to RECEIVE until the other side CLOSE too
+  * All incoming & buffered data will be push before closing \(and retransmitted if needed\)
+  * After a CLOSE call, a FIN segment is sent and the state is changed to FIN-WAIT-1
+    * An ACK to the FIN is expected, if it's not coming, the connection will change to the CLOSED state after a certain time
+  * Closing a connection is done through a **Four-Way Handshake**
+  * Process :
+    * One side sends a FIN segment and enter the FIN-WAIT-1 state
+    * The other one respond with an ACK
+      * It can also send a FIN of its own, or continue to send data
+      * The connection will be kept open until it does
+      * It also expect an ACK to its FIN, when it's received, it goes to  the CLOSED state
 
 ## Headers
 
