@@ -29,28 +29,39 @@
 * There's no restriction on a particular connection being   used multiple times
   * New instances of a connection are called incarnations of it
 
-### Sequence & acknowledgement numbers
+### Sequence numbers
 
-* Each byte of data is assigned a   **sequence** number
-* When a connection is created, an 32-bits **Initial Sequence Number** \(ISN\) is chosen from a 32-bits clock incremented every ~4 microseconds
-  * As such, the ISN will cycle after 4.55 hours
+* All bytes of a connection are assigned a **sequence** number from a random **Initial Sequence Number** \(ISN\)
+  * The ISN is chosen from a 32-bits clock incremented every ~4 microseconds
+  * As such, it''ll cycle after 4.55 hours
   * Since the Maximum Segment Lifetime \(MSL\) is 2 min, the ISN should be unique 
-  * The first byte of the first paquet sent has ISN+1 has its sequence number
-  * The sequence number of a segment is the one of the first byte of its data
-* The **acknowledgment** number is used to confirm the reception of data, it's value is the next sequence number that the receiver will use
-  * An acknowledgment of X means that all bytes up to but not including X have been received
-  * This also allows duplicate detection
-  * An acknowledgment does not guarantee that the data has been     delivered to the end user, but only that the receiving TCP has taken     the responsibility to do so
-* When a   segment is sent, a copy of it is put on a **retransmission queue** with a timer
-  * When acknowledgment for that data is received, the     segment is deleted from the queue  
-  * If the acknowledgment is not     received before the timer runs out, the segment is retransmitted
+* The sequence number of a **segment** is the one of its first byte of data
+  * Since the **SYN** request consume a number, the first byte of data of a connection has a sequence number of ISN+1
+* An ACK segment does not consume a sequence number
 * Since a connection can be used multiple times, we mustn't use sequence number that may be in segments still in transit
   * Generally, the previously used number is stored so it's not a problem
   * But after recovering from a **crash** without knowledge of the previously used number, the system must keep quiet for the MSL duration to assure that sequence number will be unique
+
+### Acknowledgement number
+
+* The **acknowledgment** number is used to confirm the reception of data, it's value is the next sequence number that the receiver will use
+  * An acknowledgment of X means that all bytes up to but not including X have been received
+* It is sent along every segment except for the inital SYN
+* An acknowledgment does not guarantee that the data has been   delivered to the end user, but only that the receiving TCP has taken   the responsibility to do so
+* When a   segment is sent, a copy of it is put on a **retransmission queue** with a timer
+  * When acknowledgment for that data is received, the     segment is deleted from the queue  
+  * If the acknowledgment is not     received before the timer runs out, the segment is retransmitted
+
+### Three-Way Handshake
+
 * To establish a connection, each side must synchronize it's sequence number with the other
   * This is done with a process called the **Three-Way Handshake**
   * It still works if the two system simultaneously attempt it
   * The synchronization segment can already carry data, the receiving end will just put them into a buffer until the connection is established
+
+
+
+
 
 
 
@@ -67,18 +78,17 @@
 
 * There's also a flag that says that urgent data is coming down the stream. What the receiving end is supposed to do with this information is not specified, but it should try to prioritize this data
 * they likewise need to close it afterwards to free the resources used to keep its information
-* The acknowledgement does not consume a sequence number : 
-  * ```text
-     1.  CLOSED                                               LISTEN
+* ```text
+   1.  CLOSED                                               LISTEN
 
-      2.  SYN-SENT    --> <SEQ=100><CTL=SYN>               --> SYN-RECEIVED
+    2.  SYN-SENT    --> <SEQ=100><CTL=SYN>               --> SYN-RECEIVED
 
-      3.  ESTABLISHED <-- <SEQ=300><ACK=101><CTL=SYN,ACK>  <-- SYN-RECEIVED
+    3.  ESTABLISHED <-- <SEQ=300><ACK=101><CTL=SYN,ACK>  <-- SYN-RECEIVED
 
-      4.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK>       --> ESTABLISHED
+    4.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK>       --> ESTABLISHED
 
-      5.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK><DATA> --> ESTABLISHED
-    ```
+    5.  ESTABLISHED --> <SEQ=101><ACK=301><CTL=ACK><DATA> --> ESTABLISHED
+  ```
 
 ### Transmission Control Block \(TCB\)
 
@@ -147,25 +157,12 @@
 * Source Port : 16 bits
 * Destination Port : 16 bits
 * Sequence Number :  32 bits
-  * The seq num of the first data byte in this segment \(except
-
-        when SYN is present\). If SYN is present the sequence number is the
-
-        initial sequence number \(ISN\) and the first data octet is ISN+1.
-* Acknowledgment Number:  32 bits
-  * If the ACK control bit is set this field contains the value of the
-
-        next sequence number the sender of the segment is expecting to
-
-        receive.  Once a connection is established this is always sent.
-* Data Offset:  4 bits
-  * The number of 32 bit words in the TCP Header.  This indicates where
-
-        the data begins.  The TCP header \(even one including options\) is an
-
-        integral number of 32 bits long.
-* Reserved:  6 bits,   reserved for future use, must be zero
-* Control Bits:  6 bits \(from left to right\):
+* Acknowledgment Numbe r:  32 bits
+* Data Offset :  4 bits
+  * The number of 32 bit words in the TCP Header
+  * Indicates where     the data begins
+* Reserved :  6 bits,   reserved for future use, must be zero
+* Control Bits :  6 bits \(from left to right\) :
   * Bit 0 - URG :  Urgent Pointer field significant
   * Bit 1 - ACK :  Acknowledgment field significant
   * Bit 2 - PSH :  Push Function
@@ -177,25 +174,18 @@
 
         acknowledgment field which the sender of this segment is willing to
 
-        accept.
+        accept
 * Checksum : 16 bits
   * It's value is the 16-bits 1's complement of the 1's     complement sum of all 16-bits words in the header & text
   * During computation of the checksum :
     * It's value is 0
     * Padding that won't be sent may be added 
   * A 96-bits pseudo header is also virtually prefixed \(it won't be sent along\) to the real header
-    * It contains the source address, destination address, protocol information and the TCP length \(without this pseudo headers\)
+    * It contains the source & destination addresses, protocol information and the TCP length \(without this pseudo headers\)
     * This protects against misrouted segments
 * Urgent Pointer : 16 bits
-  * This field communicates the current value of the urgent pointer as a
-
-        positive offset from the sequence number in this segment.  The
-
-        urgent pointer points to the sequence number of the octet following
-
-        the urgent data.  This field is only be interpreted in segments with
-
-        the URG control bit set.
+  * The current value of the urgent pointer as a     positive offset from the sequence number in this segment
+  * The     urgent pointer points to the sequence number of the octet following     the urgent data
 * Options : Variable   & Optional
   * May or may not be present, but must be understood by all implementations
   * Their length is a multiple of 8 bits
@@ -204,29 +194,28 @@
     * Plus the 1-byte option length \(which takes the 2 bytes of type + length and the length of the data\)
     * Plus the option data
   * There's 3 possible options :
-    * 0 : End of option list
-      * Terminate the list in case it doesn't fall on the end of the header
+    * 0 : End of option list \(terminate the list in case it doesn't fall on the end of the header\)
     * 1 : No operation \(filler to align on a boundary for example\)
     * 2 : Maximum segment size
       * Only set with SYN segment
       * Optional, if it's not present any size is allowed
-      * This option has a length of 4 \(bytes ?\)
+      * Length : 4 \(bytes ?\) 
 * Padding : Variable & Optional
 
 ## States
 
-* LISTEN : Represents waiting for a connection request
-* SYN-SENT : Represents waiting for a matching connection request   after having sent a connection request
-* SYN-RECEIVED : Represents waiting for a confirming connection request acknowledgment after having both received and sent a connection request
-* ESTABLISHED : Represents an open connection, data received can be   delivered to the user
-* FIN-WAIT-1 : Represents waiting for a connection termination request   from the remote or an acknowledgment of the connection   termination request previously sent.
-* FIN-WAIT-2 : Represents waiting for a connection termination request   from the remote TCP.
-* CLOSE-WAIT : Represents waiting for a connection termination request   from the local user
-* CLOSING : Represents waiting for a connection termination request   acknowledgment from the remote TCP
-* LAST-ACK : Represents waiting for an acknowledgment of the   connection termination request previously sent to the remote TCP   \(which includes an acknowledgment of its connection termination
+* LISTEN : Waiting for a connection request
+* SYN-SENT : Waiting for a matching connection request   after having sent a connection request
+* SYN-RECEIVED : Waiting for a confirming connection request acknowledgment after having both received and sent a connection request
+* ESTABLISHED : An open connection, data received can be   delivered to the user
+* FIN-WAIT-1 : Waiting for a connection termination request   from the remote or an acknowledgment of the connection   termination request previously sent.
+* FIN-WAIT-2 : Waiting for a connection termination request   from the remote TCP.
+* CLOSE-WAIT : Waiting for a connection termination request   from the local user
+* CLOSING : Waiting for a connection termination request   acknowledgment from the remote TCP
+* LAST-ACK : Waiting for an acknowledgment of the   connection termination request previously sent to the remote TCP   \(which includes an acknowledgment of its connection termination
 
       request\)
 
-* TIME-WAIT : Represents waiting for enough time to pass to be sure   the remote TCP received the acknowledgment of its connection   termination request
-* CLOSED : Represents no connection state at all
+* TIME-WAIT : Waiting for enough time to pass to be sure   the remote TCP received the acknowledgment of its connection   termination request
+* CLOSED : No connection state at all
 
