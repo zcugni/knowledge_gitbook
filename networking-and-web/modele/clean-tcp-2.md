@@ -10,34 +10,27 @@
   * **Multiplexing** : Allow for many processes within a single host to use TCP     simultaneously
   * **Connections** : Since data is transferred as a stream and different information needs to be kept for the other functionalities to work, TCP uses the concepts of a connection
   * **Precedence & Security** : Security and precedence can be set
-* TCP speaks on one hand to applications, and on the over to protocols of the underlying layer
-  * A minimum set of call is expected for the TCP/Application interface :
-    * OPEN
-    * CLOSE
-    * SEND
-    * RECEIVE
-    * STATUS
-  * There's no expectation for the TCP/Protocols interface, except that **asynchronous** dialogue must be possible
-    * TCP can work with a wide variety of protocols, and i'll explain some general concepts, but this summary is primarily focused on TCP over IP
 * It's a **connected** protocol since it consider the data sent as a stream
 * TCP implementations follow a general principle of robustness:  be   conservative in what you do, be liberal in what you accept from   others
+* ... called a **segment**
 
 ## Connection
 
-* The data stream between 2 entities is represented by a connection
-  * They're uniquely identified by the pair of sockets on each side
+* The data stream between 2 entities is represented by a connection uniquely identified by the pair of sockets on each side
 * There's no restriction on a particular connection being   used multiple times
   * New instances of a connection are called incarnations of it
 
 ### Sequence numbers
 
-* All bytes of a connection are assigned a **sequence** number from a random **Initial Sequence Number** \(ISN\)
-  * The ISN is chosen from a 32-bits clock incremented every ~4 microseconds
+* All bytes of a connection are assigned a **sequence** number that identifies them
+  * With the acknowledgment mechanism, it makes it possible to check that everything arrived
+  * **SYN** & **FIN** each consume a number
+  * **ACK** does not
+* The **Initial Sequence Number** \(ISN\) is chosen randomly from a 32-bits clock incremented every ~4 microseconds
   * As such, it''ll cycle after 4.55 hours
   * Since the Maximum Segment Lifetime \(MSL\) is 2 min, the ISN should be unique 
 * The seq number of a **segment** is the one of its first byte of data
-  * Since the **SYN** request consume a number, the first byte of data of a connection has a seq number of ISN+1
-* An ACK segment does not consume a seq number
+  * Since SYN consume a number, the first byte of data of a connection has a seq number of ISN+1
 * Since a connection can be used multiple times, we mustn't use seq numbers that may be in segments still in transit
   * Generally, the previously used number is stored so it's not a problem
   * But after recovering from a **crash** without knowledge of the previously used number, the system must keep quiet for the MSL duration to assure that sequence number will be unique
@@ -45,13 +38,13 @@
 ### Acknowledgement number
 
 * The **acknowledgment** number is used to confirm the reception of data
-* It's value is the next **sequence** number that the receiver will use
   * An ack of X means that all bytes up to but not including X have been received
-* It is sent along every segment except for the inital SYN
-* An ack does not guarantee that the data has been   delivered to the end user, but only that the receiving TCP has taken   the responsibility to do so
+* It's value is the next **sequence** number that the receiver will use
+* It is sent along every segment except for the initial SYN
 * When a   segment is sent, a copy of it is put on a **retransmission queue** with a timer
   * When acknowledgment for that data is received, the     segment is deleted from the queue  
   * If the acknowledgment is not     received before the timer runs out, the segment is retransmitted
+  * The timer is dynamically chosen
 
 ### Three-Way Handshake
 
@@ -132,18 +125,10 @@
 
 ### Window
 
-* The receiving TCP specify a window that is the number of bytes starting with the   acknowledgment number, that it can receive
-* Note that when the receive window is zero no segments should be
-
-    acceptable except for ACK
-
-  *  Thus, it's  possible to     maintain a zero receive window while transmitting data and receiving
-
-      ACKs
-
-    * However, even when the receive window is zero, a TCP must
-
-        process the RST and URG fields of all incoming segments
+* The receiving system specify a window that's the number of bytes that it can receive, starting from the   acknowledgment number
+* When the receive window is zero, no segments other that ACK are   acceptable
+  * However, even when the receive window is zero, it must process incoming RST & URG fields
+*  If more data   arrives than can be accepted, it will be discarded, resulting  in excessive retransmissions
 
 ### Reset & Error handling
 
@@ -162,6 +147,59 @@
   * The connection is in a non-synchronized state and the ack number of the received segment is wrong
 * When a connection in a synchronized state receive a segment with an unacceptable ack number, it must return an empty ACK segment with the correct seq and ack fields
   * The connection remains in the same state
+
+## Urgent pointer
+
+* When the URG flag is set, the URG field contains a pointer to the end of the urgent data
+  * If this point to data not yet acknowledged, the user must be notified to pass in urgent mode 
+  * What is done in this mode isn't part of the protocol
+* To use the URG flag, the sender must send at least 1 byte of data
+
+## TCP/app
+
+* On one hand, the protocol interface with application
+* This is not very defined, but some basic functionalities are expected
+* Those are the example call expected :
+  * OPEN - Use to create a connection
+    *  Format :  `OPEN (<local_port>, <foreign_socket>, active | passive       [timeout] [precedence] [security/compartment] [options])        -> local connection name`
+    * Depending of the       implementation, the **source address** will be supplied by it or lower protocols
+    * Either **actively** starting a connection or **passively** waiting for one
+      * We can specify the **foreign socket** from whom we await a connection or accept any
+      * A passive OPEN call is a call to LISTEN
+      * SEND will transform a passive call to an active one
+    *  A TCB is created and partially       filled in from the parameters
+    * The timeout is by default 5 \(what ?\), if it occurs, the connection will be aborted
+    * The rights of the user to open a connection must be check
+    * A **local connection name** is returned, it's a short hand for the connection defined by the &lt;local socket, foreign socket&gt;       pair
+  * SEND - Send the data in the buffer through the connection
+    *  Format :  `SEND (<local_co_name>, <buffer_address>, <byte_count>, <PUSH>, <URGENT>[timeout])`
+    * Some implementation do an implicit OPEN with a SEND done on a non-existent connection, others return an error
+    * If the PUSH flag is set, the received data buffer must be immediately passed to the application  
+      * .Otherwise, you can wait to combined it with following data before sending it
+  * RECEIVE - Allocates a receiving buffer associated with the     specified connection
+    * Format : `RECEIVE (<local_co_name>, <buffer_address>, <byte      _count>) -> byte count, urgent flag, push flag`
+  * CLOSE - Indicate that there isn't any more data to send
+    * Format :  `CLOSE (<local_co_name>)`
+    * Outstanding SENDS will still be transmitted & retransmitted
+    * Implies PUSH
+    * Data can still be RECEIVEd until the other side CLOSEs the connection
+    *  Communication is needed to close a connection, so the system may stay in the CLOSING state some time
+  *  STATUS - Depend on implementations, gives info to the application, usually one from the TCB
+    * Format :  `STATUS (<local_co_name>) -> status data`
+    * This is an implementation dependent user command and could be       excluded without adverse effect
+  * ABORT -  Abort all pending SENDs and RECEIVES, remove the TCB send a special RST
+    * Format :  `ABORT (<local_co_name>)`
+
+
+
+
+
+### TCP/protocols
+
+
+
+* * There's no expectation for the TCP/Protocols interface, except that **asynchronous** dialogue must be possible
+    * TCP can work with a wide variety of protocols, and i'll explain some general concepts, but this summary is primarily focused on TCP over IP
 
 ## Calls
 
