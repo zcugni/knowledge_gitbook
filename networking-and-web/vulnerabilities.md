@@ -43,14 +43,19 @@ Shouldn't i put this in the nmap section ?
 
 * This consist of sending multiples request to the victim so that it uses all it's bandwidth to respond to us, making it impossible to accepts legitimate request
 * With ping, it's called a **ping flood**
-* **SYN flood** sends multiples SYN request to the victim with spoofed non-existent source
-  * The OS keeps track of connexion that started an handshake, but they have only so much space for it
-  * The goal is to fill this space with half-open connexions that will timeout, effectively denying real connexion
-  * This is now prevented by **SYN cookies**
 * **Amplification** consists of sending ICMP or UDP echo request to a broadcast address with a spoofed source of the victim's IP
   * The whole broadcast domain will send replies to the victim
 * **Distributed DOS** uses compromised machines, called **bots** \(organized in **bot nets**\), to flood a victim 
   * This also as the advantages of hiding the attacker within the bots
+
+#### SYN flood
+
+* **SYN flood** sends multiples SYN request to the victim with spoofed non-existent source
+  * The OS keeps track of connection that started an handshake, but they have only so much space for it
+  * The goal is to fill this space with half-open connections that will timeout, effectively denying real connection
+* It's now prevented by **SYN cookies**, the process of synchronization is changed in this way :
+  * Connections aren't tracked and stored until the final ACK arrives
+  * Data is added to the SYN/ACK reply to be able to reconstruct the initial SYN request from the ACK reply
 
 ### Ping of death
 

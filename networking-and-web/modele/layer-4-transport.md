@@ -76,64 +76,9 @@ headers : The UDP header, defined in RFC 768, is relatively tiny. It only contai
 * It lets the applications build their own correction mechanisms tuned exactly to their needs
 * It's really fast
 
-## _TCP - Transmission Control Protocol_
+## TCP
 
-* Carry data between hosts and includes error checking, congestion control and retransmission of lost data
-* More complex than UDP
-* _Connected_ protocol since it consider packets as a stream
-* Application using TCP expects that exactly the traffic sent is delivered
-* Includes much of the error handling UDP lacks :
-  * The receiver acknowledges every packet received
-  * The sender retransmits any packet not acknowledged
-  * Packets have a specific order
-    * Switches and routers might send them out of order but the receiver will re-arrange them back before transmitting to the application
-
-{% hint style="info" %}
-header & flags : RFC 793
-
-"The sequence number and acknowledgment number are used to maintain state. "
-
- "After the handshake, every packet in the connection will have the ACK flag turned on and the SYN flag turned off."
-
-"Sequence numbers allow TCP to put unordered packets back into order, to determine whether packets are missing, and to prevent mixing up packets from other connections. When a connection is initiated, each side generates an initial sequence number. This number is communicated to the other side in the first two SYN packets of the connection handshake. Then, with each packet that is sent, the sequence number is incremented by the number of bytes found in the data portion of the packet. This sequence number is included in the TCP packet header. In addition, each TCP header has an acknowledgment number, which is simply the other side’s sequence number plus one."
-{% endhint %}
-
-### Handshakes
-
-The _three-way handshake_ establish a connection between 2 hosts :
-
-* `SYN-SENT` __: A _synchronization request_ \(SYN request\) is sent by the client
-  * It comes from a random high-numbered port on the client to a specific port on the server
-  * SYN flag turn on in the header
-  * A random `seq` number is chosen
-* `SYN-ACK`The server acknowledge the request __and respond with it's own SYN request
-  * The `ack` number is the initial SYN `seq`  + 1
-  * The request comes from the requested port on the server to the client source port
-  * SYN and ACK flags turn on in the header
-* `ACK` The client acknowledge the server SYN request, the connection is established
-  * It also up the server request seq number by 1
-  * ACK flag turn on in the header
-
-![](../../.gitbook/assets/ack.png)
-
-* The OS forward the data stream to a program only after the three-way handshake is done
-  * If the connection stops after it, the problem lies in the server program
-  * If it fails before, the OS didn't complete the connection
-* **SYN cookies** are used against **SYN flood**
-  * Connections aren't tracked and stored until the final ACK arrives
-  * Data is added to the SYN/ACK reply to be able to reconstruct the initial SYN request from the ACK reply
-* When the server and client finished exchanging data, they use the **four-way handshake** to close the connection
-
-{% hint style="info" %}
-Explain SYN cookies in more details
-{% endhint %}
-
-### Failures
-
-* If a server or firewall reject/block a connection, it generate a "connection refused" message on the client
-* If the server simply ignores it, the client has a "connection timed out" message
-* If the client or server has a problem during the connection, they can send a _TCP reset_ message
-  * With that, they don't do the four-way handshake to close the connection
+See ...
 
 ## Logical Ports
 

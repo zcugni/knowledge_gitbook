@@ -1,7 +1,8 @@
-# Clean TCP 2
+# TCP - Transmission Control Protocol
 
 ## Generalities
 
+* Used in the 4th layer of the TCP/IP model
 * More complex and reliable than UDP but slower
 * It's base functionalities are :
   * **Data Transfer** : Transfer a continuous stream of bytes in each     direction between its users
@@ -13,6 +14,9 @@
 * It's a **connected** protocol since it consider the data sent as a stream
 * TCP implementations follow a general principle of robustness:  be   conservative in what you do, be liberal in what you accept from   others
 * The header + data is called a **segment**
+* These are the errors messages for different failures:
+  * Segment rejected / blocked : "connection refused"
+  * Segment ignored :  "connection timed out"
 
 ## Connection
 
@@ -232,4 +236,10 @@ TIME-WAIT   --> <seq = 101> <ack = 501> <ACK>        --> CLOSED
       * Optional, if it's not present any size is allowed
       * Length : 4 \(bytes ?\) 
 * Padding : Variable & Optional
+
+## Sources
+
+* _Networking for Systems Administrators_ by Michael W. Lucas
+* _Hacking : The Art of Exploitation_ by John Erickson
+* Pentesterlab
 
