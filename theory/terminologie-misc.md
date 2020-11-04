@@ -10,6 +10,15 @@ description: To polish
 >
 > “A Mutex is a lock that we set before using a shared resource and release after using it. When the lock is set, no other thread can access the locked region of code. ”
 
+## Algorithmic runtime
+
+* Different from the runtime of the program, its not interested in an absolute time \(since hardware may change\), but to the time it takes to finish relative to it's input size
+* Asymptotic notation is a way to express an algorithm’s efficiency, it's called like that because it deals with the behavior of the algorithm as the input size approaches the asymptotic limit of infinity
+  * Witch such number, the highest exposant number is the most important one, so we use the Big-Oh notation \(`O(n2)` for example\) for it
+  * For example : 
+    *  `3n4 + 43n3 + 763n + log n + 37` is in the order of O\(n4\)
+    * `54n7 + 23n4 + 4325` in O\(n7\) 
+
 ## Types of malware
 
 ### Virus
@@ -89,4 +98,5 @@ They're usually part of another malware and they offer an entry point into the t
 
 * Misc Research
 * [Pentesterlab](https://pentesterlab.com/)
+* Hacking : The Art of Exploitation by John Erickson
 

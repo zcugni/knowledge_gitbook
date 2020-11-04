@@ -78,7 +78,7 @@ headers : The UDP header, defined in RFC 768, is relatively tiny. It only contai
 
 ## TCP
 
-See ...
+See this [page](https://zcugni.gitbook.io/notes/networking-and-web/modele/clean-tcp-2)
 
 ## Logical Ports
 

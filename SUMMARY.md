@@ -102,7 +102,7 @@
 
 ## Misc Theory <a id="theory"></a>
 
-* [Cryptographie & Hash](theory/cryptographie-and-hash.md)
+* [Cryptography](theory/cryptographie-and-hash.md)
 * [Bitcoin](theory/bitcoin.md)
 * [MCD / MLD](theory/mcd-mld.md)
 * [Terminology](theory/terminologie-misc.md)

@@ -2,142 +2,162 @@
 description: 'Disclaimer : The vuln part isn''t complete / might not be right'
 ---
 
-# Cryptographie & Hash
+# Cryptography
+
+## Generalities
+
+* A cryptographic system is considered to be unconditionally secure if it cannot be broken, even with infinite computational resources
+  * One example is the one-time pad
+  * A random blocks of data called a pad is created. It's at least as long as the plaintext message to encode
+  * XOR each bit of the plaintext with its corresponding pad bit, the receiver will XOR them again to decode
+  * If its used only one time, it's totally secure, except that the 2 sides needs the pads and it most be kept private 
+* A cryptosystem is considered to be computationally secure if the best-known algorithm for breaking it requires an unreasonable amount of computational resources and time
+* **Product ciphers** combine both confusion & diffusion :
+  * **Confusion** refers to methods used to hide the relationships between the plaintext, the ciphertext and the key
+  * **Diffusion** serves to spread the influence of the plaintext bits and the key bits over as much of the ciphertext as possible
 
 ## Checksum
 
-* Utilisé pour vérifier l'intégrité d'un fichier contre des modifications accidentelles
-* Permet de créer une "signature" représentant le fichier. Si on nous envoit un fichier, on peut donc comparer le checksum du notre avec l'original
-* C'est assez facile de forger un document correspondant à un checksum donné, donc ça ne protège pas des modifications malicieuses
+* Used to verify the integrity of a file against accidental modifications
+* Generate a signature from the file
+* When you receive a file with it's signature, you can use the algorithm against the file to check that the generated signature corresponds
+* It's quite easy to forge a file in a way that will give it the same signature for a different content, so it's not useful against malicious modifications
 
 ## Hash
 
-* Utilisé  pour vérifier l'intégrité d'un fichier contre des modifications malicieuse
-* Permet de créer une sorte de signature du fichier en ramenant celui-ci à une chaine donnée
-* La chaîne final ayant une taille précise, il y aura forcément des collisions \(aka, 2 chaines différentes aboutissant au même résultat\)
-* On ne peut pas extrapoler le fichier original depuis le hash
-* Caractéristique d'un bon algo de hash :
-  * Rapide mais pas trop, afin de rendre l'utilisation agréable, mais le brute force compliqué
-  * Les collisions ne doivent pas être prévisible/facilement générale. Si c'est le cas, on peut facilement forger un faux document correspondant au checksum
+* Used to verify the integrity of a file against malicious modification
+* Generate a signature from the file
+* Since the signature is a string of a defined length, generally quite smaller than the source text, there will be collisions \(different file with the same signature\)
+* Characteristic of a good hash :
+  * Sufficiently fast to be practical, but not enough to make brute forcing easy
+  * Collisions shouldn't be predictable
+* **Message Authenticated Code** \(MAC\) uses hashes with the added functionality of identifying the sender
+  * A shared key is used to create & validate the MAC
+  * One of the most known is HMAC, it use any type of hash algorithm
+
+
+
+
+
+
+
 * Pour cracker un hash, hors le brute force on utilise des dicos qui font correspondre pleins de string à leur hash correspondant
   * Il y a aussi les rainbow tables, qui sont des dico un peu particulier, go se renseigner 
 
-## _Message Authentication Code_ \(MAC\)
+## Encryption
 
-* Basé sur les hash mais permet d'identifier l'expéditeur en plus de véirifer l'intégrité du message
-* Une clé partagée est utilisée pour la construction et la validation du MAC
-* Le plus connu est HMAC et utilise n'importe quel hash:
+The goal of encryption is to protect sensible data, there's 2 main types : symmetrical & asymmetrical
 
-  HMAC\(key, message\) = hash\(key + hash\(key + message\)\) \(the keys are padded separately in each run, that's a simplification\)
+### Symmetrical
 
-## Chiffrement
-
-Le but d'un chiffrement est de protéger du contenu et de le rendre récupérable par la suite. Pour cela, on différencie 2 types.
-
-### Symétrique
-
-Une même clé secrète est utilisée pour le chiffrement et le déchiffrement, ce qui la rends moins sécu.
+* The same key is used both for encryption & decryption
+* You need to pass the key to the other side, which can be risky, but it's faster than asymmetrical encryption
 
 #### Stream
 
-* Encrypts data byte by byte
-* Most common is _RC4_ used in SSl
-* Random number generator seeded with the key generating bytes to XOR with the text
+* Stream ciphers generate a stream of pseudo-random bits, usually either one bit or byte at a time
+  * This is called the keystream, and it's XORed with the plaintext
+* Most common are RC4 & LSFR
 
 #### Block
 
-* Encrypts data block by block
-* Examples are AES \(Rijndael\), DES, 3DES, Twofish
+* Encrypts data in block of a fixed size, usually 64 or 128 bits
 * Encryption and decryption aren't the same
-* In _Electronic CodeBook_ mode \(ECB\), each plaintext block is encrypted independently to produce a ciphertext block, meaning that two identitcal ciphertext also have identical plaintext
-* In _Cipher-Block Chaining_ \(CBC\) mode, each plaintext block is XORed with the ciphertext of the previous block before encryption \(opposite for decryption\). The first block is XORed with the _Initialization Vector_
-* All blocks are of the same length, so padding may be necessary. It's usually done with PKCS\#7.
-  * Si on a besoin d'un bit de pad, on ajoute un bit 0x1, si on en a besoin de deux, on ajoute deux bits 0x2, etc.
+* Examples are AES \(Rijndael\), DES, 3DES, Blowfish
+  * DES’s only real weakness is its key size of 56 bits which make an exhaustive brute-force attack possible in a few weeks on specialized hardware
+    * Triple-DES fixes that by using 2 DES keys concatenated together for a total size of 112 bits
+    * Encryption is done by :
+      * Encrypting the plaintext block with the first key
+      * Decrypting with the second key
+      * Encrypting again with the first key
+    * Decryption is done analogously, but with the encryption and decryption operations switched
+  * Most industry-standard block ciphers are resistant to all known forms of cryptanalysis, and the key sizes are usually too big to attempt an exhaustive brute-force attack
+* In **Electronic CodeBook** mode \(ECB\), each plaintext block is encrypted independently to produce a ciphertext block
+  * Meaning that 2 identitcal ciphertext also have identical plaintext
+* In **Cipher-Block Chaining** \(CBC\) mode, each plaintext block is XORed with the ciphertext of the previous block before encryption \(opposite for decryption\)
+  * The first block is XORed with the **Initialization Vector**
+* Padding, if needed, is usually done with **PKCS\#7**
 
-### Asymétrique
+### Asymmetrical
 
-* Une clé publique qui chiffre, que l'on fournit à toutes personnes avec qui l'on veut communiquer. Elles l'utiliseront pour chiffrer leur message.
-* Ainsi qu'une clé privée qui déchiffre, que l'on doit absolument garder pour nous.
-* RSA est le plus connu, il utilise la propriété mathématique suivante : quand l'on fait le produit de 2 nombres premiers, il est très compliqué de les retrouver à partir du résultat \(surtout s'ils sont grands\)
-* Rarely used for encrypting data due to performance & complexity
-* Use to securely transmit a symmetric key
+* One public key encrypt, and a private one decrypt
+* You pass the public key with anyone with whom you want to communicate
+  * They'll encrypt their message with your key
+* Your private key should be strictly secret
+* RSA is the most known, it uses a mathematical proporty : when you compute the product of 2 prime numbers, it's very complicated to retrieve them from the result
+  * The bigger the number, the harder
+  * I won't explain how it work exactly, i just know that it uses these prime numbers
+* It's more secure but slower than symmetrical encryption, so it's not use to encrypt whole file
+  * Instead it's used to securely send a symmetric key
 
 ### One time pad
 
-* N bits of random data
-* N bits of text
-* XOR each other
-
-Used only one time it's perfect, but you need to have the initial key, which is why we use more complex solution.
+* A one time pad take a text of length N, generate N or plus random chars and XOR the 2
+* As long as it used only one time, if the pad is not compromised in in transit, it's completely secure
 
 ## PGP - Pretty Good Privacy
 
-Logiciel permettant de chiffrer des messages en mélangeant chiffrement symétrique et asymétrique \(car l'asymétrique est bien plus lent\)
-
-L'expéditeur :
-
-1. Chiffre le message avec clé symétrique 
-2. Chiffre celle-ci avec la clé publique du destinataire
-3. Envoies le message et la clé chiffré au destinataire
-
-Le destinataire :
-
-1. Déchiffre la clé symétrique avec sa clé privé
-2. Déchiffre le message avec la clé symétrique
-
-Linux utilise gpg pour gérer ces clés, regarder ... pour plus de détails
-
-## Entrainement
-
--&gt; [https://cryptopals.com](https://cryptopals.com/)
+* Lets you encrypt data by mixing symmetric & asymmetrical encryption
+* Process :
+  * The sender :
+    * Encrypt it's message with it's symmetric key
+    * Encrypt the key with the receiver public key
+    * Sends the encrypted message & key
+  * The receiver :
+    * Decrypt the key with it's private key
+    * Decrypt the message with the decrypted key
 
 ## Vulnerabilities
 
 ### Stream Cipher Reuse
 
-Bon je suis pas 100% de la raison, mais si on a encrypté 2 blobs de données avec la même clé, et qu'on XOR ces deux ciphertext ensemble, on va obtenir le XOR de leur plaintext.
-
-eSTREAM n'a pas ce problème car il utilise un "nonce" avec la clé. \(Un salt j'imagine ?\). Donc si on ne re-utilise pas la même paire clé-nonce, c'est safe.
-
-Mais RC4 ne fait pas ça, donc les dev XOR généralement sa clé à l'avance avec un nonce.
+* I'm not exact sure why, but if you encrypt 2 blobs of data with the same key, anc XOR their ciphertext together, you obtain the XOR of the plaintext
+* eSTREAM does'nt have this problem because it uses a nonce \(a salt i guess ?\)
+  * If you don't re-use the same key-nonce pair, its safe
+* RC4 has this problem, so generally dev XOR the key in advance with a nonce
 
 ### ECB Block Reordering
 
-Les blocks d'ECB étant indépendant, on peut les réordonner comme on veut.
-
-Exemple : Un cookie encrypte cela grâce au DES `admin=0;username=daeken1`. Celui-ci utilise des block de 8 bits, cette string sera donc divisée en 3 blocks : "admin=0;", "username" et "daeken1".
-
-Si on contrôle le username, on peut donner en input "paddingadmin=1;", ce qui nous donnera ces blocks "admin=0;", "username", "=padding", "admin=1;", qu'on peut ensuite réorganiser comme nécessaire.
+* ECB blocks are independent, you can reorder them however you want
+* For example :
+  * A cookie encrypt this with DES :`admin=0;username=daeken1`
+  * It uses 8 bits blocks, so the string is divided in 3 blocks : 
+    * admin=0;
+    * username
+    * daeken1
+  * If you control the username, you can give as a payload : `paddingadmin=1;`, which will give the blocks :
+    * admin=0;
+    * username
+    * =padding
+    * admin=1;
+  * You can reorder them as you want
 
 ### Pad Oracle
 
-Possible quand les données on été encrypté en CBC et paddé avec PKCS\#7 et que le serveur réagit différemment si elles sont bien paddées ou non.
+* For this to work, data must be encrypted with CBC, and padded with PKCS\#7
+  * And the server needs to respond differently if they're padded or not
+* Since CBC blocks are independent, if you flip a bit in one, it will flip the same bit in the next one
+* You can use this to decrypt with a paddle oracle
+  * The goal is to determine which bit of the N-1 block will change the plaintext of block N in `0x01` after being XORed together
+  * Once we know this, we know that the plaintext of that bit in block N is cipher XOR 0x1
+  * Test all possible char, the only one that won't return an error will be the one to flip the bit to `0x01` \(since the padding will be correct\)
+  * Continue doing that and changing the padding to `0x02`, then `0x03`, etc
 
-Vu que les blocks CBC sont interdépendant, si on flip un bit dans l'un, ça va flip le même bit dans le prochain. Ceci nous permet de les décrypter avec un padding oracle.
+### Contermeasure
 
-On commence par le dernier byte de l'avant dernier block car ceci va affecter le dernier bit du dernier block.
+* The pad oracle and the ECB re-ordering can be counter if the dev uses a MAC _after_ having encrypted the data
+* But sometimes it's not possible for the pad for compatibility reasons, in which case you need to at least not react differently on padding error
 
-Notre but est de déterminer quel bit du block N-1 va changer le plaintext du block N en 0x1 quand ils seront XOR.
+## Others
 
-Once we know this, we know that the plaintext of that bit in block N is cipher XOR 0x1.
-
-On test les 255 caractères possibles et le seul qui ne nous retournera pas une erreur sera cela qui flippera le bit à 0x1 \(vu que ce sera un padding correct\).
-
-Une fois ça trouvé, on avance petit à petit en passant à 0x2 pour du pad, puis 0x3, etc et on peut récupérer la valeur plaintext de chaque bit.
-
-C'est résumé et très mal expliqué, mais c'est l'idée globale.
-
-\(check the explanation in owasp maybe\).
-
-### Contre mesure
-
-Le pad oracle et l'ECB re-odoring peuvent être contré si les dev utilisent un MAC _après_ avoir encrypté les données pour vérifier qu'elles n'ont pas été modifiées.
-
-Mais des fois pour des raisons de comptabilité ce n'est pas possible \(du moins pour le pad\) auquel cas il faut au moins ne pas réagir différemment en cas d'erreur.
-
-### Hash Extension
-
-J'ai rien compris et ça marche pas avec HMAC apparemment.
+* A Feistel network is often used in block ciphers to ensure that the algorithm is invertible
+  * Each block is divided into two halves : left \(L\) & right \(R\)
+  * I'll show the process on each round `i` :
+  * `-1` Means the previous one, note minus 1
+  * `Ki` is the subkey for this round, normally each round has one, calculated earlier
+  * `Li = Ri-1`
+  * `Ri = Li-1 XOR function(Ri-1, ki)`
+* \`\`
 
 ## Sources
 

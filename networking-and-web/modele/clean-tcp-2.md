@@ -237,8 +237,23 @@ TIME-WAIT   --> <seq = 101> <ack = 501> <ACK>        --> CLOSED
       * Length : 4 \(bytes ?\) 
 * Padding : Variable & Optional
 
+## Modification
+
+* A number of details in RFC 793 were corrected, modified, or clarified in RFC 1122
+* This is the correlation table
+
+| Feature | RFC 793 Section | RFC 1122 Section |
+| :--- | :--- | :--- |
+| Received PUSH bit | 2.8 | 4.2.2.2 |
+| Urgent Pointer | 3.1 | 4.2.2.4 |
+| TCP state diagram | 3.2, p.23 | 4.2.2.8 |
+| Simultaneous Open | 3.4, Fig 8 | 4.2.2.10 |
+| Retransmission Timeout | 3.7 | 4.2.2.15, 4.2.3.1 |
+| Event Processing | 3.9 | 4.2.2.20 |
+
 ## Sources
 
+* RFC 793
 * _Networking for Systems Administrators_ by Michael W. Lucas
 * _Hacking : The Art of Exploitation_ by John Erickson
 * Pentesterlab
