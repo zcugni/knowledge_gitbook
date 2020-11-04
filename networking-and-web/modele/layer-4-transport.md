@@ -18,63 +18,31 @@
 
 ## _UDP - User Datagram Protocol_
 
-* Most minimal transport protocol \(0 verification/feedback\)
-* UDP is used for applications that do their own data flow error management
+* Used in the 4th layer of the TCP/IP model
+* Works over IP
+* Way simpler & faster than TCP but not reliable at all
+  * Application that uses it handle all problem of lost/damaged/out of order packets
+* The header + data is called a **datagram**
+* **Connectionless** protocol, it considers each datagram independent from each other
 * VPNs use it when they don't use VPN specific protocols like IPSec
+* It's easy to forge the source of an UDP packet, so it's often heavily filtered
 
-{% hint style="info" %}
-headers : The UDP header, defined in RFC 768, is relatively tiny. It only contains four 16-bit values in this order: source port, destination port, length, and checksum.
-{% endhint %}
+### Headers
 
-* This   protocol  assumes  that the Internet  Protocol  \(IP\)  \[1\] is used as the
+![](../../.gitbook/assets/udp%20%281%29.png)
 
-  underlying protocol.
-
-* Source Port is an optional field, when meaningful, it indicates the port
-
-  of the sending  process,  and may be assumed  to be the port  to which a
-
-  reply should  be addressed  in the absence of any other information.  If
-
-  not used, a value of zero is inserted.
-
-* Length  is the length  in octets  of this user datagram  including  this
-
-  header  and the data.   \(This  means  the minimum value of the length is
-
-  eight.\)
-
-* Checksum is the 16-bit one's complement of the one's complement sum of a
-
-  pseudo header of information from the IP header, the UDP header, and the
-
-  data,  padded  with zero octets  at the end \(if  necessary\)  to  make  a
-
-  multiple of two octets.
-
-  * The pseudo  header  conceptually prefixed to the UDP header contains the
-
-    source  address,  the destination  address,  the protocol,  and the  UDP
-
-    length.   This information gives protection against misrouted datagrams.
-
-    This checksum procedure is the same as is used in TCP.
-
-* he UDP module  must be able to determine  the  source  and  destination
-
-  internet addresses and the protocol field from the internet header.
-
-### Flaws
-
-* Called _connectionless_ because it considers each packet has being independent from the others, there's no notion of "data stream"
-  * The packets have no defined order and won't react to others having problems
-* The source of a packet is easily forged \(which is why they are often heavily filtered\)
-* A host transmitting UDP segment has no way to tell if it actually reaches its destination
-
-### Advantages
-
-* It lets the applications build their own correction mechanisms tuned exactly to their needs
-* It's really fast
+* Source Port :  16 bits, optional
+* Destination Port : 16 bits
+* Length : 16 bits, the length in bytes of the datagram
+* Checksum : 16 bits
+  * Verifies the integrity of the datagram
+  * Before computing the checksum, a pseudo-header is prefixed to the datagram, in order to protect against misrouted datagram. It contains :
+    * The source  & destination addresses
+    * The protocol
+    * The  UDP       length
+    * It retrieves the first 3 info from the IP
+  * It's value is the 16-bits 1's complement of the 1's     complement sum of the pseudo-header, the header and this data
+    * For computation, it's value is set at 0
 
 ## TCP - _Transmission Control Protocol_
 
