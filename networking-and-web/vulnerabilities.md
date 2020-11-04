@@ -12,6 +12,16 @@
   * The victims will periodically sent out ARP request and receives replies, so you need to poisened them regularly
 * These can also be done on the **default gateway**
 
+## Man in the middle
+
+* This type of attack consist of making the 2 parties believe them speak to each other, when in reality they speak to you
+* This lets you intercept communication, which might sensible information in plaintext or encrypted
+  * If the data is encrypted, since each parties believe they speak with the other, they'll exchange keys with you, so you can decrypt the data from one side to encrypt it again with the other key and transfer it
+* This can be done with different technologies, for example ARP redirection
+* `mitm-ssh` is an openssh modification that permit ssh man in the middle attacks
+  * To make the attack less obvious, some tools try to generate a key whom fingerprint will resemble the one of the legitimate host
+  * Generally, people remember the start and the beginning of the key, but if the middle looks close enough, they won't notice
+
 ## TCP/IP hijacking
 
 * We must be on the same network as the victim in order to sniff the sequence number in the TCP header

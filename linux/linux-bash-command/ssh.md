@@ -4,6 +4,7 @@
 
 * An OpenSSH client lets you connect to remote machine securely via the SSH protocol
 * The cmd is called `ssh [user]@<hostname | ip> [-p <port>] [-i private_key_file]`
+* You can retrieve the key from an host with `ssh-keyscan -t rsa <ip>`
 
 ## Authentication
 
@@ -34,8 +35,12 @@
 
 ### Known hosts
 
-* A trace of every host you connected to is kept inside `~/.ssh/knownn_hosts` and `/etc/ssh/ssh_known_hosts`
-* If an host identification change, a warning is shown and password authentication disabled to avoid spoofing
+* Each host has a key fingerprint that identifies it
+* When you connect to an host, this fingerprint is added to `~/.ssh/knownn_hosts` 
+  * You can also manually add an entry in `/etc/ssh/ssh_known_hosts`
+* If an host identification change, a warning is shown
+* This is used against man in the middle attack
+  * However, if you're connecting for the first time to an host, and an attacker is already impersonating him, you won't know except if you know what the key fingerprint should look like
 
 ## Port Forward
 
@@ -84,6 +89,12 @@ There's a lot of options so i won't detail them all. I should read it completely
 **Note** 
 
 Agent Forwarding is risky but a bit complex. I'll definitely check it one day, but not now. Read this : [https://book.hacktricks.xyz/linux-unix/privilege-escalation/ssh-forward-agent-exploitation](https://book.hacktricks.xyz/linux-unix/privilege-escalation/ssh-forward-agent-exploitation)
+
+## Vulnerabilities
+
+* There's multiple version of the SSH protocol, and each host has a key fingerprint associated with each version it can use
+  * This means that while doing a man in the middle attack might be complicated on the last version, because fingerprint for it are already in `~/.ssh/known_hosts`, it's easy for older ones when no entries exist
+  * Now, a warning is shown when an host is known via a fingerprint for another version
 
 ## Errors
 

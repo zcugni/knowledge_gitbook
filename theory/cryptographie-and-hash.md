@@ -4,30 +4,36 @@ description: 'Disclaimer : The vuln part isn''t complete / might not be right'
 
 # Cryptography
 
+## Disclaimer
+
+* I haven't yet had the occasion to really research cryptography, the following is more akin to personal notes of stuff i stumble upon while researching other things
+  * As such, it's neither complete nor fault-proof
+* I should re-read the cryptography chapter of Hacking : The Art of Exploitation once i have a better understanding of this field 
+
 ## Generalities
 
-* A cryptographic system is considered to be unconditionally secure if it cannot be broken, even with infinite computational resources
+* A cryptographic system is considered to be **unconditionally secure** if it cannot be broken, even with infinite computational resources
   * One example is the one-time pad
   * A random blocks of data called a pad is created. It's at least as long as the plaintext message to encode
   * XOR each bit of the plaintext with its corresponding pad bit, the receiver will XOR them again to decode
   * If its used only one time, it's totally secure, except that the 2 sides needs the pads and it most be kept private 
-* A cryptosystem is considered to be computationally secure if the best-known algorithm for breaking it requires an unreasonable amount of computational resources and time
+* A cryptosystem is considered to be **computationally secure** if the best-known algorithm for breaking it requires an unreasonable amount of computational resources and time
 * **Product ciphers** combine both confusion & diffusion :
   * **Confusion** refers to methods used to hide the relationships between the plaintext, the ciphertext and the key
   * **Diffusion** serves to spread the influence of the plaintext bits and the key bits over as much of the ciphertext as possible
 
 ## Checksum
 
-* Used to verify the integrity of a file against accidental modifications
-* Generate a signature from the file
+* Used to verify the integrity of a file against **accidental modifications**
+* Generate a **signature** from the file
 * When you receive a file with it's signature, you can use the algorithm against the file to check that the generated signature corresponds
 * It's quite easy to forge a file in a way that will give it the same signature for a different content, so it's not useful against malicious modifications
 
 ## Hash
 
-* Used to verify the integrity of a file against malicious modification
-* Generate a signature from the file
-* Since the signature is a string of a defined length, generally quite smaller than the source text, there will be collisions \(different file with the same signature\)
+* Used to verify the integrity of a file against **malicious modifications**
+* Generate a **signature** from the file
+* Since the signature is a string of a defined length, generally quite smaller than the source text, there will be **collisions** \(different file with the same signature\)
 * Characteristic of a good hash :
   * Sufficiently fast to be practical, but not enough to make brute forcing easy
   * Collisions shouldn't be predictable
@@ -35,14 +41,16 @@ description: 'Disclaimer : The vuln part isn''t complete / might not be right'
   * A shared key is used to create & validate the MAC
   * One of the most known is HMAC, it use any type of hash algorithm
 
+### Crack
 
-
-
-
-
-
-* Pour cracker un hash, hors le brute force on utilise des dicos qui font correspondre pleins de string à leur hash correspondant
-  * Il y a aussi les rainbow tables, qui sont des dico un peu particulier, go se renseigner 
+* There's different ways to crack an hash :
+  * Brute-forcing every possible combination of chars, often impracticable because they're too big
+  * Using a pre-made **dictionary** of plaintext to hashes
+  * Using a **hash lookup table**
+  * Using a **password probability matrix**
+    * Uses a form of lossy compression, its similar to an hash lookup table except in that it's not complete, it will return multiple results, but is faster to create & use
+  * Using a **rainbow table**
+* However, the use of arbitrary **salt** values makes those way less efficient 
 
 ## Encryption
 
@@ -158,11 +166,13 @@ The goal of encryption is to protect sensible data, there's 2 main types : symme
   * `Ki` is the subkey for this round, normally each round has one, calculated earlier
   * `Li = Ri-1`
   * `Ri = Li-1 XOR function(Ri-1, ki)`
-* \`\`
+* Tools : 
+  * RainbowCrack 
 
 ## Sources
 
 * [Hacker101](https://www.hacker101.com/sessions/crypto_crash_course)
+* PGP Encryption : [varonis.com](https://www.varonis.com/blog/pgp-encryption/)
+* Hacking : The Art of Exploitation by John Erickson
 * Misc Research
-* [https://www.varonis.com/blog/pgp-encryption/](https://www.varonis.com/blog/pgp-encryption/)
 

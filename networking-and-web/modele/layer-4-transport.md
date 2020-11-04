@@ -76,7 +76,7 @@ headers : The UDP header, defined in RFC 768, is relatively tiny. It only contai
 * It lets the applications build their own correction mechanisms tuned exactly to their needs
 * It's really fast
 
-## TCP
+## TCP - _Transmission Control Protocol_
 
 See this [page](https://zcugni.gitbook.io/notes/networking-and-web/modele/clean-tcp-2)
 
@@ -88,7 +88,7 @@ See this [page](https://zcugni.gitbook.io/notes/networking-and-web/modele/clean-
 * TCP & UDP ports aren't the same \(but the range is\)
 * Each internet service has a standard port defined by the _Internet Assigned Numbers Authority_ \(IANA\)
   * Ports between 49'152 & 65'53 aren't attributed to anything
-* A connexion is defined by the IP address + port of the source and the IP address + port of the destination
+* A connection is defined by the IP address + port of the source and the IP address + port of the destination
   * In IPv4 it's written `ip:port`
   * In IPv6 `[ip]:port`
 

@@ -118,6 +118,9 @@ Check [this website](https://www.lix.polytechnique.fr/~liberti/public/computing/
     * `S_IWOTH` Gives everyone else write permission
     * `S_IXOTH` Gives everyone else execute permission
 * These flags can be combined with the bitwise OR operator
+* **Filestream** functions facilitate I/O with files by wrapping the details of open, close, etc
+  * They're from `stdio.h`
+  * 2 examples : `fopen()` & fgets\(\)
 
 {% hint style="info" %}
 Complete it by reading the man
@@ -184,6 +187,10 @@ Complete it by reading the man
 ### Misc
 
 * `getenv()` Takes the name of an env var and returns its memory address
+* UID-related functions :
+  * `int setuid(uid_t uid);` Set the effective user id of the process
+  * `int setreuid(uid_t ruid, uid_t euid);` Set the real & effective user id of the process
+  * `int setregid(gid_t rgid, gid_t egid);` Set the real & effective group id of the process
 
 ## Compilation
 
@@ -205,6 +212,7 @@ Complete it by reading the man
   * `-E` To see the result of the **preprocessing**
   * `-S` To create an `.s` **assembly** file
   * `-c` To create an `.o` **object** file
+* **Optimize** compilation for speed : `-O3`
 * Binaries compiled with gcc have special table sections for **constructors** & **destructors** called `.ctors` &  `.dtors`
   * Constructor functions are executed before `main()` 
   * Destructor functions are executed just before `main()` exits with an exit syscall
@@ -212,10 +220,6 @@ Complete it by reading the man
     * They start with `0xffffffff` and end with `0x00000000`
     * All addresses between those two have been respectively declared with either the constructor or destructor attribute
     * They're writable and included even if no constructor or destructor have been declared
-* UID-related functions :
-  * `int setuid(uid_t uid);` Set the effective user id
-  * `int setreuid(uid_t ruid, uid_t euid);` Set the real & effective user id
-  * `int setregid(gid_t rgid, gid_t egid);` Set the real & effective group id
 
 ## Misc
 
