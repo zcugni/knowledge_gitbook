@@ -87,8 +87,9 @@ The goal of encryption is to protect sensible data, there's 2 main types : symme
 * RSA is the most known, it uses a mathematical proporty : when you compute the product of 2 prime numbers, it's very complicated to retrieve them from the result
   * The bigger the number, the harder
   * I won't explain how it work exactly, i just know that it uses these prime numbers
-* It's more secure but slower than symmetrical encryption, so it's not use to encrypt whole file
-  * Instead it's used to securely send a symmetric key
+* It's more secure but slower than symmetrical encryption, so it's not use to encrypt a lot of data
+  * Hybrid cipher use an asymmetric key to encrypt the symmetric key used to encrypt the data
+  * Hybrid ciphers are used by most modern cryptographic applications, such as SSL, SSH, and PGP
 
 ### One time pad
 
