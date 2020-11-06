@@ -201,7 +201,10 @@ Complete it by reading the man
   * Assembler
   * Linker
   * For more details on this, see this [page](https://zcugni.gitbook.io/notes/languages/things)
-* The tool used is **GCC**, which will do all 4 steps
+
+### GCC
+
+* The tool used is GCC, which will do all 4 steps
 * `gcc <file_name> [-o <output_name] [-l<libname>] [-Wall -Wextra]`
   * The default output name is `a.out`
   * Write the lib name without extensions

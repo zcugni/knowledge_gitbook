@@ -43,8 +43,6 @@ I'm still knew to this field, so i might not always use the rights terms. It's a
 
 ### Stack-related
 
-
-
 | Instruction | Explanation |
 | :--- | :--- |
 | `push <arg1>` | Pushes arg1 to the stack, so decrement `sp` and writes arg1 at `sp` |
@@ -115,9 +113,6 @@ _start:
  mov ebx, 0    ; Exit with success.
  int 0x80      ; Do the syscall.
 ```
-
-* `; comments`
-* The `global _start` line shows the linker where the asm instructions begins
 
 ## Disassemble
 
