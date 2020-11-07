@@ -30,6 +30,7 @@
   * [Registers](binary-exploitation/memory/registers.md)
   * [Heap allocation \(malloc\)](binary-exploitation/memory/memory-allocation-linux-glibc.md)
 * [Executable creation](binary-exploitation/executable-creation/README.md)
+  * [ELF file linking](binary-exploitation/executable-creation/elf-file-linking.md)
   * [ELF Files](binary-exploitation/executable-creation/elf-files.md)
   * [Compilers](binary-exploitation/executable-creation/compilers.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
