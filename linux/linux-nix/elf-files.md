@@ -323,14 +323,26 @@ typedef struct {
       <td style="text-align:left"><code>SHT_PROGBITS</code>
       </td>
       <td style="text-align:left">Processor-specific</td>
-      <td style="text-align:left">Global offset table (dynamically linked global variables)</td>
+      <td style="text-align:left">
+        <ul>
+          <li>Global offset table</li>
+          <li>Dynamically linked global variables</li>
+          <li>Writable except with RELRO</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left"><b><code>.got.plt</code></b>
       </td>
       <td style="text-align:left"></td>
       <td style="text-align:left"></td>
-      <td style="text-align:left">Global offset table (dynamically linked functions)</td>
+      <td style="text-align:left">
+        <ul>
+          <li>Global offset table</li>
+          <li>Dynamically linked functions</li>
+          <li>Writable except with RELRO</li>
+        </ul>
+      </td>
     </tr>
     <tr>
       <td style="text-align:left"><code>.hash</code>
@@ -441,7 +453,7 @@ typedef struct {
       <td style="text-align:left"><code>SHT_PROGBITS</code>
       </td>
       <td style="text-align:left">Processor-specific</td>
-      <td style="text-align:left">Procedure linkage table</td>
+      <td style="text-align:left">Procedure linkage table (generally read-only)</td>
     </tr>
     <tr>
       <td style="text-align:left"><code>.rel.&lt;name&gt;</code>

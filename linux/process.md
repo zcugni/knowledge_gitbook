@@ -2,7 +2,7 @@
 
 ## Generalities
 
-* Anything running
+* A process is a program in execution
 * Each process has an address space and an id \(**PID**\) 
 * Each process has a parent. If it dies, the previous one is attributed as parent
   * First process : before `init`, now [`systemd`](https://zcugni.gitbook.io/notes/theory/systemd)

@@ -265,6 +265,10 @@ There's a way to directly execute a file without writing it to a disk, check tha
 * `gpg --list-keys` To see all the imported keys
 * `gpg --fingerprint <username>` To get the fingerprint of the user's public key
 
+### Elf
+
+* `readelf` Analyze elf files
+
 ### Tracing
 
 * `strace` Intercepts system calls made by libs to the kernel
