@@ -1,6 +1,6 @@
 # ELF Linking
 
-### Static Relocation
+## Static Relocation
 
 {% hint style="info" %}
 * Read :
@@ -8,7 +8,7 @@
   * [https://eli.thegreenplace.net/2013/07/09/library-order-in-static-linking](https://eli.thegreenplace.net/2013/07/09/library-order-in-static-linking)
 {% endhint %}
 
-### Dynamic relocation
+## Dynamic relocation
 
 * During compilation of the object file, the linker can resolve all **internal references** to symbols but at runtime it needs to resolve the **external** ones
 * To do that, there's 2 solutions :

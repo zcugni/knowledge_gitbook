@@ -8,7 +8,10 @@ description: 'Disclaimer : The vuln part isn''t complete / might not be right'
 
 * I haven't yet had the occasion to really research cryptography, the following is more akin to personal notes of stuff i stumble upon while researching other things
   * As such, it's neither complete nor fault-proof
-* I should re-read the cryptography chapter of Hacking : The Art of Exploitation once i have a better understanding of this field 
+
+{% hint style="info" %}
+I should re-read the cryptography chapter of Hacking : The Art of Exploitation once i have a better understanding of this field
+{% endhint %}
 
 ## Generalities
 
@@ -173,6 +176,6 @@ The goal of encryption is to protect sensible data, there's 2 main types : symme
 
 * [Hacker101](https://www.hacker101.com/sessions/crypto_crash_course)
 * PGP Encryption : [varonis.com](https://www.varonis.com/blog/pgp-encryption/)
-* Hacking : The Art of Exploitation by John Erickson
+* _Hacking : The Art of Exploitation_ by John Erickson
 * Misc Research
 
