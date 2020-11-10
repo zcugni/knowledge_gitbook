@@ -1,6 +1,12 @@
-# ELF file linking
+# ELF Linking
 
 ### Static Relocation
+
+{% hint style="info" %}
+* Read :
+  * [https://eli.thegreenplace.net/2012/08/13/how-statically-linked-programs-run-on-linux](https://eli.thegreenplace.net/2012/08/13/how-statically-linked-programs-run-on-linux) 
+  * [https://eli.thegreenplace.net/2013/07/09/library-order-in-static-linking](https://eli.thegreenplace.net/2013/07/09/library-order-in-static-linking)
+{% endhint %}
 
 ### Dynamic relocation
 

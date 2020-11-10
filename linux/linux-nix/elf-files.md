@@ -444,7 +444,7 @@ typedef struct {
       <td style="text-align:left">Procedure linkage table</td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>.rel&lt;name&gt;</code>
+      <td style="text-align:left"><code>.rel.&lt;name&gt;</code>
       </td>
       <td style="text-align:left"><code>SHT_REL</code>
       </td>
@@ -459,7 +459,7 @@ typedef struct {
       </td>
     </tr>
     <tr>
-      <td style="text-align:left"><code>.rela&lt;name&gt;</code>
+      <td style="text-align:left"><code>.rela.&lt;name&gt;</code>
       </td>
       <td style="text-align:left"><code>SHT_RELA</code>
       </td>
@@ -620,6 +620,7 @@ typedef struct {
     * `ELF64_R_TYPE(info)` : `((Elf64_Word)(info))`
 * `r_addend` A constant addend to compute the value to be stored into the relocatable field
 * The index of the corresponding symbol table section is written in the relocation section header
+* The process of relocation is described [here](https://zcugni.gitbook.io/notes/binary-exploitation/executable-creation/elf-file-linking)
 
 ### Dynamic type
 
@@ -649,7 +650,6 @@ extern Elf64_Dyn _DYNAMIC[];
   * There's a looot of d\_tag, so i won't list them
 * `d_val` Various interpretations
 * `d_ptr`  Program virtual addresses
-  * When interpreting these addresses, the actual address should be computed based on the original file value and memory base address
 * `_DYNAMIC` Array of all the structures in the `.dynamic` section
   * Automatically populated by the linker
 
@@ -677,48 +677,8 @@ typedef struct {
 
 *  `n_type` Depending on the value of the name field, this will change. There's a lot of possible values, i won't list them
 
-## Notes
-
-* For statically linked programs, execution is straight forward. The system creates the memory layout from the file’s segments and passes control to the file’s entry point.
-*  With dynamically linked programs, the system executes the file’s “interpreter”, which is an intermediate program that should set up the environment and only then execute the main binary. The interpreter lies in the _PT\_INTERP_ segment created by the compile-time linker \(_**ld**_\). In this case, the interpreter is the dynamic linker program **ld-linux.so.2**:
-*  The dynamic linker will set up the environment using dynamic entries from the _.dynamic_ section:
-*  * **DT\_NEEDED** – the name of a required dependency to load.
-  * **DT\_SYMTAB** – the address of the dynamic symbol table \(covered in our [previous blog post](https://intezer.com//executable-linkable-format-101-part-2-symbols/) about symbols\).
-  * **DT\_FLAGS** – such as the BIND\_NOW flag that instructs the dynamic linker to perform all linking before handing over control to the program.
-* **Lazy linking** is an optimization for this problem. Lazy linking instructs the dynamic linker to resolve function references when they are called \(lazily\) instead of at load-time \(eagerly\).
-
-  This is enabled by the **Procedure Linkage Table \(PLT\)** and the **Global Offset Table \(GOT\)**.
-
-  The GOT holds entries of addresses of global variables and external functions.
-
-  The PLT consists of short entries of instructions \(often called “trampolines” or “thunks”\), used to reach external functions by redirecting control flow of execution to its corresponding GOT entry.
-
-  Generally speaking, in dynamically linked executables, external functions are reached by calling their respective PLT entry:
-
-* call \_printf@plt
-  * The PLT entry will retrieve the function’s address from the function’s GOT entry, and call it:
-  * With early binding, GOT entries are relocated by the dynamic linker at load-time.
-  * With lazy linking, the GOT entries will be relocated on-demand by a function call. At a function’s first invocation, the PLT will be used to call the dynamic linker to link the missing function.
-
-## Relocation process
-
-* .got - Global offset table \(dynamically linked global variables\) 
-  * This is the actual table of offsets as filled in by the linker for external symbols
-* .plt This is the PLT, or Procedure Linkage Table. These are stubs that look up the addresses in the `.got.plt` section, and either jump to the right address, or trigger the code in the linker to look up the address. \(If the address has not been filled in to `.got.plt` yet.\)
-* .got.plt This is the GOT for the PLT. It contains the target addresses \(after they have been looked up\) or an address back in the `.plt` to trigger the lookup. Classically, this data was part of the `.got` section.
-  *  the `.got.plt` section is basically a giant array of function pointers
-* .dynamic: The structure residing at the beginning of the section holds the addresses of other dynamic linking information.
-* .got and .plt \(procedure linkage table\): .got stores the addresses of system functions and the .plt stores indirect links into the GoT
-* the section is the .got.plt section, which is a specific section dedicated to hold a table of pointers, as an interface for the application to access relocated dynamically linked procedures addresses.
-* \(PLT\). This section consists of many jump instructions, each one corresponding to the address of a function. It works like a springboard—each time a shared function needs to be called, control will pass through the PLT.
-  * the procedure linking table is shown to be read only.
-  * they aren’t jumping to addresses but to pointers to addresses
-  * These addresses exist in another section, called the global offset table \(GOT\), which is writable. These addresses can be directly obtained by displaying the dynamic relocation entries for the binary by using objdump.
-  * . Another advantage of overwriting the GOT is that the GOT entries are fixed per binary, so a different system with the same binary will have the same GOT entry at the same add
-* readelf
-
 ## Source
 
-* Manual pages
+* Elf's man page
 * Intezer.com articles : [1](https://www.intezer.com/blog/research/executable-linkable-format-101-part1-sections-segments/), [2](https://www.intezer.com/blog/elf/executable-linkable-format-101-part-2-symbols/), [3](https://www.intezer.com/blog/elf/executable-and-linkable-format-101-part-3-relocations/), [4](https://www.intezer.com/blog/elf/executable-linkable-format-101-part-4-dynamic-linking/)
 
