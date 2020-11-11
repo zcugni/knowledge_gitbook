@@ -13,7 +13,7 @@ This concerned **procedural** programming, not **functional**.
 * Data needs to be stored, a **variable** is a space of memory that is reserved for some kind of information that you named
   * As the name says, the data in a variable can change over time
     * For some languages, it's type too
-  * **constant** Contain values that won't change over time
+  * **constant** contain values that won't change over time
 * It can be numbers, words, sentences, etc
 * To reserve the right space in memory, the compiler needs to know the **type** \(and therefore the size\) of the data you want to save
   * Some languages, like python, will guess this type from the content, while others, like C, will ask you to define it
