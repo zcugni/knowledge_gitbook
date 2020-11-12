@@ -96,7 +96,10 @@
 #### scp
 
 * Through ssh
-* Remote to local : `scp <username>@<ip>:<file> <local_dir>`
+* Remote to local : 
+  * Without port : `scp [<username>@]<ip | hostname><:path>`
+  * With port : `scp [<username>@]<ip | hostname>:<port>/<path>`
+  * Path is absolute
 * Local to remote : `scp <file> <username>@<ip>:<remote_dir>`
 * Absolute path
 
@@ -395,10 +398,11 @@ With this kind of json :
   * For bash, there's a more detailed history in`/home/<user>/.bash_history`  only readable by the user
   * The cmd is more permissive but less complete
 * `echo <string>` Print the string to the `stdout`
-  * Its a builtin command and each shell can change it so it won't necessarily act like the man describe
+  * Its a **builtin** command and each shell can change it so it won't necessarily act like the man describe
+    * In some setup 
   * `-n` Remove the last `\n`
   * `-e` Interpret backslash escape, will interpret sequence like `\n` or `\x41`
-    * In `/bin/bash`, `-e` doesn't do anything, instead it interpret these sequences if the string is between `'` or `"` 
+    * Since it's a builtin in certain setup `-e` doesn't do anything, instead it interpret these sequences if the string is between `'` or `"` 
 
 ## Bash tips
 
