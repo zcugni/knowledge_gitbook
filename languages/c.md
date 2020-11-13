@@ -83,7 +83,7 @@ Add others, cleans example with correct syntax
   * `%p` Memory address \(equivalent to `0x%08x`\)
   * `%n` Will write the number of character written so far at this address
 * Define the minimum width of an element with `%<nb><format_specifier>`
-  * It will pad the element to nb length with space
+  * It will **pad** the element to nb length with space
   * To pad it with 0, use `%0<nb><format_specifier>`
   * Example : `%8d`
   * This is called a **field width parameter**

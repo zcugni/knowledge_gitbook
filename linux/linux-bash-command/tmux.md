@@ -40,7 +40,7 @@ These also exist in written cmd, but that's less practical.
 | `ctrl-b %` | Split pane vertically |
 | `ctrl-b "` | Split pane horizontally |
 | `ctrl-b x` | Kill pane |
-| `ctrl-b q` | Show pane numbers |
+| `ctrl-b q <nb>` | Show pane numbers and then switch to the given one |
 | `ctrl-b o` | Switch to next pane |
 | `ctrl-b-o` | Inverse les panes |
 | `ctrl-b arrow keys` | Resize panes |
