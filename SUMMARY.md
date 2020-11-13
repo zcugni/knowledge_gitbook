@@ -121,6 +121,5 @@
 * [MySQL](oh-hold/mysql.md)
 * [Methodology reverse engienering](oh-hold/methodologie-reverse-engienering.md)
 * [BDD Language differencies](oh-hold/bdd-language-differencies.md)
-* [Note draft](oh-hold/hacking-the-art-of-exploitation-notes.md)
 * [Misc](oh-hold/misc.md)
 

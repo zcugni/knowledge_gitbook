@@ -689,7 +689,7 @@ typedef struct {
 
 *  `n_type` Depending on the value of the name field, this will change. There's a lot of possible values, i won't list them
 
-## Source
+## Sources
 
 * Elf's man page
 * Intezer.com articles : [1](https://www.intezer.com/blog/research/executable-linkable-format-101-part1-sections-segments/), [2](https://www.intezer.com/blog/elf/executable-linkable-format-101-part-2-symbols/), [3](https://www.intezer.com/blog/elf/executable-and-linkable-format-101-part-3-relocations/), [4](https://www.intezer.com/blog/elf/executable-linkable-format-101-part-4-dynamic-linking/)

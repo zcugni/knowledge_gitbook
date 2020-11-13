@@ -7,7 +7,7 @@ I'm still knew to this field, so i might not always use the rights terms. It's a
 ## Generalities
 
 * Assembly is the language closest to the machine
-  * As such, each type of processor has a different set of instructions \(such as `mov`, jumps, etc\) with different opcodes \(hex number identifying an instruction\)
+* Each type of processor has a different set of instructions \(such as `mov`, jumps, etc\) with different opcodes \(hex number identifying an instruction\)
 * This page will mostly speak about **IA-32 architecture using the x86 instruction set** \(i'm not entirely sure of the terminology\)
 
 ## AT&T vs Intel syntax
@@ -33,6 +33,7 @@ I'm still knew to this field, so i might not always use the rights terms. It's a
     * AT&T  use different suffix `movl ..`
     * Intel use different keywords words `mov DWORD PTR ...`
       * `DWORD` here means 4 bytes, while a `WORD` would be 2 bytes
+  * In intel `ds:0x..` explicitly specify to take the value at the address \(derefencing a pointer\) while AT&T leave it implied
 
 ## Instructions
 

@@ -394,6 +394,9 @@ With this kind of json :
   </tbody>
 </table>
 
+* `seq [first_nb] [increment] <last_nb>` Generate a sequence of number
+  *  Start at `first_nb` and incremented by `increment` until 
+  * Default `first_nb` & `increment` are 1
 * `history` Shows history of cmd
   * For bash, there's a more detailed history in`/home/<user>/.bash_history`  only readable by the user
   * The cmd is more permissive but less complete

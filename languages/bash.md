@@ -206,8 +206,6 @@ Et on peut chaîner avec `|` : `time cmd1 | cmd2 | ...`
 * `cmd1 || cmd2` cmd2 is executed only if cmd1 failed 
 * `cm1; cmd2;` cmds are executed sequentially
 
-
-
 ## Script
 
 * `exit nb` Exit the script and returns nb \(0 being success\) 
