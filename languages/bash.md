@@ -1,45 +1,58 @@
 # Bash
 
-## Terminologie
+## Terminology
 
 ### Bash, shell, terminal, etc
 
-Bash \(_Bourne-Again-Shell_\) est le shell \(command line interpreter\) de l'os GNU. Il est compatible avec `sh` et intègre des fonctionnalités du _Korn Shell_ `ksh` et du _C Shell_ `csh`.
-
-Shell est un _macro processor that executes commands_. Un shell unix est à la fois un _command interpreter_ et un langage de programmation.
-
-> Terminal, shell & command line are often used interchangeably to indicate a text based system for navigating your OS. Command line is very windows centric terminology, terminal is very mac centric.
+* **Bash** \(_Bourne-Again-Shell_\) is a GNU shell \(command line interpreter\) 
+  * It's compatible with `sh` and include functionalities of the Korn Shell \(`ksh`\) and the C Shell \(`csh`
+* **Shell** is a _macro processor_ that executes commands
+  * A unix shell is both a _command interpreter_ and a programmation language
+* **Terminal**, **shell** & **command line** are often used interchangeably to indicate a text based system for navigating your OS
+  * Command line is very windows centric terminology, terminal is very mac centric
 
 ### Interactive, login & pseudo shell
 
-**Interactive** shell are simply shells. We call them that for cmd that generate them. For exemple, sudo can either send a cmd to a shell and just give back the result, or return an interactive shell to use.
-
-**Login** shell are interactive shell that simulate the state you get at login. So it clears env var, read login files like `.profile`, etc
-
-**Pseudo**-shell \(or pseudo terminal ?\) are independent from the process/session that spawns them, so there's less security issue. The spawner act as a proxy \(i guess\). \(It's kind of like a sandbox ?\)
+* **Interactive** shells are simply shell
+  * We call them interactive because we can give them input and receive output
+  * For example, sudo can either :
+    * Send a cmd to a shell and give back the result
+    * Return an interactive shell to u
+* **Login** shells are interactive shells that simulate the state you get at login
+  * It clears environment vars, read login files like `.profile`, etc
+* **Pseudo**-shell \(or pseudo terminal ?\) are independent from the process/session that spawns them, so there's less security issues
+  * I guess it's kind of like a sandbox
 
 ## Shebang
 
-* Little com at the start of the script that indicates to the machine the path to the interpreter to use \(if it hasn't been specified, like when you launch in that way :`./script`\)
+* A one-line comment at the start of the script
+* Indicates the path to the interpreter to use when you launch the script without specifying it
 * Generally, use `#!/bin/bash`
 
 ## Variable
 
-* Assignment : `var="value"` \(Won't work with spaces because if will search for the cmd name\)
+* Assignment : `var="value"`
+  * Won't work with spaces around the `=` because if will search for the cmd name
 * Call :
 
 ```bash
-echo "str is $var ." # On peut pas coller de caractères au nom de la var
-echo "str is ${var}s." # On peut
+echo "str is $var ." # You can't write chars directly next to $var
+echo "str is ${var}s." # You can
 ```
 
-* environment variable / constant in CAPS
-* To put a command in a var do `x=(printf "test");` \(test avec un $ devant la paranthèse si ça marche pas\)
-* `$?` Return value of last cmd
-* `$#` Number of args in the script
-* `$0` Name of the script
-* `$1..$n` Script arguments
-* `$@` Liste des paramètres
+* Environment variable / constant in CAPS
+* There's some special chars :
+  * `$?` Last cmd's return value
+  * `$#` Number of args in the script
+  * `$0` Name of the script \(0th arg\)
+  * `$<nb>` Script arg number `n`
+  * `$@` List args
+
+{% hint style="info" %}
+* I wrote " To put a command in a var do `x=(printf "test");` \(test avec un $ devant la paranthèse si ça marche pas\)" but update it
+* With `x=$(pwd)`, test if `x` gives always the same result or not \(aka, does it contain the cmd or the result ?
+* Test without `$`
+{% endhint %}
 
 ## Quoting
 
@@ -49,7 +62,7 @@ echo "\$,\`,\\ will be interpreted"
 echo "this is a `cmd_to_be_interpreted`."
 ```
 
-## Fonctions
+## Functions
 
 ```bash
 function_name(){
@@ -61,10 +74,14 @@ function function_name(){
 }
 ```
 
-* On peut l'utiliser avec ou sans le keyword `function`
-* A l'intérieur d'une fonction `$1` représente le premier paramètre de celle-ci et non du script
-* On les appelles directement sans \(\) : `echo "test"`.
-* La valeur de retour est celle de la dernière commande.
+* The keyword `function` is optional
+* If you use `$1` inside a function, it will return it's first parameter and not the one of the script
+
+{% hint style="info" %}
+* I wrote that but i think i mix it up with command :
+  * On les appelles directement sans \(\) : echo "test".
+  * La valeur de retour est celle de la dernière commande.
+{% endhint %}
 
 ## Loops
 
@@ -83,83 +100,85 @@ for parameter; do cmd; done
 
 ## Condition - If
 
-### Généralités
+### Generalities
 
-* Il y a plusieur syntaxe permettant d'écrire un if, plus ou moins vielles et plus ou moins complètes.
-* Tout les interpreter \(bash, sh, zsh, etc\), ne réagissent pas tous de la même façon. Les explications ci-dessous fonctionne pour **bash.**
-* J'ai fait un [script de test](https://github.com/zcugni/misc_script/blob/master/test.sh) pour vérifier le comportement. Use it with `bash test.sh`, `sh test.sh`, etc to see the difference
-* Généralement, utiliser cela :
+* There's multiple if syntaxes, more or less old & complete
+  * Interpreters \(bash, sh, zsh, etc\) don't react the same to all of them
+  * The following explanations are for **bash**
+* I wrote a [test script](https://github.com/zcugni/misc_script/blob/master/test.sh) to verify its behavior
+  * Use it with `bash test.sh`, `sh test.sh`, etc to see the difference
 
-```bash
-if [[ condition ]]; then
-    # cmd...
-elif [[ condition ]]; then
-    # cmd...
-else
-    # cmd...
-fi
-```
+{% hint style="info" %}
+I think this test script is private in my github
+{% endhint %}
 
-* `elif` & `else` optionnels
-* `;` peut être remplacé par un retour à la ligne
+* Usually, use this syntax :
+  * ```bash
+    if [[ condition ]]; then
+        # cmd...
+    elif [[ condition ]]; then
+        # cmd...
+    else
+        # cmd...
+    fi
+    ```
+  * `elif` & `else` are optional
+  * `;` Can be replace by a new line
 
-### Type de test
+### Type of test
 
-* Attention, si on utilise un symbole non géré, il n'y aura pas forcément d'erreur, mais le résultat pourra être erroné.
+* Warning :  if you use an unknown symbol, you won't necessarily get an error, but the result might be wrong
 * `if [[ condition ]]`
-  * Les espaces après le `[` et avant le `]` sont nécessaires
-  * Opérateurs pour les strings : `=`, `==`, `>`, `<`
-  * Opérateurs pour les nombres : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le`, `=`, `==`, `!=`, `>`, `<`
-  * `&&`, `||`
+  * The spaces after the `[` and before the `]` are necessary
+  * String operators : `=`, `==`, `>`, `<`
+  * Int operators : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le`, `=`, `==`, `!=`, `>`, `<`
+  * Combination operators : `&&`, `||`
   * Not POSIX compliant but supported by bash
   * Support regular expression
 * `if (( condition ))`
-  * Utilisé uniquement pour les comparaisons numériques \(y'aura pas forcément d'erreur pour les strings, cf le warning d'en dessus\)
-  * `==, !=, >, <, >=, <=`
-  * `&&, ||`
+  * Used only for numerical comparison
+  * Int operators : `==, !=, >, <, >=, <=`
+  * Combination operators : `&&, ||`
 * `if [ condition ]`
   * Old \[\[ \]\] version, alias to `test`
-  * Les espaces après le `[` et avant le `]` sont nécessaires
-  * Opérateurs pour les strings  : `=`, `==`
-  * Opérateurs pour les nombres : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le, =, ==, !=`
-  * `-o`, `-a`
+  * The spaces after the `[` and before the `]` are necessary
+  * String operators : `=`, `==`
+  * Int operators : `-eq`, `-ne`, `-gt`, `-lt`, `-ge`, `-le, =, ==, !=`
+  * Combination operators : `-o`, `-a`
   * If one part of the equation evaluate to an empty string, it won't work
-  * Si une variable contient une chaine avec des espaces, il faut l'entourer de `"` :
+  * If a variable contains a string with space, you need to write it into `"` :
   * ```bash
     file="file name"
     [ -f "$file" ] && echo "$file is a regular file"
     ```
-* Il existe aussi des symboles particulier permettant de travailler avec des fichiers, par exemple `-e` ou `-nt` mais je ne les ai pas encore utilisé
-
-### Test avec commande
-
-* Il existe aussi des syntaxes mélangeant `if` avec une commande, mais ce n'est pas tout à fait la même chose.
-* `if (command)`
-  * Runs the command in a subshell. When it completes, it sets an exit code and the if statement acts accordingly.
-  * Used to limits side-effects for commands that need special var or other changes to the shell's environment. Those disappear with the subshell
-* `if command` The command is executed and the if statement acts accordingly to its exit code.
+* There's some special symbols to work with files, for example : `-e` or `-nt`, but i have not experienced with them
+* There's 2 syntaxes to mix `if` with cmds :
+  * `if (command)`
+    * Runs the command in a subshell. When it completes, it sets an exit code and the if statement acts accordingly
+    * Used to limits side-effects for commands that need special var or other changes to the shell's environment. Those disappear with the subshell
+  * `if command` The command is executed and the if statement acts accordingly to its exit code
 
 ## Condition - Case
 
 ```bash
 case $var in
-  pattern1 | pattern2 | patter3) cmd;;
+  pattern1 | pattern2 | pattern3) cmd;;
   pattern4 | pattern5 ) cmd;;
   *) cdm;;
 esac
 ```
 
-* Chaque pattern est séparé d'un `|`
-* Une liste de pattern est terminée par `)`
-* `*` est le cas par défaut
-* `;;` si ça match, on arrête après avoir exécuter les commandes de cette clause
-* `;&` si ça match, on exécute en plus les commandes de la prochaine clause
-* `;;&` si ça match, tester la prochaine clause après avoir exécutée celle-ci
-* Si aucun pattern n'a match, return 0, sinon retourne le status de la commande
+* Each pattern is separated by a  `|`
+* A list of pattern is ended by a `)`
+* `*` is the default case
+* `;;` If it matches, stop  after executing the command for this condition
+* `;&` If it matches, execute this condition cmd and the next one
+* `;;&` if it matches, execute this condition cmd and test the next condition
+* If there's no match, return 0, else return the status of the last cmd executed
 
 ## Condition - Select
 
-Commande un peu spéciale permettant de créer des menus :
+Special command that lets you create menus :
 
 ```bash
 select brand in Samsung Sony iphone symphony Walton
@@ -178,31 +197,28 @@ Each process being run has 3 channels
 | `STDIN` | Standard input | 1 | The keyboard |
 | `STDERR` | Standard error | 2 | The shell |
 
-On peut rediriger avec `>` et `<` :
+* You can redirect with `>` & `<` :
+  * `cmd1 > cmd2` or `cmd1 1> cmd2` Use the cmd1 output as input for cmd2
+  * `cdm1 2> cmd2` Use the cmd1 `STDERR` as input for cmd2
+  * `cmd1 < cmd2` Usethe cmd2 output as input for cmd1
+  * `cmd1 >> file` Append to the file instead of replacing it
+    * You can also use it with  `2>>`
+  * `cm1 &> file` Redirects both `STDOUT` & `STDERR` \(equivalent to `>&` & `2>&1`\)
+* You can chain with `|` : `[time] cmd1 | cmd2 | ...`
+  * Output of the first cmd is fed as input to the second cmd, etc
+  * `time` is optional and gives the total time of the operation
+  * Each cmd is executed in it's own subshell
+  * `|&` will also feed `STDERR`
 
-* `cmd1 > cmd2` ou `cmd1 1> cmd2` Output de cmd1 en input de cmd2
-* `cdm1 2> cmd2` STDERR de cmd1 en input de cmd2
-* `cmd1 < cmd2` Output de cmd2 en input de cmd1
-* `cmd1 >> file` Append to the file instead of replacing it
-  * You can also use it with  `2>>`
-* `cm1 &> file` Redirects both STDOUT & STDERR \(équivalent à `>&` et `2>&1`\)
+## Run a command
 
-Et on peut chaîner avec `|` : `time cmd1 | cmd2 | ...`
+* Directly use it's name and parameters : `uname -a`
+* Write it between `````
+* Write it inside `$()` : `$(command)`
 
-* Output of first cmd is fed as input to second cmd, etc
-* `time` is optional and gives the total time of the operation
-* Each cmd is executed in it's own subshell
-* `|&` will also feed STDERR
+## Chain commands
 
-## Run une commande
-
-* Directement son nom et ces params : `uname -a`
-* Entre ````` 
-* `$(command)`
-
-## Chaîner des commandes
-
-* `cmd1 && cmd2` cmd2 is executed only if cmd1 succeded 
+* `cmd1 && cmd2` cmd2 is executed only if cmd1 succeeded
 * `cmd1 || cmd2` cmd2 is executed only if cmd1 failed 
 * `cm1; cmd2;` cmds are executed sequentially
 
