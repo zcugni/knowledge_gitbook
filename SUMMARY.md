@@ -83,7 +83,7 @@
 * [MongoDB](languages/mongodb.md)
 * [PHP](languages/php.md)
 * [Python](languages/python/README.md)
-  * [Syntaxe](languages/python/syntax.md)
+  * [Syntax](languages/python/syntax.md)
   * [Norme](languages/python/norme.md)
   * [Libs](languages/python/libs.md)
 * [XML](languages/xml/README.md)

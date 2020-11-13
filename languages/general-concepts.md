@@ -57,6 +57,7 @@ This concerned **procedural** programming, not **functional**.
 * Arrays & list contains multiple value \(of the same type or not\)
 * Arrays are of a define fixed size, so they are given an allocated space where each value can be next to each other
   * This is why you can access their content through indexes \(which are actually offset added to the start address of the array\)
+* Their indexes start at 0
 * List aren't of fix size, and don't get a pre-allocated space, which means that each element must at least keep a pointer to the next one
 * Array are easier and faster to traverse, but you can't add or delete element, only change their values
 * List are more complex to traverse, but you can add & remove elements all you want

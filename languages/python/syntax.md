@@ -1,40 +1,41 @@
-# Syntaxe
+# Syntax
 
-## Générale
+## General
 
-* Déclaration de variable : sans type \(ex : `index = 0`, ou `str = "Test"`\)
-* `# Ceci est un commentaire.` Il n'y en a pas de multi-lignes, à part les Docstrings qui sont utilisée pour la documentation
+* Declare variables without defining a type
+* `# This is a comment`
+  * There's no multi-line, except Docstrings, but they shouldn't be use for that
 
-## Opérateurs
+## Operators
 
-### Numériques
+### Numerical
 
-| Symbole | Sens |
+| Symbol | Definition |
 | :--- | :--- |
-| + | Addition / Concaténation |
-| \* | Multiplication \(nombre & strings\) |
+| + | Addition / Concatenation |
+| \* | Multiplication \(number & strings\) |
 | - |  |
 | / |  |
 | // | Floor division \( 5 // 2 = 2\) |
 | % | Modulo |
-| \*\* | Exposant |
+| \*\* | Exponent |
 
-### De comparaison
+### Comparison
 
 * `==` && `!=`
 * `<` && `>`
 * `<=` && `>=`
 
-### Autre
+### Condition
 
 * `and`
 * `or`
 * `not` / `is not`
-* `in` Check si un élément est dans une liste, est aussi utilisé dans les boucle for
+* `in` Check if an element is in the list, also used if for loop
 
 ## Conditions
 
-Le switch n’existe pas.
+* There's no switch
 
 ### if - elif - else
 
@@ -47,7 +48,7 @@ else:
     #code
 ```
 
-#### Utilisation du not
+#### Uses of not
 
 ```python
 if "." not in str:
@@ -60,29 +61,29 @@ if not (elem1 or elem2 or elem 3):
     # code
 ```
 
-### Ternaire
+### Tertiary
 
 ```python
-val = "something" if test else "something else
+var = "something" if test else "something else"
 
-# On peut mettre du ternaire dans un printf :
+# You can put tertiary into printf :
 print("Splitting", total_candies, "candy" if total_candies == 1 else "candies")
 ```
 
-## Boucles
+## Loop
 
 ### for
 
 ```python
-# De base
+# Basic
 for var_name in iterable_object:
     # code
 
-# Avec range (on peut omettre start s'il veut 0)
+# With a range (the start is 0 by default)
 for var_name in range(start, end):
     # code
 
-# Avec index
+# With an index
 for index, var_name in enumerate(iterable_object):
     #code
 ```
@@ -97,11 +98,10 @@ while test:
 
 ## String
 
-* Les strings peuvent être entourées "" ou de ''
-* On peut comparer des string entre elles
-* On ne peut pas modifier les string
+* In between `"` or `'`
+* You can't modify them
 
-### Fonctions utiles
+### Useful functions
 
 * `.upper()` && `.lower()`
 * `.index(“substring”)`
@@ -109,41 +109,49 @@ while test:
 * `.join()`
 * `len(str)`
 
-### Concaténation
+### Concatenation
 
-* Avec `+`
-* Avec format : `"asdqwr {0} wrew {1} {1}"".format(var0, var1)`. On peut aussi ne pas mettre d’index et juste {}, auquel cas les params doivent être dans l’ordre.
-* Pour concaténer avec d’autres type , il faut d’abord caster au moyen de `str(var)`.
+* With `+`
+* With `format` : `"asdqwr {0} wrew {1} {1}"".format(var0, var1)`
+  * The index is optional if the arguments are in the right order
+* To concatenate with other types, you must first cast : `str(var)`
 
-## Fonction
+## Function
 
-### Déclaration
+### Declaration
 
 ```python
-def name(param1, param2, param3 = valeur_defaut):
+def example_name(arg1, arg2, arg3 = default_value):
 
     """Documentation
 
-    [blablabla]
+    [....]
 
     >>> exemple
 
     """
-    #ligne1
-    #ligne2
+    # code
     return val
 ```
 
-* Les lignes en dessous d’une déclaration doivent être indentées.  
-* Les paramètres peuvent être optionnels si on leur fournit une valeur par défaut. Ceux-ci doivent être placés à la fin de la liste.
-* On peut passer une autre fonction en paramètre simplement en donnant son nom \(sans les  parenthèses\).
-* Ce n’est pas possible de passer par référence
+* Lines under a declaration must be indented  
+* You can create optional parameters by giving them a default value
+  * They must be at the end of the list
+* You can pass a function as argument by giving its name without \(\)
+* It isn't possible to pass by reference
 
-### Retour
+### Call
 
-* Pas obligatoire \(ce sera `None` par défaut\) 
-* Parenthèse non obligatoires
-* On peut retourner plusieurs valeurs aux moyens des tuples
+* `example_name(arg1, arg2, arg3)`
+* `example_name(arg1, arg2)` Default value for arg3
+* `example_name(agr2, arg3 = val, arg1 = val)` The order of the arguments is unimportant
+* To unpack \(get the element one by one of\) a list/tuple : `func(arg1, *list_or_tuple)`
+
+### Return
+
+* `None` by default, not mandatory
+* parenthesis optional
+* You can return multiple values with tuples
 
 ```python
 def exemple(param):
@@ -153,40 +161,31 @@ def exemple(param):
 plop, plip = example(3)
 ```
 
-### Appel
+### Anonymous function
 
-`name(param1, param2, param3)`
-
-* Valeur par défaut \(pour param3\) `name(param1, param2)`
-* Ordre non important `name(param2, param3 = val, param1 = val,)`
-* “Unpack” une liste/tuple \(python récupére 1 à 1 les éléments comme paramètres\) `name(param1, *list_ou_tuple)`
-
-### Fonction anonyme
-
-Une fonction anonyme est une fonction qu’on a pas déclarée, à laquelle on a pas assigné de nom. On l’utilise donc en général qu’une seule fois en l’a passant en paramètre.
-
-Par exemple, ceci pourrait être passé à un `.apply()` de panda :
+* An anonymous function doesn't have a name and therefor is used only once as a parameter
+* For example, an `.apply()` of the panda lib : 
 
 ```python
 lambda x : ast.literal_eval(x) if not pd.isna(x) else []
 ```
 
-## Classe
+## Class
 
-### Généralité
+### Generalities
 
-* Tout en python est un objet. 
-* On peut appeler une fonction de la classe parente en utilisant `super()`.
-* Pour accéder à nos propres fonctions/méthodes, on utilise le mot clé `self`.
+* Everything in python is an object
+* You can call a function of the parent class with `super()`
+* To access its function, use `self`
 
-### Syntaxe
+### Syntax
 
 ```python
-class Nom:
-    variable_classe
+class Name:
+    class_variable
 
     __init__(self, param, ..):
-        self.variable_instance
+        self.instance_variable
         #code
 
     def func1(self, ...):
@@ -197,20 +196,22 @@ class Nom:
         #code
 ```
 
-### Variable & Fonctions
+### Variable & Functions
 
-* Les variables \(attributs\) et fonctions \(méthodes\) sont accessible avec un `.`
-* Les variables de classes déclarées directement à la racine de celle-ci sont partagées entre chaque instance
-* Les variables d’instance sont indépendantes d’une instance à l’autre et s’accède au moyen de `self.var_name`
-* Les fonctions d’une même classe sont aussi accessible par `self.func_name(...)`
-* Le premier paramètre par défaut d’une méthode est `self`, présent dans sa définition mais pas quand on l’appelle
-* Si on n’a pas besoin de self, on peut écrire `@staticmethod` au-dessus
+* Variables & functions are accessed via `.`
+* Class variable are declared at the root of the classe and are shared with each instance
+* Instance variable exist only for their instance and are access with `self.<var_name>`
+* Function of their own class are accessed with `self.<func_name>(...)`
+* The first parameter of a function is `self`, present is the declaration but not when we call it
+  * If you don't need `self`, write `@staticmethod` over it
 
 ### Module & package
 
-Les modules sont en fait les fichiers dans lesquels sont définis les fonctions/variables/etc. Leur nom dépend du nom du fichier. C’est ce qu’on `import`.
-
-Les packages sont en fait les dossiers et sous dossiers contenant ces modules. Un packages gérant le son aura par exemple cette structure-là:
+* Modules are files in which are defined functions/variables, etc
+  * Their name depends on the name of the file
+  * Those are the ones you can `import`
+* Packages are directories and sub directories containing those modules
+* Example :
 
 ```text
 /sound  # package name
@@ -232,19 +233,15 @@ Les packages sont en fait les dossiers et sous dossiers contenant ces modules. U
     .../
 ```
 
-## Structure de données
+## Data structure
 
 ### List
 
-* On les déclare ainsi : `list = [element1, element2, element3]`
-* Les éléments peuvent être de n’importe quel type
-* On peut avoir plusieurs type par liste
-* On peut accéder à un élément d’une liste comme pour un tableau.
-* L’index commence à 0
-* On peut commencer par la fin en utilisant des index négatifs
-* On peut modifier le contenu d’une liste sur le tas
-
-On peut aussi écrire des listes de listes de 2 façons :
+* Declaration : `list = [element1, element2, element3]`
+* The element can be of any type and of mixed type
+* Access a list element like you would an array
+  * To access element at the end, use negative index
+* There's 2 syntax : 
 
 ```python
 hands = [
@@ -258,18 +255,16 @@ hands = [['J', 'Q', 'K'], ['2', '2', '2'], ['6', 'A', 'K']]
 
 #### Slicing
 
-Syntaxe de base : `[start_rows:end_rows, start:col:end_col]` pour du 2d, avec une liste à un seul niveau on n’a qu’une sélection autour de `:`.
-
-* On peut utiliser des index négatifs
-* Le 0 n’est pas obligatoire
-* Le `:` non plus si on prends tout
-
-Sélectionner plusieurs index qui ne sont pas continus :
+* Basic syntax :`[start_rows:end_rows, start:col:end_col]` 
+* You can't use negative index
+* You don't have to write a starting `0`
+  * Nor an ending `:` if you take everything
+* To select multiple indexes that aren't continuous :
 
 ```python
 df[[in1, ind4, ind7], [col2, col4, col9]]
 
-# Ou 
+# Or 
 cols = [col2, col4, col9]
 rows = [ind1, ind4, ind7]
 df[rows, cols]
@@ -277,7 +272,7 @@ df[rows, cols]
 
 #### List comprehension
 
-On peut directement appliquer une condition ou une boucle à une liste :
+* You can directly apply a condition or a loop to a list : 
 
 ```python
 loud_short_planets = [planet.upper() + '!' for planet in planets if len(planet) < 6]
@@ -285,46 +280,45 @@ loud_short_planets = [planet.upper() + '!' for planet in planets if len(planet) 
 
 > `['VENUS!', 'EARTH!', 'MARS!']`
 
-#### Fonctions & méthodes utiles
+#### Useful functions
 
 * `len()`
-* `sorted()` Ca les trie
+* `sorted()` It sort them
 * `sum()`
 * `max()` && `min()`
 * `.append()`
-* `.pop(index)` Enlève et renvoit l’élément
-* `.index(elem_name)` Donne l’index de l’élément
-* `.remove(value)` Supprime la première instance de la valeur
+* `.pop(index)` Remove & return the element
+* `.index(elem_name)` Give the index of an element
+* `.remove(value)` Delete the first instance of a value
 
 ### Tuples
 
-Les tuples sont comme des listes, sauf pour 2 choses:
+* Tuples are like list except for 2 things :
+  * Declare them in parentheses :  `t = (1,2,3)`
+  * They can't be modified
+* Assign the value of a tuple to variables : `var1, var2 = tuple`
 
-* Ils se déclarent avec parenthèses `t = (1, 2, 3)`
-* Ils ne peuvent pas être modifié
-* Assigner des variables au résultat d’un tuple : `var1, var2 = tuple`
+### Dictionaries
 
-### Dictionnaires
-
-Se déclare entre {}
+* Declared between `{}`
 
 ```python
 nb = {"one" : 1, "two" : 2, "three" : 3}
 ```
 
-Pour ajouter un élément, on donne juste sa clé et sa valeur
+* To add an element, give its key & value :
 
 ```python
 nb["eleven"] = 11
 ```
 
-* `.values()` Récupère les valeurs
-* `.keys()` Récupère les clés
-* `.items()` Récupère les deux
+* `.values()` Get the values
+* `.keys()` Get the keys
+* `.items()` Get both
 
 #### Dictionary comprehension
 
-Similaire à celle des listes.
+* Similar to list
 
 ```python
 planet_initial = {planet: planet[0] for planet in planets}
@@ -332,9 +326,9 @@ planet_initial = {planet: planet[0] for planet in planets}
 
 > {'Mercury': 'M', 'Venus': 'V', 'Earth': 'E', 'Mars': 'M'}
 
-#### Loop sur les dict
+#### Loop on directory
 
-Un loop sur un dictionnaire va prendre les clés en index.
+* A loop on a directory uses its keys as index :
 
 ```python
 for k in numbers:
@@ -343,7 +337,7 @@ for k in numbers:
 
 > one = 1 two = 2 three = 3 eleven = 11
 
-Avec `.items()` on récupère les clés et les index.
+* With `.items()`, you can get the keys and the index :
 
 ```python
 for key, val in dict.items():
@@ -352,19 +346,19 @@ for key, val in dict.items():
 
 ## Time Conversion
 
-Si on a une date sous ce format : "Wed, 22 Apr 2020 16:02:51 GMT" on peut la transformer en `struct_time` \(time tuple\), ainsi :
+* You can transform date using this format : `Wed, 22 Apr 2020 16:02:51 GMT` to a `struct_time` :
 
 ```python
 # [...]
-# Récupère la date du serveur dans ce format "Wed, 22 Apr 2020 16:02:51 GMT"
+# Get the date of the server in the correct format
 serverTime = response.headers["Date"]
 format = "%a, %d %b %Y %H:%M:%S %Z"
-time_tuple = time.strptime(serverTime, format)`
+time_tuple = time.strptime(serverTime, format)
 ```
 
-On peut transformer un time tuple en **timespamp epoch** ainsi : `calendar.timegm(time_tuple)`
+* You can also transform a timestamp epoch : `calendar.timegm(time_tuple)`
 
-## Explorer des variables
+## Misc
 
-Avec `dir(obj)`, on peut récupérer la liste des attributs de l'objet
+* You can explore an object with`dir(obj)` to get the list of its variables
 
