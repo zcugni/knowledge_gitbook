@@ -1,17 +1,17 @@
-# Norme
+# Style guide
 
-Je vais me baser sur les normes PEP qui sont les plus utilisées, en prenant à chaque fois une des méthodes proposées.
+* This is based on the most popular PEP guidelines
 
-## Général
+## General
 
-* Variable = fonction\_avec\_paramètre
+* Assignation of a function with parameters to a variable :
 
 ```python
 foo = long_function_name(var_one, var_two,
                          var_three, var_four)
 ```
 
-* Déclaration de fonction avec paramètres
+* Declaration of a function with parameters :
 
 ```python
 def long_function_name(
@@ -20,7 +20,7 @@ def long_function_name(
     print(var_one)
 ```
 
-* Condition
+* Condition :
 
 ```python
 if (this_is_one_thing
@@ -28,7 +28,7 @@ if (this_is_one_thing
     do_something()
 ```
 
-* Déclaration de liste
+* List declaration :
 
 ```python
 my_list = [
@@ -37,7 +37,7 @@ my_list = [
 ]
 ```
 
-* Emplacement des opérateurs
+* Operator location :
 
 ```python
 income = (gross_wages
@@ -47,50 +47,55 @@ income = (gross_wages
           - student_loan_interest)
 ```
 
-## Espaces
+## White spaces
 
-* Autour des opérateurs “:” des slices quand ils séparent autre choses que des simples nombres.
+* Around the `:` of slices when they separate other things than numbers :
 
 ```python
 ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
 ham[lower + offset : upper + offset]
 ```
 
-* Autour des opérateurs d’assignement et de comparaisons
-* Pour les opérateurs de calculs, on en mets autour de ceux qui ont le moins de priorités
+* Around assignement & comparison operators
+* For numerical operators, around the ones with less priority :
 
 ```python
 x = x*2 - 1
 c = (a+b) * (a-b)
 ```
 
-* On ne les mets PAS dans les valeur par défauts/les return :
+* NOT before default value/return :
 
 ```python
 def complex(real, imag=0.0):
     return magic(r=real, i=imag)
 ```
 
-* Après le “\#” de début de commentaire
+* After the `#` of a comment
 
-## Ligne vide
+## Empty lines
 
-* Surround top-level function and class definitions with two blank lines.
-* Method definitions inside a class are surrounded by a single blank line.
-* Extra blank lines may be used \(sparingly\) to separate groups of related functions. Blank lines may be omitted between a bunch of related one-liners \(e.g. a set of dummy implementations\).
+* Surround top-level function and class definitions with 2 blank lines
+* Method definitions inside a class are surrounded by a single blank line
+* Extra blank lines may be used \(sparingly\) to separate groups of related functions
+* Blank lines may be omitted between a bunch of related one-liners \(e.g. a set of dummy implementations\)
 * Use blank lines in functions, sparingly, to indicate logical sections
 
 ## Import
 
-* Au début du document
-* Dans cet ordre : standard, third party, our
-* Sur plusieurs ligne pour les “import” avec des virgules pour les “from.. import”
+* At the start of the document
+* Order : standard, third party, ours
+
+{% hint style="info" %}
+I wrote that but i have no idea what i meant : "Sur plusieurs ligne pour les “import” avec des virgules pour les “from.. import” "
+{% endhint %}
 
 ## Docstring
 
-* Placées après la ligne de définition.
-* Pour tout ce qui est publique. Pour les fonctions privées, un commentaire peut suffire 
-* Je suis les guidelines de Google, donc ce format-ci
+* Document a public function
+  * For private ones, use comment
+* Placed after the line of the declaration 
+* Those are the Google's guidelines :
 
 ```python
 """ description
@@ -109,25 +114,26 @@ def complex(real, imag=0.0):
 
 ## Naming convention
 
-* module : short lower-case name underscore
-* class : CamelCase
-* function/variable : lowercase with underscore
-* Si le nom qu’on veut donner est un mot réservé rajouter \_ à la fin
-* constant : uppercase with underscore
+* Module : Short lower-case name underscore
+* Class : CamelCase
+* Function / Variable : lowercase with underscore
+* Constant : Uppercase with underscore
+* If the name we want to give is reserved, add `_` at the end
 
 ## Misc
 
-* Ligne de 79 caractères, docstring de 72
-* Espace/tab de 4 \(ils conseillent espaces mais je préfère tab je pense\)
+* 79 chars by lines
+  * 72 for Docstrings
+* Spaces/tabs of 4
 * Use string methods instead of string module \(more efficient\)
-* Use `.startswith()` and `.endswith()` instead of string slicing to check for prefixes or suffixes \(cleaner and less error prone\)
+* Use `.startswith()` & `.endswith()` instead of string slicing to check for prefixes or suffixes \(cleaner and less error prone\) :
 
 ```python
-Yes: if foo.startswith('bar'):
-No:  if foo[:3] == 'bar':
+Yes : if foo.startswith('bar'):
+No :  if foo[:3] == 'bar':
 ```
 
-* Object type comparisons should always use isinstance\(\) instead of comparing types directly
+* Object type comparisons should always use `isinstance()` instead of comparing types directly :
 
 ```python
 Yes: if isinstance(obj, int):

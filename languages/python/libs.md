@@ -1,39 +1,40 @@
-# Libs
+# Pandas
 
-## Pandas
+## Introduction
 
-Pandas propose 2 types, les `Series` qui sont des tableaux 1D \(comme des vecteurs quoi\) et les `DataFrame` qui sont des tableaux multi-dimensionnel \(comme des matrices quoi\).
+* Proposes 2 types :
+  * `Series` : 1D arrays \(like vectors\)
+  * `DataFrame` : Multiple dimensions \(like matrices\)
 
-### Fonctions utiles
+## Useful functions
 
-* `.isin([“col_name1”, “col_name2”])`
-* `.median()` & `.mean()`
-* `.unique()`
-* `.value_counts()`
-* `.idxmax()` Return l’index à l’endroit où la valeur est la plus élevée
-* `.min()` & `.max()`
-* `.agg()`
-* `.sort_values()`
-* `.describe()`
-* `pd.isnull()`
-* `.fillna`
-* `pd.concat()`
-* `.corr()` Calculate correlation
-* `.resample()`
-* `.append()` Doesn’t work “in place” so need to `=` it
-* `.rename`
-* `.drop`
-* `.at` Nécessaire pour modifier une valeur précise dans une boucle
-* `.isna()`
-* `df.sample(10)`
-* `df.head()`
-* `df.tail()`
-
-ATTENTION : mettre `inplace=true` pour drop, rename, fillna, etc.
-
-Que ce soit les Series ou les DataFrame, si on leur applique une fonction/une opération, elle sera par défaut appliquée à chacune des entrées. Les seuls cas pour lesquels ça ne marche pas sont les tests.
-
-Example :
+* This a is list of useful functions :
+  * `.isin([“col_name1”, “col_name2”])`
+  * `.median()` & `.mean()`
+  * `.unique()`
+  * `.value_counts()`
+  * `.idxmax()` Return the index where the value is the highest
+  * `.min()` & `.max()`
+  * `.agg()`
+  * `.sort_values()`
+  * `.describe()`
+  * `pd.isnull()`
+  * `.fillna`
+  * `pd.concat()`
+  * `.corr()` Calculate correlation
+  * `.resample()`
+  * `.append()` Doesn’t work “in place” so need to `=` it
+  * `.rename`
+  * `.drop`
+  * `.at` Necessary to modify a precise value in a loop
+  * `.isna()`
+  * `df.sample(10)`
+  * `df.head()`
+  * `df.tail()`
+* WARNING : Set `inplace=true` to drop, rename, fillna, etc.
+* For both DataFrames & Series, if you apply a function to it, it will by default be applied to each entry
+  * This does not work tests
+  * Example :
 
 ```python
 df[“col”] * 2
@@ -42,39 +43,37 @@ func_with_params(df[“col”], params)
 df1 + df2
 ```
 
-Etant donné qu’on peut le faire directement ainsi, je ne comprends pas vraiment l’utilité de .apply.
+{% hint style="info" %}
+Since we can do it directly like that, i'm not sure of the utility of `.apply()`
+{% endhint %}
 
-### Déclarer une nouvelle série
+## Series declaration
 
-`pd.Series(val, index, name)`
+* `pd.Series(val, index, [name])`
+  * `val :`
+    * Unique values \(will be the default one\)
+    * A list
+    * Optional if `index` is present
+  * `index` :
+    * List of strings or int
+    * Optional if `val` is present
+    * `range()` can be useful to generate a list of continuous numbers
+  * `name` :
+    * I think that if it's added to a DataFrame, it will be the name of the new column
 
-#### val
+## DataFrame
 
-* Une valeur unique \(qui sera prise comme valeur par défaut\)
-* Une liste.
+### Declaration
 
-#### index
+* `pd.DataFrame(<dict | array>, columns, [index])`
+* `dict` : `{ “col” : [val_lst] }` 
+* `array` : `[ [val_col_1], [val_col_2] ]` 
+* `columns` : Only mandatory with an array 
+* `index` : By default a list of continuous numbers
 
-* Liste de string ou de int \(continue ou non\). 
-* Si une liste de valeur est donnée, peut être omis 
-* Dans le cas contraire il est nécessaire pour imposer une taille à la Series. 
-* `Range()` est pratique pour générer une liste de nombre continu.
+### Access
 
-#### name
-
-Je crois que ça peut devenir une colonne de ce nom-là si on l’ajoute ainsi à un dataframe. La majorité du temps je l’omet.
-
-### DataFrame
-
-#### Déclaration
-
-`pd.DataFrame(dict ou tableau, columns, index)`
-
-dict : `{ “col” : [val_lst] }` tableau : `[ [val_col_1], [val_col_2] ]` columns : Uniquement obligatoire si un tableau est fourni index : optionnel, vaudra une suite continue de nombre s’il n’est pas précisé.
-
-#### Accès
-
-On peut utiliser un index directement après :
+* You can do this :
 
 ```python
 df[“col_name”]
@@ -82,35 +81,27 @@ df.col_name
 df[“col_name”][index]
 ```
 
-mais les locs sont plus précis \(et permettent du slicing\):
+* But locs are more precise and allows slicing :
+  * `.iloc[]` : Slice like the python standard : only numbers, upper limit exclusive
+  * `.loc[]` : Slice like the pandas lib : Inclusive of both limits, allows selection of names & conditions
+  * `.at[row, col_name]` : Allows access to a specific element
+* Condition : 
+  * `df[df.col_name == “something”]`
+  * `df[ (test1) & (test2)]`
 
-* `.iloc[]` : performe le slice comme le python standard - juste des nombre, en excluant la limite supérieur
-* `.loc[]` : slice version pandas - inclut les deux limites et permet une sélection basée sur les noms et des conditions
-* `.at[row, col]` : permet d’accéder à une cellule précise, on doit donner les nom de la colonne et non son index
+### Combine DataFrames & Series
 
-On peut mettre des conditions dans les sélections, par exemple :
-
-`df[df.col_name == “something”]`
-
-Pour plusieurs conditions ça donne ça : `df[ (test1) & (test2)]`
-
-### Combiner DataFrame et Series
-
-Series + Series : `new = s1.append(s2, ignore_index=true)`
-
-DataFrame + Series to the end of column : `new = df[“col”].append(s1)`
-
-DataFrame + Series as column : `df[“col”] = s1`
-
-DataFrame + DataFrame as new row : `new = df.append(df)`
-
-DataFrame + Series as row :
-
-DataFrame + DataFrame as new columns :
+* Series + Series : `new = s1.append(s2, ignore_index=true)`
+* DataFrame + Series to the end of column : `new = df[“col”].append(s1)`
+* DataFrame + Series as column : `df[“col”] = s1`
+* DataFrame + DataFrame as new row : `new = df.append(df)`
 
 ### Grouping
 
-On peut grouper les données en fonction d’une colonne. Par exemple, grouper toutes les données en fonction de leur prix. ça va nous diviser et ordonner nos lignes par les groupes formés. On peut ensuite utiliser les même fonction de d’habitude \(par exemple applique un `.max()` sur la colonne note quand les données sont regroupée par prix\).
+* You can group data on a column
+* For example, group data in function of the price
+* You can use the usual functions on groups
+* Example :
 
 ```python
 best_rating_per_price = reviews.groupby('price')['points'].max().sort_index()
@@ -120,29 +111,6 @@ best_rating_per_price = reviews.groupby('price')['points'].max().sort_index()
 
 ```python
 df = pd.read_csv("path", index_col = 0)
-df.to_csv("cows_and_goats.csv")
+df.to_csv("/path/to/file.csv")
 ```
-
-## Visualisation
-
-### Pandas
-
-### Seaborn
-
-### FacetGrid
-
-Permet de faire un “grid” avec plusieur plot les uns à côté des autres.
-
-Pour ça, on lui passe un dataframe en précisant la colonne ou la ligne \(ou les deux\) sur lesquelles on veut travailler puis on map une fonction de visualisation.
-
-```python
-g = sns.FacetGrid(df, col="Position", col_wrap = 6)
-g.map(sns.kdeplot, "Overall")
-```
-
-### Plotly
-
-### Plotnine
-
-C’est une librairie qui à l’air de beaucoup simplifier la création de graphe, etc. Ca peut valoir la peine d’approfondir.
 

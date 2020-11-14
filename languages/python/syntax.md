@@ -4,7 +4,7 @@
 
 * Declare variables without defining a type
 * `# This is a comment`
-  * There's no multi-line, except Docstrings, but they shouldn't be use for that
+  * There's no multi-line, except Docstrings, but they shouldn't be used for that
 
 ## Operators
 
