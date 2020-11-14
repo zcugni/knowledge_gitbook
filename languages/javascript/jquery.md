@@ -4,21 +4,20 @@ description: 'Disclaimer : This is an old note not up to current standard'
 
 # Jquery
 
-## Génétalités
+## Generalities
 
-* Les docs jquery & jquery UI sont très complète
-* Pour rajouter Jquery à une page web, le mieux est d’utiliser Jquery CDN
+* To add jquery to a web page, prefer Jquery CDN
 
-## Syntaxe
+## Syntax
 
-* Variable : `var nomVar` \(voir `let` en en js\)
-* Objet jquery : `$var` ou  `$(...)` Les parenthèses peuvent contenir ce genre d'éléments : 
+* Variable : `var nomVar` \(see `let` in js\)
+* jquery object : `$var` ou  `$(...)` Parenthesis can contain these types of elements : 
   * `document`
-  * Classes `.plop` ou plusieurs ainsi : `.plop, .plip`
-  * Id `#plop`
+  * CSS class
+  * ID
   * `this`
-  * Balises `p`
-* Pour les méthodes qui s’appliquent à un objet jquery, on fait `$.methode_name`
+  * tags
+* Example
 
 ```javascript
 $(document).ready(function() {
@@ -28,27 +27,29 @@ $(document).ready(function() {
 });
 ```
 
-## Gestions des événements
+## Events handling
 
-Simplement `$.event_name` ou :
+* You can simply use `.event_name` or :
 
 ### $.on :
 
-Le handler est trigger pour chaque événement de ce type survenant sur l'élément bindé et ces descendant. \(Aka, un click un élément d’une div trigger le .on\(click\) de la div.
-
+* The handler is triggered for each event occurring on the binded element and its children
+  * Aka, a clic on a element of a `div` will trigger the `.on(click)` of the div
 * `$.on( events [, selector ] [, data ], handler )`
-* `$` Représente l’objet Jquery sur lequel survient l’événement. Il doit déjà exister au moment où le `.on` est appelé \(voir le paramètre selector pour la déléguation\).
-* `events` Le\(s\) nom\(s\) de\(s\) l’événement\(s\) concerné\(s\) \(exemple : “click”\)
-* `handler` Le nom de la fonction à appeler suite à cet événement ou une fonction anonyme.
-* `selector` L’enfant du `$` sur lequel l’événement est réellement appliqué. Ceci permet de déléguer un événement
-* `data` Données à transmettre accessible ensuite depuis `event.data`
-* Exemple avec nom de fonction :
+  * `$` Represent the jquery object on which the event occurred
+    * It must exist when `.on()` is called
+  * `events` The name\(s\) of the concerned event\(s\)
+  * `handler` An anonymous function of the name of the function to call after the event happened
+  * `selector` The child of the `$` on which the event occurred
+    * This makes delegation possible
+  * `data` Data transmitted accessible by `event.data`
+* Example with a function name :
 
 ```javascript
 $(“dot”).on("mouseenter", selectDot);
 ```
 
-* Exemple avec fonction anonyme :
+* Example with an anonymous function :
 
 ```javascript
 $(“dot”).on(“mouseenter”, function(event){
@@ -57,60 +58,62 @@ $(“dot”).on(“mouseenter”, function(event){
 });
 ```
 
-* Exemple avec selector:
+* Example with a selector :
 
 ```javascript
 $(“main”).on("mouseenter", ".dot", selectDot);
 ```
 
-* Exemple avec data:
+* Exemple with data:
 
 ```javascript
 $(“main”).on("mouseenter", ".dot", “nb : 12”, selectDot);
-// Dans selectDot :
+
+// In selectDot :
 alert(event.data.nb);
 ```
 
 ### Performances
 
-Déléguer peut parfois aider au performance, je vais juste mettre un screen de la doc qui l’explique très bien :
+* Delegation can help with performance
+* However, if you delegate to a too high level, like the `body`, the event will be triggered continuously which will hinder performances
+* It's better to delegate near the target
 
-Mais par contre, si on délègue à un niveau trop haut, comme par exemple le body, l’événement sera trigger en continu et ça risque de couter en performance. Il vaut donc mieux déléguer très près de la cible si on doit le faire.
+## ajax
 
-## Appel ajax
-
-* Ajax sert à envoyer des requêtes de façon asynchrone et à insérer le résultat dans la page sans la recharger.
-* En js il faut instancier une classe XmlHttpRequest
-* Jquery fournit des fonctions plus simple
+* Ajax lets you send requests and receive responses asynchronously to modify the page without having to reload it
+* In js, you must use the `XmlHttpRequest` class
+* Jquery has simpler functions : 
   * `$.ajax()`
-  * `$.get()` Raccourci de la première
-  * `$.post()` Same
+  * `$.get()` &`$.post()` : shortcuts for the 1st one
 
 ```javascript
-$("#formulaire").submit(function(e){ 
+$("#form").submit(function(e){ 
     e.preventDefault(); 
     $.ajax({
-       url : 'url_page_traitant_info',
+       url : 'page_handling_the_data',
        type : 'POST',
        data : $(this).serialize();
        dataType : 'html',
-       success : function(donnéesReçuesParLajax, statut){
+       success : function(data_received_by_ajax, status){
             //code
        },
-       error : function(resultat, statut, erreur){
+       error : function(result, status, error){
             //code
        },
-       complete : function(resultat, statut){
+       complete : function(result, status){
             //code
        }
     });
 });
 ```
 
-* `data` contient les données à envoyer en tant que string. Facultatif pour get. `serialize()` permet d’automatiquement concaténer les données d'un formulaire.
-* `type` Type de requête \(`GET` par défaut\)
-* `dataType` Type de retour \(html, xml, json, text\)
-* Pour `error` et `complete`, le résultat est un objet XHR
+* `data` Data to send as strings
+  * Optional for GET
+  * `Serialize()` Let you automatically concatenate form data
+* `type` Request type \(GET by default\)
+* `dataType` Return type de retour \(html, xml, json, text\)
+* For `error` & `complete`, the result is an XHR object
 
 ## Source
 
