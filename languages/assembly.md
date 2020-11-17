@@ -17,23 +17,26 @@ I'm still knew to this field, so i might not always use the rights terms. It's a
 ![](../.gitbook/assets/att-vs-intel.png)
 
 * The list of differences is as follows :
-  * Register reference  
-    * AT & T  use `%` as a prefix  :`%esp`
-    * Intel don't use any prefix : `esp`
-  * Constant variable
-    * AT & T use `$` as a prefix : `$10`, `$0x80485d0`
-    * Intel don't use any prefix : `10`, `0x80485d0`
-  * Offset
+  * Register reference  prefix
+    * AT & T :`%` \(`%esp`\)
+    * Intel : Nothing \(`esp`\)
+  * Constant variable prefix :
+    * AT & T :`$` \(`$10`, `$0x80485d0`\)
+    * Intel : Nothing \(`10`, `0x80485d0`\)
+  * Offset :
     * AT & T : `0x10(%esp)`
     * Intel : `[esp+0x10]`
-  * Order of parameters
+  * Order of parameters :
     * AT&T : `mov src,dest`
     * Intel : `mov dest,src`
-  * Data size 
-    * AT&T  use different suffix `movl ..`
-    * Intel use different keywords words `mov DWORD PTR ...`
-      * `DWORD` here means 4 bytes, while a `WORD` would be 2 bytes
-  * In intel `ds:0x..` explicitly specify to take the value at the address \(derefencing a pointer\) while AT&T leave it implied
+  * Data size :
+    * AT&T  uses different suffix like `movl` ..
+    * Intel use different keywords words :
+      * `WORD` 2 bytes
+      * `DWORD` 4 bytes
+  * Pointers in intel : 
+    * `ds:0x..` indicate to take the value at the address \(derefencing the pointer\)
+    * `mov DWORD PTR [eax], edx` Copies edx at the address pointed by eax
 
 ## Instructions
 
