@@ -28,8 +28,7 @@
 
 * [Memory](binary-exploitation/memory/README.md)
   * [Registers](binary-exploitation/memory/registers.md)
-  * [Draft](binary-exploitation/memory/draft.md)
-  * [glibc malloc](binary-exploitation/memory/memory-allocation-linux-glibc.md)
+  * [glibc malloc](binary-exploitation/memory/draft.md)
 * [Executable creation](binary-exploitation/executable-creation/README.md)
   * [ELF Linking](binary-exploitation/executable-creation/elf-file-linking.md)
   * [ELF Files](binary-exploitation/executable-creation/elf-files.md)
