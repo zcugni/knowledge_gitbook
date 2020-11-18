@@ -28,8 +28,11 @@
 
 * [Memory](binary-exploitation/memory/README.md)
   * [Registers](binary-exploitation/memory/registers.md)
-  * [Heap allocation \(malloc\)](binary-exploitation/memory/memory-allocation-linux-glibc.md)
+  * [Draft](binary-exploitation/memory/draft.md)
+  * [glibc malloc](binary-exploitation/memory/memory-allocation-linux-glibc.md)
 * [Executable creation](binary-exploitation/executable-creation/README.md)
+  * [ELF Linking](binary-exploitation/executable-creation/elf-file-linking.md)
+  * [ELF Files](binary-exploitation/executable-creation/elf-files.md)
   * [Compilers](binary-exploitation/executable-creation/compilers.md)
 * [Binary, hex & bytes](binary-exploitation/binary-hex-and-bytes.md)
 * [Microcorruption.com](binary-exploitation/microcorruption-notes.md)
@@ -38,12 +41,11 @@
   * [GDB - GNU Debugger](binary-exploitation/tools/gdb-gnu-debugger.md)
 * [Vulnerabilities](binary-exploitation/vulnerabilities/README.md)
   * [Format String Vulnerabilities](binary-exploitation/vulnerabilities/format-string-vulnerabilities.md)
+  * [Malloc vulnerabilities](binary-exploitation/vulnerabilities/malloc-vulnerabilities.md)
 
 ## Linux
 
-* [Theory](linux/linux-nix/README.md)
-  * [ELF Files](linux/linux-nix/elf-files.md)
-  * [ELF Linking](linux/linux-nix/elf-file-linking.md)
+* [Theory](linux/linux-nix.md)
 * [Command](linux/linux-bash-command/README.md)
   * [Mount](linux/linux-bash-command/mount.md)
   * [Net tools / commands](linux/linux-bash-command/net-tools-commands.md)
