@@ -3,10 +3,11 @@
 * Stands for **Document Type Definition**
 * Defines the structure that the xml document should have
 * Specifies the DTD inside the first node \(beside the description\), in a `<!DOCTYPE>` \(without a closing `/` \)
-* You can write it directly inside the document `<!DOCTYPE root_name [...]`
-* Or include an external file `<!DOCTYPE root_name SYSTEM "file">`
+* You can either :
+  * Write it directly inside the document `<!DOCTYPE root_name [...]`
+  * Include an external file `<!DOCTYPE root_name SYSTEM "file">`
 
-## Elément
+## Element
 
 ```markup
 <!ELEMENT element-name EMPTY>
@@ -16,50 +17,54 @@
 <!ELEMENT element-name (child1, child2, ...)>
 ```
 
-* `#PCDATA` \(_Parsed Character Data_\) signifie que ces données seront interprétées par le parser à l'inverse des `#CDATA` \(_Character Data_\)
-* Les enfants doivent se retrouver dans le même ordre dans le document xml
-* Tous les enfants spécifiés doivent être déclarés \(décrits\) dans le fichier DTD
-* Certains symbole ajoute des restrictions :
+* `#PCDATA` \(_Parsed Character Data_\) __are interpreted by the parser while __ `#CDATA` \(_Character Data_\) aren't
+* In the XML document, all children must be present and in the same order as in the DTD
+* Some symbols add restrictions :
 
 ```markup
-<!ELEMENT note (message)> <!-- Uniquement 1 enfant nommé message -->
-<!ELEMENT note (message+)> <!-- 1 ou plusieurs enfants nommés message -->
-<!ELEMENT element-name (message*)> <!-- 0 ou plus enfants nommés message -->
-<!ELEMENT element-name (message?)> <!-- 0 or 1 enfant nommé message -->
-<!ELEMENT note (to,from,header,(message|body))> <!-- to, from header obligatoire, puis soit message soit body -->
+<!ELEMENT note (msg)> <!-- Only 1 child named msg -->
+<!ELEMENT note (msg+)> <!-- 1 or multiple children named msg -->
+<!ELEMENT element-name (msg*)> <!-- 0 or more children named msg -->
+<!ELEMENT element-name (msg?)> <!-- 0 or 1 child named msg -->
+
+<!-- to, from & header mandatory -->
+<!-- either msg or body -->
+<!ELEMENT note (to,from,header,(msg|body))> 
 ```
 
-## Attributs
+## Attributes
 
 ```markup
 <!ATTLIST element_name attribute_name attribute_type attribute_value>
 ```
 
-| Type | Définition |
+| Type | Definition |
 | :--- | :--- |
-| CDATA | Character data |
-| \(val1\|val2\|..\) | One from the enumerated list |
-| \(val1\|val2\|..\) "val1" | One from the enumerated list, defaulting to the specified one |
-| ID | Unique id |
-| IDREF | Id of another element |
-| IDREFS | List of other ids |
-| NMTOKEN | Valid XML name |
-| NMTOKENS | List of valid XML names |
-| ENTITY | Entity |
-| ENTITIES | List of entities |
-| NOTATION | Name of a notation |
-| xml: | Predefined xml value |
+| `CDATA` | Character data |
+| `(val1|val2|..)` | One from the enumerated list |
+| `(val1|val2|..) "val1"` | One from the enumerated list, defaulting to the specified one |
+| `ID` | Unique id |
+| `IDREF` | Id of another element |
+| `IDREFS` | List of other ids |
+| `NMTOKEN` | Valid XML name |
+| `NMTOKENS` | List of valid XML names |
+| `ENTITY` | Entity |
+| `ENTITIES` | List of entities |
+| `NOTATION` | Name of a notation |
+| `xml:` | Predefined xml value |
 
-| Valeur | Définition |
+| Value | Definition |
 | :--- | :--- |
-| value | The default value of the attribute |
-| \#REQUIRED | The attribute is required |
-| \#IMPLIED | The attribute is optional |
-| \#FIXED value | The attribute value is fixed |
+| `value` | The default value of the attribute |
+| `#REQUIRED` | The attribute is required |
+| `#IMPLIED` | The attribute is optional |
+| `#FIXED value` | The attribute value is fixed |
 
 ## Entity
 
-L'équivalent de variable, peuvent contenir une valeur donnée ou load le contenu d'un fichier \(local ou depuis un lien\). Ce second cas est ce qu'on appelle une entité externe.
+* They're variables that takes their value either from :
+  * A given constant
+  * A file, local or external
 
 ```markup
 <!DOCTYPE test [
@@ -69,14 +74,9 @@ L'équivalent de variable, peuvent contenir une valeur donnée ou load le conten
 <test>&entity_name1;</test>
 ```
 
-### Parameter Entity
-
-Elles permettent 2 choses :
-
-* Etre référencées directement dans le DTD
-* Référencer une autre entité dans leur valeur \(uniquement possible si elles sont en externe\)
-
-L'exemple qui suit sert à une attaque mais montre bien l'idée :
+* Parameter entity are entities that can be directly referenced in the DTD
+  * If they're external, they can reference another entity
+  * This is an example of an attack :
 
 ```markup
 <!-- test.xml-->
@@ -90,7 +90,7 @@ L'exemple qui suit sert à une attaque mais montre bien l'idée :
     %wrapper;
 ```
 
-## Example Complet
+## Complete example
 
 ```markup
 <!DOCTYPE TVSCHEDULE [

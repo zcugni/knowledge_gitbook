@@ -90,7 +90,7 @@
 * [XML](languages/xml/README.md)
   * [XML DTD](languages/xml/xml-dtd.md)
   * [XPATH](languages/xml/xpath.md)
-  * [Autre Ajouts](languages/xml/autre-ajouts.md)
+  * [Other addons](languages/xml/autre-ajouts.md)
 
 ## Technology / Protocols
 

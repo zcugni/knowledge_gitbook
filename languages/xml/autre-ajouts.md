@@ -1,49 +1,49 @@
----
-description: Not complete & not tested
----
+# Other addons
 
-# Autre Ajouts
+## Disclaimer
 
-### XSLT
+This is by no mean complete, and there might be some errors. I'll update it one day
 
-### Disclaimer & Explication
+## XSL & XSLT
 
-Ils parlent de XSL \(_eXtensible Stylesheet Language_\) et XSLT \(_XSL Transformation_\) comme si c'était 2 choses distinctes, mais je ne peux trouver aucune doc uniquement sur le XSL. On parle toujours des éléments/etc de XSLT donc je pense que c'est un abus de langage. C'est sensé être un "styling language for XML", mais il ne gère pas l'apparence \(genre couleur, placement, etc\).
+* Disclaimer : i'm not sure i understood correctly
+* XSL stands for _eXtensible Stylesheet Language_
+* XSLT stands for _XSL Transformation_
+* XSLT lets you transform an XML document into another one, or for example an XHTML or HTML one§
 
-A la place XSLT permet de prendre un document XML et de modifier son contenu final. C'est une analogie un peu foireuse mais je le vois ainsi : de la même façon que du code php est interprété et modifie le contenu final d'une page php/html, un fichier xml appelant un fichier xsl sera interprété par le parser et le résultat final ne correspondra pas au contenu du fichier xml de base \(mais se basera sur celui-ci pour la transformation\).
+### Usage
 
-On l'utilise en général pour transformer un fichier XML soit en un autre fichier XML, soit en XHTML, soit en HTML.
-
-Etant donné que le fichier de base \(xml\) et le fichier de transformation \(xsl\) sont distinct, on peut tout à fait utiliser différents fichiers de transformation en fonction de la situation.
-
-### Utilisation
-
-Dans le fichier xml à transformer, linker avant le premier élément le fichier stipulant la transformation :
+* In the xml file to transform, link the xsl file before the first element : 
 
 ```markup
 <?xml-stylesheet type="text/xsl" href="file.xsl"?>
 ```
 
-Le premier élément d'un fichier xsl doit être `<xsl:stylesheet>` ou `<xsl:transform>` \(synonyme\) et doit déclarer le XSLT namespace :
+* The first element of an xsl file must :
+  * Declare the XSLT namespace
+  * Be either of type :
+    *  `<xsl:stylesheet>`
+    *  `<xsl:transform>` 
+    * They're synonyms
 
 ```markup
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 ```
 
-Plusieurs éléments implémentant une certaine logique sont disponible \(comme `<xsl:for-each>`, `<xsl:value-of>`, `<xsl:if>`, etc.\) Voici une [liste complète](https://www.w3schools.com/xml/xsl_elementref.asp).
+* There's some special element that introduce logic like :
+  * `xsl:for-each>`
+  * `<xsl:value-of>`
+  * `<xsl:if>`
+  * etc
+  * This is a [complete list](https://www.w3schools.com/xml/xsl_elementref.asp)
 
-### XQuery
+## Others 
 
-* XQuery is to XML what SQL is to databases
-* XQuery was designed to query XML data
-* La doc est une fuck fest et je doute que j'aurais vraiment besoin de savoir tout ça, donc je vais pas le résumer ici
-
-### XSD
-
-* _XML Schema Definition_
-* Alternative plus complète que les DTD et directement écrite en XML
-
-### XML DOM
-
-* La doc a pas mal de choses à dire sur les éléments du DOM et leur propriétés, si un jour je dois le parcourir en code ce sera intéressant à détailler
+* XQuery
+  * It's to XML what SQL is to databases
+  * It was designed to query XML data
+* XSD - _XML Schema Definition_
+  * A more complete alternative to DTDs
+  * Directly written with the XML syntax
+* XML DOM
 

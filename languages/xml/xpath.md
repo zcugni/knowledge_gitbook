@@ -1,84 +1,61 @@
----
-description: Not complete & not tested
----
-
 # XPATH
 
-* Permet de naviguer un document XML \(en sélectionnant des nœuds particuliers\)
-* Les expression XPath sont aussi utilisées dans d'autre languages
-* Suit la structure des chemins de fichiers
+## Disclaimer
+
+Not at all complete
+
+## Introduction
+
+* Lets you navigate an XML document by selecting specific nodes
+* XPath expression are also used in other languages
+* It works like the path of a file
 
 | Expression | Definition |
 | :--- | :--- |
-| nodename | Selects all nodes with the name "nodename" |
-| / | Selects any direct children matching |
-| // | Selects any descendant matching |
-| . | Selects the current node |
-| .. | Selects direct parent |
-| @ | Selects attributes |
+| `nodename` | Selects all nodes with the name "nodename" |
+| `/` | Selects any direct children matching |
+| `//` | Selects any descendant matching |
+| `.` | Selects the current node |
+| `..` | Selects direct parent |
+| `@` | Selects attributes |
 
-## Opérateurs
+## Operators
 
-### Arithmétiques
+* Numerical :
+  * `+`, `-`, `*`
+  * `div`
+  * `mod`
+* Comparison :
+  * `=, !=`
+  * `>`, `<`
+  * `>=`, `<=`
+* Combination : `and`, `or`
 
-| Symbole | Sens |
-| :--- | :--- |
-| + |  |
-| - |  |
-| \* |  |
-| div |  |
-| mod |  |
+## Condition
 
-### De comparaison
-
-| Symbole | Sens |
-| :--- | :--- |
-| = |  |
-| != |  |
-| &lt; |  |
-| &lt;= |  |
-| &gt; |  |
-| &gt;= |  |
-
-### Misc
-
-| Sens | Symbole |
-| :--- | :--- |
-| and |  |
-| or |  |
-| \| | ? |
-
-## Prédicat \(condition\)
-
-Les conditions sont écrites entre \[\] : `/bookstore/book[1]`
-
-Exemple de conditions :
-
-* `/bookstore/book[1]` \(Commence à 1\)
-* `/bookstore/book[last()]`
-* `/bookstore/book[last() - 1]`
-* `/bookstore/book[position() < 3]`
-* `//title[@lang]`
-* `//title[@lang='en']`
-* `/bookstore/book[price > 35.00]`
-* `/bookstore/book[price > 35.00]/title`
+* Written inside `[ ]` : `/bookstore/book[1]`
+* Some examples :
+  * `/bookstore/book[1]`
+  * `/bookstore/book[last()]`
+  * `/bookstore/book[last() - 1]`
+  * `/bookstore/book[position() < 3]`
+  * `//title[@lang]`
+  * `//title[@lang='en']`
+  * `/bookstore/book[price > 35.00]`
+  * `/bookstore/book[price > 35.00]/title`
 
 ## Wildcard
 
 | Wildcard | Definition |
 | :--- | :--- |
-| \* | Any element node |
-| @\* | Any attributes |
-| node\(\) | Any node of any kind |
-| text\(\) | Any text node |
-
-{% hint style="info" %}
-Je suis pas certaine de la diff entre `*` et `node()`
-{% endhint %}
+| `*` | Any element node |
+| `@*` | Any attributes |
+| `node()` | Any node of any kind |
+| `text()` | Any text node |
 
 ## Location Path
 
-On peut aussi définir des chemins plus explicitement \(même si ça me semble très redondant avec l'autre méthode donc je comprends moyen\) ainsi : `axisname::nodetest[predicate]`
+* You can define path explicitly with très redondant avec l'autre méthode donc je comprends moyen\) ainsi : `axisname::nodetest[predicate]`
 
 nodetest représente ce genre de sélection :
 
