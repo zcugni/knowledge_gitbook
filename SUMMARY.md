@@ -77,6 +77,7 @@
 * [Assembly](languages/assembly.md)
 * [Bash](languages/bash.md)
 * [C](languages/c.md)
+* [Draft](languages/draft.md)
 * [Haskell](languages/haskell.md)
 * [Javascript](languages/javascript/README.md)
   * [Jquery](languages/javascript/jquery.md)
