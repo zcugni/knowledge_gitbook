@@ -1,4 +1,8 @@
-# Draft
+# Haskell
+
+## Disclaimer
+
+I started learning haskell before i got into the habit of doing those notes. A lot of things are missing. Moreover, it's my first functional language, so i'm not sure what is specific to it, and what is specific to functional programming.
 
 ## Functions
 
@@ -10,7 +14,15 @@
   * Always return the same thing for a given value
 * Functions can be parameters, and they can be returned
 * In reality all functions only have one parameter, but Haskell simplifies the syntax from `func :: arg -> (arg -> return)` to `func :: agr -> agr -> return`
-* Anonymous functions are written like that :
+* A function dealing with every cases is **total**, others are **partial**
+* A function without secondary effects is **pure**
+* You can combine functions with `.` :
+
+  ```haskell
+  (.) :: (b -> c) -> (a -> b) -> a -> c
+  ```
+
+* Anonymous functions \(lambdas\) are written like that :
 
 ```haskell
 (\x -> x + 1) (2)
@@ -98,7 +110,7 @@ streetAddress = (123, “Happy St.”)
 
 * `->` separate each parameter and the return
   * The last element is always the return
-* 
+
 ```haskell
 -- Basic :
 double :: Int -> Int
@@ -115,7 +127,7 @@ ifEven f n = if even n
              else n
 ```
 
-* You can use **placeholders** for the types, like `a` or `b` use classes to apply **constraints** to them
+* You can use **placeholders** for the types, like `a` or `b` and use classes to apply **constraints** to them
   * Declare the constraints before the `=>`
 
 ```haskell
@@ -146,6 +158,7 @@ newtype Name = Constructor  { unwrapFunction :: KnownType }
 newtype Name = Constructor  { unwrapFunction :: KnownType } deriving (TypeClass1, TypeClass2, ..)
 ```
 
+* An enum type is a "sum type" \(OR\), while a record is a "product type" \(AND\)
 * To retrieve a member of a record, use its name : `country example` will return the country 
 * Aliases are just another name for a type, its for example `String` for `[Char]`
   * If a function has this signature : `func -> alias1 -> alias2 -> type` and the aliases are from the same type, the compiler won't be able to detect it if we inverted them
@@ -159,7 +172,7 @@ half :: Int -> Double
 half n = (fromIntergral n) / 2
 ```
 
-`show` & `read` for strings
+* `show` & `read` for strings
 
 ### Classes
 
@@ -183,6 +196,9 @@ class TypeClassName a where
   * `Bounded` A type of this class has minimal & maximal limits \(for example the boundaries of an `int`\)
   * `Show` A type of this class can be printed
   * `Read` A type of this class can be read
+  * `Lazy` Will be evaluated at the last possible moment \(in opposition to anything `Strict`\)
+    * With this, we can have infinite lists as long as we don't try to evaluate them entirely
+  * Some classes are detailed at the end of this summary
 * The `deriving` seen before lets you use functions from another class
   * You can overload function with `instance`
   * There's also `DerivingStrategies` but i don't understand it
@@ -200,27 +216,13 @@ instance TypeClass OurType where
 * Example :
   * `Either :: * -> * -> *`
   * `Maybe ::  * -> *`
-  * `Maybe Int :: *` 
-    * This one is the final \(**concrete**\) type
+  * `Maybe Int :: *` This one is the final \(**concrete**\) type
 * Types using other types are said to give a **context** to those
   * For security reasons, you can't definitively leave a context, but there are temporary workarounds
 
-## Condition
+## Data Structure
 
-```haskell
--- If...else
-if test then code else code
-
--- Switch :
-func x y = 
-    case (x > y) of
-        False -> y
-        True -> x + 10
-        
--- Guards (to do)
-```
-
-## List & Array
+### List & Array
 
 * List are declared between `[ ]`
 * To add an element at the start of the list, use a _cons_  `:` 
@@ -257,11 +259,32 @@ foldl (+) 0 [1, 2, 3, 4] -- = 10
 Speak of List Comprehension
 {% endhint %}
 
-## Pattern matching
+### Tuple
 
-* This technique lets you define the behavior of a function depending on its parameters more easily that with an `if..else` 
+* Tuples are declared between `()`
+* Useful functions :
 
 ```haskell
+(,) :: a -> b -> (a, b)
+fst :: (a, b) -> a
+snd :: (a, b) -> b
+```
+
+## Condition
+
+```haskell
+-- If...else
+if test then code else code
+
+-- Switch :
+func x y = 
+    case (x > y) of
+        False -> y
+        True -> x + 10
+        
+        
+-- Pattern matching :
+
 -- List : 
 
 -- An empty list is given :
@@ -283,23 +306,11 @@ func (_, _, elem3) = elem3
 -- To Do
 ```
 
-## Pragma
-
-* Pragmas are added at the start of the file to modify the behavior of the compiler 
-* `{-# LANGUAGE OverloadedStrings #-}` With this, ghc will understand that the content of `" "` can be converted to `Text`, `ByteString`, etc in addition to `String`
-* `{-# LANGUAGE TypeApplications  #-}` Lets you define the type that some variable must have without having to give the full signature
-  * With that, in ghci you can do this :
-
-```haskell
-*Main> :type (>>=) @Maybe @String (>>=) @Maybe @String :: Maybe String -> (String -> Maybe b) -> Maybe b
-```
-
-## Terminology
-
-* Since most things linked to IO violate the rules about the function, we speak of **IO action** instead of function
-* A function dealing with every cases is **total**, others are **partial**
-* A function without secondary effects is **pure**
-* A enum type is a "sum type" \(OR\), while a record is a "product type" \(AND\)
+{% hint style="info" %}
+* Add  :
+  * guards
+  * pattern matching on enum
+{% endhint %}
 
 ## GHCI Options
 
@@ -310,36 +321,24 @@ func (_, _, elem3) = elem3
 * `:r` Reload
 * `:k/:kind` Give the kind of a function
 
+### Pragma
+
+* Pragmas are added at the start of the file to modify the behavior of the compiler 
+* `{-# LANGUAGE OverloadedStrings #-}` With this, ghc will understand that the content of `" "` can be converted to `Text`, `ByteString`, etc in addition to `String`
+* `{-# LANGUAGE TypeApplications  #-}` Lets you define the type that some variable must have without having to give the full signature
+  * With that, in ghci you can do this :
+
+```haskell
+*Main> :type (>>=) @Maybe @String (>>=) @Maybe @String :: Maybe String -> (String -> Maybe b) -> Maybe b
+```
+
 ## Misc
 
+* Since most things linked to IO violate the rules about the function, we speak of **IO action** instead of function
 * `Text` is preferred to `String` because its an array instead of a linked list
 * There's some functions to deal with unicode, check pragmas
 
-### Tuple
-
-* Tuples are declared between `()`
-* Useful functions :
-
-```haskell
-(,) :: a -> b -> (a, b)
-fst :: (a, b) -> a
-snd :: (a, b) -> b
-```
-
-### Lazy evaluation
-
-* Anything `Lazy` will be evaluated at the last possible moment \(in opposition to anything `Strict`\)
-* With this, we can have infinite list as long as we don't try to evaluate if entirely
-
-### Combine functions
-
-* You can combine functions with `.` :
-
-```haskell
-(.) :: (b -> c) -> (a -> b) -> a -> c
-```
-
-## Cheat Sheet
+## Important classes
 
 ### Semigroup
 
@@ -402,27 +401,25 @@ return :: Monad m => a -> m a -- Like pure
 
 ```haskell
 func :: m a -> m b
-func ma_var = do
-  justA <- ma_var
+func myVar = do
+  justA <- myVar
   func justA
 ```
 
-Le do est plus ou moins un bind plus facile d’utilisation : `<-` permet de sortir du contexte.
-
-En occurrence, on aurait juste pu écrire `func =<< ma_var`. Mais pour des cas plus compliqué, c’est vite pratique.
+* The `do` is a simplification of the `bind`
+  * `<-` Lets you exit the context
+* In the above example, we could have simple done `func =<< my_var`, but for more complicated cases, its useful
 
 ### Either
 
-Il y a différentes façon de gérer `Either`.
-
-* Essayer d’en sortir rapidement
-* Utiliser les `bifunctor`
-* Utiliser `either`
+* There's 3 way to deal with `Either` :
+  * Get out of it quickly
+  * Use `bifunctor`
+  * Use `either`
 
 ## Sources
 
-* Haskell Programming from first principles by Christopher Allen & Julie Moronuki
+* _Haskell Programming from first principles_ by Christopher Allen & Julie Moronuki
 * [https://kodimensional.dev/recordwildcards](https://kodimensional.dev/recordwildcards)
 * [https://artyom.me/aeson](https://artyom.me/aeson)
-* Misc research
 
