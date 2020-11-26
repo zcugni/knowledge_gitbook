@@ -40,6 +40,7 @@
   * [GDB - GNU Debugger](binary-exploitation/tools/gdb-gnu-debugger.md)
 * [Vulnerabilities](binary-exploitation/vulnerabilities/README.md)
   * [Format String Vulnerabilities](binary-exploitation/vulnerabilities/format-string-vulnerabilities.md)
+  * [Shellcode](binary-exploitation/vulnerabilities/shellcode.md)
   * [Malloc vulnerabilities](binary-exploitation/vulnerabilities/malloc-vulnerabilities.md)
 
 ## Linux
