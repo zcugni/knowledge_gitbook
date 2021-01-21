@@ -47,6 +47,7 @@
 
 * [Theory](linux/linux-nix.md)
 * [Command](linux/linux-bash-command/README.md)
+  * [Hacking related cmd](linux/linux-bash-command/hacking-related-cmd.md)
   * [Mount](linux/linux-bash-command/mount.md)
   * [Net tools / commands](linux/linux-bash-command/net-tools-commands.md)
   * [Sudo, su, sudoers, etc](linux/linux-bash-command/sudo-su-sudoers-etc.md)

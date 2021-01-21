@@ -234,53 +234,6 @@ There's a way to directly execute a file without writing it to a disk, check tha
   * `screen -r <session_name>` To attach to the session
   * `screen -dr <session_name>` To detach others and then attach to the session
 
-## Hacking cmd
-
-### Hex dump
-
-* There's multiple tools to see the hex dump of a file
-* `xxd` My preferred one
-  * `xxd <in_file> [out_file]` Dump it's hexa, with it's ascii equivalent
-  * `xxd -r [-p] <in_file> <out_file>` Create the bytestream corresponding to an hex dump
-    * `-r` Reverse
-    * The `-p` is necessary to write the hex in a friendly manner \(without offset, etc\)
-    * `<in_file>` can be set as the standard input with `-`
-    * If you want to add content to that file after the new hex, just do `cat <other_file> >> <new_file>`
-  * `-e` Switch to little-endian
-  * `-b` Switch to binary representation \(`-r` doesn't work with it\)
-* `hexdump <file>` Dump it's hexa, but i find the format less friendly \(it doesn't show the ascii equivalent and the endianness is inversed from xxd\)
-
-### Base64 Encoding
-
-* `base64 -d <file>` Decode
-  * To do it from a file use `echo <file_name> | base64 -d`
-
-### GPG
-
-* pgp encoding
-* `gpg --gen-key` Generate a key pair with default setting
-* `gpg --export <username> > <file>` Export the public key of the user to a file \(binary format\)
-  * To export the ascii representation of it, add `--armor`
-* `gpg --import <file>` Import public key from file
-* `gpg -r <username> --encrypt <file>` Encrypt file using user's public key \(binary format\)
-  * To get an ascii file as result, add `--armor`
-* `gpg --decrypt <file>` Decrypt file using your private key
-* `gpg --list-keys` To see all the imported keys
-* `gpg --fingerprint <username>` To get the fingerprint of the user's public key
-
-### Elf
-
-* `readelf` Analyze elf files
-
-### Tracing
-
-* `strace` Intercepts system calls made by libs to the kernel
-* `ltrace` Intercepts library & system calls made by your application to libs
-
-### Debugging
-
-* `ulimit -c unlimited` The the OS to dump the memory whenever a crash occurs \(must be root\) 
-
 ## Misc
 
 ### Alias

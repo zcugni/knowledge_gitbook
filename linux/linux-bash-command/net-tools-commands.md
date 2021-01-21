@@ -20,7 +20,7 @@ Go see [Nmap](https://zcugni.gitbook.io/notes/tools/nmap)
   * The openBSD version is the most popular \(and it supports IPv6\)
 * Defaults using TCP
   * For UDP use `-u` \(the protocol doesn't imply an answer, but netcat will listen for one and display it\)
-* `netcat <hostname> <port>` If the client establish a TCP session, you'll get a blank line
+* **`netcat <hostname> <port>`** If the client establish a TCP session, you'll get a blank line
   * The three-way handshake is done, but no request has been made. You can then write your own :`GET / HTTP/1.1`
 * The basic listen command is `nc -lnvp <port>`
   * `-l` Listen mode
