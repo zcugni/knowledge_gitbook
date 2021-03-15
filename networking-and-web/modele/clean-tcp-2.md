@@ -2,7 +2,7 @@
 
 ## Generalities
 
-* Used in the 4th layer of the TCP/IP model
+* Transport layer protocol
 * More complex and reliable than UDP but slower
 * It's base functionalities are :
   * **Data Transfer** : Transfer a continuous stream of bytes in each     direction between its users
@@ -11,7 +11,7 @@
   * **Multiplexing** : Allow for many processes within a single host to use TCP     simultaneously
   * **Connections** : Since data is transferred as a stream and different information needs to be kept for the other functionalities to work, TCP uses the concepts of a connection
   * **Precedence & Security** : Security and precedence can be set
-* It's a **connected** protocol since it consider the data sent as a stream
+* It's a **connection-oriented** protocol since it consider the data sent as a stream
 * TCP implementations follow a general principle of robustness:  be   conservative in what you do, be liberal in what you accept from   others
 * The header + data is called a **segment**
 * These are the errors messages for different failures:
@@ -89,19 +89,19 @@ TIME-WAIT   --> <seq = 101> <ack = 501> <ACK>        --> CLOSED
 
 ### State
 
-* LISTEN : Waiting for a connection request
-* SYN-SENT : Waiting for a matching connection request   after having sent one
-* SYN-RECEIVED : Waiting for a connection request acknowledgment after having both received and sent a connection request
-* ESTABLISHED : An open connection, data received can be   delivered to the user
-* FIN-WAIT-1 : Waiting for either : 
+* `LISTEN` Waiting for a connection request
+* `SYN-SENT` Waiting for a matching connection request   after having sent one
+* `SYN-RECEIVED` Waiting for a connection request acknowledgment after having both received and sent a connection request
+* `ESTABLISHED` An open connection, data received can be   delivered to the user
+* `FIN-WAIT-1` Waiting for either : 
   * A connection termination request     from the remote
   * An acknowledgment of the connection     termination request previously sent
-* FIN-WAIT-2 : Waiting for a connection termination request   from the remote
-* CLOSE-WAIT : Waiting for a connection termination request   from the local user
-* CLOSING : Waiting for a termination request   acknowledgment
-* LAST-ACK : Waiting for an acknowledgment of the   termination request previously sent
-* TIME-WAIT : Waiting for enough time to pass to be sure   the remote received the acknowledgment of its termination request
-* CLOSED : No connection state at all
+* `FIN-WAIT-2` Waiting for a connection termination request   from the remote
+* `CLOSE-WAIT` Waiting for a connection termination request   from the local user
+* `CLOSING` Waiting for a termination request   acknowledgment
+* `LAST-ACK` Waiting for an acknowledgment of the   termination request previously sent
+* `TIME-WAIT` Waiting for enough time to pass to be sure   the remote received the acknowledgment of its termination request
+* `CLOSED` No connection state at all
 
 ### Window
 

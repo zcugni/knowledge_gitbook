@@ -14,14 +14,14 @@
 
 * Broadcast protocol
 * A section of Ethernet where all the hosts communicate directly without involving a router is called a \(depending on the vendor\) :
-  * _Broadcast domain_
-  * _Segment_ 
-  * _Local area network_ \(LAN\)
+  * Broadcast domain
+  * Segment 
+  * Local area network \(LAN\)
 * Ethernet cables are ranked by category numbers, higher ones being better
   * cat5 is the current standard, at 100 megabits
 
 {% hint style="info" %}
-Describe ethernet headers
+To Do : Describe ethernet headers
 
 "An Ethernet header is 14 bytes in size and contains the source and destination MAC addresses for this Ethernet packet."
 

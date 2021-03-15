@@ -18,12 +18,13 @@
 
 ## _UDP - User Datagram Protocol_
 
-* Used in the 4th layer of the TCP/IP model
 * Works over IP
 * Way simpler & faster than TCP but not reliable at all
   * Application that uses it handle all problem of lost/damaged/out of order packets
-* The header + data is called a **datagram**
-* **Connectionless** protocol, it considers each datagram independent from each other
+* The combination of the header + data is called a **datagram**
+* **Connectionless**
+* **Stateless**
+  * Each datagram are independent from each other
 * VPNs use it when they don't use VPN specific protocols like IPSec
 * It's easy to forge the source of an UDP packet, so it's often heavily filtered
 

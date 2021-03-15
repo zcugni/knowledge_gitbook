@@ -5,7 +5,26 @@
 * The OSI model divides this layer in 3 \(session, presentation & application\) but in reality they're often mixed, like in the TCP/IP model
 * Some tech of this layer are : HTTP, LDAP, SMTP, etc.
 
-## HTTP
+## HTTP - Hypertext Transfer Protocol
+
+* Used to fetch resources, such as HTML documents
+  * A document is reconstructed from the different element fetched \(text, css, media, scripts, etc\)
+* Essential for any data exchange on the Web
+* Characteristic :
+  * Client-Server : the requests are initiated by the client \(usually a browser\)
+  * Stateless : there's no link between two successive request made on the same connection
+    * However, the usage of cookies make it possible to use it as a stateful protocol
+      * They're called _**request**_ ****when sent by the client & _**response**_ ****when sent by the server
+  * Human readable
+  * Used over TCP
+  * Extensible
+* 
+### Version
+
+* Based on TCP/IP
+* * HTTP is a TCP/IP based communication protocol, that is used to deliver data \(HTML files, image files, query results, etc.\) on the World Wide Web. The default port is TCP 80, but other ports can be used as well. It provides a standardized way for computers to communicate with each other. 
+* There's 2 versions of this protocol \(HTTP/1.0 & HTTP/1.1\)
+* The main difference is that the new version can use a connection for more than one request/response pair
 
 ### Request
 
@@ -23,7 +42,7 @@ Cookie:  hackthebox_session=eyJpdiI6IkJBTlJ0bzNRVGowUDVrOUZNejl2K3c9PSIsInZhbHVl
 ```
 
 * HTTP Verb :
-  * `GET` Ask for a ressource by adding `key=value` parameters after an `?` in a link
+  * `GET` Ask for a resource by adding `key=value` parameters after an `?` in a link
   * `POST` Submit form data \(they're in the message body\)
   * `HEAD` Ask for the the headers that would be given if the request was a GET
   * `PUT` Upload a file to the server
@@ -65,17 +84,22 @@ Content-Length: 48
 
 * Protocol version
 * Status
-  * 200 Ok
-  * 301 Moved Permanently
-  * 302 Found \(temporarily moved\)
-  * 400 Bad Request
-  * 401 Unauthorized
-  * 403 Forbidden
-  * 404 Not Found
-  * 405 Method Not Allowed
-  * 408 Request Time-Out
-  * 500 Internal Server Error
-  * 501 Method Not Implemented
+  * 1xx : Information
+  * 2xx : Successful
+    * 200 Ok
+  * 3xx : Redirection
+    * 301 Moved Permanently
+    * 302 Found \(temporarily moved\)
+  * 4xx : Client Error
+    * 400 Bad Request
+    * 401 Unauthorized
+    * 403 Forbidden
+    * 404 Not Found
+    * 405 Method Not Allowed
+    * 408 Request Time-Out
+  * 5xx : Server Error
+    * 500 Internal Server Error
+    * 501 Method Not Implemented
 * `Date`
 * `Cache-Control` Cache policy
 * `Content-type` Describe the format

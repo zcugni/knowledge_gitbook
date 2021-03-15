@@ -10,6 +10,12 @@ description: To polish
 >
 > “A Mutex is a lock that we set before using a shared resource and release after using it. When the lock is set, no other thread can access the locked region of code. ”
 
+## Types of communication protocols
+
+* **Connection-oriented** \(sometimes called "connected"\) : A connection needs to be established before communicating
+* **Connectionless** : No need to establish a connection before communicating
+* **Stateful** : At least one side keeps track of the state of the connection \(and generally act on it\)
+
 ## Algorithmic runtime
 
 * Different from the runtime of the program, its not interested in an absolute time \(since hardware may change\), but to the time it takes to finish relative to it's input size
@@ -99,4 +105,5 @@ They're usually part of another malware and they offer an entry point into the t
 * Misc Research
 * [Pentesterlab](https://pentesterlab.com/)
 * Hacking : The Art of Exploitation by John Erickson
+* Type of communication protocol : [stackoverflow ](https://stackoverflow.com/questions/56671582/whats-the-difference-between-stateless-and-connection-less#:~:text=If%20one%20communication%20protocol%20is%20%22Stateless%22%2C%20it%20means%20in,is%20stored%20in%20either%20side.&text=%22Not%20Connection%2DOriented%20Stateful%22,highly%20related%20and%20dependent%20messages.)& misc research
 
