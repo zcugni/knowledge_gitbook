@@ -11,22 +11,29 @@
   * A document is reconstructed from the different element fetched \(text, css, media, scripts, etc\)
 * Essential for any data exchange on the Web
 * Characteristic :
-  * Client-Server : the requests are initiated by the client \(usually a browser\)
-  * Stateless : there's no link between two successive request made on the same connection
-    * However, the usage of cookies make it possible to use it as a stateful protocol
-      * They're called _**request**_ ****when sent by the client & _**response**_ ****when sent by the server
-  * Human readable
-  * Used over TCP
+  * Client-Server : the communication is initiated by the client \(usually a browser\)
+    * They communicate via messages, called **request \(**from the client\) & **response** \(from the server\)
+  * [Stateless](https://zcugni.gitbook.io/notes/theory/terminologie-misc#types-of-communication-protocols) \(The usage of cookies let us use it as a stateful protocol\)
+  * Human readable \(before HTTP/2\)
+  * Used over TCP \(however in reality it only needs its transport protocol to be reliable, not necessarily connection-oriented\)
+    * Experiments are made to develop a transport protocol better suited for HTTP
   * Extensible
-* 
-### Version
-
-* Based on TCP/IP
-* * HTTP is a TCP/IP based communication protocol, that is used to deliver data \(HTML files, image files, query results, etc.\) on the World Wide Web. The default port is TCP 80, but other ports can be used as well. It provides a standardized way for computers to communicate with each other. 
-* There's 2 versions of this protocol \(HTTP/1.0 & HTTP/1.1\)
-* The main difference is that the new version can use a connection for more than one request/response pair
+* There's 3 versions of this protocol \(HTTP/1.0, HTTP/1.1 & HTTP/2\)
+  * The main difference between HTTP/1.0 & HTTP/1.1 is that the new version can use a connection for more than one request/response pair
+  *  HTTP messages, as defined in HTTP/1.1 and earlier, are human-readable. In HTTP/2, these messages are embedded into a binary structure, a _frame_, allowing optimizations like compression of headers and multiplexing. Even if only part of the original HTTP message is sent in this version of HTTP, the semantics of each message is unchanged and the client reconstitutes \(virtually\) the original HTTP/1.1 request. It is therefore useful to comprehend HTTP/2 messages in the HTTP/1.1 format.
 
 ### Request
+
+Format :
+
+```text
+<VERB | NOUN> <path> <version>
+[Optional Headers ...]
+
+[Optionnal body]
+```
+
+Example :
 
 ```text
 GET /api/stats/overview HTTP/1.1
@@ -41,7 +48,7 @@ Referer: https://www.hackthebox.eu/
 Cookie:  hackthebox_session=eyJpdiI6IkJBTlJ0bzNRVGowUDVrOUZNejl2K3c9PSIsInZhbHVlIjoiNlNUOUlUTlkwXC9GWEhpWXhpQzhmSUtHczFvWDlLYTYyMk5Tc0RNTDBFcm8rdjA2YmJwdDF5blwvSkl5OFB6emxVIiwibWFjIjoiMTY1NDNjMDI0NzhkOTI4ZDVlNzE2Y2MwOTYwZGE5NzZhOTIxNzQ3NTQ3ODk3YjNkNmJmMjA2ZWZhMjdmZjQ5ZCJ9
 ```
 
-* HTTP Verb :
+* HTTP Verbs & Nouns :
   * `GET` Ask for a resource by adding `key=value` parameters after an `?` in a link
   * `POST` Submit form data \(they're in the message body\)
   * `HEAD` Ask for the the headers that would be given if the request was a GET

@@ -11,10 +11,10 @@
   * **Multiplexing** : Allow for many processes within a single host to use TCP     simultaneously
   * **Connections** : Since data is transferred as a stream and different information needs to be kept for the other functionalities to work, TCP uses the concepts of a connection
   * **Precedence & Security** : Security and precedence can be set
-* It's a **connection-oriented** protocol since it consider the data sent as a stream
+* \*\*\*\*[**Connection-oriented**](https://zcugni.gitbook.io/notes/theory/terminologie-misc#types-of-communication-protocols) ****& ****[**stateful**](https://zcugni.gitbook.io/notes/theory/terminologie-misc#types-of-communication-protocols)\*\*\*\*
 * TCP implementations follow a general principle of robustness:  be   conservative in what you do, be liberal in what you accept from   others
 * The header + data is called a **segment**
-* These are the errors messages for different failures:
+* Errors messages for different failures :
   * Segment rejected / blocked : "connection refused"
   * Segment ignored :  "connection timed out"
 
@@ -253,7 +253,7 @@ TIME-WAIT   --> <seq = 101> <ack = 501> <ACK>        --> CLOSED
 
 ## Sources
 
-* RFC 793
+* [RFC 793](https://tools.ietf.org/html/rfc793)
 * _Networking for Systems Administrators_ by Michael W. Lucas
 * _Hacking : The Art of Exploitation_ by John Erickson
 * Pentesterlab

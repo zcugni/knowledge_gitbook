@@ -21,9 +21,9 @@
 * Works over IP
 * Way simpler & faster than TCP but not reliable at all
   * Application that uses it handle all problem of lost/damaged/out of order packets
+* \*\*\*\*[**Connectionless**](https://zcugni.gitbook.io/notes/theory/terminologie-misc#types-of-communication-protocols)\*\*\*\*
+* \*\*\*\*[**Stateless**](https://zcugni.gitbook.io/notes/theory/terminologie-misc#types-of-communication-protocols)\*\*\*\*
 * The combination of the header + data is called a **datagram**
-* **Connectionless**
-* **Stateless**
   * Each datagram are independent from each other
 * VPNs use it when they don't use VPN specific protocols like IPSec
 * It's easy to forge the source of an UDP packet, so it's often heavily filtered
@@ -116,6 +116,7 @@ See this [page](https://zcugni.gitbook.io/notes/networking-and-web/modele/clean-
 * _Hacking : The Art of Exploitation_ by John Erickson
 * Pentesterlab
 * Misc Research
+* [RFC 768](https://tools.ietf.org/html/rfc768)
 
 
 

@@ -129,7 +129,8 @@
 * Time to Live \(TTL\) :  8 bits  , the maximum time a packet can exist before it is discarded
   * Measured in seconds, but must be decremented by one on each hop even if a second hasn't passed
 * Protocol :  8 bits  , this field indicates the next level protocol used in the data   portion
-  * It will for example be 1 for ICMP, available protocols are described in RFC 790
+  * For instance, it's 1 for ICMP
+  * Before, a list of assigned numbers was given in RFCs but since 2002 this information is available on the [iana ](https://www.iana.org/)website \(see [RFC 3232](https://tools.ietf.org/html/rfc3232) for details\)
 * Header Checksum :  16 bits  , a checksum on the header only
   * IT's the 16-bits 1's complement of the 1's complement sum of all 16-bits words in the header
   * Since some header fields change    , it's recomputed and verified at time

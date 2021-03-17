@@ -67,6 +67,7 @@
   * [Layer 2 - Datalink](networking-and-web/modele/layer-2-datalink.md)
   * [Layer 3 - Network](networking-and-web/modele/layer-3-network.md)
   * [Layer 4 - Transport](networking-and-web/modele/layer-4-transport.md)
+  * [HTTP - Hypertext Transfer Protocol](networking-and-web/modele/http-hypertext-transfer-protocol.md)
   * [TCP - Transmission Control Protocol](networking-and-web/modele/clean-tcp-2.md)
   * [Layer 5 - Application](networking-and-web/modele/layer-5-application.md)
 * [Security hardware](networking-and-web/machines.md)
