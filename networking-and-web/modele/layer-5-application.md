@@ -124,7 +124,7 @@ Content-Length: 48
 
   `Set-Cookie: name=value; expires=Mon, 23-Mar-2020 20:35:24 GMT; Max-Age=7200; path=/; secure`
 
-* Can have these attributes :
+* Available attributes :
   * `Secure` Will only be transmitted with https request
   * `HttpOnly` Can't be retrieved in js \(not supported by every browser\)
   * `Domain` Define the domain for which the cookies will be sent
@@ -138,7 +138,7 @@ Content-Length: 48
 
 * Session keeps the state & information of the client server-side
 * This allows you to avoids transmitting all data through cookies
-* When you login \(for exemple\), your're only given a session id cookie, which is subsequently used to retrieve your info \(instead of having a cookie for each info\)
+* When you login \(for example\), your're only given a session id cookie, which is subsequently used to retrieve your info \(instead of having a cookie for each info\)
 * Session id can also be sent via GET parameters
 
 ## Local Storage
@@ -147,23 +147,23 @@ Content-Length: 48
 * Let you store data as key-value pair on the client
   * Linked to a particular domain, it follows SOP
 * The storage capacity is bigger than that of cookies, and data aren't sent to the server
-* The `localStorage` is persistant, while the `sessionStorage` is emptied when you close a window
+* The `localStorage` is persistent, while the `sessionStorage` is emptied when you close a window
   * Both are accessible in js via `setItem` & `getItem`
 
 ## URL
 
 ### Terminology
 
-* **Uniform Ressource Identifier** _\(URI\)_ Identifies a ressource \(like a name\)
-* **Uniform Ressource Locator** _\(URL\)_ Locate a ressource \(like an address\)
-* **Uniform Ressource Name** _\(URN\)_ Identifies a ressource uniquely' \(like the ISBN of a book\)
+* **Uniform Resource Identifier** _\(URI\)_ Identifies a resource \(like a name\)
+* **Uniform Resource Locator** _\(URL\)_ Locate a resource \(like an address\)
+* **Uniform Resource Name** _\(URN\)_ Identifies a resource uniquely' \(like the ISBN of a book\)
 * URL & URN are URIs, but the opposite isn't always true
 
 ### Anatomy
 
 ![](../../.gitbook/assets/url_anatomy.png)
 
-* If the scheme is `file://` it reference a local ressource
+* If the scheme is `file://` it reference a local resource
 * There can be multiple parameters in the **Query String**, separated by `&`
 * You can specify the username & password before the domain :`https://username:password@example.com`
 * The **Fragment Identifier** is a page anchor
@@ -197,31 +197,31 @@ Content-Length: 48
 
 ## SOP - Same Origin Policy
 
-* It restrain how an origin can interact with a ressource from another origin
-* 2 pages have the same origin if they share :
-  * The same protocol \(http vs https\)
-  * The same host
-  * The same port
+* The SOP restrict how an origin can access or interact with a resource from another origin
+* It's goal is to help protect against CSRF
+* 2 pages have the same **origin** if they share :
+  * The same **protocol** \(http vs https\)
+  * The same **host**
+  * The same **port**
 * Type of exchanges :
-  * Generally authorized
-    * Link
-    * Redirection
-    * Forms
+  * Link, redirection and form submissions are generally authorized
+    * 
   * Authorized only in part :
     * `<script src=”..”></script>` Error message are visible only to the same origin
     * `<link rel=”stylesheet” href=”...”>` The `content-type` header must be present and there's restrictions depending on the browser
     * `<img>`, `<video>`, `<audio>`
-    * Plugins avec `<object>`, `<embed>`, `<applet>`
+    * Plugins with `<object>`, `<embed>`, `<applet>`
     * `@font-face` Depending of the browsers
     * `<frame>` & `<iframe>` Can be forbidden by an header
+    * Not authorized : Read \(you won't see the result of a GET response\)
 
 ## CORS - Cross-Origin Resource Sharing
 
-Can autorise some exchanges that don't follow SOP restriction by adding headers in the response
+Can authorize some exchanges that don't follow SOP restriction by adding headers in the response
 
 ### Type of headers \(in the response\)
 
-* `Access-Control-Allow-Origin : * | <origin>` Autorise cross-origin request from one specific domain or any domain
+* `Access-Control-Allow-Origin : * | <origin>` Authorize cross-origin request from one specific domain or any domain
 * `Access-Control-Allow-Credentials : true` ****
   * False if not specified
   * Allows request with cookies
@@ -277,5 +277,5 @@ Request following these conditions won't trigger a preflight :
 * MDN Web Docs
   * [On SOP](%20https://developer.mozilla.org/fr/docs/Web/Security/Same_origin_policy_for_JavaScript)
   * [On CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-* [W3C](https://www.w3schools.com/tags/ref_urlencode.ASP)
+* Url encoding : [W3C](https://www.w3schools.com/tags/ref_urlencode.ASP)
 

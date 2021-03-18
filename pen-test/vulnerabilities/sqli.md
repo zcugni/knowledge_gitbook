@@ -15,7 +15,7 @@ SELECT * FROM Users WHERE Username=’admin’ AND Password=’1’ OR ‘1’ =
 ```
 
 * Use `LIMIT` if needed
-* Stack request by terminating it with `;`
+* Stack request by terminating them with `;`
 
 ## Union Exploitation
 
@@ -75,7 +75,7 @@ Create procedure get_report @columnamelist varchar(7900) As Declare @sqlstring v
 
 ## Insider Info
 
-If you have an injection in a place where doing an `1'or '1'='1` isn't useful, you may still be able to use it to show the table name & structure by injecting an sql command.
+If you have an injection in a place where doing an `1'or '1'='1` isn't useful, you may still be able to use it to show the table name & structure by injecting an sql command
 
 ## Sources
 

@@ -58,7 +58,7 @@ XSS payloads made from a mixture of encoding/repetition/comments/etc that make i
 
 * Exist in Chrome, not in Firefox and I don't know for the rest
 * Broadly speaking, it detects XSS injection by comparing what is given in the url with the scripts of the page
-* Because of that, we can inject in the url a script that's a normal part of the page to disable it
+* Because of that, we can inject in the url a script that is in the page to disable it
 * Might soon disappear because it create vulnerabilities and gives a false impression of security to devs
 
 ## Get a cookie

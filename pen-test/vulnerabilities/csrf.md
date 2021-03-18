@@ -1,9 +1,10 @@
 # CSRF - Cross-Site Request Forgery
 
-For both of these attacks, the user must go to _our_ website which has a malicious image or form that will send to the target website a request in the name of the user \(so with it's cookies\).
+For CSRF, the victim must go to the _attacker_ website which has a malicious image or form that will send a request in the name of the victim \(so with it's cookies\) to the target website
 
 ## GET attack
 
+* Because of the SOP, if a server receive a get request from another origin, it won't show the response
 * When using GET request correctly  \(to get data, not do action\), SOP & CORS are a good protection
   * If you send one from another origin, the server will receive it, but no show the result
 * However, if the get request is used to delete/modify/etc data, this will still be executed by the server \(since it does receive the request\)
