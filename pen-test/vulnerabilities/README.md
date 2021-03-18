@@ -17,7 +17,7 @@
 
 * **Inband** : The result is directly visible \(sent or displayed\)
 * **Out-of-band** : We must force the app to send the result from another way : 
-  * By adding it as a cookie or parameter to a request made to our server
+  * By adding it as a cookie or url parameter to a request made to our server
   * By pipping the result to netcat to send it back to us
   * etc
 * **Blind \(oracle\)** : The result isn't retrievable, but the application reacts differently in function of it
@@ -30,23 +30,20 @@
 
 ## Parser Differentials
 
-* Lots of vulns comes from differences in how parser work on a same string, for example :
-  * The client parser vs the server one
-  * Different js context \(for example, before dom purify's `noscript` would react differently in a browser and in a template\) 
-  * Html parser \(because of a `<div>`\) vs js parser \(because of a `<script>`\)
-  * Often case a problem with url parsing, for example python libraries don't always react the same\)
-* Because of that, the first parser might let something pass that the second would not, or vice-versa, which can be abuse
-
-{% hint style="info" %}
-Add an example
-{% endhint %}
+* A lot of vulnerabilities come from differences in how different parser work on a same string
+* The first parser might let something pass that the second would not, or vice-versa, which can be abused
+* Some example of situation where different parser work on a string :
+  * Client vs server
+  * Different js context \(for example, browser vs template\)
+  * Html parser \(in`<div>`\) vs js parser \(in `<script>`\)
+  * Url  \(for example python libraries don't parse them the same way\)
 
 ## Bypassing sanitizers
 
 ### Encode
 
 * Url
-* Unicode or double unicode \(`%2e` or `%c0%af`for `/` for example\)
+* Unicode or double unicode \(for example `/` = `%2e` or `%c0%af`\)
 * Base64
 * Hexadecimal
   * `printf "\x41"`
@@ -55,11 +52,13 @@ Add an example
 
 ### Simple tips
 
+* Check which chars are escaped by using them with an easily recognizable safe string
 * See if the check is **case sensitiv**e or not
-* Add a null byte `%00` to terminate a string earlier
-* If file type \(aka **mime type**\) is deduced from the magic number, add arbitrary ones that are accepted at the start of the file
+* Add a **null byte `%00`** to terminate a string earlier
+* If the file type \(aka **mime type**\) is deduced from the magic number, add arbitrary ones that are accepted at the start of the file
 * **Fragment** or mix the input, or try to double some elements
   * If the sanitizers aren't recursive or are straightforward, they'll remove only a part of your input
+* Retrieve sanitized char from **environment variables**
 
 ### Use function
 
@@ -70,19 +69,13 @@ Add an example
 * More generally, try to find alternative functions to create your input
   * For example, if the `"` are sanitized you can eval a regex : `eval(/alert(1337)/.source())`
 
-### Use constant
-
-* Retrieve your char from constant ****or variable, for example :
-  * To get `/` you can `echo $HOME` and retrieve the start
-  * `echo ${<env_var>:13:1}` The first number is the position of the char, the second the number of chars to retrieve
-
 ### Specifics
 
 * The following examples are specific to some technologies/languages, but see if you can adapt it to your situation 
 * **Break out of html commen**t : 
   * If `<?php>` \(or `<?>`, it's shortcut\) are in the html response, browser will transform it to `<!--php-->` because server code shouldn't be on the client
   * However, nested comment aren't possible in html, so if we do that inside of an existing comment, it terminate it earlier
-* If there's a verification that the address start with `/`, use : **`//google.com`**
+* If there's a verification that the address start with `/` use  **`//google.com`**
 * The whole **127.0.0.1/8 subnet** is localhost, so if 127.0.0.1 is filtered, try that or localhost
 * **JSFuck** is a valid js syntax using only 6 characters : `[`, `]`, `(`, `)`, `+`, `!` which you can use to bypass filters
 * Some versions of apache will execute scripts with `.php.jpg` or  `.php3` as extensions for example

@@ -5,7 +5,7 @@
 * If our input is directly injected as a node inside an xml doc, we can :
   * Inject malformed string to break the parser
   * Modify information with well crafted payload
-* If the xml is converted to html, `<![CDATA[]]>` might be stripped, making it possible to inject other script undetected : 
+* If the xml is converted to html `<![CDATA[]]>` might be stripped, making it possible to inject other script undetected : 
 
 ```markup
 <html>

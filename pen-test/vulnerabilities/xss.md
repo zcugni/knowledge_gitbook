@@ -1,5 +1,15 @@
 # XSS - Cross-Site Scripting
 
+## Introduction
+
+* An XSS vulnerability lets you inject a malicious script on a website
+  * One notable use is to steal cookies
+* Where to find XSS :
+  * Any input on a website really \(if it's not properly sanitized\)
+  * Concatenated http parameter pollution
+  * Url of action form : `javascript:alert(1337)`
+  * Url : `data:text/html,<script>alert(0)</script>`
+
 ## Types
 
 ### Reflected
@@ -39,13 +49,8 @@ XSS payloads made from a mixture of encoding/repetition/comments/etc that make i
 
 ## Tips
 
-* Check which chars are escaped by using them with an easily recognizable safe string
 * Use lists with _burp intruder_
 * If `<script>` aren't accepted, use events like `onfocus`, `onload`, etc
-* Other places for xss :
-  * Concatenated http parameter pollution
-  * Url of action form : `javascript:alert(1337)`
-  * Url : `data:text/html,<script>alert(0)</script>`
 * `google.com/jsapi?callback=alert` can be used to received a function in a callback
 * Check : [Bypassing Sanitizers](https://zcugni.gitbook.io/notes/pen-test/vulnerabilities#bypassing-sanitizers) & the [Owasp Cheat Sheet](https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet)
 
@@ -56,7 +61,7 @@ XSS payloads made from a mixture of encoding/repetition/comments/etc that make i
 * Because of that, we can inject in the url a script that's a normal part of the page to disable it
 * Might soon disappear because it create vulnerabilities and gives a false impression of security to devs
 
-## Get a cookie with that
+## Get a cookie
 
 By example by injecting this script :
 

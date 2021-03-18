@@ -1,5 +1,9 @@
 # Bash
 
+{% hint style="info" %}
+Add something about parameter substitution : [https://tldp.org/LDP/abs/html/parameter-substitution.html](https://tldp.org/LDP/abs/html/parameter-substitution.html)
+{% endhint %}
+
 ## Terminology
 
 ### Bash, shell, terminal, etc
