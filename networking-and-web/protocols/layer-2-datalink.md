@@ -1,22 +1,12 @@
-# Layer 2 - Datalink
+# Ethernet
 
 ## Generalities
 
-* Deals with transferring data between 2 network entities
-* **Ethernet** is the standard protocol
-* "A single lump of datalink data is called a _**frame**_"
-* It has a _Maximum Transmission Unit_ \(MTU\) defining it's size
-  * Older Ethernet equipment have an MTU of 1500 bytes
-  * Gigabit Ethernet support 9000 byte "jumbo" frames
-  * Packets are usually larger than that so they are divided into multiple ones that are then reassembled on reception
-
-## Ethernet
-
 * Broadcast protocol
-* A section of Ethernet where all the hosts communicate directly without involving a router is called a \(depending on the vendor\) :
-  * Broadcast domain
-  * Segment 
-  * Local area network \(LAN\)
+* A section of Ethernet where all the hosts communicate directly without involving a router is called \(depending on the vendor\) :
+  * A broadcast domain
+  * A segment 
+  * A local area network \(LAN\)
 * Ethernet cables are ranked by category numbers, higher ones being better
   * cat5 is the current standard, at 100 megabits
 
@@ -26,6 +16,15 @@ To Do : Describe ethernet headers
 "An Ethernet header is 14 bytes in size and contains the source and destination MAC addresses for this Ethernet packet."
 
 "Any packet’s Ethernet header includes a type value that describes the packet. This type is used to specify whether the packet is an ARP-type message or an IP packet."
+{% endhint %}
+
+{% hint style="info" %}
+To write elsewhere : 
+
+* It has a _Maximum Transmission Unit_ \(MTU\) defining it's size
+  * Older Ethernet equipment have an MTU of 1500 bytes
+  * Gigabit Ethernet support 9000 byte "jumbo" frames
+  * Packets are usually larger than that so they are divided into multiple ones that are then reassembled on reception
 {% endhint %}
 
 ## Switch

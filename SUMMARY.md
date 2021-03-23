@@ -63,17 +63,17 @@
 
 ## Networking & Web
 
-* [Models & Protocols](networking-and-web/modele/README.md)
-  * [Models](networking-and-web/modele/models.md)
-  * [Layer 2 - Datalink](networking-and-web/modele/layer-2-datalink.md)
-  * [Layer 4 - Transport](networking-and-web/modele/layer-4-transport.md)
-  * [Layer 5 - Application](networking-and-web/modele/layer-5-application.md)
+* [Models](networking-and-web/models.md)
 * [Security hardware](networking-and-web/machines.md)
 * [Protocols](networking-and-web/protocols/README.md)
+  * [Ethernet](networking-and-web/protocols/layer-2-datalink.md)
+  * [HTTP - Hypertext Transfer Protocol](networking-and-web/protocols/http-hypertext-transfer-protocol.md)
+  * [ICMP - Internet Control Message Protocol](networking-and-web/protocols/icmp-internet-control-message-protocol.md)
   * [Internet Protocol](networking-and-web/protocols/layer-3-network.md)
   * [SOP & CORS](networking-and-web/protocols/sop-and-cors.md)
   * [TCP - Transmission Control Protocol](networking-and-web/protocols/clean-tcp-2.md)
-  * [HTTP - Hypertext Transfer Protocol](networking-and-web/protocols/http-hypertext-transfer-protocol.md)
+  * [UDP - User Datagram Protocol](networking-and-web/protocols/udp-user-datagram-protocol.md)
+  * [Misc](networking-and-web/protocols/layer-5-application.md)
 * [DNS](networking-and-web/dns.md)
 * [Vulnerabilities](networking-and-web/vulnerabilities.md)
 

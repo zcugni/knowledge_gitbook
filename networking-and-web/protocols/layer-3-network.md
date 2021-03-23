@@ -7,8 +7,8 @@
   * A connection is not established before communication between the hosts
   * IP packets sent to the same host won't necessarily go through the same route
 * There's no reliability built into the protocol \(no acknowledgement of arrival, re-transmission or control of data except for the header checksum\)
-  * This should be dealt by protocols in the transport layer, particularly **TCP**
-  * **Errors** are reported via the Internet Control Message Protocol \(**ICMP**\)
+  * This should be dealt by protocols of the transport layer, particularly [**TCP**](https://zcugni.gitbook.io/notes/networking-and-web/protocols/clean-tcp-2)\*\*\*\*
+  * **Errors** are reported via the Internet Control Message Protocol \([**ICMP**](https://zcugni.gitbook.io/notes/networking-and-web/modele/layer-4-transport#icmp-internet-control-message-protocol)\)
 * It's comes in 2 versions :  **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
   * Some host are only capable of using one of the 2 protocols
   * Others can do both and will responds by using the same one as the request when responding and their default configuration when requesting

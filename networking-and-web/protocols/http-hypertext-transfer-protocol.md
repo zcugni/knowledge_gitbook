@@ -1,5 +1,122 @@
 # HTTP - Hypertext Transfer Protocol
 
+## Old
+
+
+
+* Used to fetch resources, such as HTML documents
+  * A document is reconstructed from the different element fetched \(text, css, media, scripts, etc\)
+* Essential for any data exchange on the Web
+* Characteristic :
+  * Client-Server : the communication is initiated by the client \(usually a browser\)
+    * They communicate via messages, called **request \(**from the client\) & **response** \(from the server\)
+  * [Stateless](https://zcugni.gitbook.io/notes/theory/terminologie-misc#types-of-communication-protocols) \(The usage of cookies let us use it as a stateful protocol\)
+  * Human readable \(before HTTP/2\)
+  * Used over TCP \(however in reality it only needs its transport protocol to be reliable, not necessarily connection-oriented\)
+    * Experiments are made to develop a transport protocol better suited for HTTP
+  * Extensible
+* There's 3 versions of this protocol \(HTTP/1.0, HTTP/1.1 & HTTP/2\)
+  * The main difference between HTTP/1.0 & HTTP/1.1 is that the new version can use a connection for more than one request/response pair
+  *  HTTP messages, as defined in HTTP/1.1 and earlier, are human-readable. In HTTP/2, these messages are embedded into a binary structure, a _frame_, allowing optimizations like compression of headers and multiplexing. Even if only part of the original HTTP message is sent in this version of HTTP, the semantics of each message is unchanged and the client reconstitutes \(virtually\) the original HTTP/1.1 request. It is therefore useful to comprehend HTTP/2 messages in the HTTP/1.1 format.
+
+### Request
+
+Format :
+
+```text
+<VERB | NOUN> <path> <version>
+[Optional Headers ...]
+
+[Optionnal body]
+```
+
+Example :
+
+```text
+GET /api/stats/overview HTTP/1.1
+Host: www.hackthebox.eu
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:73.0) Gecko/20100101 Firefox/73.0
+Accept: application/json, text/javascript, */*; q=0.01
+Accept-Language: fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3
+Accept-Encoding: gzip, deflate
+X-Requested-With: XMLHttpRequest
+Connection: close
+Referer: https://www.hackthebox.eu/
+Cookie:  hackthebox_session=eyJpdiI6IkJBTlJ0bzNRVGowUDVrOUZNejl2K3c9PSIsInZhbHVlIjoiNlNUOUlUTlkwXC9GWEhpWXhpQzhmSUtHczFvWDlLYTYyMk5Tc0RNTDBFcm8rdjA2YmJwdDF5blwvSkl5OFB6emxVIiwibWFjIjoiMTY1NDNjMDI0NzhkOTI4ZDVlNzE2Y2MwOTYwZGE5NzZhOTIxNzQ3NTQ3ODk3YjNkNmJmMjA2ZWZhMjdmZjQ5ZCJ9
+```
+
+* HTTP Verbs & Nouns :
+  * `GET` Ask for a resource by adding `key=value` parameters after an `?` in a link
+  * `POST` Submit form data \(they're in the message body\)
+  * `HEAD` Ask for the the headers that would be given if the request was a GET
+  * `PUT` Upload a file to the server
+  * `DELETE` Remove a file from the server
+  * `OPTIONS` Query the server for accepted Verbs
+  * `TRACE`
+* Path
+* Protocol Version
+* `Host` Domain of the requested ressource
+  * The behavior of the serveur might change depending on that field even if it points to the same ressource \(for example, using the ip address instead of the hostname\)
+* `User-Agent` Client software issuing the request
+* `Accept` Expected format of the response
+* `Accept-Language` Expected \(human\) language of the response
+* `Accept-Encoding` Expected encoding \(aka compression method\)
+* `Connection` What to do with it, with `keep-alive` it will be re-use next time \(i think\)
+* `Referer` Last page visited
+
+### Response
+
+```text
+HTTP/1.1 200 OK
+Date: Mon, 23 Mar 2020 18:35:27 GMT
+Content-Type: application/json
+Connection: close
+Vary: Accept-Encoding
+Cache-Control: no-cache, private
+X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+CF-Cache-Status: DYNAMIC
+Expect-CT: max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+Strict-Transport-Security: max-age=0; includeSubDomains
+Server: cloudflare
+CF-RAY: 578a4096ab09c795-AMS
+Content-Length: 48
+
+{"users":"286k","machines":154,"challenges":111}
+```
+
+* Protocol version
+* Status
+  * 1xx : Information
+  * 2xx : Successful
+    * 200 Ok
+  * 3xx : Redirection
+    * 301 Moved Permanently
+    * 302 Found \(temporarily moved\)
+  * 4xx : Client Error
+    * 400 Bad Request
+    * 401 Unauthorized
+    * 403 Forbidden
+    * 404 Not Found
+    * 405 Method Not Allowed
+    * 408 Request Time-Out
+  * 5xx : Server Error
+    * 500 Internal Server Error
+    * 501 Method Not Implemented
+* `Date`
+* `Cache-Control` Cache policy
+* `Content-type` Describe the format
+* `Content-Encoding` Describe the encoding \(the compression method\)
+* `Server` \(Optional\) Header of the server generating the response
+* `Content-Length` Length of the message body in bytes
+
+### HTTPS
+
+* Stands for HTTP Secure, it's runs over SSL/TLS
+
+## Draft
+
 * HTTP communication usually takes place over TCP/IP connections. The default port is TCP 80 \[19\], but other ports can be used. This does not preclude HTTP from being implemented on top of any other protocol on the Internet, or on other networks. HTTP only presumes a reliable transport; any protocol that provides such guarantees can be used;
 * Semantics
   * HTTP/1.1 defines the sequence CR LF as the end-of-line marker for all protocol elements except the entity-body \(see appendix 19.3 for tolerant applications\). The end-of-line marker within an entity-body is defined by its associated media type, as described in section 3.7.
