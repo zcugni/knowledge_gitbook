@@ -1,22 +1,22 @@
 # CSRF - Cross-Site Request Forgery
 
-For CSRF, the victim must go to the _attacker_ website which has a malicious image or form that will send a request in the name of the victim \(so with it's cookies\) to the target website
+## Presentation
 
-## GET attack
-
-* Because of the SOP, if a server receive a get request from another origin, it won't show the response
-* When using GET request correctly  \(to get data, not do action\), SOP & CORS are a good protection
-  * If you send one from another origin, the server will receive it, but no show the result
-* However, if the get request is used to delete/modify/etc data, this will still be executed by the server \(since it does receive the request\)
-* For exemple, if this link [https://example.com/profile/delete](https://example.com/profile/delete) is embeded in an image, any user visiting our website will send a request to the target server with the cookies of the user, effectively deleting their account
-
-## POST attack
-
-* With POST, you need an auto-submit form \(through js\) with the target website as the action link
-* To defend against that, we use **CSRF tokens** : an hidden input added to every form of the website
-  * It's value is secret, unique and identifies the user
-  * Any request that does not contain the token is rejected
-  * As long as the attacker can't leak the token, this is a good defense
+* Cross-Site Request Forgery is an attack where you **execute action in the name of an authenticated user**
+* For example :
+  * A user is authenticated on application X
+  * The user visit a malicious website
+  * This website sends requests \(with the user cookies attached\) to the application X server without the user knowing
+* To trigger the requests, the malicious website could use :
+  * `<img>` or other embedded tags `src`
+  * Auto-submitting forms
+  * Scripts
+* Because of the SOP & CORS, the browser **won't share the response** to requests made from another origin \(unless explicitly authorized too\)
+  * However, **the request are still made**, so **GET requests** that trigger some action instead of only retrieving data are vulnerable 
+  * To protect **POST request**, servers use **CSRF tokens** : an hidden input added to every form of the website
+    * It's value is secret, unique & identifies the user
+    * Any request that does not contain the token is rejected
+    * As long as the attacker can't leak the token, this is a good defense
 
 ## Sources
 
