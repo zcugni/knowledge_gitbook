@@ -76,5 +76,6 @@ The CORS are added **headers** in HTTP request & response that makes it possible
 * [Hackedu](https://www.hackedu.com/blog/same-origin-policy-and-cross-origin-resource-sharing-cors#:~:text=The%20same%2Dorigin%20policy%20is,when%20it%20was%20first%20created.)
 * [Wikipedia](https://en.wikipedia.org/wiki/Same-origin_policy#:~:text=The%20concept%20of%20same%2Dorigin,Document%20Object%20Model%20%28DOM%29.)
 * [LiveOverflow](https://www.youtube.com/watch?v=KaEj_qZgiKY)
+* [StackOverflow](https://softwareengineering.stackexchange.com/questions/285377/why-does-sop-permit-cross-origin-form-submissions)
 * Misc research
 

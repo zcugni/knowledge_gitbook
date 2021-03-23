@@ -1,21 +1,25 @@
-# Layer 3 - Network \(IP\)
+# Internet Protocol
 
 ## Generalities
 
-* The network layer deals with choosing a path between two hosts \(**routing** them\), enabling them to transfer data to each other
-* I'll only detail the **Internet Protocol** \(IP\) here
-  * I think that based on the destination, it decides which is the next hop and gives it's IP address to the underlying layer, which will "translate" it to a MAC address
-  * So on each hop, the underlying layer is deconstructed to access this layer, and then constructed again
-* "A single chunk of network data is called a **packet**"
-* It's a **connectionless** protocol, meaning among other things that : 
-  * A connection is not established beforehand between the hosts
+* The Internet Protocol \(IP\) is a layer 3 protocol that helps **routing** **packet** between machines
+* **Connectionless**
+  * A connection is not established before communication between the hosts
   * IP packets sent to the same host won't necessarily go through the same route
-* There's no reliability built into the protocol, meaning there is no acknowledgement of arrival, control of data \(except for the header checksum\) or re-transmission
-  * This should be dealt by protocols in the transport layer, particularly TCP
+* There's no reliability built into the protocol \(no acknowledgement of arrival, re-transmission or control of data except for the header checksum\)
+  * This should be dealt by protocols in the transport layer, particularly **TCP**
   * **Errors** are reported via the Internet Control Message Protocol \(**ICMP**\)
 * It's comes in 2 versions :  **IPv4** & **IPv6** \(because there wasn't enough addresses in IPv4\)
   * Some host are only capable of using one of the 2 protocols
   * Others can do both and will responds by using the same one as the request when responding and their default configuration when requesting
+
+{% hint style="info" %}
+Write this somewhere else :
+
+I think that based on the destination, it decides which is the next hop and gives it's IP address to the underlying layer, which will "translate" it to a MAC address
+
+So on each hop, the underlying layer is deconstructed to access this layer, and then constructed again
+{% endhint %}
 
 ## IP addresses & Netmask
 
