@@ -1,6 +1,6 @@
 # CSRF - Cross-Site Request Forgery
 
-## Presentation
+## Concept
 
 * Cross-Site Request Forgery is an attack where you **execute action in the name of an authenticated user**
 * For example :

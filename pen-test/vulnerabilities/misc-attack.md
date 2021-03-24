@@ -11,27 +11,30 @@ description: 'Disclaimer : This isn''t clean, don''t use it for now'
 ## RCE
 
 * I'm not sure if it stands for _**Remote Code Execution**_ or _**Remote Command Execution**_
-* It allows us to execute commands on the server
+* It allows us to **execute commands on the server**
 * Language specific commands :
   * PHP : `system(<command>)`
   * Ruby : `command`
   * Python
     * `os.system(<command>)` and variants
     * Do that inside an `str()`
-    * If you need to import os.system, use this function in str\(\) : `__import__('os').system(...)`
+    * If you need to import `os.system`, use this function in `str()` : `__import__('os').system(...)`
 
 ## HTTP
 
 ### Parameter pollution
 
-* There’s no official protocol on how to deal with multiple get variables with the same name \(aka [http://test.com/?user=asd&user=xyz](http://test.com/?user=asd&user=xyz)\)
+* There’s no official agreement on how to deal with multiple get variables with the same name \(aka `http://test.com/?user=asd&user=xyz)`
 * Some parser will take the first one, some the last and others will concatenate all of them
-* We can abuse this by overriding values, create a vicious payload by concatenating all of them, or taking advantage of parser differentials to pass different values to the different services.
+* With that an attacker can : 
+  * Override values
+  * Create a vicious payload by concatenating all of them
+  * Take advantage of parser differentials
 
 ### Cross-site Tracing
 
 * The `TRACE` request simply returns back the request
-* If we can force the browser to do it, it'll send cookies with it and so receive them back in the response, which can be read in js, bypassing the `HttpOnly` rule
+* If we can force the browser to do it, it'll send cookies with it and so receive them back in the response, which can be read in js, **bypassing the `HttpOnly` rule**
 
 ### Redirect
 
@@ -65,22 +68,23 @@ When unnecessary HTTP methods are accepted, we can abuse it, but I haven't resea
 
 ## Open redirect
 
-* Allows us to redirect a user to any page
+* Allows us to **redirect a user to any page**
 * This happens when we can control the redirect instruction of a page, which can come from:
-  * A get parameter : [https://abc.com/?url=xyz.com](https://abc.com/?url=xyz.com)
+  * A get parameter : `https://abc.com/?url=xyz.com`
   * JS's `window.location`
   * Html's meta tag
   * PHP's header : `header("location: $var")`
   * Server-side framework \(like flask's `redirect()`\)
-* It's one of the based concepts of phishing attacks
-* It can also be use to retrieve cookies if the target is our website
+* It's one of the based concepts of **phishing attacks**
+* It can also be use to **retrieve cookies** if the target is our website
 * Restricted redirect are restricted to only some subdomains
 * Check [Bypassing Sanitizers](https://zcugni.gitbook.io/notes/pen-test/vulnerabilities#bypassing-sanitizers)
 
 ## Dom Clobbering
 
 * For each element with an id in the page, a corresponding js var is created \(except if it already exist\)
-* It's doesn't represent the same thing in function of the type of the element
+  * It doesn't represent the same thing in function of the type of the element
+* You can create artificial variable like this
 
 {% hint style="info" %}
 I forgot how to use that to our advantages
@@ -98,13 +102,13 @@ I forgot how to use that to our advantages
 ## Click jacking
 
 * By integrating a page into an iframe and making in transparent, we can make the user click on element without him knowing
-* To protect from that client side, use _frame busting_
+* To protect from that client side, use _**frame busting**_
 * To protect from that server side, use `X-frame-options` which determine who can put our site into an iframe
 
 ## LDAP vulnerabilities
 
 * We might be able to authenticate by doing an anonymous bind \(by putting nothing into the body of the request\)
-* Example of payloads given this authentication `(&(cn=[INPUT1])(userPassword=HASH[INPUT2]))` :
+* Example of payloads given this authentication : `(&(cn=[INPUT1])(userPassword=HASH[INPUT2]))` :
   * `?name=admin)(userPassword=*))%00&password=*`
 * Try to break filters with `)`
 
@@ -126,7 +130,7 @@ I forgot how to use that to our advantages
 
 * This is a vulnerability using Active Directory and Kerberos
 * 2 aspects make this attack possible :
-  * Kerberos user can ask for tickets for services they don't have the rights to use
+  * Kerberos users can ask for tickets for services they don't have the rights to use
   * AD services tickets are encrypted with the NTLM hash of the service account instead of a more random/secure option
 * Because of all of that, we can ask for tickets and then crack the password of the service account
 
@@ -136,14 +140,17 @@ I forgot how to use that to our advantages
 * Resource : [https://repo.zenk-security.com/](https://repo.zenk-security.com/)
 * A weird way to write a file is to `cat > file_name << EoF`, then write your text, and write EoF at the end.
 * Many web servers and application servers provide, in a default installation, sample applications and files that have vulnerabilities
-* _HTTP Strict Transport Security_ \(HSTS\) is a request header specifying that all exchanged must be done over HTTPS.
-* If `Cache-Control` is not  set to `must re-validate`, using the “back” button of the browser will show the previous page and it’s information, which may be sensitive if it was for a login for example. Other Cache-Control options will control how page are cached, and if wrongly set will enable finding sensitive information in the browser \(aka forced browsing\)
-* Mobile website may differ from desktop website, and may have vulnerabilities not existent in the other version. Same for different browser version \(looking at you IE\). By using an interception proxy and modifying request, you can forge them/bypass checks used in the front end. De même pour des champs qui sont normalement cachés
+* If `Cache-Control` is not  set to `must re-validate`, using the “back” button of the browser will show the previous page and it’s information, which may be sensitive if it was for a login for example. 
+  * Other Cache-Control options will control how pages are cached, and if wrongly set will enable finding sensitive information in the browser \(aka forced browsing\)
+* Mobile website may differ from desktop website, and may have vulnerabilities not existent in the other version
+  * Same for different browser version \(looking at you IE\)
+  * By using an interception proxy and modifying request, you can forge them/bypass checks used in the front end
+  * Same for hidden fields
 * Processing times might give a hint to the attacker, for example if the error message takes longer to come for an invalid username + invalid password combo than for a valid username + invalid password one
-* Test that some function can't be used more times than intended \(for example discount one\).
-* **Session Fixation** : Si l'application ne fournit pas un nouvel id de session à chaque connexion il est possible de pousser la victime à utiliser un id dont l'attaqueur à la connaissance et donc permettre à celui-ci de se faire passer pour elle.
+* Test that some function can't be used more times than intended \(for example a discount one\)
+* **Session Fixation** : If an application doesn't give a new session id to a user at each new connection, an attacker may force a victim to use a known id, making it possible to hijack the user session
 * If a service with "Pi" in it's name is used, try to ssh with default Rasberry Pi Credentials \(Pi - Rasberry\)
-* To enumerate user on wordpress, scripts use "url/?author=1", then 2, etc because it redirects to the user name.
+* To enumerate user on wordpress, scripts use `url/?author=1`, then 2, etc because it redirects to the user name
 * Linux's ping default ttl is of 64, while windows's is of 127
 
 ## Sources
