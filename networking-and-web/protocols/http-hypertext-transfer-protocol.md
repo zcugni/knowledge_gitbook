@@ -2,8 +2,6 @@
 
 ## Old
 
-
-
 * Used to fetch resources, such as HTML documents
   * A document is reconstructed from the different element fetched \(text, css, media, scripts, etc\)
 * Essential for any data exchange on the Web
@@ -760,5 +758,16 @@ Content-Length: 48
 
             to send a request body.
 
-  * 
 
+
+## From book
+
+* The `Content-Type` header indicate the media type of the content
+  * The media-type determines how a browser will render the content
+  * Browser can ignore this header and instead use MIME sniffing
+    * Application can block this behavior with the `X-Content-Type-Options: nosniff`
+* When a 3xx response is received, the browser should make a new HTTP request to the URL defined in the `Location` header
+* The CONNECT method is reserved for use with a proxy
+* OPTIONS doesn't say if HEAD & TRACE request are permitted
+* HTTP request are stateless
+* 

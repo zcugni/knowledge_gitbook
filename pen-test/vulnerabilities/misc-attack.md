@@ -70,14 +70,16 @@ When unnecessary HTTP methods are accepted, we can abuse it, but I haven't resea
 
 * Allows us to **redirect a user to any page**
 * This happens when we can control the redirect instruction of a page, which can come from:
-  * A get parameter : `https://abc.com/?url=xyz.com`
+  * An url parameter : `https://abc.com/?url=xyz.com`
+    * Look for `url=`, `redirect=`, `next=`, `page=`, ...
+    * As well as single letter version : `u=`
   * JS's `window.location`
-  * Html's meta tag
+  * Html's `<meta>` tag
   * PHP's header : `header("location: $var")`
   * Server-side framework \(like flask's `redirect()`\)
 * It's one of the based concepts of **phishing attacks**
-* It can also be use to **retrieve cookies** if the target is our website
-* Restricted redirect are restricted to only some subdomains
+* It can also be use to retrieve **cookies** if the target is our website
+* **Restricted redirect** are restricted to only some subdomains
 * Check [Bypassing Sanitizers](https://zcugni.gitbook.io/notes/pen-test/vulnerabilities#bypassing-sanitizers)
 
 ## Dom Clobbering
@@ -161,5 +163,6 @@ I forgot how to use that to our advantages
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
 * [Pentesterlab](https://pentesterlab.com/)
 * For kerberoast : [geekeries.org](https://geekeries.org/2016/11/kerberoasting-active-directory-a-la-rotissoire/?cn-reloaded=1) \(in french\), [pentestlab.blog](https://pentestlab.blog/2018/06/12/kerberoast/), [scip.ch](%20https://www.scip.ch/en/?labs.20181011)
+* _Real-World Bug Hunting: A Field Guide to Web Hacking_ by Peter Yaworski
 * Misc research
 
