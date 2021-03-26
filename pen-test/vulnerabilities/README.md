@@ -45,6 +45,7 @@
 * Url
 * Unicode or double unicode \(for example `/` = `%2e` or `%c0%af`\)
 * Base64
+* HTLM  :`&#60;`
 * Hexadecimal
   * `printf "\x41"`
   * `password LIKE 0x4125`

@@ -4,6 +4,47 @@ description: 'Disclaimer : This isn''t clean, don''t use it for now'
 
 # Misc Attack
 
+## Insecure Direct Object Reference \(IDOR\) & Force Browsing
+
+* These two happens when the app **directly expose sensible data without checking authorization**
+  * Force Browsing is for **files** \(aka a backup file that you can access\)
+  * IDOR is for **object reference** \(so ids, etc\) :  `http://website.com/orders?id=1213`
+
+{% hint style="info" %}
+Maybe i should add stuff about backup, extensions, etc
+{% endhint %}
+
+## Open redirect
+
+* Allows us to **redirect a user to any page**
+* This happens when we can control the redirect instruction of a page, which can come from:
+  * An url parameter : `https://abc.com/?url=xyz.com`
+    * Look for `url=`, `redirect=`, `next=`, `page=`, ...
+    * As well as single letter version : `u=`
+  * JS's `window.location`
+  * Html's `<meta>` tag
+  * PHP's header : `header("location: $var")`
+  * Server-side framework \(like flask's `redirect()`\)
+* It's one of the based concepts of **phishing attacks**
+* It can also be use to retrieve **cookies** if the target is our website
+* **Restricted redirect** are restricted to only some subdomains
+* Check [Bypassing Sanitizers](https://zcugni.gitbook.io/notes/pen-test/vulnerabilities#bypassing-sanitizers)
+
+## MFLAC - _Missing Function Level Access Control_
+
+* This happens when access control isn't done at the **function level**
+* Given a function that changes a password and doesn't check that you have the right to do it \(because the web page does it beforehand\), you would be able ****to **forge a request and send it through a proxy**, bypassing the verification
+
+## Directory Traversal & File Inclusion
+
+* _Directory Traversal_ is an attack where we can **access** \(and read/execute\) **sensible files** by moving inside directories with this kind of payloads : `../../../../etc/passwd`
+* _Files Inclusion_ \(FI\) abuse arbitrary  `require` & `include` used in application
+  * It 's a _**Local File Inclusion**_ \(LFI\) if you can only include local files \(through path traversal probably\)
+  * It's a _**Remote File Inclusion**_ \(RFI\) if you can include any file
+* You don't necessarily need to know the exact hierarchy of the directories, if you write too many `../../` it might still work
+* Windows is more vulnerable than Linux because you can do `test/../../../file.txt` even if file.txt doesn't exist, meaning that if concatenation is done by the application, it won't break your payload
+* Check if extension are added automatically and try to cut the string with `%00` if it's the case
+
 ## SSRF - Server Side Request Forgery
 
 * Make request in the name of the server, so with it's rights
@@ -30,6 +71,7 @@ description: 'Disclaimer : This isn''t clean, don''t use it for now'
   * Override values
   * Create a vicious payload by concatenating all of them
   * Take advantage of parser differentials
+* A good first place to look at is social media links
 
 ### Cross-site Tracing
 
@@ -65,22 +107,6 @@ When unnecessary HTTP methods are accepted, we can abuse it, but I haven't resea
   * Link parameters
   * Error code
   * Page's title
-
-## Open redirect
-
-* Allows us to **redirect a user to any page**
-* This happens when we can control the redirect instruction of a page, which can come from:
-  * An url parameter : `https://abc.com/?url=xyz.com`
-    * Look for `url=`, `redirect=`, `next=`, `page=`, ...
-    * As well as single letter version : `u=`
-  * JS's `window.location`
-  * Html's `<meta>` tag
-  * PHP's header : `header("location: $var")`
-  * Server-side framework \(like flask's `redirect()`\)
-* It's one of the based concepts of **phishing attacks**
-* It can also be use to retrieve **cookies** if the target is our website
-* **Restricted redirect** are restricted to only some subdomains
-* Check [Bypassing Sanitizers](https://zcugni.gitbook.io/notes/pen-test/vulnerabilities#bypassing-sanitizers)
 
 ## Dom Clobbering
 
@@ -154,12 +180,13 @@ I forgot how to use that to our advantages
 * If a service with "Pi" in it's name is used, try to ssh with default Rasberry Pi Credentials \(Pi - Rasberry\)
 * To enumerate user on wordpress, scripts use `url/?author=1`, then 2, etc because it redirects to the user name
 * Linux's ping default ttl is of 64, while windows's is of 127
+* Test not only the website but also the API endpoints
 
 ## Sources
 
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
 * [LiveOverflow](https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w/search?query=rce)
-* [PwnFunction](https://www.youtube.com/channel/UCW6MNdOsqv2E9AjQkv9we7A/videos)
+* [PwnFunction](https://www.youtube.com/channel/UCW6MNdOsqv2E9AjQkv9we7A/videos) & [video](https://www.youtube.com/watch?v=rloqMGcPMkI)
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
 * [Pentesterlab](https://pentesterlab.com/)
 * For kerberoast : [geekeries.org](https://geekeries.org/2016/11/kerberoasting-active-directory-a-la-rotissoire/?cn-reloaded=1) \(in french\), [pentestlab.blog](https://pentestlab.blog/2018/06/12/kerberoast/), [scip.ch](%20https://www.scip.ch/en/?labs.20181011)

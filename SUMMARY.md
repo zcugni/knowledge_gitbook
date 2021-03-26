@@ -12,7 +12,7 @@
   * [XSS - Cross-Site Scripting](pen-test/vulnerabilities/xss.md)
   * [SQL Injection](pen-test/vulnerabilities/sqli.md)
   * [CSRF - Cross-Site Request Forgery](pen-test/vulnerabilities/csrf.md)
-  * [Broken Access Control & File Inclusion](pen-test/vulnerabilities/broken-access-control-and-file-inclusion.md)
+  * [URL/Path vulnerabilities](pen-test/vulnerabilities/broken-access-control-and-file-inclusion.md)
   * [Misc Attack](pen-test/vulnerabilities/misc-attack.md)
 * [Tools](pen-test/hack-tools/README.md)
   * [JohnTheRipper](pen-test/hack-tools/johntheripper.md)
@@ -76,6 +76,7 @@
   * [Misc](networking-and-web/protocols/layer-5-application.md)
 * [DNS](networking-and-web/dns.md)
 * [Vulnerabilities](networking-and-web/vulnerabilities.md)
+* [Misc](networking-and-web/misc.md)
 
 ## Languages
 

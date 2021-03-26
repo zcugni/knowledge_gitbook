@@ -1,5 +1,7 @@
 # Misc
 
+## 
+
 ## RIA Cross Domain Policy
 
 Rich Internet Applications \(RIA\) use a `crossdomain.xml` or `clientaccesspolicy.xml` file to specifies the permissions that a web client such as Java, Adobe Flash, Adobe Reader, etc. uses to access data across different domains. There’s a master file at the root and maybe sub files in the subdirectory. Too permissive files will enable _CSRF_.

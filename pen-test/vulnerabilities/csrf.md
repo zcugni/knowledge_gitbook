@@ -11,12 +11,26 @@
   * `<img>` or other embedded tags `src`
   * Auto-submitting forms
   * Scripts
-* Because of the SOP & CORS, the browser **won't share the response** to requests made from another origin \(unless explicitly authorized too\)
-  * However, **the request are still made**, so **GET requests** that trigger some action instead of only retrieving data are vulnerable 
-  * To protect **POST request**, servers use **CSRF tokens** : an hidden input added to every form of the website
-    * It's value is secret, unique & identifies the user
-    * Any request that does not contain the token is rejected
-    * As long as the attacker can't leak the token, this is a good defense
+
+## Mitigation
+
+* For GET requests, they're safe as long as **they are not used to perform action, only retrieve data**
+  * The reason behind this is that browsers **won't share the response** to requests made from another origin \(unless explicitly authorized too\) thanks to the [SOP & CORS](https://zcugni.gitbook.io/notes/networking-and-web/protocols/sop-and-cors)
+  * However, **the request are still made**
+* For POST request **CSRF tokens** & **CORS preflight requests** are used as protection
+  * CSRF tokens are a **secret & unique value identifying the user added to every form** of the website
+  * Any request that does not contain the token is **rejected**
+  * As long as the attacker can't leak the token, this is a good defense
+  * Those tokens might be named `X-CSRF-TOKEN`, `lia-token`, `form_id`, etc
+* The `Referer` or `Origin` HTTP header can also be used because they're set by browser and can't be modified by attackers
+
+## Tips
+
+* If the HTTP header `Content-type` as any of these values, a [CORS ](https://zcugni.gitbook.io/notes/networking-and-web/protocols/sop-and-cors)**preflight won't be triggered** \(so the request will be directly sent\) :
+  * `application/x-www-form-urlencoded` 
+  * `multipart/form-data`
+  * `text/plain`
+  * This can be abused to perform POST requests that wouldn't be accepted otherwise
 
 ## Sources
 
@@ -24,4 +38,5 @@
 * PwnFunction's [video](https://www.youtube.com/watch?v=eWEgUcHPle0)
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
 * Misc research
+* _Real-World Bug Hunting: A Field Guide to Web Hacking_ by Peter Yaworski
 

@@ -131,6 +131,12 @@
 | `[` | `%5B` |  |
 | `]` | `%5D` |  |
 
+## DOM
+
+From Real-World Bug Hunting: A Field Guide to Web Hacking
+
+> The DOM  is an API for HTML & XML documents that allows developers to modify the structure, style, and content of a web page via Javascript
+
 ## Sources
 
 * Url encoding : [W3C](https://www.w3schools.com/tags/ref_urlencode.ASP)

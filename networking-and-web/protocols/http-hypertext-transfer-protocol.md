@@ -770,4 +770,11 @@ Content-Length: 48
 * The CONNECT method is reserved for use with a proxy
 * OPTIONS doesn't say if HEAD & TRACE request are permitted
 * HTTP request are stateless
-* 
+* A site uses basic authorization if there's an HTTP header like this : `Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW11`
+* Check `samesite`Cookie
+
+## Sources
+
+* RFC
+* _Real-World Bug Hunting: A Field Guide to Web Hacking_ by [Peter Yaworski](https://www.google.com/search?safe=strict&sxsrf=ALeKk02u5fJoFUD8va7qx4wcDgWmD8cPVg:1616713092379&q=peter+yaworski&stick=H4sIAAAAAAAAAOPgE-LVT9c3NEyrqixPMyhKUoJyDaqMjTLKk7RkspOt9JPy87P1y4syS0pS8-LL84uyrRJLSzLyixax8hWklqQWKVQmAkWLszN3sDICAA97YYBSAAAA&sa=X&ved=2ahUKEwj7oszMxczvAhXGyYUKHRtMBLkQmxMoATAdegQIFhAD)
+

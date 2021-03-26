@@ -8,7 +8,9 @@
   * Any input on a website really \(if it's not properly sanitized\)
   * Concatenated http parameter pollution
   * Url of action form : `javascript:alert(1337)`
-  * Url : `data:text/html,<script>alert(0)</script>`
+  * Url :
+    *  `data:text/html,<script>alert(0)</script>`
+    * URL parameters that renders on the page
 
 ## Types
 
@@ -78,5 +80,6 @@ The img will be added to the page and request it's source \(the attacker website
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
 * PwnFunction's [video](https://www.youtube.com/watch?v=EoaDgUgS6QA)
 * [LiveOverflow](https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w)'s multiple videos
+* _Real-World Bug Hunting: A Field Guide to Web_ Hacking by Peter Yaworski
 * Misc research
 

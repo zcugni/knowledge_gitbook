@@ -29,8 +29,8 @@ The CORS are added **headers** in HTTP request & response that makes it possible
 
 * If a request is judged risky, it will trigger a _**preflight**_
   * An `OPTION` request describing the final request is sent to the server
-  * Headers in the response indicates if the final request will be accepted or not
-  * If it is, it is sent
+  * Headers in the response indicates what the server accepts
+  * The real request is sent only if it corresponds to what is accepted
 * Requests following these conditions won't trigger a preflight :
   * No event listeners are registered on any `XMLHttpRequestUpload` object used in the request
     * These are accessed using the `XMLHttpRequest.upload property`
