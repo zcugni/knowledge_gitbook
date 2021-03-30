@@ -25,6 +25,8 @@ Versatile fuzzer \(brute-forcer\) for :
   * `-H "header: value"` Specify an **HTTP header** \(repeat for multiples headers\)
     * You can override existing headers with it
   * **Filter** **result**  :
+    * `--hs <"regex">` / `--ss <"regex">` Hide /Show result with this regex in the content
+      * \(It can be as simple as "Invalid username"\)
     * `--hc <code>` / `--sc <code>` Hide / Show result with this **status code**
     * `--hc <nb>` / `--sc <nb>` Hide / Show result with this **nb of chars**
     * `--hl <nb>` / `--sc <nb>` Hide / Show result with this **nb of lines**
