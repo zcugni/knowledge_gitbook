@@ -15,6 +15,7 @@
   * [URL/Path vulnerabilities](pen-test/vulnerabilities/broken-access-control-and-file-inclusion.md)
   * [Misc Attack](pen-test/vulnerabilities/misc-attack.md)
 * [Tools](pen-test/hack-tools/README.md)
+  * [Wfuzz](pen-test/hack-tools/wfuzz.md)
   * [JohnTheRipper](pen-test/hack-tools/johntheripper.md)
   * [Metasploit Framework](pen-test/hack-tools/metasploit-framework.md)
   * [Patator](pen-test/hack-tools/patator.md)
@@ -46,7 +47,7 @@
 ## Linux
 
 * [Theory](linux/linux-nix.md)
-* [Command](linux/linux-bash-command/README.md)
+* [Command / Tools](linux/linux-bash-command/README.md)
   * [Hacking related cmd](linux/linux-bash-command/hacking-related-cmd.md)
   * [Mount](linux/linux-bash-command/mount.md)
   * [Net tools / commands](linux/linux-bash-command/net-tools-commands.md)

@@ -106,19 +106,7 @@
 ## Fuzzing
 
 * wfuzz
-  * Will fuzz places of the string where you wrote "FUZZ"
-  * `wfuzz -u <url> -d "username=asd&password=FUZZ" -w <wordlist>`
-    * d specifies post data
-  * Not good with SSL or with website using CSRF tokens
-  * Use a proxy with  `-p 127.0.0.1:8080`
-  * You can filter result by status code or by :
-    * `--hc <code>` / `--sc <code>` Hide / Show result with this status code
-    * `--hc <nb>` / `--sc <nb>` Hide / Show result with this number of chars
-    * `--hl <nb>` / `--sc <nb>` Hide / Show result with this number of lines
-    * `--hw <nb>` / `--sw <nb>`Hide / Show result with this number of words
-    * `--hh <nb>` / `--sh <nb>` Hide / Show result with this content-length
-  * Sometimes it takes an eternity to launch, i don't know why
-  * Use `'` instead of `"` around parameters to not have problems with the shell
+  * 
 * Hydra
 * [Patator](https://zcugni.gitbook.io/notes/tools/patator)
 * Seclist has good specific fuzzing lists
