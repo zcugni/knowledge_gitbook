@@ -2,32 +2,38 @@
 
 ## Presentation
 
-* Versatile fuzzer for url parameters, post request data, directory name, cookies, etc
+Versatile fuzzer \(brute-forcer\) for :
+
+* Directory/file names
+* URL parameters
+* POST request data
+* Cookies
+* HTTP Headers
+* etc
+
+## Usage
+
 * It will fuzz places of the string where you wrote "**FUZZ**"
-* It uses the **wordlist** specified with `-w <wordlist>`
-  * Seclist has good ones
-* If you're not directly fuzzing the **url**, specify it with `-u <url>`
-* Syntax :
-  * **URL fuzzing** : 
-    * `wfuzz -w <wordlist> https://example.com/FUZZ.php`
-    * `wfuzz -w <wordlist> https://example.com/listproducts.php?cat=FUZZ`
-  * **POST request** :`wfuzz -w <wordlist> -u <url> -d "username=admin&pass=FUZZ"` 
-    * `-d` Indicate the form data
-  * Add **cookies** with `-b cookie1=value -b cookie2=value`
-    * Cookies can also be fuzzed
-  * Add **custom http headers with** `-H "myheader: headervalue" -H "myheader2: headervalue2"`
-    * You can override existing headers
-    * Headers can also be fuzzed
-* Use a proxy with  `-p 127.0.0.1:8080`
-* Not good with SSL or with website using CSRF tokens
-* * You can filter result by status code or by :
-  * `--hc <code>` / `--sc <code>` Hide / Show result with this status code
-  * `--hc <nb>` / `--sc <nb>` Hide / Show result with this number of chars
-  * `--hl <nb>` / `--sc <nb>` Hide / Show result with this number of lines
-  * `--hw <nb>` / `--sw <nb>`Hide / Show result with this number of words
-  * `--hh <nb>` / `--sh <nb>` Hide / Show result with this content-length
+* Syntax : 
+  * `wfuzz -w <wordlist> [options] <url>`
+  * `-w` Indicates the **wordlist**, ****[Seclist](https://github.com/danielmiessler/SecLists) has multiples
+  * If the url isn't last in order, you can specify it with `-u <url>`
+* Options :
+  * `-d <post_data>` Specifies the data to send with a **POST request**
+    * For example : `-d "username=admin&pass=FUZZ"`
+  * `-b cookie=value` Specify a **cookie** \(repeat for multiple cookies\)
+  * `-H "header: value"` Specify an **HTTP header** \(repeat for multiples headers\)
+    * You can override existing headers with it
+  * **Filter** **result**  :
+    * `--hc <code>` / `--sc <code>` Hide / Show result with this **status code**
+    * `--hc <nb>` / `--sc <nb>` Hide / Show result with this **nb of chars**
+    * `--hl <nb>` / `--sc <nb>` Hide / Show result with this **nb of lines**
+    * `--hw <nb>` / `--sw <nb>`Hide / Show result with this **nb of words**
+    * `--hh <nb>` / `--sh <nb>` Hide / Show result with this **content-length**
+  * Use a **proxy** with  `-p 127.0.0.1:8080`
+* **Not good with SSL or with website using CSRF tokens**
 * Sometimes it takes an eternity to launch, i don't know why
-* Use `'` instead of `"` around parameters to not have problems with the shell
+* Use `'` instead of `"` around parameters to avoid problems with the shell
 * There's a lot more functionalities
 
 ## Sources

@@ -105,8 +105,7 @@
 
 ## Fuzzing
 
-* wfuzz
-  * 
+* [wfuzz](https://zcugni.gitbook.io/notes/pen-test/hack-tools/wfuzz)
 * Hydra
 * [Patator](https://zcugni.gitbook.io/notes/tools/patator)
 * Seclist has good specific fuzzing lists
