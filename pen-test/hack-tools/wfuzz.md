@@ -34,7 +34,7 @@ Versatile fuzzer \(brute-forcer\) for :
     * `--hh <nb>` / `--sh <nb>` Hide / Show result with this **content-length**
   * Use a **proxy** with  `-p 127.0.0.1:8080`
 * **Not good with SSL or with website using CSRF tokens**
-* Sometimes it takes an eternity to launch, i don't know why
+* If the wordlist is long, it takes some time to start
 * Use `'` instead of `"` around parameters to avoid problems with the shell
 * There's a lot more functionalities
 
