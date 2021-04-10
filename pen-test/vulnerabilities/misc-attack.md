@@ -42,12 +42,15 @@ Maybe i should add stuff about backup, extensions, etc
   * It 's a _**Local File Inclusion**_ \(LFI\) if you can only include local files \(through path traversal probably\)
   * It's a _**Remote File Inclusion**_ \(RFI\) if you can include any file
 * You don't necessarily need to know the exact hierarchy of the directories, if you write too many `../../` it might still work
-* Windows is more vulnerable than Linux because you can do `test/../../../file.txt` even if file.txt doesn't exist, meaning that if concatenation is done by the application, it won't break your payload
+* Windows is more vulnerable than Linux because you can do `/test/../../../file.txt` even if file.txt doesn't exist, meaning that if concatenation is done by the application, it won't break your payload
 * Check if extension are added automatically and try to cut the string with `%00` if it's the case
 
 ## SSRF - Server Side Request Forgery
 
 * Make request in the name of the server, so with it's rights
+* If you can't access internal IPs from a server but it allows external access, try abusing redirection
+  * Make the server send a request to one of yours and give a response with a 3xx code and a `Location` to an internal IP to check if it will follow the redirection
+* You can smuggle data by appending it as a subdomain to your domain
 
 ## RCE
 
@@ -60,42 +63,24 @@ Maybe i should add stuff about backup, extensions, etc
     * `os.system(<command>)` and variants
     * Do that inside an `str()`
     * If you need to import `os.system`, use this function in `str()` : `__import__('os').system(...)`
+* Accessing `/etc/passwd` is usually enough to prove an RCE is possible
+  * Regarding bug bounty programs, be careful with this kind of vulnerabilities
+* Common causes :
+  * File uploads, if the server execute the file when visited
+  * Deserialization
 
-## HTTP
+## Subdomain takeover
 
-### Parameter pollution
-
-* There’s no official agreement on how to deal with multiple get variables with the same name \(aka `http://test.com/?user=asd&user=xyz)`
-* Some parser will take the first one, some the last and others will concatenate all of them
-* With that an attacker can : 
-  * Override values
-  * Create a vicious payload by concatenating all of them
-  * Take advantage of parser differentials
-* A good first place to look at is social media links
-
-### Cross-site Tracing
-
-* The `TRACE` request simply returns back the request
-* If we can force the browser to do it, it'll send cookies with it and so receive them back in the response, which can be read in js, **bypassing the `HttpOnly` rule**
-
-### Redirect
-
-* If a server responds with content after a 302 \(which it shouldn't\) but then redirects \(which it should\), we can use a proxy to change the status code of the response and change it from a 302 to a 202 \(preventing it from redirecting\)
-
-### Method mismatch
-
-{% hint style="info" %}
-I'm not really sure how i wanted to abuse it but i wrote that : 
-
-* Checks implemented for GET requests might not be for HEAD ones
-* Same goes for methods names that don’t exist
-{% endhint %}
-
-### Verb Tampering
-
-{% hint style="info" %}
-When unnecessary HTTP methods are accepted, we can abuse it, but I haven't research how
-{% endhint %}
+* This vulnerability occurs when an attacker can claim a subdomain from a website and then either serve its own content or intercept traffic
+  * More specifically, it happens with leftover CNAME or A records
+    * For example, let's say there's an old CNAME record pointing url\_test1 to url2, but url2 is no longer registered
+    * An attacker that has found this record could claim url2 and control what url\_test1 would point to
+* Subdomains takeovers can be dangerous if cookies are scoped with a wildcard and send to any subdomain of the domain
+  * They can also be used for phishing attacks
+*  Some external services are often associated with subdomain takeovers : Zendesk, Heroku, Github, Amazon S3, SendGrid, etc
+* Look for :
+  * Browse SSL certificates \(see tools\)
+  * Acquisition between companies can lead to forgotten DNS records
 
 ## Brute-Forcing Username
 
@@ -186,7 +171,7 @@ I forgot how to use that to our advantages
 
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
 * [LiveOverflow](https://www.youtube.com/channel/UClcE-kVhqyiHCcjYwcpfj9w/search?query=rce)
-* [PwnFunction](https://www.youtube.com/channel/UCW6MNdOsqv2E9AjQkv9we7A/videos) & [video](https://www.youtube.com/watch?v=rloqMGcPMkI)
+* [PwnFunction](https://www.youtube.com/channel/UCW6MNdOsqv2E9AjQkv9we7A/videos)
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
 * [Pentesterlab](https://pentesterlab.com/)
 * For kerberoast : [geekeries.org](https://geekeries.org/2016/11/kerberoasting-active-directory-a-la-rotissoire/?cn-reloaded=1) \(in french\), [pentestlab.blog](https://pentestlab.blog/2018/06/12/kerberoast/), [scip.ch](%20https://www.scip.ch/en/?labs.20181011)

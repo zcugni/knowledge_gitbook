@@ -8,6 +8,7 @@
 * [Get Shell](pen-test/get-shell.md)
 * [Linux Privilege Escalation](pen-test/privilege-escalation.md)
 * [Vulnerabilities](pen-test/vulnerabilities/README.md)
+  * [HTTP Vulnerabilities](pen-test/vulnerabilities/http-vulnerabilities.md)
   * [XXE and other XML vulnerabilities](pen-test/vulnerabilities/xml-xxe-vuln.md)
   * [XSS - Cross-Site Scripting](pen-test/vulnerabilities/xss.md)
   * [SQL Injection](pen-test/vulnerabilities/sqli.md)

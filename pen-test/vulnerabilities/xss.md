@@ -11,39 +11,27 @@
   * Url :
     *  `data:text/html,<script>alert(0)</script>`
     * URL parameters that renders on the page
+* Example of XSS payloads available at [https://github.com/cure53/H5SC](https://github.com/cure53/H5SC)
 
 ## Types
 
-### Reflected
-
-* The input is sent to the server and reflected on the page
-
-### Stored
-
-* Same but the input is also persisted in a db of some sort
-
-### DOM
-
-* The input is directly inserted into the DOM \(without being sent to the server at all\)
-* **Sources** \(where the input goes\) :
-  * `document.url`
-  * `document.referrer`
-  * `location`
-  * `location.href`
-  * `location.search`
-  * `location.hash`
-  * `location.pathname`
-  * etc
-* **Sinks** \(where the input ends up\) :
-  * `element.innerHTML()`
-  * `element.outerHTML()`
-  * `eval()`
-  * `setTimeout()`
-  * `setInterval()`
-  * `document.write()`
-  * `document.writeln()`
-  * etc
-* A `<script>alert();</script>` inserted via `inner.html` won't be executed
+* **Reflected** : The input is sent to the server and reflected on the page
+* **Stored** : Same but the input is also **persisted** in a db of some sort
+* **DOM** : The input is directly inserted into the DOM \(without being sent to the server at all\)
+  * **Sources** \(where the input goes\) :
+    * `document.url`, `document.referrer`
+    * `location`, `location.href`, `location.search`, `location.hash`, `location.pathname`
+    * etc
+  * **Sinks** \(where the input ends up\) :
+    * `element.innerHTML()`, `element.outerHTML()`
+    * `eval()`
+    * `setTimeout()`, `setInterval()`
+    * `document.write()`, `document.writeln()`
+    * etc
+  * A `<script>alert();</script>` inserted via `inner.html` won't be executed
+* **Self** : Impact only the user entering the payload
+  * Rarely useful without some sort of social engineering
+    * However, they can be. Read this [article](https://whitton.io/articles/uber-turning-self-xss-into-good-xss/)
 
 ### Polygots
 
@@ -58,10 +46,17 @@ XSS payloads made from a mixture of encoding/repetition/comments/etc that make i
 
 ## XSS Auditor
 
-* Exist in Chrome, not in Firefox and I don't know for the rest
-* Broadly speaking, it detects XSS injection by comparing what is given in the url with the scripts of the page
-* Because of that, we can inject in the url a script that is in the page to disable it
-* Might soon disappear because it create vulnerabilities and gives a false impression of security to devs
+* Mechanism used by browsers to detect XSS and prevent them
+* However, they often introduce other vulnerabilities and gives a false impression of security
+  * For this reason, a lot of browsers have stopped using them
+  * For example, in Chrome it detected an injection \(in part\) by comparing what was given in the url with the content of the scripts in the page
+    * But that could be abused to inject in the url a valid part of the script, so that the auditor would disable it
+
+{% hint style="info" %}
+Read this : [https://blog.innerht.ml/the-misunderstood-x-xss-protection/](https://blog.innerht.ml/the-misunderstood-x-xss-protection/)
+
+Check this : [https://github.com/masatokinugawa/filterbypass/wiki/Browser's-XSS-Filter-Bypass-Cheat-Sheet](https://github.com/masatokinugawa/filterbypass/wiki/Browser's-XSS-Filter-Bypass-Cheat-Sheet)
+{% endhint %}
 
 ## Get a cookie
 

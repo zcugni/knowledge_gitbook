@@ -3,11 +3,11 @@
 ## Generalities
 
 * Stands for eXtensible Markup Language
-* Use for transporting and stocking data
-* Describe what are the data \(while HTML discribe their structure\)
-* Some characters are reserved and so you need to use _entities_
+* Used for **transporting and stocking data**
+* Describe what are the data \(while HTML describe their structure\)
+* Some characters are reserved so you need to use _**entities** :_
 
-| Caractère | Entity |
+| Characters | Entity |
 | :--- | :--- |
 | `<` | `&lt;` |
 | `>` | `&gt;` |
@@ -26,24 +26,24 @@
 
 ## Tags/elements/nodes
 
-* These 3 terms are synonyms
+* Those 3 terms are synonyms
 * `<elementName></elementName>`
 * No predefined name, except for `<?xml>` \(and it's variant `<Xml>`\)
 * Case-sensitive
 * Begins with a letter or an `_`
 * Can't contain spaces
 * Can contain letters, numbers, `_`, `.`
-* Element can be empty `<element></element` and close by themselves `<element />`
-* An element inside CDATA won't be interpreted `<![CDATA[content]]>`
+* Element can be empty `<element></element` and closed by themselves `<element />`
+* An element inside `CDATA` won't be interpreted `<![CDATA[content]]>`
 
 ## Attributes
 
 * You can add them to tags : `<elementName attributeName="attribute value"></elementName>`
-* Non predefined
+* None predefined
 * Always between `"` or `'`
 * Generally speaking, metadata \(like an id\)  should be attributes while data \(like a date\)  should be nodes
 
-## Exemple
+## Example
 
 ```markup
 <?xml version="1.0" encoding="UTF-8"?>
@@ -71,7 +71,7 @@
 
 ## Namespace
 
-* Two differentiate element with the same name but not representing the same thins, use namespaces
+* Too differentiate elements with the same name but not representing the same thins, use namespaces :
 
 ```markup
 <table xmlns="http://www.w3.org/TR/html4/">
@@ -82,7 +82,7 @@
 </table>
 ```
 
-* You can set a prefix with `xmlns:prefix="URI"`
+* You can set a prefix with `xmlns:prefix="URI"` :
 
 ```markup
 <root>
@@ -108,7 +108,7 @@
 xmlns:f="https://www.w3schools.com/furniture">
 ```
 
-* The link aren't followed by the parser
+* The links aren't followed by the parser
 
 ## Source
 

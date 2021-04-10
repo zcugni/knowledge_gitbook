@@ -22,15 +22,11 @@
   * Any request that does not contain the token is **rejected**
   * As long as the attacker can't leak the token, this is a good defense
   * Those tokens might be named `X-CSRF-TOKEN`, `lia-token`, `form_id`, etc
-* The `Referer` or `Origin` HTTP header can also be used because they're set by browser and can't be modified by attackers
+* The `Referer` or `Origin` HTTP header can also be used because they're set by the browsers and can't be modified by attackers
 
 ## Tips
 
-* If the HTTP header `Content-type` as any of these values, a [CORS ](https://zcugni.gitbook.io/notes/networking-and-web/protocols/sop-and-cors)**preflight won't be triggered** \(so the request will be directly sent\) :
-  * `application/x-www-form-urlencoded` 
-  * `multipart/form-data`
-  * `text/plain`
-  * This can be abused to perform POST requests that wouldn't be accepted otherwise
+* In HTTP request, change the value of the `Content-type` header and the type of the method to ones that won't trigger a [CORS ](https://zcugni.gitbook.io/notes/networking-and-web/protocols/sop-and-cors)**preflight**
 
 ## Sources
 

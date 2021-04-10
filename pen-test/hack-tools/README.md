@@ -156,14 +156,21 @@ These are advised by OWASP or i stumble upon them but i haven't yet used them
   * bXSS
   * ezXSS
   * Jackmasa's XSS mindmap
+  * [https://xsshunter.com/](https://xsshunter.com/)
 * XSS \(blind\)
   * XSS Hunter
   * Sleepy Puppy
   * KnoXSS
+* Subdomain takeover/finder
+  * KnockPy
+  * [https://crt.sh/](https://crt.sh/) \(find subdomain by checking SSL certificates\)
+  * Censys.io
+  * [https://github.com/EdOverflow/can-i-take-over-xyz](https://github.com/EdOverflow/can-i-take-over-xyz)
 
 ## Sources
 
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)
 * [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA)
+* _Real-World Bug Hunting: A Field Guide to Web Hacking_ by Peter Yaworski
 * Misc research
 

@@ -70,6 +70,10 @@
   * `expires` By default, cookies are only valid for the current session of the browser and are deleted when it closes \(i think\)
     * With this flag, you can define an expiration date
 
+{% hint style="info" %}
+Check out samesite cookie
+{% endhint %}
+
 ## Session
 
 * Session keeps the state & information of the client server-side

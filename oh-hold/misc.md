@@ -1,6 +1,15 @@
 # Misc
 
-## 
+## Terminology : CDN
+
+* Stands for _Content Delivery Network_
+* A CDN stores copies of data on servers across the world so that it can be delivered more rapidly wherever you are
+
+## Terminology : Interface
+
+> An interface is a programming concept that guarantees inputs and outputs of a function without defining how the function is implemented
+>
+> By Peter Yaworski in _Real-World Bug Hunting: A Field Guide to Web_ Hacking
 
 ## RIA Cross Domain Policy
 

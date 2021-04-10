@@ -23,7 +23,7 @@
 
 ## CORS - Cross-Origin Resource Sharing
 
-The CORS are added **headers** in HTTP request & response that makes it possible to get around the SOP
+The CORS are added **headers** in HTTP requests & responses that make it possible to get around the SOP
 
 ### Preflight
 
@@ -31,28 +31,22 @@ The CORS are added **headers** in HTTP request & response that makes it possible
   * An `OPTION` request describing the final request is sent to the server
   * Headers in the response indicates what the server accepts
   * The real request is sent only if it corresponds to what is accepted
-* Requests following these conditions won't trigger a preflight :
-  * No event listeners are registered on any `XMLHttpRequestUpload` object used in the request
-    * These are accessed using the `XMLHttpRequest.upload property`
-  * No `ReadableStream` object is used in the request
-  * Some additional restrictions by browsers
-  * Accepted methods : `GET`, `HEAD`, `POST`
-  * Header that can be specified manually :
+* To be considered **safe** and not trigger a preflight, requests must follow those conditions :
+  * Accepted methods : `GET`, `HEAD` or `POST`
+  * Accepted headers \(in addition to the one set by the browser and to reserved one\) :
     * `Accept`
     * `Accept-Language`
     * `Content-Language`
-    * `Content-Type`
-    * `DPR`
-    * `Downlink`
-    * `Save-Data`
-    * `Viewport-Width`
-    * `Width`
-  * Accepted values of `Content-Type` :
-    * `application/x-www-form-urlencoded`
-    * `multipart/form-data`
-    * `text/plain`
+    * `Content-Type`, it's accepted values are :
+      * `application/x-www-form-urlencoded`
+      * `multipart/form-data`
+      * `text/plain`
+  * No event listeners registered on any `XMLHttpRequestUpload` object used in the request
+    * These are accessed using the `XMLHttpRequest.upload` property
+  * No `ReadableStream` object is used in the request
+  * Some additional restrictions by browsers
 
-### Headers
+### New headers
 
 * Request :
   * `Origin`

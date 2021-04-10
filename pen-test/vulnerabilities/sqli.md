@@ -77,6 +77,10 @@ Create procedure get_report @columnamelist varchar(7900) As Declare @sqlstring v
 
 If you have an injection in a place where doing an `1'or '1'='1` isn't useful, you may still be able to use it to show the table name & structure by injecting an sql command
 
+## Bug bounty notes
+
+* Extracting the database name, user name & host name is generally harmless but might not be permitted by the program. In those case, a `sleep` command might be considered enough of a proof
+
 ## Sources
 
 * [Owasp testing guide v4](https://owasp.org/www-project-web-security-testing-guide/assets/archive/OWASP_Testing_Guide_v4.pdf)

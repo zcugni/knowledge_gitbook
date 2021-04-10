@@ -772,6 +772,7 @@ Content-Length: 48
 * HTTP request are stateless
 * A site uses basic authorization if there's an HTTP header like this : `Authorization: Basic QWxhZGRpbjpPcGVuU2VzYW11`
 * Check `samesite`Cookie
+* You can identify a site that uses basic authorization when the request includes an http header of the form `Authorization: BasicQwxhZGRpb...`
 
 ## Sources
 

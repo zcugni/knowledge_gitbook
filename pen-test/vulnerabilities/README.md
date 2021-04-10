@@ -11,7 +11,7 @@
 * I've detailed some types of injection for XSS, XXE, SQL, etc, but of course there's much more. Until i have more complete example for them, i'll simply list the one i stumble upon :
   * Server-Side Include Injection
   * Path injection \(when a url is reflected on a page\)
-  * Server Side template injection \(like Jinga 2\)
+  * Server/Client Side Template Injection \(like Jinga 2\)
 
 ## Types of attacks
 
@@ -53,6 +53,7 @@
 
 ### Simple tips
 
+* Start with harmless payload to see what is sanitized and what isn't
 * Check which chars are escaped by using them with an easily recognizable safe string
 * See if the check is **case sensitiv**e or not
 * Add a **null byte `%00`** to terminate a string earlier
@@ -77,6 +78,7 @@
   * If `<?php>` \(or `<?>`, it's shortcut\) are in the html response, browser will transform it to `<!--php-->` because server code shouldn't be on the client
   * However, nested comment aren't possible in html, so if we do that inside of an existing comment, it terminate it earlier
 * If there's a verification that the address start with `/` use  **`//google.com`**
+* If you want to get rid of a part of an URL \(the part after an injection for example\), add multiple `///`, sometimes what's following them is ignored because it's not a conform syntax
 * The whole **127.0.0.1/8 subnet** is localhost, so if 127.0.0.1 is filtered, try that or localhost
 * **JSFuck** is a valid js syntax using only 6 characters : `[`, `]`, `(`, `)`, `+`, `!` which you can use to bypass filters
 * Some versions of apache will execute scripts with `.php.jpg` or  `.php3` as extensions for example

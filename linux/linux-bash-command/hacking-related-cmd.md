@@ -2,17 +2,17 @@
 
 ## Hex dump
 
-* There's multiple tools to see the hex dump of a file
+* There's multiple tools to see the **hex dump** of a file
 * `xxd` My preferred one
   * `xxd <in_file> [out_file]` Dump it's hexa, with it's ascii equivalent
   * `xxd -r [-p] <in_file> <out_file>` Create the bytestream corresponding to an hex dump
     * `-r` Reverse
-    * The `-p` is necessary to write the hex in a friendly manner \(without offset, etc\)
-    * `<in_file>` can be set as the standard input with `-`
+    * The `-p` is necessary to write the hex in a friendly manner \(**without offset**, etc\)
+    * `<in_file>` can be set as the **standard input** with `-`
     * If you want to add content to that file after the new hex, just do `cat <other_file> >> <new_file>`
-  * `-e` Switch to little-endian
-  * `-b` Switch to binary representation \(`-r` doesn't work with it\)
-* `hexdump <file>` Dump it's hexa, but i find the format less friendly \(it doesn't show the ascii equivalent and the endianness is inversed from xxd\)
+  * `-e` Switch to **little-endian**
+  * `-b` Switch to **binary representation** \(`-r` doesn't work with it\)
+* `hexdump <file>` Dump it's hexa, but i find the format less friendly \(it doesn't show the ascii equivalent and the endianness is inversed from `xxd`\)
 
 ## GPG
 
