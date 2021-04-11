@@ -1,6 +1,7 @@
 # Methodology / Recon
 
-* Start broad to get an idea of attack vectors and then go deeper on specific areas
+* To avoid IP bans, use a VPS \(virtual private server\) that allows security testing from its server
+* * * Start broad to get an idea of attack vectors and then go deeper on specific areas
 
 ## Social Info
 

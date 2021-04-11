@@ -8,6 +8,8 @@ description: 'Disclaimer : This isn''t clean, don''t use it for now'
 
 * These two happens when the app **directly expose sensible data without checking authorization**
   * Force Browsing is for **files** \(aka a backup file that you can access\)
+    * Look for forgotten assets, backup files, etc
+    * Some interesting extension : `.old`, `.backup`, `.copy`, etc
   * IDOR is for **object reference** \(so ids, etc\) :  `http://website.com/orders?id=1213`
 
 {% hint style="info" %}
@@ -147,6 +149,10 @@ I forgot how to use that to our advantages
   * AD services tickets are encrypted with the NTLM hash of the service account instead of a more random/secure option
 * Because of all of that, we can ask for tickets and then crack the password of the service account
 
+## OAuth
+
+* Read the chapter about it in R_eal-World Bug Hunting: A Field Guide to Web Hacking_ by Peter Yaworski
+
 ## Tips & Tricks
 
 * When it ends with `==` it’s usually base64
@@ -166,6 +172,7 @@ I forgot how to use that to our advantages
 * To enumerate user on wordpress, scripts use `url/?author=1`, then 2, etc because it redirects to the user name
 * Linux's ping default ttl is of 64, while windows's is of 127
 * Test not only the website but also the API endpoints
+* `phpinfo` include the content of `httponly` cookies
 
 ## Sources
 

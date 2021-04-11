@@ -119,6 +119,11 @@
 
 These are advised by OWASP or i stumble upon them but i haven't yet used them
 
+* Screenshot :
+  * HTTPScreenshot
+  * Gowitness
+  * Aquatone
+  * Eyewitness
 * CSRF :
   * CSRF tester
   * Cross Site Requester
@@ -166,6 +171,7 @@ These are advised by OWASP or i stumble upon them but i haven't yet used them
   * [https://crt.sh/](https://crt.sh/) \(find subdomain by checking SSL certificates\)
   * Censys.io
   * [https://github.com/EdOverflow/can-i-take-over-xyz](https://github.com/EdOverflow/can-i-take-over-xyz)
+  * subFinder
 
 ## Sources
 

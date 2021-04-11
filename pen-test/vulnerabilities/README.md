@@ -40,10 +40,11 @@
 
 ## Bypassing sanitizers
 
-### Encode
+### Encoding
 
-* Url
-* Unicode or double unicode \(for example `/` = `%2e` or `%c0%af`\)
+* Url : `%3a`
+  * You can also double encode by encoding the `%` : `%253a`
+* Unicode
 * Base64
 * HTLM  :`&#60;`
 * Hexadecimal
